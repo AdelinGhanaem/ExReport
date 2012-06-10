@@ -1,10 +1,12 @@
 package com.clouway.exreport.client;
 
+import com.clouway.exreport.client.expensesdashboard.view.ExpensesReporterDashboardViewImpl;
+import com.clouway.exreport.client.mainview.CompositePanel;
+import com.clouway.exreport.shared.Expense;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+
+import java.util.ArrayList;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -15,41 +17,39 @@ public class ExReport implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    final Button button = new Button("Click me");
-    final Label label = new Label();
 
-    button.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        if (label.getText().equals("")) {
-          ExReportService.App.getInstance().getMessage("Hello, World!", new MyAsyncCallback(label));
-        } else {
-          label.setText("");
-        }
-      }
-    });
+//
+//    SimpleLayoutPanel widgets = new SimpleLayoutPanel();
+//
+//    EventBus eventBus = new SimpleEventBus();
+//
+//    PlaceController placeController = new PlaceController(eventBus);
+//
+//    ActivityMapper mapper = new ApplicationActivityMapper();
+//
+//    ActivityManager manager = new ActivityManager(mapper, eventBus);
+//
+//    manager.setDisplay(widgets);
+//
+//    placeController.goTo(new Dashboard());
 
-    // Assume that the host HTML has elements defined whose
-    // IDs are "slot1", "slot2".  In a real app, you probably would not want
-    // to hard-code IDs.  Instead, you could, for example, search for all
-    // elements with a particular CSS class and replace them with widgets.
-    //
-    RootPanel.get("slot1").add(button);
-    RootPanel.get("slot2").add(label);
-  }
 
-  private static class MyAsyncCallback implements AsyncCallback<String> {
-    private Label label;
+    ExpensesReporterDashboardViewImpl dashboardView = new ExpensesReporterDashboardViewImpl();
 
-    public MyAsyncCallback(Label label) {
-      this.label = label;
-    }
+    dashboardView.renderTodaysExpense(new ArrayList<Expense>() {{
+      add(new Expense("food", 123d));
+      add(new Expense("diskoteka", 100d));
+      add(new Expense("Drugi gluposti", 500d));
+    }});
 
-    public void onSuccess(String result) {
-      label.getElement().setInnerHTML(result);
-    }
+    CompositePanel compositePanel = new CompositePanel();
 
-    public void onFailure(Throwable throwable) {
-      label.setText("Failed to receive answer from server!");
-    }
+    compositePanel.addWidget(dashboardView.asWidget());
+//
+    RootLayoutPanel.get().add(compositePanel.asWidget());
+//
+// RootLayoutPanel.get().add(dashboardView.asWidget());
+
+
   }
 }
