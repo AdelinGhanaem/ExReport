@@ -1,0 +1,17 @@
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
+<module rename-to="ExReport">
+
+  <!-- Inherit the core Web Toolkit stuff.                  -->
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
+  <!-- Specify the app entry point class.                   -->
+
+  <entry-point class='com.clouway.exreport.client.ExReport'/>
+
+
+  <!-- Specify the app servlets.                   -->
+  <servlet path='/exreportservice' class='com.clouway.exreport.server.ExReportServiceImpl'/>
+  <source path="client"/>
+  <source path="shared"/>
+</module>

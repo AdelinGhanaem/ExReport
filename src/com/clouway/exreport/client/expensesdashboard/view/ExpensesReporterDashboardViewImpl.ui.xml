@@ -1,0 +1,33 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:myStuff='urn:import:com.clouway.exreport.client.expensesdashboard.view'
+             xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
+
+
+  <ui:style>
+    .cellTable {
+      width: 100%;
+      height: auto;
+
+
+    }
+
+  </ui:style>
+
+
+  <g:HTMLPanel>
+    <g:VerticalPanel>
+      <g:HorizontalPanel>
+      </g:HorizontalPanel>
+      <g:HorizontalPanel>
+        <c:CellTable ui:field="expensesTable" width="100%" addStyleNames="{style.cellTable}">
+        </c:CellTable>
+        <myStuff:ExpensesPager ui:field="expensesPage">
+        </myStuff:ExpensesPager>
+      </g:HorizontalPanel>
+    </g:VerticalPanel>
+
+  </g:HTMLPanel>
+
+
+</ui:UiBinder>

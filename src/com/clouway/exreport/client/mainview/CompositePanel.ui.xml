@@ -1,0 +1,43 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:m='urn:import:com.clouway.exreport.client.navigation'>
+
+  <ui:style src="dashboardStyle.css"/>
+
+
+  <g:DockLayoutPanel ui:field="mainContainerPanel" unit="EM" addStyleNames="{style.mainDockLayoutPanel}">
+    <g:north size="10">
+      <g:HTML>
+
+      </g:HTML>
+    </g:north>
+
+
+    <g:center>
+
+      <g:HTMLPanel ui:field="centerPanel" addStyleNames="{style.centerHTMLPanel}">
+
+      </g:HTMLPanel>
+
+    </g:center>
+
+    <g:west size="10">
+
+      <g:HTMLPanel addStyleNames="{style.navHTML}">
+        <m:NavigationMenu ui:field="navigationMenu">
+
+        </m:NavigationMenu>
+      </g:HTMLPanel>
+
+
+    </g:west>
+
+
+    <g:south size="2">
+      <g:HTML>
+
+      </g:HTML>
+    </g:south>
+
+  </g:DockLayoutPanel>
+</ui:UiBinder>

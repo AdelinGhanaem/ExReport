@@ -1,0 +1,33 @@
+.mainDockLayoutPanel {
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+}
+
+.htmlStackPanelContainer {
+    border: 1px #191970;
+    margin: 5px;
+    padding: 5px;
+}
+
+.stackPanel {
+    width: auto;
+    height: 400px;
+}
+
+.navHTML {
+    border-width: 1px;
+    border-style: solid;
+    width: auto;
+    height: 400px;
+    padding: 2px;
+    margin: 3px;
+}
+
+.centerHTMLPanel {
+    border-width: 1px;
+    border-style: solid;
+    width: auto;
+    height: 400px;
+    padding: 4px;
+}
