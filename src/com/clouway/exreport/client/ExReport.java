@@ -36,12 +36,6 @@ public class ExReport implements EntryPoint {
 
     ExpensesReporterDashboardViewImpl dashboardView = new ExpensesReporterDashboardViewImpl();
 
-    dashboardView.renderTodaysExpense(new ArrayList<Expense>() {{
-      add(new Expense("food", 123d));
-      add(new Expense("diskoteka", 100d));
-      add(new Expense("Drugi gluposti", 500d));
-    }});
-
     CompositePanel compositePanel = new CompositePanel();
 
     compositePanel.addWidget(dashboardView.asWidget());

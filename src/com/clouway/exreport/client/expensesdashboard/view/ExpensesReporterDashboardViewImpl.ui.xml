@@ -20,10 +20,12 @@
       <g:HorizontalPanel>
       </g:HorizontalPanel>
       <g:HorizontalPanel>
-        <c:CellTable ui:field="expensesTable" width="100%" addStyleNames="{style.cellTable}">
-        </c:CellTable>
-        <myStuff:ExpensesPager ui:field="expensesPage">
-        </myStuff:ExpensesPager>
+        <!--<c:CellTable ui:field="expensesTable" width="100%" addStyleNames="{style.cellTable}">-->
+        <!--</c:CellTable>-->
+          <c:CellTree ui:field="cellTree">
+          </c:CellTree>
+        <!--<myStuff:ExpensesPager ui:field="expensesPage">-->
+        <!--</myStuff:ExpensesPager>-->
       </g:HorizontalPanel>
     </g:VerticalPanel>
 

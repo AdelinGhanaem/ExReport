@@ -5,13 +5,17 @@
   <!-- Inherit the core Web Toolkit stuff.                  -->
   <inherits name='com.google.gwt.user.User'/>
   <inherits name='com.google.gwt.user.theme.clean.Clean'/>
-  <!-- Specify the app entry point class.                   -->
+    <inherits name="com.google.gwt.activity.Activity"/>
+    <!-- Specify the app entry point class.                   -->
 
   <entry-point class='com.clouway.exreport.client.ExReport'/>
 
 
   <!-- Specify the app servlets.                   -->
-  <servlet path='/exreportservice' class='com.clouway.exreport.server.ExReportServiceImpl'/>
+  <servlet path='/exreportservice' class='com.clouway.exreport.server.ExpensesReporterServiceImpl'/>
+
   <source path="client"/>
+
   <source path="shared"/>
+
 </module>

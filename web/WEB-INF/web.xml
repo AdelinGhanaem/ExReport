@@ -6,13 +6,12 @@
            version="2.5">
 
 
-
-  <servlet>
-    <servlet-name>exReportService</servlet-name>
-    <servlet-class>com.clouway.exreport.server.ExReportServiceImpl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>exReportService</servlet-name>
-    <url-pattern>/ExReport/exreportservice</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>expensesReporterService</servlet-name>
+        <servlet-class>com.clouway.exreport.server.ExpensesReporterServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>expensesReporterService</servlet-name>
+        <url-pattern>/ExReport/exreportservice</url-pattern>
+    </servlet-mapping>
 </web-app>

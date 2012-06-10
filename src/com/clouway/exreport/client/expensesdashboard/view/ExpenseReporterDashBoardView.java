@@ -1,8 +1,12 @@
 package com.clouway.exreport.client.expensesdashboard.view;
 
+import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.Month;
+import com.clouway.exreport.shared.Year;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,13 +14,19 @@ import java.util.List;
  */
 public interface ExpenseReporterDashBoardView {
 
-  void renderTodaysExpense(List<Expense> expenses);
+    void renderTodaysExpense(List<Expense> expenses);
 
-  void notifyUserOfFutureDate();
+    void notifyUserOfFutureDate();
 
-  void notifyUserOfDateDiscrepancy();
+    void notifyUserOfDateDiscrepancy();
 
-  void showConnectionErrorMessage();
+    void showConnectionErrorMessage();
 
-  Widget asWidget();
+    Widget asWidget();
+
+    void showExpensesYears(ArrayList<Year> yearList);
+
+    void showMonthsOfExpenses(ArrayList<Month> months);
+
+    void showDaysExpenses(ArrayList<Day> days);
 }
