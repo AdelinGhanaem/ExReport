@@ -18,6 +18,8 @@ public class Expense implements Serializable {
     this.price = price;
   }
 
+  public Expense() {
+  }
 
   public String getName() {
     return name;

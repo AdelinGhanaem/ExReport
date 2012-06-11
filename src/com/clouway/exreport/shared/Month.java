@@ -9,19 +9,28 @@ import java.io.Serializable;
  * Time: 2:17 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Month  implements Serializable{
-    private int monthNumber;
+public class Month implements Serializable {
 
-    public Month() {
-    }
+  private int year;
+  private int month;
 
-    public Month(int monthNumber) {
+  public Month(int year, int month) {
+    this.year = year;
+    this.month = month;
 
-        this.monthNumber = monthNumber;
-    }
+  }
+
+  public Month() {
+
+  }
+
+  public int getYear() {
+    return year;
+  }
+
+  public int getMonth() {
+    return month;
+  }
 
 
-    public int getMonthNumber() {
-        return monthNumber;
-    }
 }

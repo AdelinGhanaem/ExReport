@@ -17,10 +17,13 @@ public class CompositePanel extends Composite {
   }
 
   private static CompositePanelUiBinder ourUiBinder = GWT.create(CompositePanelUiBinder.class);
+
   @UiField
   DockLayoutPanel mainContainerPanel;
+
   @UiField
   HTMLPanel centerPanel;
+
   @UiField
   NavigationMenu navigationMenu;
 

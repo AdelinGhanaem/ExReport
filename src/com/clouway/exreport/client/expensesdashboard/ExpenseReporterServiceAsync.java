@@ -8,16 +8,15 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public interface ExpenseReporterServiceAsync {
 
-    void getExpensesFor(Date date, AsyncCallback<List<Expense>> asyncCallback);
+    void getExpensesFor(Date date, AsyncCallback<ArrayList<Expense>> asyncCallback);
 
-    void getExpensesBetween(Date firstDate, Date secondDate, AsyncCallback<List<Expense>> any);
+    void getExpensesBetween(Date firstDate, Date secondDate, AsyncCallback<ArrayList<Expense>> any);
 
     void getYearsOfExpenses(AsyncCallback<ArrayList<Year>> callback);
 

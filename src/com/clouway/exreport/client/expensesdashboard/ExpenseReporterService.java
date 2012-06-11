@@ -17,9 +17,9 @@ import java.util.List;
 @RemoteServiceRelativePath("exreportservice")
 public interface ExpenseReporterService extends RemoteService {
 
-    List<Expense> getExpensesFor(Date date);
+    ArrayList<Expense> getExpensesFor(Date date);
 
-    List<Expense> getExpensesBetween(Date firstDate, Date secondDate);
+  ArrayList<Expense> getExpensesBetween(Date firstDate, Date secondDate);
 
     ArrayList<Year> getYearsOfExpenses();
 

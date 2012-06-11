@@ -7,14 +7,13 @@ import com.clouway.exreport.shared.Year;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public interface ExpenseReporterDashBoardView {
 
-    void renderTodaysExpense(List<Expense> expenses);
+    void updateExpenses(ArrayList<Expense> expenses);
 
     void notifyUserOfFutureDate();
 

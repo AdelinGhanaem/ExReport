@@ -9,17 +9,34 @@ import java.io.Serializable;
  * Time: 2:34 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Day implements Serializable{
-    private String day;
+public class Day implements Serializable {
 
-    public Day() {
-    }
+  private  int day;
+  
+  private  int month;
+  
+  private  int year;
 
-    public Day(String day) {
-        this.day = day;
-    }
+  public Day(int day, int month, int year) {
+    this.day = day;
+    this.month = month;
+    this.year = year;
+  }
 
-    public String getDay() {
-        return day;
-    }
+  public Day() {
+
+  }
+
+
+  public int getDay() {
+    return day;
+  }
+
+  public int getMonth() {
+    return month;
+  }
+
+  public int getYear() {
+    return year;
+  }
 }

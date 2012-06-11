@@ -29,163 +29,164 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class DashBoardExpensePresenterTest {
 
 
-    @Mock
-    ExpenseReporterDashBoardView reporterDashBoardView;
+  @Mock
+  ExpenseReporterDashBoardView reporterDashBoardView;
 
-    @Mock
-    ExpenseReporterServiceAsync reporterAsync;
+  @Mock
+  ExpenseReporterServiceAsync reporterAsync;
 
-    private ExpenseReporterDashboardPresenter reporterDashboardPresenter;
-
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-        reporterDashboardPresenter = new ExpenseReporterDashboardPresenter(reporterDashBoardView, reporterAsync);
-    }
-
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+  private ExpenseReporterDashboardPresenter reporterDashboardPresenter;
 
 
-    @Test
-    public void returnsExpensesOfTheGivenDate() throws ParseException {
-        ArrayList<Expense> expenses = new ArrayList<Expense>();
+  @Before
+  public void setUp() {
+    initMocks(this);
+    reporterDashboardPresenter = new ExpenseReporterDashboardPresenter(reporterDashBoardView, reporterAsync);
+  }
 
-        expenses.add(new Expense("food", 10));
-        expenses.add(new Expense("dress", 50));
-        expenses.add(new Expense("internet", 60));
-
-        Date date = dateFormat.parse("2012-06-01");
-        doOnSuccess(expenses).when(reporterAsync).getExpensesFor(any(Date.class), any(AsyncCallback.class));
-        reporterDashboardPresenter.showExpensesFor(date);
-        verify(reporterAsync).getExpensesFor(eq(date), any(AsyncCallback.class));
-        verify(reporterDashBoardView).renderTodaysExpense(expenses);
-    }
+  private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
-    @Test
-    public void returnsExpensesBetweenTwoGivenDates() throws ParseException {
-        ArrayList<Expense> expenses = new ArrayList<Expense>() {{
-            add(new Expense("fuel for the car", 20));
-            add(new Expense("shoes", 100));
-            add(new Expense("food", 100));
-        }};
+  @Test
+  public void returnsExpensesOfTheGivenDateAndUpdatesView() throws ParseException {
 
-        Date firstDate = dateFormat.parse("2012-01-06");
+    ArrayList<Expense> expenses = new ArrayList<Expense>();
 
-        Date secondDate = dateFormat.parse("2012-06-01");
+    Date date = dateFormat.parse("2012-06-01");
 
-        doOnSuccess(expenses).when(reporterAsync).getExpensesBetween(eq(firstDate), eq(secondDate), any(AsyncCallback.class));
+    doOnSuccess(expenses).when(reporterAsync).getExpensesFor(any(Date.class), any(AsyncCallback.class));
 
-        reporterDashboardPresenter.showExpensesBetween(firstDate, secondDate);
+    reporterDashboardPresenter.showExpensesFor(date);
 
-        verify(reporterAsync).getExpensesBetween(eq(firstDate), eq(secondDate), any(AsyncCallback.class));
+    verify(reporterAsync).getExpensesFor(eq(date), any(AsyncCallback.class));
 
-        verify(reporterDashBoardView).renderTodaysExpense(expenses);
-    }
+    verify(reporterDashBoardView).updateExpenses(expenses);
+  }
 
 
-    @Test
-    public void notifiesUserWhenDataIsInFuture() throws ParseException {
+  @Test
+  public void returnsExpensesBetweenTwoGivenDates() throws ParseException {
+    ArrayList<Expense> expenses = new ArrayList<Expense>();
 
-        Date futureDate = dateFormat.parse("2013-01-01");
+    Date firstDate = dateFormat.parse("2012-01-06");
 
-        reporterDashboardPresenter.showExpensesFor(futureDate);
+    Date secondDate = dateFormat.parse("2012-06-01");
 
-        verify(reporterAsync, never()).getExpensesFor(eq(futureDate), any(AsyncCallback.class));
+    doOnSuccess(expenses).when(reporterAsync).getExpensesBetween(eq(firstDate), eq(secondDate), any(AsyncCallback.class));
 
-        verify(reporterDashBoardView).notifyUserOfFutureDate();
+    reporterDashboardPresenter.fetchExpensesBetween(firstDate, secondDate);
 
-    }
+    verify(reporterAsync).getExpensesBetween(eq(firstDate), eq(secondDate), any(AsyncCallback.class));
 
-
-    @Test
-    public void notifiesUserWhenStartDateIsAfterEndDate() throws ParseException {
-
-        Date startDate = dateFormat.parse("2012-06-01");
-
-        Date endDate = dateFormat.parse("2010-06-01");
-
-        reporterDashboardPresenter.showExpensesBetween(startDate, endDate);
-
-        verify(reporterAsync, never()).getExpensesBetween(eq(startDate), eq(endDate), any(AsyncCallback.class));
-
-        verify(reporterDashBoardView).notifyUserOfDateDiscrepancy();
-
-    }
+    verify(reporterDashBoardView).updateExpenses(expenses);
+  }
 
 
-    @Test
-    public void notifiesUserWhenConnectionErrorOccurs() {
-        Date firstDate = new Date();
+  @Test
+  public void notifiesUserWhenDataIsInFuture() throws ParseException {
 
-        Date endDate = new Date();
+    Date futureDate = dateFormat.parse("2013-01-01");
 
-        doOnFailure(new Throwable()).when(reporterAsync).getExpensesBetween(eq(firstDate), eq(endDate), any(AsyncCallback.class));
+    reporterDashboardPresenter.showExpensesFor(futureDate);
 
-        reporterDashboardPresenter.showExpensesBetween(firstDate, endDate);
+    verify(reporterAsync, never()).getExpensesFor(eq(futureDate), any(AsyncCallback.class));
 
-        verify(reporterDashBoardView).showConnectionErrorMessage();
+    verify(reporterDashBoardView).notifyUserOfFutureDate();
 
-    }
-
-
-    @Test
-    public void returnsAllYearOfExpensesAndListThemInTheView() {
-        ArrayList<Year> yearList = new ArrayList<Year>();
-        yearList.add(new Year(2012));
-        yearList.add(new Year(2013));
-        doOnSuccess(yearList).when(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
-        reporterDashboardPresenter.getAllExpensesYears();
-
-        verify(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
-        verify(reporterDashBoardView).showExpensesYears(yearList);
-
-    }
-
-    @Test
-    public void notifiesUserWhenErrorOccursWhileRequiringYearsOfExpenses() {
-
-        doOnFailure(new Throwable()).when(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
-
-        reporterDashboardPresenter.getAllExpensesYears();
-
-        verify(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
-
-        verify(reporterDashBoardView).showConnectionErrorMessage();
-    }
+  }
 
 
-    @Test
-    public void returnsAllExpensesMonthsOfTheYear() {
+  @Test
+  public void notifiesUserWhenStartDateIsAfterEndDate() throws ParseException {
 
-        ArrayList<Month> months = new ArrayList<Month>();
+    Date startDate = dateFormat.parse("2012-06-01");
 
-        months.add(new Month(11));
+    Date endDate = dateFormat.parse("2010-06-01");
 
-        months.add(new Month(6));
+    reporterDashboardPresenter.fetchExpensesBetween(startDate, endDate);
 
-        doOnSuccess(months).when(reporterAsync).getMonthOf(eq(2012), any(AsyncCallback.class));
+    verify(reporterAsync, never()).getExpensesBetween(eq(startDate), eq(endDate), any(AsyncCallback.class));
 
-        reporterDashboardPresenter.getMonthsOf(2012);
+    verify(reporterDashBoardView).notifyUserOfDateDiscrepancy();
 
-        verify(reporterAsync).getMonthOf(eq(2012), any(AsyncCallback.class));
-
-        verify(reporterDashBoardView).showMonthsOfExpenses(months);
-
-    }
-
-    @Test
-    public void returnsAllExpensesDays() {
-
-        ArrayList<Day> days = new ArrayList<Day>();
-        doOnSuccess(days).when(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
-        reporterDashboardPresenter.getAllExpensesDays(2012, 6);
-        verify(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
-        verify(reporterDashBoardView).showDaysExpenses(days);
+  }
 
 
-    }
+  @Test
+  public void notifiesUserWhenConnectionErrorOccurs() {
+
+    Date firstDate = new Date();
+
+    Date endDate = new Date();
+
+    doOnFailure(new Throwable()).when(reporterAsync).getExpensesBetween(eq(firstDate), eq(endDate), any(AsyncCallback.class));
+
+    reporterDashboardPresenter.fetchExpensesBetween(firstDate, endDate);
+
+    verify(reporterDashBoardView).showConnectionErrorMessage();
+
+  }
+
+
+  @Test
+  public void returnsAllYearOfExpensesAndListThemInTheView() {
+
+    ArrayList<Year> yearList = new ArrayList<Year>();
+
+    doOnSuccess(yearList).when(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
+
+    reporterDashboardPresenter.getAllExpensesYears();
+
+    verify(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
+
+    verify(reporterDashBoardView).showExpensesYears(yearList);
+
+  }
+
+  @Test
+  public void notifiesUserWhenErrorOccursWhileRequiringYearsOfExpenses() {
+
+    doOnFailure(new Throwable()).when(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
+
+    reporterDashboardPresenter.getAllExpensesYears();
+
+    verify(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
+
+    verify(reporterDashBoardView).showConnectionErrorMessage();
+  }
+
+
+  @Test
+  public void returnsAllExpensesMonthsOfTheYear() {
+    int year = 2012;
+    ArrayList<Month> months = new ArrayList<Month>();
+
+    doOnSuccess(months).when(reporterAsync).getMonthOf(eq(year), any(AsyncCallback.class));
+
+    reporterDashboardPresenter.getMonthsOf(year);
+
+    verify(reporterAsync).getMonthOf(eq(year), any(AsyncCallback.class));
+
+    verify(reporterDashBoardView).showMonthsOfExpenses(months);
+
+  }
+
+  @Test
+  public void returnsAllExpensesDays() {
+
+    ArrayList<Day> days = new ArrayList<Day>();
+    
+    doOnSuccess(days).when(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
+    
+    reporterDashboardPresenter.getAllExpensesDays(2012, 6);
+    
+    verify(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
+    
+    verify(reporterDashBoardView).showDaysExpenses(days);
+
+  }
+
+
 
 
 }
