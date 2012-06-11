@@ -7,7 +7,6 @@ import com.clouway.exreport.shared.Expense;
 import com.clouway.exreport.shared.Month;
 import com.clouway.exreport.shared.Year;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
@@ -86,7 +85,6 @@ public class ExpenseReporterDashboardPresenter extends AbstractActivity {
 
             @Override
             public void onSuccess(ArrayList<Year> result) {
-                Window.alert("Ahaaa .... !");
                 reporterDashBoardView.showExpensesYears(result);
             }
         });
