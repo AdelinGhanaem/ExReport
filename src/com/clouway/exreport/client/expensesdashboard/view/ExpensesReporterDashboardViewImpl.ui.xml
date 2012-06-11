@@ -16,20 +16,27 @@
                 <g:ScrollPanel ui:field="cellTreeScrollPanel" addStyleNames="{style.scrollPanel}">
                     <g:HorizontalPanel ui:field="cellTreePanel">
                         <c:CellTree ui:field="cellTree">
-                            <!---->
                         </c:CellTree>
                     </g:HorizontalPanel>
 
                 </g:ScrollPanel>
             </g:DecoratorPanel>
-            <g:DecoratorPanel addStyleNames="{style.cellTreeDecoratorPanel}">
-                <g:ScrollPanel ui:field="cellTableScrollPanel" addStyleNames="{style.CellTreeScrollPanel}">
-                    <g:HorizontalPanel>
-                        <c:CellTable ui:field="expensesCellTable">
-                        </c:CellTable>
-                    </g:HorizontalPanel>
-                </g:ScrollPanel>
-            </g:DecoratorPanel>
+            <g:VerticalPanel>
+                <g:DecoratorPanel addStyleNames="{style.cellTreeDecoratorPanel}">
+                    <g:ScrollPanel ui:field="cellTableScrollPanel" addStyleNames="{style.CellTreeScrollPanel}">
+                        <g:HorizontalPanel>
+
+                            <c:CellTable ui:field="expensesCellTable">
+
+                            </c:CellTable>
+
+                        </g:HorizontalPanel>
+
+                    </g:ScrollPanel>
+                </g:DecoratorPanel>
+
+
+            </g:VerticalPanel>
 
 
         </g:HorizontalPanel>
