@@ -19,6 +19,8 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
@@ -64,8 +66,14 @@ public class ExpensesReporterDashboardViewImpl implements ExpenseReporterDashBoa
   @UiField
   CellTable<Expense> expensesCellTable;
 
+    @UiField
+    ScrollPanel cellTreeScrollPanel;
 
-  public ExpensesReporterDashboardViewImpl() {
+    @UiField
+    HorizontalPanel cellTreePanel;
+
+
+    public ExpensesReporterDashboardViewImpl() {
 
     presenter = new ExpenseReporterDashboardPresenter(this, async);
 
@@ -114,7 +122,7 @@ public class ExpensesReporterDashboardViewImpl implements ExpenseReporterDashBoa
 
 
     maiPanel = ourUiBinder.createAndBindUi(this);
-
+    cellTreePanel.add(cellTree);
     expensesCellTable.addColumn(new Column<Expense, String>(new TextCell()) {
       @Override
       public String getValue(Expense object) {

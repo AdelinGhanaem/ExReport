@@ -1,0 +1,26 @@
+.oog {
+    height: 400px;
+}
+
+.scrollPanel {
+
+    height: 370px;
+    width: 200px;
+
+}
+
+.decoratorPanel {
+    /*height: 400px;*/
+    padding: 10px;
+    margin: 5px;
+}
+
+.cellTreeDecoratorPanel {
+    padding: 10px;
+    margin: 5px;
+}
+
+.CellTreeScrollPanel {
+    height: auto;
+    widows: 300px;
+}

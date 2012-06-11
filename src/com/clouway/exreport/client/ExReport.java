@@ -4,7 +4,7 @@ import com.clouway.exreport.client.expensesdashboard.view.ExpensesReporterDashbo
 import com.clouway.exreport.client.mainview.CompositePanel;
 import com.clouway.exreport.shared.Expense;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.*;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class ExReport implements EntryPoint {
 
-  /**
-   * This is the entry point method.
-   */
-  public void onModuleLoad() {
+    /**
+     * This is the entry point method.
+     */
+    public void onModuleLoad() {
 
 //
 //    SimpleLayoutPanel widgets = new SimpleLayoutPanel();
@@ -34,16 +34,19 @@ public class ExReport implements EntryPoint {
 //    placeController.goTo(new Dashboard());
 
 
-    ExpensesReporterDashboardViewImpl dashboardView = new ExpensesReporterDashboardViewImpl();
+        ExpensesReporterDashboardViewImpl dashboardView = new ExpensesReporterDashboardViewImpl();
 
-    CompositePanel compositePanel = new CompositePanel();
+        CompositePanel compositePanel = new CompositePanel();
 
-    compositePanel.addWidget(dashboardView.asWidget());
+        compositePanel.addWidget(dashboardView.asWidget());
+
+
+
 //
     RootLayoutPanel.get().add(compositePanel.asWidget());
 //
 // RootLayoutPanel.get().add(dashboardView.asWidget());
 
 
-  }
+    }
 }
