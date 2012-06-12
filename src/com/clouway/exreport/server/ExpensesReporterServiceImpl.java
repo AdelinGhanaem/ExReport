@@ -1,6 +1,6 @@
 package com.clouway.exreport.server;
 
-import com.clouway.exreport.client.expensesdashboard.expensesreport.ExpenseReporterService;
+import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterService;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
 import com.clouway.exreport.shared.Month;

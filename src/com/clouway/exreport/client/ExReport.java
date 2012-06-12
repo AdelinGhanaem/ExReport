@@ -1,8 +1,8 @@
 package com.clouway.exreport.client;
 
-import com.clouway.exreport.client.expensesdashboard.addingexpenses.view.AddExpensesViewImpl;
-import com.clouway.exreport.client.expensesdashboard.expensesreport.view.ExpensesReporterViewImpl;
-import com.clouway.exreport.client.mainview.CompositePanel;
+import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesViewImpl;
+import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
+import com.clouway.exreport.client.dashboard.CompositePanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 

@@ -18,7 +18,7 @@ public class Dashboard extends Place {
 
     @Override
     public String getToken(Dashboard place) {
-      return "expensesdashboard";
+      return "expensesreporting";
     }
   }
 }
