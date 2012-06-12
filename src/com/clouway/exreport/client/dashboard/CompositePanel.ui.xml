@@ -1,43 +1,32 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:m='urn:import:com.clouway.exreport.client.navigation'>
+             xmlns:m='urn:import:com.clouway.exreport.client.navigation'
+             xmlns:reporting='urn:import:com.clouway.exreport.client.expensesreporting.expensesreport.view'
+             xmlns:add='urn:import:com.clouway.exreport.client.expensesreporting.addingexpenses.view'>
 
-  <ui:style src="dashboardStyle.css"/>
-
-
-  <g:DockLayoutPanel ui:field="mainContainerPanel" unit="EM" addStyleNames="{style.mainDockLayoutPanel}">
-    <g:north size="10">
-      <g:HTML>
-
-      </g:HTML>
-    </g:north>
-
-
-    <g:center>
-
-      <g:HTMLPanel ui:field="centerPanel" addStyleNames="{style.centerHTMLPanel}">
-
-      </g:HTMLPanel>
-
-    </g:center>
-
-    <g:west size="10">
-
-      <g:HTMLPanel addStyleNames="{style.navHTML}">
-        <m:NavigationMenu ui:field="navigationMenu">
-
-        </m:NavigationMenu>
-      </g:HTMLPanel>
-
-
-    </g:west>
+    <ui:style src="dashboardStyle.css"/>
+    <g:HTMLPanel addStyleNames="{style.mainPanel}">
+        <div class="{style.head}">
+        </div>
+        <div class="{style.leftnavigation}">
+            <g:HTMLPanel addStyleNames="{style.navHTML}">
+                <m:NavigationMenu ui:field="navigationMenu">
+                </m:NavigationMenu>
+            </g:HTMLPanel>
+        </div>
+        <div class="{style.center}">
+            <g:ScrollPanel addStyleNames="{style.centerScrollPanel}">
+                <g:HTMLPanel ui:field="centerPanel" addStyleNames="{style.centerHTMLPanel}">
+                    <reporting:ExpensesReporterViewImpl>
+                    </reporting:ExpensesReporterViewImpl>
+                    <add:AddExpensesViewImpl>
+                    </add:AddExpensesViewImpl>
+                </g:HTMLPanel>
+            </g:ScrollPanel>
+        </div>
+        <div class="footer">
+        </div>
+    </g:HTMLPanel>
 
 
-    <g:south size="2">
-      <g:HTML>
-
-      </g:HTML>
-    </g:south>
-
-  </g:DockLayoutPanel>
 </ui:UiBinder>

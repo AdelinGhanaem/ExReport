@@ -4,8 +4,17 @@ h1 {
     font-size: 2em;
     font-weight: bold;
     text-align: center;
+    overflow: visible;
 }
 
 body, td, a, div, .p {
+    overflow: visible;
     font-family: arial, sans-serif
+}
+
+.rootPanel {
+    border: 3px solid;
+             background: #191970;
+    overflow: visible;
+    /*overflow-style:*/
 }

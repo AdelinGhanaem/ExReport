@@ -1,4 +1,5 @@
 .mainDockLayoutPanel {
+    overflow: visible;
     text-align: center;
     padding: 20px;
     margin: 20px;
@@ -16,18 +17,52 @@
 }
 
 .navHTML {
-    border-width: 1px;
-    border-style: solid;
     width: auto;
-    height: 400px;
-    padding: 2px;
-    margin: 3px;
+    height: auto;
+    padding: 4px;
+    margin: 4px;
 }
 
 .centerHTMLPanel {
-    border-width: 1px;
-    border-style: solid;
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    overflow: visible;
     width: auto;
-    height: 400px;
+    height: auto;
     padding: 4px;
+}
+
+.centerScrollPanel {
+    height: 600px;
+}
+
+.leftnavigation {
+    border: 2px black;
+    width: 19%;
+    height: auto;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+}
+
+.center {
+    border: 2px black;
+    width: 75%;
+    height: auto;
+    padding: 5px;
+    margin: 5px;
+    float: right;
+}
+
+.head {
+    height: 200px;
+}
+
+.mainScrollPanel {
+    height: 600px;
+    width: 100%;
+}
+
+.mainPanel {
+    overflow: scroll;
 }

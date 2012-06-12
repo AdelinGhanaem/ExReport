@@ -20,7 +20,8 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
 
 
   private static ExpenseEditorUiBinder ourUiBinder = GWT.create(ExpenseEditorUiBinder.class);
-  @UiField
+
+    @UiField
   TextBox name;
 
   @Ignore

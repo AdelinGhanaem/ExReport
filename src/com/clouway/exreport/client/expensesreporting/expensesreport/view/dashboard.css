@@ -10,17 +10,16 @@
 }
 
 .decoratorPanel {
-    /*height: 400px;*/
     padding: 10px;
-    margin: 5px;
+    margin: auto;
 }
 
 .cellTreeDecoratorPanel {
     padding: 10px;
-    margin: 5px;
+    margin: auto;
 }
 
 .CellTreeScrollPanel {
-    height: auto;
-    widows: 300px;
+    height: 370px;
+    width: 300px;
 }

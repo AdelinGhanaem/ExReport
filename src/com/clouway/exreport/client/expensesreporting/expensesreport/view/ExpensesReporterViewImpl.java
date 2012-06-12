@@ -19,10 +19,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -35,7 +32,7 @@ import java.util.Date;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class ExpensesReporterViewImpl implements ExpenseReporterDashBoardView, TreeViewModel {
+public class ExpensesReporterViewImpl extends Composite implements ExpenseReporterDashBoardView, TreeViewModel {
 
     interface ExpensesReporterDashboardViewImplUiBinder extends UiBinder<HTMLPanel, ExpensesReporterViewImpl> {
 
@@ -133,6 +130,7 @@ public class ExpensesReporterViewImpl implements ExpenseReporterDashBoardView, T
                 return String.valueOf(object.getPrice());
             }
         });
+        initWidget(maiPanel);
     }
 
     @Override
