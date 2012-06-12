@@ -1,0 +1,12 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+        xmlns:mine='urn:import:com.clouway.exreport.client.expensesdashboard.addingexpenses.view'>
+  <g:HTMLPanel>
+    <g:DecoratorPanel>
+      <g:HorizontalPanel>
+        <mine:ExpenseEditor ui:field="expenseEditor"/>
+        <g:Button ui:field="save" text="save"/>
+      </g:HorizontalPanel>
+    </g:DecoratorPanel>
+  </g:HTMLPanel>
+</ui:UiBinder>

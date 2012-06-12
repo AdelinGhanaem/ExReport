@@ -1,0 +1,17 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+        >
+  <g:HTMLPanel>
+    <g:DecoratorPanel>
+      <g:VerticalPanel>
+        <g:Label text="Title:"/>
+        <g:TextBox ui:field="name"/>
+        <g:TextBox ui:field="expensePrice"/>
+
+      </g:VerticalPanel>
+
+    </g:DecoratorPanel>
+
+  </g:HTMLPanel>
+</ui:UiBinder>

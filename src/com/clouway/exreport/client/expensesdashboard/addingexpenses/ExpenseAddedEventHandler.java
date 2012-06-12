@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.expensesdashboard.addexpenses;
+package com.clouway.exreport.client.expensesdashboard.addingexpenses;
 
 import com.google.gwt.event.shared.EventHandler;
 

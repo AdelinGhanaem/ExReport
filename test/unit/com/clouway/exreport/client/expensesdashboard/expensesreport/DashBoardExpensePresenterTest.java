@@ -1,6 +1,6 @@
-package com.clouway.exreport.client.expensesdashboard.expensesreview;
+package com.clouway.exreport.client.expensesdashboard.expensesreport;
 
-import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpenseReporterDashBoardView;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.view.ExpenseReporterDashBoardView;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
 import com.clouway.exreport.shared.Month;
@@ -36,13 +36,13 @@ public class DashBoardExpensePresenterTest {
   @Mock
   ExpenseReporterServiceAsync reporterAsync;
 
-  private ExpenseReporterDashboardPresenter reporterDashboardPresenter;
+  private ExpenseReporterPresenter reporterPresenter;
 
   //TODO:Don't forget to change to MessagesContainer;
   @Before
   public void setUp() {
     initMocks(this);
-    reporterDashboardPresenter = new ExpenseReporterDashboardPresenter(reporterDashBoardView, reporterAsync);
+    reporterPresenter = new ExpenseReporterPresenter(reporterDashBoardView, reporterAsync);
   }
 
   private DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
@@ -57,7 +57,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnSuccess(expenses).when(reporterAsync).getExpensesFor(any(Date.class), any(AsyncCallback.class));
 
-    reporterDashboardPresenter.showExpensesFor(date);
+    reporterPresenter.showExpensesFor(date);
 
     verify(reporterAsync).getExpensesFor(eq(date), any(AsyncCallback.class));
 
@@ -75,7 +75,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnSuccess(expenses).when(reporterAsync).getExpensesBetween(eq(firstDate), eq(secondDate), any(AsyncCallback.class));
 
-    reporterDashboardPresenter.fetchExpensesBetween(firstDate, secondDate);
+    reporterPresenter.fetchExpensesBetween(firstDate, secondDate);
 
     verify(reporterAsync).getExpensesBetween(eq(firstDate), eq(secondDate), any(AsyncCallback.class));
 
@@ -88,7 +88,7 @@ public class DashBoardExpensePresenterTest {
 
     Date futureDate = dateFormat.parse("2013-01-01");
 
-    reporterDashboardPresenter.showExpensesFor(futureDate);
+    reporterPresenter.showExpensesFor(futureDate);
 
     verify(reporterAsync, never()).getExpensesFor(eq(futureDate), any(AsyncCallback.class));
 
@@ -104,7 +104,7 @@ public class DashBoardExpensePresenterTest {
 
     Date endDate = dateFormat.parse("2010-06-01");
 
-    reporterDashboardPresenter.fetchExpensesBetween(startDate, endDate);
+    reporterPresenter.fetchExpensesBetween(startDate, endDate);
 
     verify(reporterAsync, never()).getExpensesBetween(eq(startDate), eq(endDate), any(AsyncCallback.class));
 
@@ -122,7 +122,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnFailure(new Throwable()).when(reporterAsync).getExpensesBetween(eq(firstDate), eq(endDate), any(AsyncCallback.class));
 
-    reporterDashboardPresenter.fetchExpensesBetween(firstDate, endDate);
+    reporterPresenter.fetchExpensesBetween(firstDate, endDate);
 
     verify(reporterDashBoardView).showConnectionErrorMessage();
 
@@ -136,7 +136,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnSuccess(yearList).when(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
 
-    reporterDashboardPresenter.getAllExpensesYears();
+    reporterPresenter.getAllExpensesYears();
 
     verify(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
 
@@ -149,7 +149,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnFailure(new Throwable()).when(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
 
-    reporterDashboardPresenter.getAllExpensesYears();
+    reporterPresenter.getAllExpensesYears();
 
     verify(reporterAsync).getYearsOfExpenses(any(AsyncCallback.class));
 
@@ -164,7 +164,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnSuccess(months).when(reporterAsync).getMonthOf(eq(year), any(AsyncCallback.class));
 
-    reporterDashboardPresenter.getMonthsOf(year);
+    reporterPresenter.getMonthsOf(year);
 
     verify(reporterAsync).getMonthOf(eq(year), any(AsyncCallback.class));
 
@@ -179,7 +179,7 @@ public class DashBoardExpensePresenterTest {
 
     doOnSuccess(days).when(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
 
-    reporterDashboardPresenter.getAllExpensesDays(2012, 6);
+    reporterPresenter.getAllExpensesDays(2012, 6);
 
     verify(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
 

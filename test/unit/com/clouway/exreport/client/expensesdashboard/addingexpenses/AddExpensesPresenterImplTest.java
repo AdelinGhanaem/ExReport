@@ -1,5 +1,6 @@
-package com.clouway.exreport.client.expensesdashboard.addexpenses;
+package com.clouway.exreport.client.expensesdashboard.addingexpenses;
 
+import com.clouway.exreport.client.expensesdashboard.addingexpenses.view.AddExpensesView;
 import com.clouway.exreport.shared.Expense;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -11,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.clouway.exreport.client.expensesdashboard.TestingAsyncCallbacksHelper.doOnFailure;
 import static com.clouway.exreport.client.expensesdashboard.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -22,7 +24,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 
-public class AddExpensesPresenterTest {
+public class AddExpensesPresenterImplTest {
 
   private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yy-MM-DD");
 
@@ -32,7 +34,7 @@ public class AddExpensesPresenterTest {
   @Mock
   HasHandlers hasHandlers;
 
-  private AddExpensesPresenter addExpensesPresenter;
+  private AddExpensesPresenterImpl addExpensesPresenterImpl;
 
   @Mock
   private AddExpensesView view;
@@ -41,7 +43,7 @@ public class AddExpensesPresenterTest {
   @Before
   public void setUp() {
     initMocks(this);
-    addExpensesPresenter = new AddExpensesPresenter(addingExpensesServiceAsync, hasHandlers, view);
+    addExpensesPresenterImpl = new AddExpensesPresenterImpl(addingExpensesServiceAsync, hasHandlers, view);
   }
 
   @Test
@@ -54,7 +56,7 @@ public class AddExpensesPresenterTest {
 
     doOnSuccess(expense).when(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
 
-    addExpensesPresenter.addExpense(expense, date);
+    addExpensesPresenterImpl.addExpense(expense, date);
 
     verify(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
 
@@ -71,7 +73,7 @@ public class AddExpensesPresenterTest {
 
     doOnSuccess(expense).when(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
 
-    addExpensesPresenter.addExpense(expense, date);
+    addExpensesPresenterImpl.addExpense(expense, date);
 
     verify(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
 
@@ -87,7 +89,7 @@ public class AddExpensesPresenterTest {
 
     Date futureDate = dateTimeFormat.parse("2013-03-12");
 
-    addExpensesPresenter.addExpense(expense, futureDate);
+    addExpensesPresenterImpl.addExpense(expense, futureDate);
 
     verify(addingExpensesServiceAsync, never()).addExpense(eq(expense), eq(futureDate), any(AsyncCallback.class));
 
@@ -104,8 +106,7 @@ public class AddExpensesPresenterTest {
 
     Date date = new Date();
 
-    addExpensesPresenter.addExpense(expense, date);
-
+    addExpensesPresenterImpl.addExpense(expense, date);
 
     verify(addingExpensesServiceAsync, never()).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
 
@@ -115,10 +116,20 @@ public class AddExpensesPresenterTest {
 
   }
 
-
   //TODO:i think that the Expense should encapsulate the date, but we will see ... !
+
   @Test
   public void userIsNotifiedOfConnectionError() {
+
+    Expense expense = new Expense("Computer fix", 200);
+
+    Date date = new Date();
+
+    doOnFailure(new Throwable()).when(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+
+    addExpensesPresenterImpl.addExpense(expense, date);
+
+    verify(view).notifyUserOfConnectionError();
 
   }
 

@@ -1,6 +1,6 @@
-package com.clouway.exreport.client.expensesdashboard.expensesreview;
+package com.clouway.exreport.client.expensesdashboard.expensesreport;
 
-import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpenseReporterDashBoardView;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.view.ExpenseReporterDashBoardView;
 import com.clouway.exreport.client.navigation.AbstractActivity;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
@@ -16,12 +16,12 @@ import java.util.Date;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class ExpenseReporterDashboardPresenter extends AbstractActivity {
+public class ExpenseReporterPresenter extends AbstractActivity {
 
   private final ExpenseReporterDashBoardView reporterDashBoardView;
   private final ExpenseReporterServiceAsync reporterAsync;
 
-  public ExpenseReporterDashboardPresenter(ExpenseReporterDashBoardView reporterDashBoardView, ExpenseReporterServiceAsync reporterAsync) {
+  public ExpenseReporterPresenter(ExpenseReporterDashBoardView reporterDashBoardView, ExpenseReporterServiceAsync reporterAsync) {
     this.reporterDashBoardView = reporterDashBoardView;
     this.reporterAsync = reporterAsync;
   }

@@ -1,11 +1,11 @@
-package com.clouway.exreport.client.expensesdashboard.expensesreview.view;
+package com.clouway.exreport.client.expensesdashboard.expensesreport.view;
 
-import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterDashboardPresenter;
-import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterService;
-import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterServiceAsync;
-import com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells.DayCell;
-import com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells.MonthCell;
-import com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells.YearCell;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.ExpenseReporterPresenter;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.ExpenseReporterService;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.ExpenseReporterServiceAsync;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.view.cells.DayCell;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.view.cells.MonthCell;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.view.cells.YearCell;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
 import com.clouway.exreport.shared.Month;
@@ -35,9 +35,9 @@ import java.util.Date;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class ExpensesReporterDashboardViewImpl implements ExpenseReporterDashBoardView, TreeViewModel {
+public class ExpensesReporterViewImpl implements ExpenseReporterDashBoardView, TreeViewModel {
 
-    interface ExpensesReporterDashboardViewImplUiBinder extends UiBinder<HTMLPanel, ExpensesReporterDashboardViewImpl> {
+    interface ExpensesReporterDashboardViewImplUiBinder extends UiBinder<HTMLPanel, ExpensesReporterViewImpl> {
 
     }
 
@@ -49,7 +49,7 @@ public class ExpensesReporterDashboardViewImpl implements ExpenseReporterDashBoa
 
     private static ExpensesReporterDashboardViewImplUiBinder ourUiBinder = GWT.create(ExpensesReporterDashboardViewImplUiBinder.class);
 
-    private ExpenseReporterDashboardPresenter presenter;
+    private ExpenseReporterPresenter presenter;
 
     private ExpenseReporterServiceAsync async = GWT.create(ExpenseReporterService.class);
 
@@ -74,9 +74,9 @@ public class ExpensesReporterDashboardViewImpl implements ExpenseReporterDashBoa
     HorizontalPanel cellTreePanel;
 
 
-    public ExpensesReporterDashboardViewImpl() {
+    public ExpensesReporterViewImpl() {
 
-        presenter = new ExpenseReporterDashboardPresenter(this, async);
+        presenter = new ExpenseReporterPresenter(this, async);
 
         singleSelectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 

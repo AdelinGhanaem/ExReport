@@ -9,13 +9,11 @@ public class Expense implements Serializable {
 
 
   private String name;
-
   private double price;
-  private boolean priceValid;
 
   public Expense(String name, double price) {
 
-    this.name = name;
+    this.name =   name;
     this.price = price;
   }
 

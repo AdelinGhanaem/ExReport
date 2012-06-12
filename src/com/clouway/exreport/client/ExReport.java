@@ -1,19 +1,20 @@
 package com.clouway.exreport.client;
 
-import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpensesReporterDashboardViewImpl;
+import com.clouway.exreport.client.expensesdashboard.addingexpenses.view.AddExpensesViewImpl;
+import com.clouway.exreport.client.expensesdashboard.expensesreport.view.ExpensesReporterViewImpl;
 import com.clouway.exreport.client.mainview.CompositePanel;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
  */
 public class ExReport implements EntryPoint {
 
-    /**
-     * This is the entry point method.
-     */
-    public void onModuleLoad() {
+  /**
+   * This is the entry point method.
+   */
+  public void onModuleLoad() {
 
 //
 //    SimpleLayoutPanel widgets = new SimpleLayoutPanel();
@@ -31,19 +32,22 @@ public class ExReport implements EntryPoint {
 //    placeController.goTo(new Dashboard());
 
 
-        ExpensesReporterDashboardViewImpl dashboardView = new ExpensesReporterDashboardViewImpl();
+    ExpensesReporterViewImpl view = new ExpensesReporterViewImpl();
 
-        CompositePanel compositePanel = new CompositePanel();
+    AddExpensesViewImpl expensesView = new AddExpensesViewImpl();
 
-        compositePanel.addWidget(dashboardView.asWidget());
+    CompositePanel compositePanel = new CompositePanel();
 
+    compositePanel.addWidget(view.asWidget());
+
+    compositePanel.addWidget(expensesView.asWidget());
 
 
 //
     RootLayoutPanel.get().add(compositePanel.asWidget());
 //
-// RootLayoutPanel.get().add(dashboardView.asWidget());
+// RootLayoutPanel.get().add(view.asWidget());
 
 
-    }
+  }
 }

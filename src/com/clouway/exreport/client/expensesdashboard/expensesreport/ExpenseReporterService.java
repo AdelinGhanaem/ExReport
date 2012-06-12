@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.expensesdashboard.expensesreview;
+package com.clouway.exreport.client.expensesdashboard.expensesreport;
 
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
@@ -9,7 +9,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com

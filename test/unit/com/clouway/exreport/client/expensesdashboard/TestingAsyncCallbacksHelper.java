@@ -40,7 +40,7 @@ public class TestingAsyncCallbacksHelper {
   }
 
 
-  public   static <T>Stubber doOnFailure(final Throwable throwable) {
+  public static <T>Stubber doOnFailure(final Throwable throwable) {
         return doAnswer(new Answer<Throwable>() {
             @Override
             public Throwable answer(InvocationOnMock invocation) throws Throwable {
