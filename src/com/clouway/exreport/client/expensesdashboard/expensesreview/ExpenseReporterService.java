@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.expensesdashboard;
+package com.clouway.exreport.client.expensesdashboard.expensesreview;
 
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;

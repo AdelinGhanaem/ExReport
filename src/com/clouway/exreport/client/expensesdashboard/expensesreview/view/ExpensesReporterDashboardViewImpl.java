@@ -1,11 +1,11 @@
-package com.clouway.exreport.client.expensesdashboard.view;
+package com.clouway.exreport.client.expensesdashboard.expensesreview.view;
 
-import com.clouway.exreport.client.expensesdashboard.ExpenseReporterDashboardPresenter;
-import com.clouway.exreport.client.expensesdashboard.ExpenseReporterService;
-import com.clouway.exreport.client.expensesdashboard.ExpenseReporterServiceAsync;
-import com.clouway.exreport.client.expensesdashboard.view.cells.DayCell;
-import com.clouway.exreport.client.expensesdashboard.view.cells.MonthCell;
-import com.clouway.exreport.client.expensesdashboard.view.cells.YearCell;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterDashboardPresenter;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterService;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterServiceAsync;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells.DayCell;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells.MonthCell;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells.YearCell;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
 import com.clouway.exreport.shared.Month;

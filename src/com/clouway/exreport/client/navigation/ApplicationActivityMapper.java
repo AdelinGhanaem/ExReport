@@ -1,7 +1,7 @@
 package com.clouway.exreport.client.navigation;
 
-import com.clouway.exreport.client.expensesdashboard.ExpenseReporterDashboardPresenter;
-import com.clouway.exreport.client.expensesdashboard.view.ExpensesReporterDashboardViewImpl;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.ExpenseReporterDashboardPresenter;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpensesReporterDashboardViewImpl;
 import com.clouway.exreport.client.navigation.places.Dashboard;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;

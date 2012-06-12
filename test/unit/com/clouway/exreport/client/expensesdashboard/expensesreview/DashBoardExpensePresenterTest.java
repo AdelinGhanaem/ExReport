@@ -1,6 +1,6 @@
-package com.clouway.exreport.client.expensesdashboard;
+package com.clouway.exreport.client.expensesdashboard.expensesreview;
 
-import com.clouway.exreport.client.expensesdashboard.view.ExpenseReporterDashBoardView;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpenseReporterDashBoardView;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
 import com.clouway.exreport.shared.Month;
@@ -20,7 +20,8 @@ import static com.clouway.exreport.client.expensesdashboard.TestingAsyncCallback
 import static com.clouway.exreport.client.expensesdashboard.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -37,14 +38,14 @@ public class DashBoardExpensePresenterTest {
 
   private ExpenseReporterDashboardPresenter reporterDashboardPresenter;
 
-
+  //TODO:Don't forget to change to MessagesContainer;
   @Before
   public void setUp() {
     initMocks(this);
     reporterDashboardPresenter = new ExpenseReporterDashboardPresenter(reporterDashBoardView, reporterAsync);
   }
 
-  private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+  private DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
 
 
   @Test
@@ -175,18 +176,16 @@ public class DashBoardExpensePresenterTest {
   public void returnsAllExpensesDays() {
 
     ArrayList<Day> days = new ArrayList<Day>();
-    
+
     doOnSuccess(days).when(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
-    
+
     reporterDashboardPresenter.getAllExpensesDays(2012, 6);
-    
+
     verify(reporterAsync).getDaysOf(eq(2012), eq(6), any(AsyncCallback.class));
-    
+
     verify(reporterDashBoardView).showDaysExpenses(days);
 
   }
-
-
 
 
 }

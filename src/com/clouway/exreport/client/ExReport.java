@@ -1,12 +1,9 @@
 package com.clouway.exreport.client;
 
-import com.clouway.exreport.client.expensesdashboard.view.ExpensesReporterDashboardViewImpl;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpensesReporterDashboardViewImpl;
 import com.clouway.exreport.client.mainview.CompositePanel;
-import com.clouway.exreport.shared.Expense;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
-
-import java.util.ArrayList;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>

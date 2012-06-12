@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.expensesdashboard.view.cells;
+package com.clouway.exreport.client.expensesdashboard.expensesreview.view.cells;
 
 import com.clouway.exreport.shared.Day;
 import com.google.gwt.cell.client.AbstractCell;

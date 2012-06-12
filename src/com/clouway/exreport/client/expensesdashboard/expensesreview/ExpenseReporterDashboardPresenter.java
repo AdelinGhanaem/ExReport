@@ -1,6 +1,6 @@
-package com.clouway.exreport.client.expensesdashboard;
+package com.clouway.exreport.client.expensesdashboard.expensesreview;
 
-import com.clouway.exreport.client.expensesdashboard.view.ExpenseReporterDashBoardView;
+import com.clouway.exreport.client.expensesdashboard.expensesreview.view.ExpenseReporterDashBoardView;
 import com.clouway.exreport.client.navigation.AbstractActivity;
 import com.clouway.exreport.shared.Day;
 import com.clouway.exreport.shared.Expense;
