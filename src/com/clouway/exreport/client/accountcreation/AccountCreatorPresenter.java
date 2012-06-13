@@ -1,5 +1,6 @@
 package com.clouway.exreport.client.accountcreation;
 
+import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.shared.Account;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.regexp.shared.RegExp;

@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.client.accountcreation.view;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com

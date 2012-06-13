@@ -1,5 +1,6 @@
 package com.clouway.exreport.client.accountcreation;
 
+import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.shared.Account;
 import com.evo.gad.shared.Action;
 import com.google.gwt.event.shared.HasHandlers;
@@ -43,7 +44,7 @@ public class AccountCreatorPresenterTest {
   @Test
   public void createsNewAccountAndFiresEventWhenResponseIsReturned() {
 
-    Account account = new Account("email@mail.com");
+    Account account = new Account("email@mail.com","123567");
 
     AccountCreatedResponse accountResponse = new AccountCreatedResponse(account);
 
@@ -67,7 +68,7 @@ public class AccountCreatorPresenterTest {
 
     when(errorMessages.invalidEmailForm()).thenReturn(invalidEmailForm);
 
-    Account account = new Account(invalidEmailForm);
+    Account account = new Account(invalidEmailForm,"12345678");
 
     accountCreatorPresenter.create(account);
 
@@ -101,5 +102,8 @@ public class AccountCreatorPresenterTest {
     verify(view).showMessage(shotPasswordMessage);
 
   }
+
+
+
 
 }

@@ -9,14 +9,14 @@ public class Account implements Serializable {
 
 
   private String email;
-  private  String password;
+
+  private String password;
 
   public Account(String email) {
     this.email = email;
   }
 
   public Account() {
-
 
   }
 
@@ -33,5 +33,13 @@ public class Account implements Serializable {
 
   public String getPassword() {
     return password;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
