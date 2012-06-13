@@ -6,7 +6,8 @@
     <inherits name='com.google.gwt.user.User'/>
     <inherits name='com.google.gwt.user.theme.clean.Clean'/>
     <inherits name="com.google.gwt.activity.Activity"/>
-    <!-- Specify the app entry point class.                   -->
+    <inherits name="com.evo.gad.Gad"/>
+  <!-- Specify the app entry point class.                   -->
 
     <entry-point class='com.clouway.exreport.client.ExReport'/>
 
