@@ -16,6 +16,7 @@ public class ExpensesService {
   public ExpensesService(ExpenseRepository repository) {
 
     this.repository = repository;
+
   }
 
   public Expense add(Expense expense) {
@@ -33,5 +34,9 @@ public class ExpensesService {
 
   public List<Expense> getExpensesByName(String expenseName) {
     return repository.getByName(expenseName);
+  }
+
+  public List<Expense> getExpensesBetween(Date firstDate, Date secondDate) {
+    return repository.getByDateBetween(firstDate, secondDate);
   }
 }

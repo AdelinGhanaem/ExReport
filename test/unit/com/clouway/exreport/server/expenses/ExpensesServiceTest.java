@@ -1,5 +1,6 @@
 package com.clouway.exreport.server.expenses;
 
+import com.clouway.exreport.shared.Account;
 import com.clouway.exreport.shared.Expense;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,7 @@ public class ExpensesServiceTest {
 
   ExpensesService expensesService;
 
+
   @Before
   public void setUp() {
 
@@ -40,12 +42,12 @@ public class ExpensesServiceTest {
 
     expensesService = new ExpensesService(repository);
 
-
   }
 
 
   @Test
-  public void expensesAreSaved() {
+  public void expensesAreSavedForSpecifiedAccount() {
+    Account account = new Account();
 
     Expense expense = new Expense();
 
@@ -59,9 +61,13 @@ public class ExpensesServiceTest {
   public void returnsExpenseWhenExpenseIsAddedSuccessfully() {
 
     Expense expense = new Expense("expense", 12);
+
     Expense addedExpense = expensesService.add(expense);
+
     assertThat(addedExpense, is(notNullValue()));
+
     assertThat(addedExpense.getName(), is(equalTo(expense.getName())));
+
     assertThat(addedExpense.getPrice(), is(equalTo(expense.getPrice())));
 
   }
@@ -126,6 +132,31 @@ public class ExpensesServiceTest {
     assertThat(returnedExpenses.size(), is(equalTo(expenseList.size())));
 
     assertThat(returnedExpenses.containsAll(expenseList), is(true));
+
+  }
+
+
+  @Test
+  public void expensesAreReturnedBetweenTwoDifferDates() throws ParseException {
+    List<Expense> expenseList = new ArrayList<Expense>();
+
+    expenseList.add(new Expense("first expense", 12d));
+
+    expenseList.add(new Expense("seconds expense", 12d));
+
+    Date firstDate = new SimpleDateFormat("yyyy/MM/dd").parse("2012/09/05");
+    Date secondDate = new SimpleDateFormat("yyyy/MM/dd").parse("2012/09/05");
+
+    when(repository.getByDateBetween(firstDate,secondDate)).thenReturn(expenseList);
+
+    List<Expense> returnedExpenses = expensesService.getExpensesBetween(firstDate,secondDate);
+
+    verify(repository).getByDateBetween(firstDate,secondDate);
+
+    assertThat(returnedExpenses.size(), is(equalTo(expenseList.size())));
+
+    assertThat(returnedExpenses.containsAll(expenseList), is(true));
+
   }
 
 }
