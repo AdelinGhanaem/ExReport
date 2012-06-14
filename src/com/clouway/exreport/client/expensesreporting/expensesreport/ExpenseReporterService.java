@@ -14,11 +14,12 @@ import java.util.Date;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 @RemoteServiceRelativePath("exreportservice")
+
 public interface ExpenseReporterService extends RemoteService {
 
     ArrayList<Expense> getExpensesFor(Date date);
 
-  ArrayList<Expense> getExpensesBetween(Date firstDate, Date secondDate);
+   ArrayList<Expense> getExpensesBetween(Date firstDate, Date secondDate);
 
     ArrayList<Year> getYearsOfExpenses();
 

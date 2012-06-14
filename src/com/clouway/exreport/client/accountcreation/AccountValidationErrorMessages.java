@@ -11,5 +11,5 @@ public interface AccountValidationErrorMessages {
 
   String shortPassword();
 
-
+  String emailPreviouslyReserved();
 }

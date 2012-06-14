@@ -1,6 +1,7 @@
 package com.clouway.exreport.client.accountcreation;
 
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
+import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.shared.Account;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.regexp.shared.RegExp;
@@ -27,10 +28,9 @@ public class AccountCreatorPresenter {
   public void create(Account account) {
     String validationErrors = validateAccount(account);
     if ("".equals(validationErrors)) {
-      service.dispatch(new CreateAccountAction<AccountCreatedResponse>(), new GotResponse<AccountCreatedResponse>() {
+      service.dispatch(new CreateAccountAction<AccountCreatedResponse>(account), new GotResponse<AccountCreatedResponse>() {
         @Override
         public void gotResponse(AccountCreatedResponse result) {
-
           handlers.fireEvent(new AccountCreatedEvent(result.getAccount()));
         }
       });

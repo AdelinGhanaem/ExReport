@@ -1,6 +1,7 @@
 package com.clouway.exreport.client.accountcreation;
 
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
+import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.shared.Account;
 import com.evo.gad.shared.Action;
 import com.google.gwt.event.shared.HasHandlers;
@@ -8,6 +9,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import java.util.ArrayList;
 
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
@@ -46,7 +49,7 @@ public class AccountCreatorPresenterTest {
 
     Account account = new Account("email@mail.com","123567");
 
-    AccountCreatedResponse accountResponse = new AccountCreatedResponse(account);
+    AccountCreatedResponse accountResponse = new AccountCreatedResponse(account, new ArrayList<String>());
 
     doOnSuccess(accountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
 

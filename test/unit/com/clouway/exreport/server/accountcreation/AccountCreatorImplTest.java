@@ -1,5 +1,6 @@
 package com.clouway.exreport.server.accountcreation;
 
+import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.Account;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +24,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 
-public class AccountCreatorTest {
-
+public class AccountCreatorImplTest {
 
   @Mock
   AccountRepository repository;
@@ -32,14 +32,18 @@ public class AccountCreatorTest {
   @Mock
   AccountValidator accountValidator;
 
-  AccountCreator accountCreator;
+  @Mock
+  AccountValidationErrorMessages errorMessages;
+
+  AccountCreatorImpl accountCreatorImpl;
+
 
   @Before
   public void setUp() {
 
     initMocks(this);
 
-    accountCreator = new AccountCreator(repository, accountValidator);
+    accountCreatorImpl = new AccountCreatorImpl(repository, accountValidator, errorMessages);
 
   }
 
@@ -53,7 +57,7 @@ public class AccountCreatorTest {
     when(repository.getAccountByEmail(account.getEmail())).thenReturn(null);
 
 
-    Account createdAccount = accountCreator.create(account, errorMessages);
+    Account createdAccount = accountCreatorImpl.create(account, errorMessages);
 
     verify(repository).getAccountByEmail(account.getEmail());
 
@@ -72,11 +76,15 @@ public class AccountCreatorTest {
 
     Account account = new Account("mail@mail.com", "123456");
 
+    String errorMessage = "errorMessage";
+
     when(repository.getAccountByEmail(account.getEmail())).thenReturn(account);
+
+    when(errorMessages.emailPreviouslyReserved()).thenReturn(errorMessage);
 
     List<String> errorMessages = new ArrayList<String>();
 
-    Account createdAccount = accountCreator.create(account, errorMessages);
+    Account createdAccount = accountCreatorImpl.create(account, errorMessages);
 
     verify(repository).getAccountByEmail(account.getEmail());
 
@@ -86,6 +94,7 @@ public class AccountCreatorTest {
 
     assertThat(errorMessages.size(), is(equalTo(1)));
 
+    assertThat(errorMessages.contains(errorMessage), is(true));
   }
 
 
@@ -102,7 +111,7 @@ public class AccountCreatorTest {
 
     errorMessages.add(errorMessage);
 
-    Account createdAccount = accountCreator.create(account, errorMessages);
+    Account createdAccount = accountCreatorImpl.create(account, errorMessages);
 
     when(accountValidator.validateAccount(account)).thenReturn(errorMessages);
 
@@ -133,7 +142,7 @@ public class AccountCreatorTest {
 
     when(accountValidator.validateAccount(account)).thenReturn(errorMessages);
 
-    Account createdAccount = accountCreator.create(account, new ArrayList<String>());
+    Account createdAccount = accountCreatorImpl.create(account, new ArrayList<String>());
 
     verify(repository, never()).getAccountByEmail(invalidEmailForm);
 
@@ -162,7 +171,7 @@ public class AccountCreatorTest {
 
     when(accountValidator.validateAccount(account)).thenReturn(errorMessages);
 
-    Account createdAccount = accountCreator.create(account, new ArrayList<String>());
+    Account createdAccount = accountCreatorImpl.create(account, new ArrayList<String>());
 
     verify(repository, never()).getAccountByEmail(shortPassword);
 
@@ -175,6 +184,5 @@ public class AccountCreatorTest {
     assertThat(errorMessages.contains(errorMessage), is(true));
 
   }
-
 
 }
