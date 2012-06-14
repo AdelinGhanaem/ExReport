@@ -1,11 +1,12 @@
 package com.clouway.exreport.client.accountcreation;
 
+import com.evo.gad.shared.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public abstract class GotResponse<AccountCreatedResponse> implements AsyncCallback<AccountCreatedResponse> {
+public abstract class GotResponse<T extends Response> implements AsyncCallback<T> {
 
   @Override
   public void onFailure(Throwable caught) {
@@ -13,10 +14,10 @@ public abstract class GotResponse<AccountCreatedResponse> implements AsyncCallba
   }
 
   @Override
-  public void onSuccess(AccountCreatedResponse result) {
+  public void onSuccess(T result) {
     gotResponse(result);
   }
 
-  public abstract void gotResponse(AccountCreatedResponse result);
+  public abstract void gotResponse(T result);
 
 }

@@ -31,7 +31,11 @@ public class AccountCreatorPresenter {
       service.dispatch(new CreateAccountAction<AccountCreatedResponse>(account), new GotResponse<AccountCreatedResponse>() {
         @Override
         public void gotResponse(AccountCreatedResponse result) {
-          handlers.fireEvent(new AccountCreatedEvent(result.getAccount()));
+          if (result.getErrors().size() > 0) {
+            view.showMessages(result.getErrors());
+          } else {
+            handlers.fireEvent(new AccountCreatedEvent(result.getAccount()));
+          }
         }
       });
     } else {

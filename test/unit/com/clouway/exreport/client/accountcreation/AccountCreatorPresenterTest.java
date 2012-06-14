@@ -47,7 +47,7 @@ public class AccountCreatorPresenterTest {
   @Test
   public void createsNewAccountAndFiresEventWhenResponseIsReturned() {
 
-    Account account = new Account("email@mail.com","123567");
+    Account account = new Account("email@mail.com", "123567");
 
     AccountCreatedResponse accountResponse = new AccountCreatedResponse(account, new ArrayList<String>());
 
@@ -61,7 +61,29 @@ public class AccountCreatorPresenterTest {
   }
 
 
+  @Test
+  public void showErrorsAndDoesNotFireEventWhenReturnedResponseHasErrors() {
 
+    Account account = new Account("email@mail.com", "123567");
+
+    String errorMessage = "errors";
+
+    ArrayList<String> errors = new ArrayList<String>();
+
+    errors.add(errorMessage);
+
+    AccountCreatedResponse accountResponse = new AccountCreatedResponse(null, errors);
+
+    doOnSuccess(accountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
+
+    accountCreatorPresenter.create(account);
+
+    verify(service).dispatch(any(CreateAccountAction.class), any(GotResponse.class));
+
+    verify(view).showMessages(errors);
+
+    verify(handlers, never()).fireEvent(any(AccountCreatedEvent.class));
+  }
 
 
   @Test
@@ -71,7 +93,7 @@ public class AccountCreatorPresenterTest {
 
     when(errorMessages.invalidEmailForm()).thenReturn(invalidEmailForm);
 
-    Account account = new Account(invalidEmailForm,"12345678");
+    Account account = new Account(invalidEmailForm, "12345678");
 
     accountCreatorPresenter.create(account);
 
@@ -94,7 +116,7 @@ public class AccountCreatorPresenterTest {
 
     when(errorMessages.shortPassword()).thenReturn(shotPasswordMessage);
 
-    accountCreatorPresenter.create(new Account("mail@mail.com","123"));
+    accountCreatorPresenter.create(new Account("mail@mail.com", "123"));
 
     verify(service, never()).dispatch(any(CreateAccountAction.class), any(GotResponse.class));
 
@@ -105,8 +127,6 @@ public class AccountCreatorPresenterTest {
     verify(view).showMessage(shotPasswordMessage);
 
   }
-
-
 
 
 }

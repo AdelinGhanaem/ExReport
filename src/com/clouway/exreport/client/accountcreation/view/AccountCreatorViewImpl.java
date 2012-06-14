@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
+import java.util.ArrayList;
+
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
@@ -70,6 +72,11 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   @Override
   public void showMessage(String messages) {
 
+  }
+
+  @Override
+  public void showMessages(ArrayList<String> errors) {
+    //To change body of implemented methods use File | Settings | File Templates.
   }
 
 }

@@ -1,7 +1,9 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses;
 
+import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
 import com.clouway.exreport.shared.Expense;
+import com.evo.gad.shared.Action;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.junit.Before;
@@ -28,8 +30,9 @@ public class AddExpensesPresenterImplTest {
 
   private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yy-MM-DD");
 
+  //  private AddingExpensesServiceAsync addingExpensesServiceAsync;
   @Mock
-  private AddingExpensesServiceAsync addingExpensesServiceAsync;
+  ActionDispatcherServiceAsync actionDispatcherServiceAsync;
 
   @Mock
   HasHandlers hasHandlers;
@@ -43,22 +46,23 @@ public class AddExpensesPresenterImplTest {
   @Before
   public void setUp() {
     initMocks(this);
-    addExpensesPresenterImpl = new AddExpensesPresenterImpl(addingExpensesServiceAsync, hasHandlers, view);
+    addExpensesPresenterImpl = new AddExpensesPresenterImpl(actionDispatcherServiceAsync, hasHandlers, view);
   }
 
   @Test
   public void shouldAddExpenseAndFireExpenseAddedEvent() throws ParseException {
 
-
     Expense expense = new Expense("Food", 12d);
+
+    AddExpenseResponse expenseResponse = new AddExpenseResponse(expense);
 
     Date date = dateTimeFormat.parse("2012-06-02");
 
-    doOnSuccess(expense).when(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+    doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
     addExpensesPresenterImpl.addExpense(expense, date);
 
-    verify(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
     verify(hasHandlers).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -69,19 +73,21 @@ public class AddExpensesPresenterImplTest {
 
     Expense expense = new Expense("Food", 12d);
 
+    AddExpenseResponse expenseResponse = new AddExpenseResponse(expense);
+
     Date date = new Date();
 
-    doOnSuccess(expense).when(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+    doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
     addExpensesPresenterImpl.addExpense(expense, date);
 
-    verify(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
     verify(hasHandlers).fireEvent(any(ExpenseAddedEvent.class));
 
   }
-
-  //TODO:When testing date in the future make sure the date is always in the future !!;
+//
+//  //TODO:When testing date in the future make sure the date is always in the future !!;
   @Test
   public void anExpenseCanNotBeAddedInFutureDate() throws ParseException {
 
@@ -91,7 +97,7 @@ public class AddExpensesPresenterImplTest {
 
     addExpensesPresenterImpl.addExpense(expense, futureDate);
 
-    verify(addingExpensesServiceAsync, never()).addExpense(eq(expense), eq(futureDate), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync,never()).dispatch(any(Action.class), any(AsyncCallback.class));
 
     verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -99,6 +105,10 @@ public class AddExpensesPresenterImplTest {
 
   }
 
+
+
+
+//
   @Test
   public void expensePriceCanNotBeNegative() {
 
@@ -108,7 +118,7 @@ public class AddExpensesPresenterImplTest {
 
     addExpensesPresenterImpl.addExpense(expense, date);
 
-    verify(addingExpensesServiceAsync, never()).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync,never()).dispatch(any(Action.class), any(AsyncCallback.class));
 
     verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -125,7 +135,7 @@ public class AddExpensesPresenterImplTest {
 
     Date date = new Date();
 
-    doOnFailure(new Throwable()).when(addingExpensesServiceAsync).addExpense(eq(expense), eq(date), any(AsyncCallback.class));
+    doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
     addExpensesPresenterImpl.addExpense(expense, date);
 
