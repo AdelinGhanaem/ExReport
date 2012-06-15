@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.client.comunication;
 
 import com.evo.gad.shared.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;

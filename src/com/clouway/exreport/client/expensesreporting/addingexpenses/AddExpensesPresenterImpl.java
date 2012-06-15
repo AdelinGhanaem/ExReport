@@ -1,9 +1,11 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses;
 
-import com.clouway.exreport.client.accountcreation.GotResponse;
+import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
+import com.clouway.exreport.shared.Actions.AddExpenseAction;
 import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.Reponses.AddExpenseResponse;
 import com.google.gwt.event.shared.HasHandlers;
 
 import java.util.Date;
@@ -32,27 +34,21 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
     if (date.before(currentDate) || date.equals(currentDate)) {
       //here we are making expense to tell us whether its price is valid ot not, but we don't ask it! according to "tell don't ask"
       if (expense.isPriceValid()) {
-
         AddExpenseAction<AddExpenseResponse> addExpenseAction = new AddExpenseAction<AddExpenseResponse>(expense, date);
-
         addingExpensesServiceAsync.dispatch(addExpenseAction, new GotResponse<AddExpenseResponse>() {
           @Override
           public void gotResponse(AddExpenseResponse result) {
             hasHandlers.fireEvent(new ExpenseAddedEvent(result.getExpense()));
           }
-
           @Override
           public void onFailure(Throwable caught) {
             view.notifyUserOfConnectionError();
           }
         });
       } else {
-
         view.notifyNegativeExpensePriceValue();
       }
-
     } else {
-
       view.notifyExpenseCanNotBeAddedInFutureDate();
     }
   }

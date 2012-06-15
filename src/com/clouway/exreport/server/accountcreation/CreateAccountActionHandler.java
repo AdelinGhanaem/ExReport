@@ -1,7 +1,7 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.client.accountcreation.AccountCreatedResponse;
-import com.clouway.exreport.client.accountcreation.CreateAccountAction;
+import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
+import com.clouway.exreport.shared.Actions.CreateAccountAction;
 import com.clouway.exreport.shared.Account;
 import com.evo.gad.dispatch.ActionHandler;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountActionHandler implements ActionHandler<CreateAccountAction, AccountCreatedResponse> {
+public class CreateAccountActionHandler implements ActionHandler<CreateAccountAction, CreateAccountResponse> {
 
 
   private final AccountCreator accountCreator;
@@ -22,12 +22,12 @@ public class CreateAccountActionHandler implements ActionHandler<CreateAccountAc
   }
 
   @Override
-  public AccountCreatedResponse handle(CreateAccountAction action) {
+  public CreateAccountResponse handle(CreateAccountAction action) {
 
     List<String> error = new ArrayList<String>();
 
     Account account = accountCreator.create(action.getAccount(), error);
 
-    return new AccountCreatedResponse(account, (ArrayList<String>) error);
+    return new CreateAccountResponse(account, (ArrayList<String>) error);
   }
 }

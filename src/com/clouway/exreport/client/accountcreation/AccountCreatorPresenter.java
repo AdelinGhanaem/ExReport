@@ -3,6 +3,9 @@ package com.clouway.exreport.client.accountcreation;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.Actions.CreateAccountAction;
+import com.clouway.exreport.client.comunication.GotResponse;
+import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.regexp.shared.RegExp;
 
@@ -28,9 +31,9 @@ public class AccountCreatorPresenter {
   public void create(Account account) {
     String validationErrors = validateAccount(account);
     if ("".equals(validationErrors)) {
-      service.dispatch(new CreateAccountAction<AccountCreatedResponse>(account), new GotResponse<AccountCreatedResponse>() {
+      service.dispatch(new CreateAccountAction<CreateAccountResponse>(account), new GotResponse<CreateAccountResponse>() {
         @Override
-        public void gotResponse(AccountCreatedResponse result) {
+        public void gotResponse(CreateAccountResponse result) {
           if (result.getErrors().size() > 0) {
             view.showMessages(result.getErrors());
           } else {

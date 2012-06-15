@@ -2,7 +2,10 @@ package com.clouway.exreport.client.accountcreation;
 
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
+import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.Actions.CreateAccountAction;
+import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
 import com.evo.gad.shared.Action;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -49,9 +52,9 @@ public class AccountCreatorPresenterTest {
 
     Account account = new Account("email@mail.com", "123567");
 
-    AccountCreatedResponse accountResponse = new AccountCreatedResponse(account, new ArrayList<String>());
+    CreateAccountResponse createAccountResponse = new CreateAccountResponse(account, new ArrayList<String>());
 
-    doOnSuccess(accountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
+    doOnSuccess(createAccountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
 
     accountCreatorPresenter.create(account);
 
@@ -72,9 +75,9 @@ public class AccountCreatorPresenterTest {
 
     errors.add(errorMessage);
 
-    AccountCreatedResponse accountResponse = new AccountCreatedResponse(null, errors);
+    CreateAccountResponse createAccountResponse = new CreateAccountResponse(null, errors);
 
-    doOnSuccess(accountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
+    doOnSuccess(createAccountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
 
     accountCreatorPresenter.create(account);
 

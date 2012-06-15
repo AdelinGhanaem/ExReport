@@ -1,7 +1,7 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.client.accountcreation.AccountCreatedResponse;
-import com.clouway.exreport.client.accountcreation.CreateAccountAction;
+import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
+import com.clouway.exreport.shared.Actions.CreateAccountAction;
 import com.clouway.exreport.shared.Account;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,11 +52,11 @@ public class CreateAccountActionHandlerTest {
 
     when(accountCreator.create(account, erros)).thenReturn(account);
 
-    AccountCreatedResponse response = createAccountActionHandler.handle(new CreateAccountAction(account));
+    CreateAccountResponse responseCreate = createAccountActionHandler.handle(new CreateAccountAction(account));
 
-    assertThat(response, is(notNullValue()));
+    assertThat(responseCreate, is(notNullValue()));
 
-    Account responseAccount = response.getAccount();
+    Account responseAccount = responseCreate.getAccount();
 
     assertThat(responseAccount, is(notNullValue()));
 
@@ -64,7 +64,7 @@ public class CreateAccountActionHandlerTest {
 
     verify(accountCreator).create(eq(account), any(List.class));
 
-    assertThat(response.getErrors().size(), is(0));
+    assertThat(responseCreate.getErrors().size(), is(0));
   }
      //TODO:do i need to test what is going to happen in each test scenario again ?? like invalid email form, short password .... ect ... ?
 

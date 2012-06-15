@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public interface ExpenseReporterDashBoardView {
+public interface ExpenseReporterView {
 
     void updateExpenses(ArrayList<Expense> expenses);
 

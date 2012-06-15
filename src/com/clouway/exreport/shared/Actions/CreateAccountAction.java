@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.shared.Actions;
 
 import com.clouway.exreport.shared.Account;
 import com.evo.gad.shared.Action;
@@ -9,7 +9,10 @@ import com.evo.gad.shared.Response;
  */
 public class CreateAccountAction<AccountCreatedResponse> implements Action<Response> {
 
-  private final Account account;
+  private  Account account;
+
+  public CreateAccountAction() {
+  }
 
   public CreateAccountAction(Account account) {
 
@@ -19,4 +22,6 @@ public class CreateAccountAction<AccountCreatedResponse> implements Action<Respo
   public Account getAccount() {
     return account;
   }
+
+
 }
