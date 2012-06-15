@@ -21,26 +21,26 @@ public class ExpensesReporterServiceImpl extends RemoteServiceServlet implements
     @Override
     public ArrayList<Expense> getExpensesFor(Date date) {
         ArrayList<Expense> expenses = new ArrayList<Expense>();
-        expenses.add(new Expense("Food", 12));
-        expenses.add(new Expense("Diskoteka", 12));
-        expenses.add(new Expense("Fitness", 12d));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin", 12));
-        expenses.add(new Expense("Adelin234324324", 12));
+//        expenses.add(new Expense("Food", 12));
+//        expenses.add(new Expense("Diskoteka", 12));
+//        expenses.add(new Expense("Fitness", 12d));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin", 12));
+//        expenses.add(new Expense("Adelin234324324", 12));
 
 
 

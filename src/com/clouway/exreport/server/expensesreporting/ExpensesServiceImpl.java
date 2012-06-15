@@ -1,4 +1,4 @@
-package com.clouway.exreport.server.expenses;
+package com.clouway.exreport.server.expensesreporting;
 
 import com.clouway.exreport.shared.Expense;
 
@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class ExpensesService {
+public class ExpensesServiceImpl implements ExpensesService {
 
 
-  private final ExpenseRepository repository;
+  private final ExpensesRepository repository;
 
-  public ExpensesService(ExpenseRepository repository) {
+  public ExpensesServiceImpl(ExpensesRepository repository) {
 
     this.repository = repository;
 

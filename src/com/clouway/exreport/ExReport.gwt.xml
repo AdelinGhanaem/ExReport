@@ -19,6 +19,6 @@
 
   <source path="client"/>
 
-  <source path="shared"/>
+  <source path="com.clouway.exreport.shared"/>
 
 </module>

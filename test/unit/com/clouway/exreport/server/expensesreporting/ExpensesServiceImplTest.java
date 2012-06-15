@@ -1,4 +1,4 @@
-package com.clouway.exreport.server.expenses;
+package com.clouway.exreport.server.expensesreporting;
 
 import com.clouway.exreport.shared.Account;
 import com.clouway.exreport.shared.Expense;
@@ -26,13 +26,14 @@ import static org.mockito.MockitoAnnotations.initMocks;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 
-public class ExpensesServiceTest {
+public class ExpensesServiceImplTest {
 
 
   @Mock
-  ExpenseRepository repository;
+  ExpensesRepository repository;
 
-  ExpensesService expensesService;
+  private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+  ExpensesServiceImpl expensesServiceImpl;
 
 
   @Before
@@ -40,29 +41,30 @@ public class ExpensesServiceTest {
 
     initMocks(this);
 
-    expensesService = new ExpensesService(repository);
+    expensesServiceImpl = new ExpensesServiceImpl(repository);
 
   }
 
 
   @Test
   public void expensesAreSavedForSpecifiedAccount() {
+
     Account account = new Account();
 
     Expense expense = new Expense();
 
-    expensesService.add(expense);
+    expensesServiceImpl.add(expense);
 
     verify(repository).saveExpense(expense);
 
   }
 
   @Test
-  public void returnsExpenseWhenExpenseIsAddedSuccessfully() {
+  public void returnsExpenseWhenExpenseIsAddedSuccessfully() throws ParseException {
 
-    Expense expense = new Expense("expense", 12);
+    Expense expense = new Expense("expense", 12, dateFormat.parse("2012-06-12"));
 
-    Expense addedExpense = expensesService.add(expense);
+    Expense addedExpense = expensesServiceImpl.add(expense);
 
     assertThat(addedExpense, is(notNullValue()));
 
@@ -70,15 +72,18 @@ public class ExpensesServiceTest {
 
     assertThat(addedExpense.getPrice(), is(equalTo(expense.getPrice())));
 
+    assertThat(addedExpense.getDate(), is(equalTo(expense.getDate())));
+
   }
 
   //TODO:I am not very sure about this one ..... !
+
   @Test
   public void nullExpensesAreNotSaved() {
 
     Expense nullExpense = null;
 
-    Expense returned = expensesService.add(nullExpense);
+    Expense returned = expensesServiceImpl.add(nullExpense);
 
     verify(repository, never()).saveExpense(nullExpense);
 
@@ -91,41 +96,50 @@ public class ExpensesServiceTest {
 
     List<Expense> expenseList = new ArrayList<Expense>();
 
-    expenseList.add(new Expense("bla bla bla ", 12d));
+    String expenseName = "bla bla bla ";
 
-    expenseList.add(new Expense("gr gr gr ", 12d));
+    Date date = dateFormat.parse("2012-03-12");
 
-    Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2012/09/05");
+    Double price = 12d;
+
+    expenseList.add(new Expense(expenseName, price, date));
+
+
 
     when(repository.getByDate(date)).thenReturn(expenseList);
 
-    List<Expense> returnedExpenses = expensesService.getExpensesByDate(date);
+    List<Expense> returnedExpenses = expensesServiceImpl.getExpensesByDate(date);
 
     verify(repository).getByDate(date);
 
-    assertThat(returnedExpenses.size(), is(equalTo(expenseList.size())));
+    assertThat(returnedExpenses.size(), is(equalTo(1)));
 
-    assertThat(returnedExpenses.containsAll(expenseList), is(true));
-
+    assertThat(expenseList.get(0).getName(), is(equalTo(expenseName)));
+    assertThat(expenseList.get(0).getDate(), is(equalTo(date)));
+    assertThat(expenseList.get(0).getPrice(), is(equalTo(price)));
   }
 
 
   //TODO:change the method add(Expense expense,Date date)  to add(Expense expense); and put the Date into Expense.
 
   @Test
-  public void expensesAreReturnedByName() {
+  public void expensesAreReturnedByName() throws ParseException {
 
     String expenseName = "Hubala Hubala";
 
+    Date date = dateFormat.parse("2012-03-03");
+
+    Double price = 100d;
+
     List<Expense> expenseList = new ArrayList<Expense>();
 
-    expenseList.add(new Expense(expenseName, 120000d));
+    expenseList.add(new Expense(expenseName, price, date));
 
-    expenseList.add(new Expense(expenseName, 100000d));
+    expenseList.add(new Expense("123", 100000d, date));
 
     when(repository.getByName(expenseName)).thenReturn(expenseList);
 
-    List<Expense> returnedExpenses = expensesService.getExpensesByName(expenseName);
+    List<Expense> returnedExpenses = expensesServiceImpl.getExpensesByName(expenseName);
 
     verify(repository).getByName(expenseName);
 
@@ -133,30 +147,38 @@ public class ExpensesServiceTest {
 
     assertThat(returnedExpenses.containsAll(expenseList), is(true));
 
+    assertThat(expenseList.get(0).getName(), is(equalTo(expenseName)));
+
+    assertThat(expenseList.get(0).getDate(), is(equalTo(date)));
+
+    assertThat(expenseList.get(0).getPrice(), is(equalTo(price)));
   }
 
 
   @Test
   public void expensesAreReturnedBetweenTwoDifferDates() throws ParseException {
+
+    Date firstDate = dateFormat.parse("2012-09-05");
+
+    Date secondDate = dateFormat.parse("2012-09-05");
+
     List<Expense> expenseList = new ArrayList<Expense>();
 
-    expenseList.add(new Expense("first expense", 12d));
+    expenseList.add(new Expense("first expense", 12d,firstDate));
 
-    expenseList.add(new Expense("seconds expense", 12d));
+    expenseList.add(new Expense("seconds expense", 12d,secondDate));
 
-    Date firstDate = new SimpleDateFormat("yyyy/MM/dd").parse("2012/09/05");
-    Date secondDate = new SimpleDateFormat("yyyy/MM/dd").parse("2012/09/05");
+    when(repository.getByDateBetween(firstDate, secondDate)).thenReturn(expenseList);
 
-    when(repository.getByDateBetween(firstDate,secondDate)).thenReturn(expenseList);
+    List<Expense> returnedExpenses = expensesServiceImpl.getExpensesBetween(firstDate, secondDate);
 
-    List<Expense> returnedExpenses = expensesService.getExpensesBetween(firstDate,secondDate);
-
-    verify(repository).getByDateBetween(firstDate,secondDate);
+    verify(repository).getByDateBetween(firstDate, secondDate);
 
     assertThat(returnedExpenses.size(), is(equalTo(expenseList.size())));
 
     assertThat(returnedExpenses.containsAll(expenseList), is(true));
 
   }
+
 
 }

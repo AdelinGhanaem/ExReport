@@ -11,8 +11,9 @@ import java.util.Date;
  */
 public class AddExpenseAction<AddExpenseResponse> implements Action<Response> {
 
-  private  Expense expense;
-  private  Date date;
+  private Expense expense;
+
+  private Date date;
 
   public AddExpenseAction() {
   }
@@ -20,11 +21,15 @@ public class AddExpenseAction<AddExpenseResponse> implements Action<Response> {
   public AddExpenseAction(Expense expense, Date date) {
 
     this.expense = expense;
+
     this.date = date;
+
   }
 
   public Expense getExpense() {
+
     return expense;
+
   }
 
   public Date getDate() {

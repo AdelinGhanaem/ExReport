@@ -30,7 +30,6 @@ import java.util.Date;
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnFailure;
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -70,17 +69,17 @@ public class DashBoardExpensePresenterTest {
   @Test
   public void returnsExpensesOfTheGivenDateAndUpdatesView() throws ParseException {
 
-//    ArrayList<Expense> expenses = new ArrayList<Expense>();
+//    ArrayList<Expense> expensesreporting = new ArrayList<Expense>();
 //
 //    Date date = dateFormat.parse("2012-06-01");
 //
-//    doOnSuccess(expenses).when(reporterAsync).getExpensesFor(any(Date.class), any(AsyncCallback.class));
+//    doOnSuccess(expensesreporting).when(reporterAsync).getExpensesFor(any(Date.class), any(AsyncCallback.class));
 //
 ////    reporterPresenter.showExpensesFor(date);
 //
 //    verify(reporterAsync).getExpensesFor(eq(date), any(AsyncCallback.class));
 //
-//    verify(reporterView).updateExpenses(expenses);
+//    verify(reporterView).updateExpenses(expensesreporting);
   }
 
 

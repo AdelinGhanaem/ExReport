@@ -18,7 +18,6 @@ import java.util.Date;
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnFailure;
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -51,13 +50,13 @@ public class AddExpensesPresenterImplTest {
   }
 
   @Test
-  public void shouldAddExpenseAndFireExpenseAddedEvent() throws ParseException {
-
-    Expense expense = new Expense("Food", 12d);
-
-    AddExpenseResponse expenseResponse = new AddExpenseResponse(expense);
+  public void shouldAddExpenseAndFireExpenseAddedEventOnSuccess() throws ParseException {
 
     Date date = dateTimeFormat.parse("2012-06-02");
+
+    Expense expense = new Expense("Food", 12d, date);
+
+    AddExpenseResponse expenseResponse = new AddExpenseResponse(expense);
 
     doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
@@ -72,11 +71,11 @@ public class AddExpensesPresenterImplTest {
   @Test
   public void anExpenseIsAddedWhenDateIsCurrentDate() {
 
-    Expense expense = new Expense("Food", 12d);
+    Date date = new Date();
+
+    Expense expense = new Expense("Food", 12d, date);
 
     AddExpenseResponse expenseResponse = new AddExpenseResponse(expense);
-
-    Date date = new Date();
 
     doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
@@ -87,18 +86,19 @@ public class AddExpensesPresenterImplTest {
     verify(hasHandlers).fireEvent(any(ExpenseAddedEvent.class));
 
   }
-//
+
+  //
 //  //TODO:When testing date in the future make sure the date is always in the future !!;
   @Test
   public void anExpenseCanNotBeAddedInFutureDate() throws ParseException {
 
-    Expense expense = new Expense("House Rent", 12d);
-
     Date futureDate = dateTimeFormat.parse("2013-03-12");
+
+    Expense expense = new Expense("House Rent", 12d, futureDate);
 
     addExpensesPresenterImpl.addExpense(expense, futureDate);
 
-    verify(actionDispatcherServiceAsync,never()).dispatch(any(Action.class), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync, never()).dispatch(any(Action.class), any(AsyncCallback.class));
 
     verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -107,19 +107,17 @@ public class AddExpensesPresenterImplTest {
   }
 
 
-
-
-//
+  //
   @Test
   public void expensePriceCanNotBeNegative() {
 
-    Expense expense = new Expense("HousPrice", -12);
-
     Date date = new Date();
+
+    Expense expense = new Expense("HousPrice", -12, date);
 
     addExpensesPresenterImpl.addExpense(expense, date);
 
-    verify(actionDispatcherServiceAsync,never()).dispatch(any(Action.class), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync, never()).dispatch(any(Action.class), any(AsyncCallback.class));
 
     verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -132,9 +130,10 @@ public class AddExpensesPresenterImplTest {
   @Test
   public void userIsNotifiedOfConnectionError() {
 
-    Expense expense = new Expense("Computer fix", 200);
 
     Date date = new Date();
+
+    Expense expense = new Expense("Computer fix", 200, date);
 
     doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 

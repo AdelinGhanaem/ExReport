@@ -56,7 +56,6 @@ public class AccountCreatorImplTest {
 
     when(repository.getAccountByEmail(account.getEmail())).thenReturn(null);
 
-
     Account createdAccount = accountCreatorImpl.create(account, errorMessages);
 
     verify(repository).getAccountByEmail(account.getEmail());

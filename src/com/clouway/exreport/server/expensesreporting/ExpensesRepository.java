@@ -1,4 +1,4 @@
-package com.clouway.exreport.server.expenses;
+package com.clouway.exreport.server.expensesreporting;
 
 import com.clouway.exreport.shared.Expense;
 
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public interface ExpenseRepository {
+public interface ExpensesRepository {
 
   void saveExpense(Expense expense);
 
