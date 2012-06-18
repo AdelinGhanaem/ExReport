@@ -1,7 +1,10 @@
 package com.clouway.exreport.server.expensesreporting;
 
-import com.clouway.exreport.shared.Account;
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Account;
+import com.clouway.exreport.shared.entites.Day;
+import com.clouway.exreport.shared.entites.Expense;
+import com.clouway.exreport.shared.entites.Month;
+import com.clouway.exreport.shared.entites.Year;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -33,6 +36,7 @@ public class ExpensesServiceImplTest {
   ExpensesRepository repository;
 
   private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
   ExpensesServiceImpl expensesServiceImpl;
 
 
@@ -105,7 +109,6 @@ public class ExpensesServiceImplTest {
     expenseList.add(new Expense(expenseName, price, date));
 
 
-
     when(repository.getByDate(date)).thenReturn(expenseList);
 
     List<Expense> returnedExpenses = expensesServiceImpl.getExpensesByDate(date);
@@ -155,6 +158,9 @@ public class ExpensesServiceImplTest {
   }
 
 
+  //TODO:what happens when the first date is after the seconds date ?
+  //TODO what happens when the first date is in the future ?
+
   @Test
   public void expensesAreReturnedBetweenTwoDifferDates() throws ParseException {
 
@@ -164,9 +170,9 @@ public class ExpensesServiceImplTest {
 
     List<Expense> expenseList = new ArrayList<Expense>();
 
-    expenseList.add(new Expense("first expense", 12d,firstDate));
+    expenseList.add(new Expense("first expense", 12d, firstDate));
 
-    expenseList.add(new Expense("seconds expense", 12d,secondDate));
+    expenseList.add(new Expense("seconds expense", 12d, secondDate));
 
     when(repository.getByDateBetween(firstDate, secondDate)).thenReturn(expenseList);
 
@@ -180,5 +186,71 @@ public class ExpensesServiceImplTest {
 
   }
 
+
+  @Test
+  public void returnsAllMonthsOfExpensesDeclaredYear() {
+
+    List<Month> months = new ArrayList<Month>();
+
+    int year = 2012;
+
+    months.add(new Month(year, 1));
+
+    months.add(new Month(year, 2));
+
+    when(repository.getExpensesMonths(year)).thenReturn(months);
+
+    List<Month> returnedExpenses = expensesServiceImpl.getMonths(year);
+
+    assertThat(returnedExpenses, is(notNullValue()));
+
+    assertThat(returnedExpenses.size(), is(2));
+
+    verify(repository).getExpensesMonths(year);
+  }
+
+
+  @Test
+  public void returnsAllDaysOfExpensesDeclaredMonths() {
+
+    List<Day> days = new ArrayList<Day>();
+
+    int year = 2012;
+
+    int month = 3;
+
+    days.add(new Day(1, month, year));
+
+    days.add(new Day(2, month, year));
+
+    when(repository.getDeclaredDays(year, month)).thenReturn(days);
+
+    List<Day> returnedDays = expensesServiceImpl.getDays(year, month);
+
+    assertThat(returnedDays, is(notNullValue()));
+
+    assertThat(returnedDays.size(), is(2));
+
+  }
+
+
+  @Test
+  public void returnsAllYearsOfExpensesDeclaration() {
+
+    List<Year> years = new ArrayList<Year>();
+
+    years.add(new Year(2012));
+
+    when(repository.getYears()).thenReturn(years);
+
+    List<Year> returnedYears = expensesServiceImpl.getDeclaredYears();
+
+    assertThat(returnedYears, is(notNullValue()));
+
+    assertThat(returnedYears.size(), is(1));
+
+    verify(repository).getYears();
+
+  }
 
 }

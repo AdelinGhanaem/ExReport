@@ -1,6 +1,6 @@
 package com.clouway.exreport.shared.Reponses;
 
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Expense;
 import com.evo.gad.shared.Response;
 
 /**

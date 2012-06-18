@@ -1,5 +1,6 @@
 package com.clouway.exreport.shared;
 
+import com.clouway.exreport.shared.entites.Expense;
 import org.junit.Test;
 
 import java.text.ParseException;

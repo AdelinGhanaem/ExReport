@@ -1,6 +1,6 @@
 package com.clouway.exreport.shared.Reponses;
 
-import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.entites.Account;
 import com.evo.gad.shared.Response;
 
 import java.util.ArrayList;

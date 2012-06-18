@@ -1,6 +1,9 @@
 package com.clouway.exreport.server.expensesreporting;
 
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Day;
+import com.clouway.exreport.shared.entites.Expense;
+import com.clouway.exreport.shared.entites.Month;
+import com.clouway.exreport.shared.entites.Year;
 
 import java.util.Date;
 import java.util.List;
@@ -17,4 +20,10 @@ public interface ExpensesRepository {
   List<Expense> getByName(String expenseName);
 
   List<Expense> getByDateBetween(Date firstDate, Date secondDate);
+
+  List<Month> getExpensesMonths(int year);
+
+  List<Day> getDeclaredDays(int year, int month);
+
+  List<Year> getYears();
 }

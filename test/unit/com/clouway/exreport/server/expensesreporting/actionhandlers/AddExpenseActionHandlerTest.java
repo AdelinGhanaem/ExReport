@@ -2,7 +2,7 @@ package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
 import com.clouway.exreport.server.expensesreporting.ExpensesService;
 import com.clouway.exreport.shared.Actions.AddExpenseAction;
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.Reponses.AddExpenseResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class AddExpenseActionHandlerTest {
 
     when(expensesService.add(expense)).thenReturn(expense);
 
-    AddExpenseResponse returnedResponse = addExpenseActionHandler.handle(new AddExpenseAction(expense, date));
+    AddExpenseResponse returnedResponse = addExpenseActionHandler.handle(new AddExpenseAction(expense));
 
     assertThat(returnedResponse, is(notNullValue()));
 

@@ -15,6 +15,9 @@ public class FetchYearsAction<FetchYearsResponse> implements Action<Response> {
 
   }
 
+  public FetchYearsAction(int year) {
+    this.year = year;
+  }
 
 
   public int getYear() {

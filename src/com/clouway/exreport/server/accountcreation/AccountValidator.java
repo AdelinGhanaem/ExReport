@@ -1,6 +1,6 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.entites.Account;
 
 import java.util.List;
 

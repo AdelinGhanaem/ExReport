@@ -1,13 +1,9 @@
-package com.clouway.exreport.shared;
+package com.clouway.exreport.shared.entites;
 
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Adio
- * Date: 6/10/12
- * Time: 1:51 AM
- * To change this template use File | Settings | File Templates.
+ * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class Year implements Serializable {
 

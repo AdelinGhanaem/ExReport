@@ -1,13 +1,18 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
-import com.clouway.exreport.shared.Day;
+import com.clouway.exreport.shared.Actions.FetchDaysAction;
+import com.clouway.exreport.shared.entites.Day;
+import com.clouway.exreport.shared.Reponses.FetchDaysResponse;
 import org.junit.Test;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -16,10 +21,9 @@ public class FetchDaysExpensesActionHandlerTest extends ExpensesActionHandlerTes
 
 
   @Test
-  public void fetchesDaysAndReturnsResponseContainingTheFetchedDays() throws ParseException {
-    //TODO:How to get all the days of a month ..... !
+  public void fetches1DaysAndReturnsResponseContainingTheFetchedDays() throws ParseException {
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //TODO:How to get all the days of a month ..... !
 
     int year = 2012;
 
@@ -28,24 +32,27 @@ public class FetchDaysExpensesActionHandlerTest extends ExpensesActionHandlerTes
     int day = 1;
 
     List<Day> expensesDays = new ArrayList<Day>();
+
     expensesDays.add(new Day(day, moth, year));
 
+    FetchDaysActionHandler fetchDaysActionHandler = new FetchDaysActionHandler(service);
 
-    Date first = simpleDateFormat.parse(year + "-" + moth + "-" + 1);
+    when(service.getDays(year, moth)).thenReturn(expensesDays);
 
-    Date lastDate = simpleDateFormat.parse(year + "-" + moth + "-" + 1);
+    FetchDaysResponse response = fetchDaysActionHandler.handle(new FetchDaysAction(year, moth));
 
-    FetchDaysActionHandler fetchDaysActionHandler = new FetchDaysActionHandler();
+    assertThat(response, is(notNullValue()));
 
-//    when(service.ge(first, lastDate)).
-//
-//    FetchDaysResponse response = fetchDaysActionHandler.handle(new FetchDaysAction(2001, 3));
-//    assertThat(response, is(notNullValue()));
-//    assertThat(response.getDays(), is(notNullValue()));
-//    assertThat(response.getDays().get(0), is(notNull()));
-//    assertThat(response.getDays().get(0).getDay(), is(day));
-//    assertThat(response.getDays().get(0).getMonth(), is(moth));
-//    assertThat(response.getDays().get(0).getYear(), is(year));
+    assertThat(response.getDays(), is(notNullValue()));
+
+    assertThat(response.getDays().get(0), is(notNullValue()));
+
+    assertThat(response.getDays().get(0).getDay(), is(day));
+
+    assertThat(response.getDays().get(0).getMonth(), is(moth));
+
+    assertThat(response.getDays().get(0).getYear(), is(year));
+
     //    Calendar calendar = new GregorianCalendar();
 //    calendar.set(year, Calendar.JANUARY, 1);
 

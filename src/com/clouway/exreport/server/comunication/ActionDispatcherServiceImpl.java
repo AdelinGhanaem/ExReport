@@ -12,7 +12,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  */
 public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements ActionDispatcher {
 
-  private final ActionHandlerRepository repository;
+  private  ActionHandlerRepository repository;
 
   public ActionDispatcherServiceImpl(ActionHandlerRepository repository) {
 
@@ -20,8 +20,9 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
   }
 
 
-//  private final MyActionHandlerRepository repository;
+  public ActionDispatcherServiceImpl() {
 
+  }
 
   @Override
   public <T extends Response> T dispatch(Action<T> action) throws ActionHandlerNotBoundException {

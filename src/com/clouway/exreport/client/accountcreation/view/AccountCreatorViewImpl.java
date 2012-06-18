@@ -1,7 +1,7 @@
 package com.clouway.exreport.client.accountcreation.view;
 
 import com.clouway.exreport.client.accountcreation.AccountCreatorPresenter;
-import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.entites.Account;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;

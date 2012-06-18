@@ -1,6 +1,9 @@
 package com.clouway.exreport.server.expensesreporting;
 
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Day;
+import com.clouway.exreport.shared.entites.Expense;
+import com.clouway.exreport.shared.entites.Month;
+import com.clouway.exreport.shared.entites.Year;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,9 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -36,61 +39,8 @@ public class ExpensesRepositoryContractTest {
 //    previouslySaved.add(new Expense("dress", 30d, dateFormat.parse("2011-15-6")));
 //    previouslySaved.add(new Expense("gluposti", 100d, dateFormat.parse("2003-05-08")));
 //    previouslySaved.add(new Expense("sports", 100d, dateFormat.parse("2006-05-02")));
-    expensesRepository = new InMemoryExpensesRepository(previouslySaved);
+    expensesRepository = new InMemoryExpensesRepository(previouslySaved, new HashMap<Year, Map<Month, List<Day>>>());
 
-  }
-
-  private class InMemoryExpensesRepository implements ExpensesRepository {
-
-    private List<Expense> previouslySaved;
-
-    public InMemoryExpensesRepository(List<Expense> previouslySaved) {
-
-      this.previouslySaved = previouslySaved;
-    }
-
-    @Override
-    public void saveExpense(Expense expense) {
-
-    }
-
-
-    @Override
-    public List<Expense> getByDate(Date date) {
-
-      List<Expense> matchedExpenses = new ArrayList<Expense>();
-
-      for (Expense expense : previouslySaved) {
-        if (date.equals(expense.getDate())) {
-          matchedExpenses.add(expense);
-        }
-      }
-      return matchedExpenses;
-    }
-
-    @Override
-    public List<Expense> getByName(String expenseName) {
-      List<Expense> matchedExpenses = new ArrayList<Expense>();
-
-      for (Expense expense : previouslySaved) {
-        if (expenseName.equals(expense.getName())) {
-          matchedExpenses.add(expense);
-        }
-      }
-      return matchedExpenses;
-    }
-
-    @Override
-    public List<Expense> getByDateBetween(Date firstDate, Date secondDate) {
-      SortedSet<Expense> sortedExpense = new TreeSet<Expense>();
-      for (Expense expense : previouslySaved) {
-        if (firstDate.equals(expense.getDate()) || secondDate.equals(expense.getDate()) ||
-                (firstDate.before(expense.getDate()) && secondDate.after(expense.getDate()))) {
-          sortedExpense.add(expense);
-        }
-      }
-      return new ArrayList<Expense>(sortedExpense);
-    }
   }
 
   @Test
@@ -177,6 +127,11 @@ public class ExpensesRepositoryContractTest {
     assertThat(expenseList.get(0).getDate(), is(dateFormat.parse(firstDate)));
 
     assertThat(expenseList.get(1).getDate(), is(dateFormat.parse(secondsDate)));
+
+  }
+
+  @Test
+  public void returnsYearsOfDeclaredExpenses() {
 
   }
 

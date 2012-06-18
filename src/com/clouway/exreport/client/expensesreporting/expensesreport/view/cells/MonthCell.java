@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport.view.cells;
 
-import com.clouway.exreport.shared.Month;
+import com.clouway.exreport.shared.entites.Month;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 

@@ -1,6 +1,6 @@
 package com.clouway.exreport.shared.Reponses;
 
-import com.clouway.exreport.shared.Year;
+import com.clouway.exreport.shared.entites.Year;
 import com.evo.gad.shared.Response;
 
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ public class FetchYearsResponse implements Response {
   public FetchYearsResponse(ArrayList<Year> years) {
     this.years = years;
   }
+
+
 
   public ArrayList<Year> getYears() {
     return years;

@@ -2,7 +2,7 @@ package com.clouway.exreport.client.expensesreporting.addingexpenses;
 
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.Reponses.AddExpenseResponse;
 import com.evo.gad.shared.Action;
 import com.google.gwt.event.shared.HasHandlers;
@@ -27,6 +27,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
  */
 
 public class AddExpensesPresenterImplTest {
+
 
   private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yy-MM-DD");
 
@@ -60,7 +61,7 @@ public class AddExpensesPresenterImplTest {
 
     doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
-    addExpensesPresenterImpl.addExpense(expense, date);
+    addExpensesPresenterImpl.addExpense(expense);
 
     verify(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
@@ -79,7 +80,7 @@ public class AddExpensesPresenterImplTest {
 
     doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
-    addExpensesPresenterImpl.addExpense(expense, date);
+    addExpensesPresenterImpl.addExpense(expense);
 
     verify(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
@@ -87,24 +88,24 @@ public class AddExpensesPresenterImplTest {
 
   }
 
-  //
-//  //TODO:When testing date in the future make sure the date is always in the future !!;
-  @Test
-  public void anExpenseCanNotBeAddedInFutureDate() throws ParseException {
-
-    Date futureDate = dateTimeFormat.parse("2013-03-12");
-
-    Expense expense = new Expense("House Rent", 12d, futureDate);
-
-    addExpensesPresenterImpl.addExpense(expense, futureDate);
-
-    verify(actionDispatcherServiceAsync, never()).dispatch(any(Action.class), any(AsyncCallback.class));
-
-    verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
-
-    verify(view).notifyExpenseCanNotBeAddedInFutureDate();
-
-  }
+//  //
+////  //TODO:When testing date in the future make sure the date is always in the future !!;
+//  @Test
+//  public void anExpenseCanNotBeAddedInFutureDate() throws ParseException {
+//
+//    Date futureDate = dateTimeFormat.parse("2013-03-12");
+//
+//    Expense expense = new Expense("House Rent", 12d, futureDate);
+//
+//    addExpensesPresenterImpl.addExpense(expense);
+//
+//    verify(actionDispatcherServiceAsync, never()).dispatch(any(Action.class), any(AsyncCallback.class));
+//
+//    verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
+//
+//    verify(view).notifyExpenseCanNotBeAddedInFutureDate();
+//
+//  }
 
 
   //
@@ -115,7 +116,7 @@ public class AddExpensesPresenterImplTest {
 
     Expense expense = new Expense("HousPrice", -12, date);
 
-    addExpensesPresenterImpl.addExpense(expense, date);
+    addExpensesPresenterImpl.addExpense(expense);
 
     verify(actionDispatcherServiceAsync, never()).dispatch(any(Action.class), any(AsyncCallback.class));
 
@@ -137,7 +138,7 @@ public class AddExpensesPresenterImplTest {
 
     doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
 
-    addExpensesPresenterImpl.addExpense(expense, date);
+    addExpensesPresenterImpl.addExpense(expense);
 
     verify(view).notifyUserOfConnectionError();
 

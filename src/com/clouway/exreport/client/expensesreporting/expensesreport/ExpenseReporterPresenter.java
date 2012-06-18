@@ -6,9 +6,9 @@ import com.clouway.exreport.client.expensesreporting.expensesreport.view.Expense
 import com.clouway.exreport.client.navigation.AbstractActivity;
 import com.clouway.exreport.shared.Actions.FetchDaysAction;
 import com.clouway.exreport.shared.Actions.FetchExpensesAction;
-import com.clouway.exreport.shared.Actions.FetchMonthAction;
+import com.clouway.exreport.shared.Actions.FetchMonthsAction;
 import com.clouway.exreport.shared.Actions.FetchYearsAction;
-import com.clouway.exreport.shared.Day;
+import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.Reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.Reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.Reponses.FetchMonthsResponse;
@@ -104,7 +104,7 @@ public class ExpenseReporterPresenter extends AbstractActivity {
   public void getMonthsOf(int year) {
 
 
-    reporterAsync.dispatch(new FetchMonthAction<FetchMonthsResponse>(year), new GotResponse<FetchMonthsResponse>() {
+    reporterAsync.dispatch(new FetchMonthsAction<FetchMonthsResponse>(year), new GotResponse<FetchMonthsResponse>() {
 
       @Override
       public void gotResponse(FetchMonthsResponse result) {

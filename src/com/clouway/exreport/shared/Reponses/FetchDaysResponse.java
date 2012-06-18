@@ -1,6 +1,6 @@
 package com.clouway.exreport.shared.Reponses;
 
-import com.clouway.exreport.shared.Day;
+import com.clouway.exreport.shared.entites.Day;
 import com.evo.gad.shared.Response;
 
 import java.util.ArrayList;

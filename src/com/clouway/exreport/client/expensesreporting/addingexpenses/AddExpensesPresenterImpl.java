@@ -4,7 +4,7 @@ import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
 import com.clouway.exreport.shared.Actions.AddExpenseAction;
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.Reponses.AddExpenseResponse;
 import com.google.gwt.event.shared.HasHandlers;
 
@@ -28,28 +28,25 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
     this.view = view;
   }
 
-  public void addExpense(Expense expense, Date date) {
+  public void addExpense(Expense expense) {
 
     Date currentDate = new Date();
-    if (date.before(currentDate) || date.equals(currentDate)) {
-      //here we are making expense to tell us whether its price is valid ot not, but we don't ask it! according to "tell don't ask"
-      if (expense.isPriceValid()) {
-        AddExpenseAction<AddExpenseResponse> addExpenseAction = new AddExpenseAction<AddExpenseResponse>(expense, date);
-        addingExpensesServiceAsync.dispatch(addExpenseAction, new GotResponse<AddExpenseResponse>() {
-          @Override
-          public void gotResponse(AddExpenseResponse result) {
-            hasHandlers.fireEvent(new ExpenseAddedEvent(result.getExpense()));
-          }
-          @Override
-          public void onFailure(Throwable caught) {
-            view.notifyUserOfConnectionError();
-          }
-        });
-      } else {
-        view.notifyNegativeExpensePriceValue();
-      }
+
+    //here we are making expense to tell us whether its price is valid ot not, but we don't ask it! according to "tell don't ask"
+    if (expense.isPriceValid()) {
+      AddExpenseAction<AddExpenseResponse> addExpenseAction = new AddExpenseAction<AddExpenseResponse>(expense);
+      addingExpensesServiceAsync.dispatch(addExpenseAction, new GotResponse<AddExpenseResponse>() {
+        @Override
+        public void gotResponse(AddExpenseResponse result) {
+          hasHandlers.fireEvent(new ExpenseAddedEvent(result.getExpense()));
+        }
+        @Override
+        public void onFailure(Throwable caught) {
+          view.notifyUserOfConnectionError();
+        }
+      });
     } else {
-      view.notifyExpenseCanNotBeAddedInFutureDate();
+      view.notifyNegativeExpensePriceValue();
     }
   }
 }

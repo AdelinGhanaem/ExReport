@@ -15,11 +15,13 @@ public class FetchExpensesAction<FetchExpensesResponse> implements Action<Respon
   private  Date secondDate;
 
   public FetchExpensesAction() {
+
   }
 
   public FetchExpensesAction(Date firstDate, Date secondDate) {
 
     this.firstDate = firstDate;
+
     this.secondDate = secondDate;
   }
 

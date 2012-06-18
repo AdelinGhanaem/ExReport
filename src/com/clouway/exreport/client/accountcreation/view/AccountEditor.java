@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.accountcreation.view;
 
-import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.entites.Account;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.uibinder.client.UiBinder;

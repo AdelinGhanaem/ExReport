@@ -3,7 +3,7 @@ package com.clouway.exreport.client.accountcreation;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
-import com.clouway.exreport.shared.Account;
+import com.clouway.exreport.shared.entites.Account;
 import com.clouway.exreport.shared.Actions.CreateAccountAction;
 import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
 import com.evo.gad.shared.Action;

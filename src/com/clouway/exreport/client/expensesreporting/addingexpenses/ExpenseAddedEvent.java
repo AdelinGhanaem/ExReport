@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses;
 
-import com.clouway.exreport.shared.Expense;
+import com.clouway.exreport.shared.entites.Expense;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**

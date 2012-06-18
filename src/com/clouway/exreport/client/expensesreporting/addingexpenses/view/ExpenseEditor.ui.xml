@@ -2,21 +2,23 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:e='urn:import:com.google.gwt.editor.ui.client'
         >
-    <ui:style>
-        .addExpensePanel {
-            width: 100%;
-            float: left;
+  <ui:style>
+    .addExpensePanel {
+      width: 100%;
+      float: left;
 
-        }
+    }
 
-    </ui:style>
-    <g:HTMLPanel>
-        <div style="{style.addExpensePanel}">
-            <g:Label text="Title:"/>
-            <g:TextBox ui:field="name"/>
-            <g:Label text="Price:"/>
-            <g:TextBox ui:field="expensePrice"/>
-        </div>
+  </ui:style>
+  <g:HTMLPanel>
+    <div style="{style.addExpensePanel}">
+      <g:Label text="Title:"/>
+      <g:TextBox ui:field="name"/>
+      <g:Label text="Price:"/>
+      <g:TextBox ui:field="expensePrice"/>
+      <g:Label text="Date:"/>
+      <g:TextBox ui:field="expenseDate"/>
+    </div>
 
-    </g:HTMLPanel>
+  </g:HTMLPanel>
 </ui:UiBinder>

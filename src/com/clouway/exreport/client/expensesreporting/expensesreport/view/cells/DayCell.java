@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport.view.cells;
 
-import com.clouway.exreport.shared.Day;
+import com.clouway.exreport.shared.entites.Day;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 

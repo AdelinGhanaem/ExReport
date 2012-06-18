@@ -5,16 +5,16 @@ import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.shared.Actions.FetchDaysAction;
 import com.clouway.exreport.shared.Actions.FetchExpensesAction;
-import com.clouway.exreport.shared.Actions.FetchMonthAction;
+import com.clouway.exreport.shared.Actions.FetchMonthsAction;
 import com.clouway.exreport.shared.Actions.FetchYearsAction;
-import com.clouway.exreport.shared.Day;
-import com.clouway.exreport.shared.Expense;
-import com.clouway.exreport.shared.Month;
+import com.clouway.exreport.shared.entites.Day;
+import com.clouway.exreport.shared.entites.Expense;
+import com.clouway.exreport.shared.entites.Month;
 import com.clouway.exreport.shared.Reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.Reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.Reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.Reponses.FetchYearsResponse;
-import com.clouway.exreport.shared.Year;
+import com.clouway.exreport.shared.entites.Year;
 import com.evo.gad.shared.Action;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.junit.Before;
@@ -186,12 +186,12 @@ public class DashBoardExpensePresenterTest {
 
     ArrayList<Month> months = new ArrayList<Month>();
 
-    doOnSuccess(new FetchMonthsResponse(months)).when(reporterAsync).dispatch(any(FetchMonthAction.class), any(GotResponse.class));
+    doOnSuccess(new FetchMonthsResponse(months)).when(reporterAsync).dispatch(any(FetchMonthsAction.class), any(GotResponse.class));
 
 
     reporterPresenter.getMonthsOf(year);
 
-    verify(reporterAsync).dispatch(any(FetchMonthAction.class), any(GotResponse.class));
+    verify(reporterAsync).dispatch(any(FetchMonthsAction.class), any(GotResponse.class));
 
     verify(reporterView).showMonthsOfExpenses(months);
 

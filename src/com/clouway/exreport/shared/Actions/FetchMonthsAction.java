@@ -6,14 +6,14 @@ import com.evo.gad.shared.Response;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchMonthAction<FetchMonthResponse> implements Action<Response> {
+public class FetchMonthsAction<FetchMonthResponse> implements Action<Response> {
 
   private  int year;
 
-  public FetchMonthAction() {
+  public FetchMonthsAction() {
   }
 
-  public FetchMonthAction(int year) {
+  public FetchMonthsAction(int year) {
 
     this.year = year;
 
