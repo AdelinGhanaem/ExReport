@@ -2,6 +2,8 @@ package com.clouway.exreport.client;
 
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
 import com.clouway.exreport.client.dashboard.CompositePanel;
+import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesViewImpl;
+import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
@@ -15,9 +17,9 @@ public class ExReport implements EntryPoint {
    */
   public void onModuleLoad() {
 
-//        ExpensesReporterViewImpl view = new ExpensesReporterViewImpl();
-//
-//        AddExpensesViewImpl expensesView = new AddExpensesViewImpl();
+    ExpensesReporterViewImpl view = new ExpensesReporterViewImpl();
+
+    AddExpensesViewImpl expensesView = new AddExpensesViewImpl();
 
     CompositePanel compositePanel = new CompositePanel();
 
@@ -25,6 +27,7 @@ public class ExReport implements EntryPoint {
 
     RootLayoutPanel widgets = RootLayoutPanel.get();
 
-    widgets.add(accountCreatorView);
+    widgets.add(expensesView);
+
   }
 }

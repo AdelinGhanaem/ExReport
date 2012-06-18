@@ -29,9 +29,12 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   @Ignore
   @UiField
   TextBox expensePrice;
+
   @Ignore
   @UiField
   TextBox expenseDate;
+
+
 
 
   LeafValueEditor<Double> price = new LeafValueEditor<Double>() {
@@ -50,7 +53,9 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   LeafValueEditor<Date> date = new LeafValueEditor<Date>() {
     @Override
     public void setValue(Date value) {
-      expenseDate.setValue(value.toString());
+      if(value!=null){
+        expenseDate.setValue(value.toString());
+      }
     }
 
     @Override

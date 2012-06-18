@@ -12,12 +12,17 @@
   </ui:style>
   <g:HTMLPanel>
     <div style="{style.addExpensePanel}">
+      <g:Label text="Date:"/>
+
+      <g:TextBox ui:field="expenseDate"/>
+
       <g:Label text="Title:"/>
       <g:TextBox ui:field="name"/>
+
       <g:Label text="Price:"/>
       <g:TextBox ui:field="expensePrice"/>
-      <g:Label text="Date:"/>
-      <g:TextBox ui:field="expenseDate"/>
+
+
     </div>
 
   </g:HTMLPanel>

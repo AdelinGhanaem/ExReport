@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchMonthActionHandlerTest extends ExpensesActionHandlerTest {
+public class FetchMonthsActionHandlerTest extends ExpensesActionHandlerTest {
 
   //TODO:All the responses must have a list indicating errors .... !
 
@@ -33,7 +33,7 @@ public class FetchMonthActionHandlerTest extends ExpensesActionHandlerTest {
     when(service.getMonths(year)).thenReturn(new ArrayList<Month>() {{
       add(returnedMonth);
     }});
-    FetchMonthActionHandler handler = new FetchMonthActionHandler(service);
+    FetchMonthsActionHandler handler = new FetchMonthsActionHandler(service);
 
     FetchMonthsResponse response = handler.handle(new FetchMonthsAction(year));
 

@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchMonthActionHandler implements ActionHandler<FetchMonthsAction, FetchMonthsResponse> {
+public class FetchMonthsActionHandler implements ActionHandler<FetchMonthsAction, FetchMonthsResponse> {
   private final ExpensesService service;
 
-  public FetchMonthActionHandler(ExpensesService service) {
+  public FetchMonthsActionHandler(ExpensesService service) {
 
     this.service = service;
   }
