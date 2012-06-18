@@ -8,17 +8,16 @@
   <inherits name="com.google.gwt.activity.Activity"/>
   <inherits name="com.evo.gad.Gad"/>
   <!-- Specify the app entry point class.                   -->
-  <set-property name="user.agent" value="safari"/>
+  <!--<set-property name="user.agent" value="safari"/>-->
 
   <entry-point class='com.clouway.exreport.client.ExReport'/>
 
-  <set-property name="user.agent" value="safari" />
+  <!--<set-property name="user.agent" value="safari" />-->
 
   <servlet path="/service" class="com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl"/>
 
   <source path="client"/>
   <source path="shared"/>
 
-  <source path="com.clouway.exreport.shared"/>
 
 </module>

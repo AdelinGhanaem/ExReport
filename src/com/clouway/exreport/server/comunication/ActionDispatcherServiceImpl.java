@@ -14,26 +14,24 @@ import com.google.inject.Singleton;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 @Singleton
-public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements ActionDispatcherService {
-
-    @Inject
-    private ActionDispatcher dispatcher;
+public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements ActionDispatcherService, ActionDispatcher {
 
 
-    public ActionDispatcherServiceImpl() {
+  ActionHandlerRepository repository;
 
-    }
+  @Inject
+  public ActionDispatcherServiceImpl(ActionHandlerRepository repository) {
 
-    public ActionDispatcherServiceImpl(ActionDispatcher dispatcher) {
 
-        this.dispatcher = dispatcher;
-    }
+    this.repository = repository;
+  }
 
-    public <T extends Response> T dispatch(Action<T> action) {
+  public <T extends Response> T dispatch(Action<T> action) {
 
-        return dispatcher.dispatch(action);
+    return (T) repository.getActionHandler(action.getClass()).handle(action);
 
-    }
+
+  }
 
 
 }

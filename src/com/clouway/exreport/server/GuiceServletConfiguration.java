@@ -30,6 +30,7 @@ import com.evo.gad.dispatch.ActionHandlerRepository;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 
@@ -51,7 +52,7 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         bind(ActionHandlerRepository.class).to(LazyActionHandlerRepository.class);
 
-        bind(ActionDispatcher.class).to(ApplicationActionDispatcher.class);
+//        bind(ActionDispatcher.class).to(ApplicationActionDispatcher.class);
 
         bind(ExpensesService.class).to(ExpensesServiceImpl.class);
 
@@ -68,23 +69,39 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
       }
 
       @Provides
+      @Singleton
       public Set<ActionHandlerMetadata> metadatas() {
 
-        return new HashSet<ActionHandlerMetadata>() {{
+//        return new HashSet<ActionHandlerMetadata>() {{
+//
+//          add(new ActionHandlerMetadata(AddExpenseAction.class, AddExpenseActionHandler.class));
+//
+//          add(new ActionHandlerMetadata(CreateAccountAction.class, CreateAccountActionHandler.class));
+//
+//          add(new ActionHandlerMetadata(FetchDaysAction.class, FetchDaysActionHandler.class));
+//
+//          add(new ActionHandlerMetadata(FetchExpensesAction.class, FetchExpensesActionHandler.class));
+//
+//          add(new ActionHandlerMetadata(FetchMonthsAction.class, FetchMonthsActionHandler.class));
+//
+//          add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
+//
+//        }};
+        HashSet<ActionHandlerMetadata> metadatas = new HashSet<ActionHandlerMetadata>();
 
-          add(new ActionHandlerMetadata(AddExpenseAction.class, AddExpenseActionHandler.class));
+        metadatas.add(new ActionHandlerMetadata(AddExpenseAction.class, AddExpenseActionHandler.class));
+//
+        metadatas.add(new ActionHandlerMetadata(CreateAccountAction.class, CreateAccountActionHandler.class));
 
-          add(new ActionHandlerMetadata(CreateAccountAction.class, CreateAccountActionHandler.class));
+        metadatas.add(new ActionHandlerMetadata(FetchDaysAction.class, FetchDaysActionHandler.class));
 
-          add(new ActionHandlerMetadata(FetchDaysAction.class, FetchDaysActionHandler.class));
+        metadatas.add(new ActionHandlerMetadata(FetchExpensesAction.class, FetchExpensesActionHandler.class));
 
-          add(new ActionHandlerMetadata(FetchExpensesAction.class, FetchExpensesActionHandler.class));
+        metadatas.add(new ActionHandlerMetadata(FetchMonthsAction.class, FetchMonthsActionHandler.class));
 
-          add(new ActionHandlerMetadata(FetchMonthsAction.class, FetchMonthsActionHandler.class));
+        metadatas.add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
+        return metadatas;
 
-          add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
-
-        }};
       }
     });
   }

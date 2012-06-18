@@ -39,7 +39,7 @@ public class ExpensesRepositoryContractTest {
 //    previouslySaved.add(new Expense("dress", 30d, dateFormat.parse("2011-15-6")));
 //    previouslySaved.add(new Expense("gluposti", 100d, dateFormat.parse("2003-05-08")));
 //    previouslySaved.add(new Expense("sports", 100d, dateFormat.parse("2006-05-02")));
-    expensesRepository = new InMemoryExpensesRepository(previouslySaved, new HashMap<Year, Map<Month, List<Day>>>());
+    expensesRepository = new InMemoryExpensesRepository(previouslySaved);
 
   }
 
