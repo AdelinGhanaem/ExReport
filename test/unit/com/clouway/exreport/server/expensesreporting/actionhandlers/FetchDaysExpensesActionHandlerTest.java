@@ -1,8 +1,8 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
-import com.clouway.exreport.shared.Actions.FetchDaysAction;
+import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.entites.Day;
-import com.clouway.exreport.shared.Reponses.FetchDaysResponse;
+import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import org.junit.Test;
 
 import java.text.ParseException;

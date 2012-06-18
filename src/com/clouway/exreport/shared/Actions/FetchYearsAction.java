@@ -1,4 +1,4 @@
-package com.clouway.exreport.shared.Actions;
+package com.clouway.exreport.shared.actions;
 
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;

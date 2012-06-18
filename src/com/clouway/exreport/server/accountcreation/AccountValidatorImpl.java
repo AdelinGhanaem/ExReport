@@ -2,6 +2,7 @@ package com.clouway.exreport.server.accountcreation;
 
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.entites.Account;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,9 @@ import java.util.regex.Pattern;
  */
 public class AccountValidatorImpl implements AccountValidator {
 
-  private final AccountValidationErrorMessages errorMessages;
+  private AccountValidationErrorMessages errorMessages;
 
+  @Inject
   public AccountValidatorImpl(AccountValidationErrorMessages errorMessages) {
 
 

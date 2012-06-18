@@ -3,7 +3,7 @@ package com.clouway.exreport.client.expensesreporting.addingexpenses;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
 import com.clouway.exreport.shared.entites.Expense;
-import com.clouway.exreport.shared.Reponses.AddExpenseResponse;
+import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import com.evo.gad.shared.Action;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;

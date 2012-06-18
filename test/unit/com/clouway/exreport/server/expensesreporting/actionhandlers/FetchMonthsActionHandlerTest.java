@@ -1,7 +1,7 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
-import com.clouway.exreport.shared.Actions.FetchMonthsAction;
-import com.clouway.exreport.shared.Reponses.FetchMonthsResponse;
+import com.clouway.exreport.shared.actions.FetchMonthsAction;
+import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.entites.Month;
 import org.junit.Test;
 

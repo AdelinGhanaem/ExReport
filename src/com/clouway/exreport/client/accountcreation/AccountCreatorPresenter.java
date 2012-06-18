@@ -3,9 +3,9 @@ package com.clouway.exreport.client.accountcreation;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.shared.entites.Account;
-import com.clouway.exreport.shared.Actions.CreateAccountAction;
+import com.clouway.exreport.shared.actions.CreateAccountAction;
 import com.clouway.exreport.client.comunication.GotResponse;
-import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
+import com.clouway.exreport.shared.reponses.CreateAccountResponse;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.regexp.shared.RegExp;
 

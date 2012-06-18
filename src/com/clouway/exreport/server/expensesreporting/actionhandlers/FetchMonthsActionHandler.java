@@ -1,10 +1,11 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
 import com.clouway.exreport.server.expensesreporting.ExpensesService;
-import com.clouway.exreport.shared.Actions.FetchMonthsAction;
-import com.clouway.exreport.shared.Reponses.FetchMonthsResponse;
+import com.clouway.exreport.shared.actions.FetchMonthsAction;
+import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.entites.Month;
 import com.evo.gad.dispatch.ActionHandler;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,16 @@ import java.util.List;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class FetchMonthsActionHandler implements ActionHandler<FetchMonthsAction, FetchMonthsResponse> {
-  private final ExpensesService service;
 
+
+  private ExpensesService service;
+  @Inject
   public FetchMonthsActionHandler(ExpensesService service) {
 
     this.service = service;
+  }
+
+  public FetchMonthsActionHandler() {
   }
 
   @Override

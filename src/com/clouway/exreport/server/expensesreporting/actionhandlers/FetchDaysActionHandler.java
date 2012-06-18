@@ -1,10 +1,11 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
 import com.clouway.exreport.server.expensesreporting.ExpensesService;
-import com.clouway.exreport.shared.Actions.FetchDaysAction;
+import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.entites.Day;
-import com.clouway.exreport.shared.Reponses.FetchDaysResponse;
+import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import com.evo.gad.dispatch.ActionHandler;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class FetchDaysActionHandler implements ActionHandler<FetchDaysAction, Fe
 
   private final ExpensesService service;
 
+  @Inject
   public FetchDaysActionHandler(ExpensesService service) {
 
     this.service = service;

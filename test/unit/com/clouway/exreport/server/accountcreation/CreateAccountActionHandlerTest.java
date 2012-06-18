@@ -1,8 +1,9 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
-import com.clouway.exreport.shared.Actions.CreateAccountAction;
+import com.clouway.exreport.server.accountcreation.actionhandlers.CreateAccountActionHandler;
+import com.clouway.exreport.shared.actions.CreateAccountAction;
 import com.clouway.exreport.shared.entites.Account;
+import com.clouway.exreport.shared.reponses.CreateAccountResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

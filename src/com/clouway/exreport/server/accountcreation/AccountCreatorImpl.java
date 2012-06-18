@@ -2,26 +2,26 @@ package com.clouway.exreport.server.accountcreation;
 
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.entites.Account;
+import com.google.inject.Inject;
 
 import java.util.List;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatorImpl implements AccountCreator{
+public class AccountCreatorImpl implements AccountCreator {
 
   private final AccountRepository repository;
   private final AccountValidator validator;
   private final AccountValidationErrorMessages errorMessages;
 
+  @Inject
   public AccountCreatorImpl(AccountRepository repository, AccountValidator validator, AccountValidationErrorMessages errorMessages) {
     this.repository = repository;
     this.validator = validator;
 
     this.errorMessages = errorMessages;
   }
-
-
 
 
   public Account create(Account account, List<String> retirnedErros) {
@@ -36,7 +36,6 @@ public class AccountCreatorImpl implements AccountCreator{
         return account;
       }
     } else {
-
       return null;
 
     }

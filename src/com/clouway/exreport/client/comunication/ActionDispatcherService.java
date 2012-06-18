@@ -12,6 +12,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("service")
 public interface ActionDispatcherService extends RemoteService {
 
-  <T extends Response> T dispatch(Action<T> action) throws ActionHandlerNotBoundException;
+  public <T extends Response> T dispatch(Action<T> action) ;
 
 }

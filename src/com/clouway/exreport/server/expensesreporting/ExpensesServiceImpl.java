@@ -4,6 +4,7 @@ import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.entites.Month;
 import com.clouway.exreport.shared.entites.Year;
+import com.google.inject.Inject;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 
   private final ExpensesRepository repository;
 
+  @Inject
   public ExpensesServiceImpl(ExpensesRepository repository) {
     this.repository = repository;
   }

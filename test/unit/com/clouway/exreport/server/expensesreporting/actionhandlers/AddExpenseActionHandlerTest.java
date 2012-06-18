@@ -1,9 +1,9 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
 import com.clouway.exreport.server.expensesreporting.ExpensesService;
-import com.clouway.exreport.shared.Actions.AddExpenseAction;
+import com.clouway.exreport.shared.actions.AddExpenseAction;
 import com.clouway.exreport.shared.entites.Expense;
-import com.clouway.exreport.shared.Reponses.AddExpenseResponse;
+import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

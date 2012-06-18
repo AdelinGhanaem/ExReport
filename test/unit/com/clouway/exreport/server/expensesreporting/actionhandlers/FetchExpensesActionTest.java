@@ -1,7 +1,7 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
-import com.clouway.exreport.shared.Actions.FetchExpensesAction;
-import com.clouway.exreport.shared.Reponses.FetchExpensesResponse;
+import com.clouway.exreport.shared.actions.FetchExpensesAction;
+import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.entites.Expense;
 import org.junit.Test;
 

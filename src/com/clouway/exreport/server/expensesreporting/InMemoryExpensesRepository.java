@@ -4,9 +4,11 @@ import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.entites.Month;
 import com.clouway.exreport.shared.entites.Year;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
@@ -18,14 +20,22 @@ import java.util.TreeSet;
 public class InMemoryExpensesRepository implements ExpensesRepository {
 
   private List<Expense> previouslySaved;
-  private final Map<Year, Map<Month, List<Day>>> map;
 
+  private Map<Year, Map<Month, List<Day>>> map;
+
+  //  @Inject
   public InMemoryExpensesRepository(List<Expense> previouslySaved, Map<Year, Map<Month, List<Day>>> map) {
 
     this.previouslySaved = previouslySaved;
     this.map = map;
   }
 
+
+  public InMemoryExpensesRepository() {
+    previouslySaved = new ArrayList<Expense>();
+    map = new HashMap<Year, Map<Month, List<Day>>>();
+
+  }
 
   @Override
   public List<Expense> getByDate(Date date) {

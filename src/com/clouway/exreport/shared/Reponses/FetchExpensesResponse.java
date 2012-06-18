@@ -1,4 +1,4 @@
-package com.clouway.exreport.shared.Reponses;
+package com.clouway.exreport.shared.reponses;
 
 import com.clouway.exreport.shared.entites.Expense;
 import com.evo.gad.shared.Response;

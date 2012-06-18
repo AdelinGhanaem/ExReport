@@ -1,7 +1,7 @@
 package com.clouway.exreport.server.expensesreporting.actionhandlers;
 
-import com.clouway.exreport.shared.Actions.FetchYearsAction;
-import com.clouway.exreport.shared.Reponses.FetchYearsResponse;
+import com.clouway.exreport.shared.actions.FetchYearsAction;
+import com.clouway.exreport.shared.reponses.FetchYearsResponse;
 import com.clouway.exreport.shared.entites.Year;
 import org.junit.Test;
 

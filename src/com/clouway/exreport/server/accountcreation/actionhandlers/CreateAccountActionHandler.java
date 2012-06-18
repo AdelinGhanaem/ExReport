@@ -1,7 +1,8 @@
-package com.clouway.exreport.server.accountcreation;
+package com.clouway.exreport.server.accountcreation.actionhandlers;
 
-import com.clouway.exreport.shared.Actions.CreateAccountAction;
-import com.clouway.exreport.shared.Reponses.CreateAccountResponse;
+import com.clouway.exreport.server.accountcreation.AccountCreator;
+import com.clouway.exreport.shared.actions.CreateAccountAction;
+import com.clouway.exreport.shared.reponses.CreateAccountResponse;
 import com.clouway.exreport.shared.entites.Account;
 import com.evo.gad.dispatch.ActionHandler;
 
