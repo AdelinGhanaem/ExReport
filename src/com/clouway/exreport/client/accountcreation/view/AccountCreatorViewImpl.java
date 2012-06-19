@@ -79,4 +79,9 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
     //To change body of implemented methods use File | Settings | File Templates.
   }
 
+  @Override
+  public void setPresenter(AccountCreatorPresenter presenter) {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
 }

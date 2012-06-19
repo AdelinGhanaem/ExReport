@@ -38,6 +38,10 @@ import java.util.Date;
  */
 public class ExpensesReporterViewImpl extends Composite implements ExpenseReporterView, TreeViewModel {
 
+
+
+
+
   interface ExpensesReporterDashboardViewImplUiBinder extends UiBinder<HTMLPanel, ExpensesReporterViewImpl> {
 
   }
@@ -50,7 +54,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   private static ExpensesReporterDashboardViewImplUiBinder ourUiBinder = GWT.create(ExpensesReporterDashboardViewImplUiBinder.class);
 
-  private ExpenseReporterPresenter presenter;
+  private ExpenseReporterPresenter expenseReporterPresenter;
 
   private ActionDispatcherServiceAsync async = GWT.create(ActionDispatcherService.class);
 
@@ -77,7 +81,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   public ExpensesReporterViewImpl() {
 
-    presenter = new ExpenseReporterPresenter(this, async);
+    expenseReporterPresenter = new ExpenseReporterPresenter(this, async);
 
     singleSelectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 
@@ -90,7 +94,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
         Date date = new Date(day.getDay(), day.getMonth(), day.getYear());
 
-//                presenter.showExpensesFor(date);
+//                expenseReporterPresenter.showExpensesFor(date);
 
       }
     });
@@ -98,21 +102,21 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
     yearAsyncDataProvider = new AsyncDataProvider<Year>() {
       @Override
       protected void onRangeChanged(HasData<Year> display) {
-        presenter.getAllExpensesYears();
+        expenseReporterPresenter.getAllExpensesYears();
       }
     };
 
     monthAsyncDataProvider = new AsyncDataProvider<Month>() {
       @Override
       protected void onRangeChanged(HasData<Month> display) {
-        presenter.getMonthsOf(currentYear.getYear());
+        expenseReporterPresenter.getMonthsOf(currentYear.getYear());
       }
     };
 
     dayAsyncDataProvider = new AsyncDataProvider<Day>() {
       @Override
       protected void onRangeChanged(HasData<Day> display) {
-        presenter.getAllExpensesDays(currentYear.getYear(), currentMonth.getMonth());
+        expenseReporterPresenter.getAllExpensesDays(currentYear.getYear(), currentMonth.getMonth());
       }
     };
 
@@ -204,6 +208,12 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   public void showDaysExpenses(ArrayList<Day> days) {
     dayAsyncDataProvider.updateRowCount(days.size(), true);
     dayAsyncDataProvider.updateRowData(0, days);
+  }
+
+  @Override
+  public void setExpenseReporterPresenter(ExpenseReporterPresenter expenseReporterPresenter) {
+
+    this.expenseReporterPresenter = expenseReporterPresenter;
   }
 
 

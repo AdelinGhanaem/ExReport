@@ -14,7 +14,6 @@ body, td, a, div, .p {
 
 .rootPanel {
     border: 3px solid;
-             background: #191970;
+    background: #191970;
     overflow: visible;
-    /*overflow-style:*/
 }

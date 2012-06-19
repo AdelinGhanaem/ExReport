@@ -6,18 +6,18 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class Dashboard extends Place {
+public class DashboardPlace extends Place {
 
 
-  public static class Tokenizer implements PlaceTokenizer<Dashboard> {
+  public static class Tokenizer implements PlaceTokenizer<DashboardPlace> {
 
     @Override
-    public Dashboard getPlace(String token) {
-      return new Dashboard();
+    public DashboardPlace getPlace(String token) {
+      return new DashboardPlace();
     }
 
     @Override
-    public String getToken(Dashboard place) {
+    public String getToken(DashboardPlace place) {
       return "expensesreporting";
     }
   }

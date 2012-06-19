@@ -1,12 +1,11 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses;
 
+import com.clouway.exreport.client.navigation.Presenter;
 import com.clouway.exreport.shared.entites.Expense;
-
-import java.util.Date;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public interface AddExpensesPresenter {
+public interface AddExpensesPresenter extends Presenter {
   public void addExpense(Expense expense);
 }

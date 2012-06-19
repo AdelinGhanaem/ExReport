@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -21,73 +20,70 @@ import com.google.gwt.user.client.ui.Widget;
 public class AddExpensesViewImpl extends Composite implements AddExpensesView {
 
 
-    interface AddExpensesViewImplUiBinder extends UiBinder<HTMLPanel, AddExpensesViewImpl> {
+  interface AddExpensesViewImplUiBinder extends UiBinder<HTMLPanel, AddExpensesViewImpl> {
 
-    }
+  }
 
-    private static AddExpensesViewImplUiBinder ourUiBinder = GWT.create(AddExpensesViewImplUiBinder.class);
+  private static AddExpensesViewImplUiBinder ourUiBinder = GWT.create(AddExpensesViewImplUiBinder.class);
 
-    interface Driver extends SimpleBeanEditorDriver<Expense, ExpenseEditor> {
-    }
+  interface Driver extends SimpleBeanEditorDriver<Expense, ExpenseEditor> {
+  }
 
-    private AddExpensesPresenter presenter = new AddExpensesPresenterImpl(null, null, this);
+  private AddExpensesPresenter presenter = new AddExpensesPresenterImpl(null, null, this);
 
-    @UiField
-    Button save;
+  @UiField
+  Button save;
 
-    @UiField
-    ExpenseEditor expenseEditor;
+  @UiField
+  ExpenseEditor expenseEditor;
 
-    private HTMLPanel rootElement;
+  private HTMLPanel rootElement;
 
-    private Driver expenseDriver = GWT.create(Driver.class);
+  private Driver expenseDriver = GWT.create(Driver.class);
 
-    public AddExpensesViewImpl() {
+  public AddExpensesViewImpl() {
 
-        rootElement = ourUiBinder.createAndBindUi(this);
+    rootElement = ourUiBinder.createAndBindUi(this);
 
-        initWidget(rootElement);
+    initWidget(rootElement);
 
-        expenseDriver.initialize(expenseEditor);
+    expenseDriver.initialize(expenseEditor);
 
-        Expense expense = new Expense();
+    Expense expense = new Expense();
 
-        expenseDriver.edit(expense);
+    expenseDriver.edit(expense);
 
-    }
+  }
 
-
-    @Override
-    public void notifyNegativeExpensePriceValue() {
-
-    }
-
-    @Override
-    public void notifyExpenseCanNotBeAddedInFutureDate() {
-
-    }
-
-    @Override
-    public void notifyUserOfConnectionError() {
-
-    }
+  @Override
+  public void setExpenseReporterPresenter(AddExpensesPresenter addExpensesPresenter) {
+    presenter = addExpensesPresenter;
+  }
 
 
-    @UiHandler("save")
-    public void onClick(ClickEvent event) {
+  @Override
+  public void notifyNegativeExpensePriceValue() {
 
+  }
 
+  @Override
+  public void notifyExpenseCanNotBeAddedInFutureDate() {
 
+  }
 
-        Expense returnedExpense = expenseDriver.flush();
+  @Override
+  public void notifyUserOfConnectionError() {
 
-        Window.alert(returnedExpense.getName() + "/" + returnedExpense.getPrice());
+  }
 
-//        presenter.addExpense(expense, new Date());
-    }
+  @UiHandler("save")
+  public void onClick(ClickEvent event) {
+    Expense returnedExpense = expenseDriver.flush();
+    presenter.addExpense(returnedExpense);
+  }
 
-    public Widget asWidget() {
-        return rootElement;
-    }
+  public Widget asWidget() {
+    return rootElement;
+  }
 
 }

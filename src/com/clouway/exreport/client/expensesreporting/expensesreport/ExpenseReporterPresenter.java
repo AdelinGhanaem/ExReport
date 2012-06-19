@@ -4,6 +4,7 @@ import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.navigation.AbstractActivity;
+import com.clouway.exreport.client.navigation.Presenter;
 import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchMonthsAction;
@@ -15,6 +16,7 @@ import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.reponses.FetchYearsResponse;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +24,7 @@ import java.util.Date;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class ExpenseReporterPresenter extends AbstractActivity {
+public class ExpenseReporterPresenter extends AbstractActivity implements Presenter {
 
   private final ExpenseReporterView view;
 
@@ -148,4 +150,6 @@ public class ExpenseReporterPresenter extends AbstractActivity {
 //      }
 //    });
   }
+
+
 }
