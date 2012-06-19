@@ -33,4 +33,9 @@ public class AccountRepositoryImpl implements AccountRepository {
 
   }
 
+  @Override
+  public Account getAccount(String username, String password) {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
 }

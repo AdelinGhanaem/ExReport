@@ -8,6 +8,8 @@ import com.clouway.exreport.server.accountcreation.AccountRepositoryImpl;
 import com.clouway.exreport.server.accountcreation.AccountValidator;
 import com.clouway.exreport.server.accountcreation.AccountValidatorImpl;
 import com.clouway.exreport.server.accountcreation.actionhandlers.CreateAccountActionHandler;
+import com.clouway.exreport.server.authentication.UserAuthentication;
+import com.clouway.exreport.server.authentication.UserAuthenticationImpl;
 import com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl;
 import com.clouway.exreport.server.expensesreporting.ExpensesRepository;
 import com.clouway.exreport.server.expensesreporting.ExpensesService;
@@ -47,13 +49,12 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
     return Guice.createInjector(new ServletModule() {
       @Override
       protected void configureServlets() {
-//        serve("/index").
 
         serve("/ExReport/service").with(ActionDispatcherServiceImpl.class);
 
         bind(ActionHandlerRepository.class).to(LazyActionHandlerRepository.class);
 
-//        bind(ActionDispatcher.class).to(ApplicationActionDispatcher.class);
+        bind(UserAuthentication.class).to(UserAuthenticationImpl.class);
 
         bind(ExpensesService.class).to(ExpensesServiceImpl.class);
 
@@ -68,32 +69,16 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
         bind(AccountValidationErrorMessages.class).to(AccountValidationErrorMessagesImpl.class);
 
         bind(ActionHandlerRepository.class).to(LazyActionHandlerRepository.class);
-//        bind(Injector.class).to();
       }
 
       @Provides
       @Singleton
       public Set<ActionHandlerMetadata> metadatas() {
 
-//        return new HashSet<ActionHandlerMetadata>() {{
-//
-//          add(new ActionHandlerMetadata(AddExpenseAction.class, AddExpenseActionHandler.class));
-//
-//          add(new ActionHandlerMetadata(CreateAccountAction.class, CreateAccountActionHandler.class));
-//
-//          add(new ActionHandlerMetadata(FetchDaysAction.class, FetchDaysActionHandler.class));
-//
-//          add(new ActionHandlerMetadata(FetchExpensesAction.class, FetchExpensesActionHandler.class));
-//
-//          add(new ActionHandlerMetadata(FetchMonthsAction.class, FetchMonthsActionHandler.class));
-//
-//          add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
-//
-//        }};
         HashSet<ActionHandlerMetadata> metadatas = new HashSet<ActionHandlerMetadata>();
 
         metadatas.add(new ActionHandlerMetadata(AddExpenseAction.class, AddExpenseActionHandler.class));
-//
+
         metadatas.add(new ActionHandlerMetadata(CreateAccountAction.class, CreateAccountActionHandler.class));
 
         metadatas.add(new ActionHandlerMetadata(FetchDaysAction.class, FetchDaysActionHandler.class));
@@ -103,6 +88,7 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
         metadatas.add(new ActionHandlerMetadata(FetchMonthsAction.class, FetchMonthsActionHandler.class));
 
         metadatas.add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
+
         return metadatas;
 
       }

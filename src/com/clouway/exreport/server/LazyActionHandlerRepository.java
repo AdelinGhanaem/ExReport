@@ -9,6 +9,7 @@ import com.evo.gad.shared.Response;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,11 +20,11 @@ import java.util.Set;
 public class LazyActionHandlerRepository implements ActionHandlerRepository {
 
 
-  private  Injector injector;
+  private Injector injector;
 
-  private  ImmutableMap<Class<? extends Action>, Class<? extends ActionHandler<? extends Action, ? extends Response>>> handlers;
+  private ImmutableMap<Class<? extends Action>, Class<? extends ActionHandler<? extends Action, ? extends Response>>> handlers;
 
-  //  @Inject
+  @Inject
   public LazyActionHandlerRepository(Set<ActionHandlerMetadata> actionHandlerMetadata, Injector injector) {
 
     this.injector = injector;
@@ -33,16 +34,8 @@ public class LazyActionHandlerRepository implements ActionHandlerRepository {
     for (ActionHandlerMetadata meta : actionHandlerMetadata) {
       map.put(meta.getAction(), meta.getHandler());
     }
-
     handlers = ImmutableMap.copyOf(map);
-
   }
-
-
-  public LazyActionHandlerRepository() {
-
-  }
-
 
   /**
    * Gets {@link com.evo.gad.dispatch.ActionHandler} from the repository by providing the type of the

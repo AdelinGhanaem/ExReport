@@ -17,6 +17,7 @@ public class ExReport implements EntryPoint {
    */
   public void onModuleLoad() {
 
+
     ExpensesReporterViewImpl view = new ExpensesReporterViewImpl();
 //
     AddExpensesViewImpl expensesView = new AddExpensesViewImpl();

@@ -10,4 +10,6 @@ public interface AccountRepository {
   void persis(Account account);
 
   Account getAccountByEmail(String email);
+
+  Account getAccount(String username, String password);
 }
