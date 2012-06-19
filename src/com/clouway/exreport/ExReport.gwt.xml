@@ -17,6 +17,7 @@
   <servlet path="/service" class="com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl"/>
 
   <source path="client"/>
+
   <source path="shared"/>
 
 

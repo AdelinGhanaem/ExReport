@@ -4,10 +4,9 @@ import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
 import com.clouway.exreport.shared.actions.AddExpenseAction;
-import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import com.clouway.exreport.shared.entites.Expense;
+import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import com.google.gwt.event.shared.HasHandlers;
-import com.google.gwt.user.client.Window;
 
 import java.util.Date;
 
@@ -44,8 +43,8 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
 
         @Override
         public void onFailure(Throwable caught) {
-//          view.notifyUserOfConnectionError();
-          Window.alert(caught.getMessage());
+          view.notifyUserOfConnectionError();
+//          Window.alert(caught.getMessage());
         }
       });
     } else {

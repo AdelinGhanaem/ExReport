@@ -24,7 +24,6 @@ import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchMonthsAction;
 import com.clouway.exreport.shared.actions.FetchYearsAction;
-import com.evo.gad.dispatch.ActionDispatcher;
 import com.evo.gad.dispatch.ActionHandlerMetadata;
 import com.evo.gad.dispatch.ActionHandlerRepository;
 import com.google.inject.Guice;
@@ -37,12 +36,14 @@ import com.google.inject.servlet.ServletModule;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class GuiceServletConfiguration extends GuiceServletContextListener {
   @Override
   protected Injector getInjector() {
+
     return Guice.createInjector(new ServletModule() {
       @Override
       protected void configureServlets() {
@@ -66,6 +67,8 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         bind(AccountValidationErrorMessages.class).to(AccountValidationErrorMessagesImpl.class);
 
+        bind(ActionHandlerRepository.class).to(LazyActionHandlerRepository.class);
+//        bind(Injector.class).to();
       }
 
       @Provides

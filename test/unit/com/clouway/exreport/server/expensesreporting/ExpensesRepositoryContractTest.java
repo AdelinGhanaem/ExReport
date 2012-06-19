@@ -1,9 +1,6 @@
 package com.clouway.exreport.server.expensesreporting;
 
-import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.entites.Expense;
-import com.clouway.exreport.shared.entites.Month;
-import com.clouway.exreport.shared.entites.Year;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,9 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -27,20 +22,11 @@ public class ExpensesRepositoryContractTest {
 
   private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-DD");
   private List<Expense> previouslySaved = new ArrayList<Expense>();
-  private String stringDate;
   private ExpensesRepository expensesRepository;
 
   @Before
   public void setUp() throws ParseException {
-
-    stringDate = "2012-04-03";
-//    previouslySaved.add(new Expense("food", 10d, dateFormat.parse(stringDate)));
-//    previouslySaved.add(new Expense("disko", 10d, dateFormat.parse("2009-03-09")));
-//    previouslySaved.add(new Expense("dress", 30d, dateFormat.parse("2011-15-6")));
-//    previouslySaved.add(new Expense("gluposti", 100d, dateFormat.parse("2003-05-08")));
-//    previouslySaved.add(new Expense("sports", 100d, dateFormat.parse("2006-05-02")));
     expensesRepository = new InMemoryExpensesRepository(previouslySaved);
-
   }
 
   @Test
