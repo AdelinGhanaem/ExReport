@@ -18,7 +18,7 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
 
   private final UserAuthenticationView view;
 
-  private  ActionDispatcherServiceAsync service;
+  private ActionDispatcherServiceAsync service;
 
   private final EventBus handlers;
 
@@ -34,13 +34,10 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
   }
 
   public void authenticate(User user) {
-    Window.alert(user.getUsername());
     service.dispatch(new UserAuthenticationAction<UserAuthenticationResponse>(user), new GotResponse<UserAuthenticationResponse>() {
       @Override
       public void gotResponse(UserAuthenticationResponse result) {
-
         handlers.fireEvent(new UserAuthenticatedEvent(result.getToken()));
-
       }
     });
   }

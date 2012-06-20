@@ -1,5 +1,7 @@
 package com.clouway.exreport.client;
 
+import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
+import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;
@@ -7,6 +9,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -29,6 +32,10 @@ public class ExReport implements EntryPoint {
     manager.setDisplay(panel);
 
     RootLayoutPanel.get().add(panel);
+
+    EventBus eventBus = injector.eventBus();
+
+    eventBus.addHandler(UserAuthenticatedEvent.TYPE, injector.userAuthenticatedEventHandler());
 
     controller.goTo(new AuthenticationPlace());
 

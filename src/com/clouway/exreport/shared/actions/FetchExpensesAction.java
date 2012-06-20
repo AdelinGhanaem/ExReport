@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchExpensesAction<FetchExpensesResponse> implements Action<Response>,Serializable {
+public class FetchExpensesAction<FetchExpensesResponse> implements Action<Response> {
 
   private  Date firstDate;
   private  Date secondDate;

@@ -23,7 +23,7 @@ public class SpikeTest {
 
   }
 
-  public class SecurityAction implements Action {
+  private class SecurityAction implements Action {
     private SecurityToken token;
 
     public void setToken(SecurityToken token) {

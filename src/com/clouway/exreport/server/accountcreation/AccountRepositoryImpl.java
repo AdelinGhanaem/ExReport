@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Ivan Lazov <darkpain1989@gmail.com>
+ * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class AccountRepositoryImpl implements AccountRepository {
 

@@ -1,5 +1,7 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport;
 
+import com.clouway.exreport.client.authentication.SecurityAction;
+import com.clouway.exreport.client.authentication.SecurityActionFactory;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
@@ -10,11 +12,13 @@ import com.clouway.exreport.shared.actions.FetchYearsAction;
 import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.entites.Month;
+import com.clouway.exreport.shared.entites.Token;
 import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.reponses.FetchYearsResponse;
 import com.clouway.exreport.shared.entites.Year;
+import com.clouway.exreport.shared.reponses.SecurityResponse;
 import com.evo.gad.shared.Action;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.junit.Before;
@@ -32,6 +36,7 @@ import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallback
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -46,41 +51,29 @@ public class DashBoardExpensePresenterTest {
   @Mock
   ActionDispatcherServiceAsync reporterAsync;
 
+  @Mock
+  SecurityActionFactory factory;
+
   private ExpenseReporterPresenterImpl reporterPresenter;
+
+  private Token token;
 
   ArrayList<Expense> expenses = new ArrayList<Expense>();
 
-  private FetchExpensesResponse fetchExpensesResponse = new FetchExpensesResponse(expenses);
 
   //TODO:Don't forget to change to MessagesContainer;
-  //TODO:Try to figure out how to capture the ArrayList result... may be something with capture(... ) !  
+  //TODO:Try to figure out how to capture the ArrayList result... may be something with capture(... ) !
+
   @Before
   public void setUp() {
 
     initMocks(this);
 
-    reporterPresenter = new ExpenseReporterPresenterImpl(reporterView, reporterAsync);
+    reporterPresenter = new ExpenseReporterPresenterImpl(reporterView, reporterAsync, factory);
 
   }
 
   private DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
-
-
-  @Test
-  public void returnsExpensesOfTheGivenDateAndUpdatesView() throws ParseException {
-
-//    ArrayList<Expense> expensesreporting = new ArrayList<Expense>();
-//
-//    Date date = dateFormat.parse("2012-06-01");
-//
-//    doOnSuccess(expensesreporting).when(reporterAsync).getExpensesFor(any(Date.class), any(AsyncCallback.class));
-//
-////    reporterPresenter.showExpensesFor(date);
-//
-//    verify(reporterAsync).getExpensesFor(eq(date), any(AsyncCallback.class));
-//
-//    verify(reporterView).updateExpenses(expensesreporting);
-  }
 
 
   @Test
@@ -89,9 +82,10 @@ public class DashBoardExpensePresenterTest {
     Date firstDate = dateFormat.parse("2012-01-06");
 
     Date secondDate = dateFormat.parse("2012-06-01");
-
-    doOnSuccess(fetchExpensesResponse).when(reporterAsync).dispatch(any(Action.class), any(GotResponse.class));
-
+    SecurityResponse<FetchExpensesResponse> response = new SecurityResponse<FetchExpensesResponse>(new FetchExpensesResponse(expenses), token);
+    doOnSuccess(response).when(reporterAsync).dispatch(any(SecurityAction.class), any(GotResponse.class));
+    when(factory.createSecurity(new FetchExpensesAction<FetchExpensesResponse>())).
+            thenReturn(new SecurityAction<FetchExpensesAction<FetchExpensesResponse>>(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate), new Token()));
     reporterPresenter.fetchExpensesBetween(firstDate, secondDate);
 
     verify(reporterAsync).dispatch(any(Action.class), any(GotResponse.class));
@@ -153,12 +147,15 @@ public class DashBoardExpensePresenterTest {
   public void returnsAllYearOfExpensesAndListThemInTheView() {
 
     ArrayList<Year> yearList = new ArrayList<Year>();
-
-    doOnSuccess(new FetchYearsResponse(yearList)).when(reporterAsync).dispatch(any(FetchYearsAction.class), any(AsyncCallback.class));
+    FetchYearsAction<FetchYearsResponse> fetchYearsAction = new FetchYearsAction<FetchYearsResponse>();
+    SecurityAction<FetchYearsAction<FetchYearsResponse>> action =
+            new SecurityAction<FetchYearsAction<FetchYearsResponse>>(new FetchYearsAction<FetchYearsResponse>(), token);
+    when(factory.createSecurity(fetchYearsAction)).thenReturn(action);
+    doOnSuccess(new SecurityResponse<FetchYearsResponse>(new FetchYearsResponse(yearList), token)).when(reporterAsync).dispatch(any(FetchYearsAction.class), any(AsyncCallback.class));
 
     reporterPresenter.getAllExpensesYears();
 
-    verify(reporterAsync).dispatch(any(FetchExpensesAction.class), any(AsyncCallback.class));
+    verify(reporterAsync).dispatch(any(SecurityAction.class), any(AsyncCallback.class));
 
     verify(reporterView).showExpensesYears(yearList);
 
@@ -187,7 +184,6 @@ public class DashBoardExpensePresenterTest {
     ArrayList<Month> months = new ArrayList<Month>();
 
     doOnSuccess(new FetchMonthsResponse(months)).when(reporterAsync).dispatch(any(FetchMonthsAction.class), any(GotResponse.class));
-
 
     reporterPresenter.getMonthsOf(year);
 

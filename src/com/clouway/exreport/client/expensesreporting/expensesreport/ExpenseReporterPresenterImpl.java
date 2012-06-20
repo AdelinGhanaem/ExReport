@@ -1,5 +1,7 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport;
 
+import com.clouway.exreport.client.authentication.SecurityAction;
+import com.clouway.exreport.client.authentication.SecurityActionFactory;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
@@ -13,6 +15,7 @@ import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.reponses.FetchYearsResponse;
+import com.clouway.exreport.shared.reponses.SecurityResponse;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
@@ -27,12 +30,15 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
   private final ExpenseReporterView view;
 
-  private final ActionDispatcherServiceAsync reporterAsync;
+  private final ActionDispatcherServiceAsync asynchService;
+
+  private SecurityActionFactory securityActionFactory;
 
   @Inject
-  public ExpenseReporterPresenterImpl(ExpenseReporterView view, ActionDispatcherServiceAsync reporterAsync) {
+  public ExpenseReporterPresenterImpl(ExpenseReporterView view, ActionDispatcherServiceAsync reporterAsync, SecurityActionFactory securityActionFactory) {
     this.view = view;
-    this.reporterAsync = reporterAsync;
+    this.asynchService = reporterAsync;
+    this.securityActionFactory = securityActionFactory;
   }
 
 
@@ -43,23 +49,19 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 //    if (todaysDate.before(date)) {
 //      view.notifyUserOfFutureDate();
 //    } else {
-//      reporterAsync.dispatch(new FetchExpensesAction(date));
+//      asynchService.dispatch(new FetchExpensesAction(date));
 //    }
 //  }
 
   public void fetchExpensesBetween(Date firstDate, Date secondDate) {
 
     if (firstDate.before(secondDate) || firstDate.equals(secondDate)) {
+      SecurityAction<FetchExpensesAction<FetchExpensesResponse>> securityAction = securityActionFactory.createSecurity(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate));
 
-      reporterAsync.dispatch(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate), new GotResponse<FetchExpensesResponse>() {
+      asynchService.dispatch(securityAction, new GotResponse<SecurityResponse<FetchExpensesResponse>>() {
         @Override
-        public void gotResponse(FetchExpensesResponse result) {
-          view.updateExpenses(result.getExpenses());
-        }
-
-        @Override
-        public void onFailure(Throwable caught) {
-          view.showConnectionErrorMessage();
+        public void gotResponse(SecurityResponse<FetchExpensesResponse> result) {
+          view.updateExpenses(result.getResponse().getExpenses());
         }
       });
     } else {
@@ -69,39 +71,22 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
   }
 
 
-
   public void getAllExpensesYears() {
+    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction = securityActionFactory.createSecurity(new FetchYearsAction<FetchYearsResponse>());
 
-    reporterAsync.dispatch(new FetchYearsAction<FetchYearsResponse>(), new GotResponse<FetchYearsResponse>() {
+    asynchService.dispatch(securityAction, new GotResponse<SecurityResponse<FetchYearsResponse>>() {
       @Override
-      public void onFailure(Throwable caught) {
-        view.showConnectionErrorMessage();
-      }
-
-      @Override
-      public void gotResponse(FetchYearsResponse result) {
-        view.showExpensesYears(result.getYears());
+      public void gotResponse(SecurityResponse<FetchYearsResponse> result) {
+        view.showExpensesYears(result.getResponse().getYears());
       }
     });
-
-//    reporterAsync.getYearsOfExpenses(new AsyncCallback<ArrayList<Year>>() {
-//      @Override
-//      public void onFailure(Throwable caught) {
-//        view.showConnectionErrorMessage();
-//      }
-//
-//      @Override
-//      public void onSuccess(ArrayList<Year> result) {
-//        view.showExpensesYears(result);
-//      }
-//    });
   }
 
 
   public void getMonthsOf(int year) {
 
 
-    reporterAsync.dispatch(new FetchMonthsAction<FetchMonthsResponse>(year), new GotResponse<FetchMonthsResponse>() {
+    asynchService.dispatch(new FetchMonthsAction<FetchMonthsResponse>(year), new GotResponse<FetchMonthsResponse>() {
 
       @Override
       public void gotResponse(FetchMonthsResponse result) {
@@ -109,7 +94,7 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
       }
     });
 
-//    reporterAsync.getMonthOf(year, new AsyncCallback<ArrayList<Month>>() {
+//    asynchService.getMonthOf(year, new AsyncCallback<ArrayList<Month>>() {
 //      @Override
 //      public void onFailure(Throwable caught) {
 //        //To change body of implemented methods use File | Settings | File Templates.
@@ -124,7 +109,7 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
   public void getAllExpensesDays(int year, int month) {
 
-    reporterAsync.dispatch(new FetchDaysAction<FetchDaysResponse>(year, month), new GotResponse<FetchDaysResponse>() {
+    asynchService.dispatch(new FetchDaysAction<FetchDaysResponse>(year, month), new GotResponse<FetchDaysResponse>() {
       @Override
       public void gotResponse(FetchDaysResponse result) {
         ArrayList<Day> days = result.getDays();
@@ -133,7 +118,7 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
     });
 
 
-//    reporterAsync.getDaysOf(year, month, new AsyncCallback<ArrayList<Day>>() {
+//    asynchService.getDaysOf(year, month, new AsyncCallback<ArrayList<Day>>() {
 //      @Override
 //      public void onFailure(Throwable caught) {
 //        //To change body of implemented methods use File | Settings | File Templates.

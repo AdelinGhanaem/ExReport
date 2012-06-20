@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchExpensesResponse implements Response,Serializable {
+public class FetchExpensesResponse implements Response  {
 
   public FetchExpensesResponse(ArrayList<Expense> expenses) {
     this.expenses = expenses;

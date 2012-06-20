@@ -1,5 +1,6 @@
 package com.clouway.exreport.client.navigation.activities;
 
+import com.clouway.exreport.client.authentication.SecurityTokenProvider;
 import com.clouway.exreport.client.expensesreporting.dashboardview.DashboardPanel;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenter;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
@@ -31,6 +32,9 @@ public class DashboardActivity extends AbstractActivity {
   private DashboardPanel dashboardPanel;
 
   @Inject
+  private SecurityTokenProvider provider;
+
+  @Inject
   public DashboardActivity(ExpenseReporterPresenterImpl expenseReporterPresenter, AddExpensesPresenter addExpensesPresenter,
 
                            ExpenseReporterView expenseReporterView, AddExpensesView addExpensesView, DashboardPanel panel) {
@@ -39,6 +43,7 @@ public class DashboardActivity extends AbstractActivity {
     this.expenseReporterView = expenseReporterView;
     this.addExpensesView = addExpensesView;
     this.dashboardPanel = panel;
+
   }
 
   @Override
@@ -48,7 +53,8 @@ public class DashboardActivity extends AbstractActivity {
     addExpensesView.setExpenseReporterPresenter(addExpensesPresenter);
     dashboardPanel.addWidget(expenseReporterView.asWidget());
     dashboardPanel.addWidget(addExpensesView.asWidget());
-    panel.setWidget(  dashboardPanel.asWidget());
+    dashboardPanel.setToken(provider.getToken());
+    panel.setWidget(dashboardPanel.asWidget());
   }
 
 }

@@ -6,6 +6,11 @@ import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessage
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessagesImpl;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
+import com.clouway.exreport.client.authentication.SecurityTokenProvider;
+import com.clouway.exreport.client.authentication.SecurityTokenProviderImpl;
+import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
+import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
+import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenter;
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenterImpl;
 import com.clouway.exreport.client.authentication.view.UserAuthenticationView;
@@ -21,9 +26,11 @@ import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseRepor
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
 import com.clouway.exreport.client.navigation.ApplicationActivityMapper;
+import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.gwt.user.client.Cookies;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
@@ -48,7 +55,7 @@ public class ClientSideModule extends AbstractGinModule {
     //User authentication
     bind(UserAuthenticationView.class).to(UserAuthenticationViewImpl.class);
 
-    bind(UserAuthenticationPresenter.class).to(UserAuthenticationPresenterImpl.class);
+    bind(UserAuthenticationPresenter.class).to(UserAuthenticationPresenterImpl.class).in(Singleton.class);
 
     //communication
 
@@ -66,6 +73,12 @@ public class ClientSideModule extends AbstractGinModule {
     //navigation 
     bind(ActivityMapper.class).to(ApplicationActivityMapper.class);
 
+//    bind(SecurityTokenProvider.class)
+
+    //EventHandlers
+    bind(UserAuthenticatedEventHandler.class).to(UserAuthenticatedEventHandlerImpl.class);
+
+    bind(SecurityTokenProvider.class).to(SecurityTokenProviderImpl.class).in(Singleton.class);
 
   }
 
@@ -74,4 +87,5 @@ public class ClientSideModule extends AbstractGinModule {
   public ActionDispatcherServiceAsync dispatcherServiceAsync() {
     return GWT.create(ActionDispatcherService.class);
   }
+
 }

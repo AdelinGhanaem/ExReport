@@ -15,6 +15,9 @@ public class Token implements Serializable {
     this.user = user;
   }
 
+  public Token() {
+  }
+
   public String getUser() {
     return user;
   }

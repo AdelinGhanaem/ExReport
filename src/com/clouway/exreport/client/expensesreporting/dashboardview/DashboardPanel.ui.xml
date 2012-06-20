@@ -6,6 +6,9 @@
 
     <ui:style src="dashboardStyle.css"/>
     <g:HTMLPanel addStyleNames="{style.mainPanel}">
+      <div class="{style.menu}">
+        <g:Label ui:field="nameLabel"/>
+      </div>
         <div class="{style.head}">
         </div>
         <div class="{style.leftnavigation}">

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AddExpenseResponse implements Response ,Serializable {
+public class AddExpenseResponse implements Response {
   private Expense expense;
 
   public AddExpenseResponse(Expense expense) {

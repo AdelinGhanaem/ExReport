@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountResponse implements Response ,Serializable {
+public class CreateAccountResponse implements Response  {
 
 
   private  Account account;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchYearsResponse implements Response ,Serializable {
+public class FetchYearsResponse implements Response  {
 
   private ArrayList<Year> years;
 

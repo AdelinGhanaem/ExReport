@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchMonthsResponse implements Response ,Serializable {
+public class FetchMonthsResponse implements Response  {
 
   public FetchMonthsResponse() {
   }

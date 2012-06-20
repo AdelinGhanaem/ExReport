@@ -3,7 +3,7 @@ package com.clouway.exreport.server;
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
 
 /**
- * @author Ivan Lazov <darkpain1989@gmail.com>
+ * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class AccountValidationErrorMessagesImpl implements AccountValidationErrorMessages {
   @Override

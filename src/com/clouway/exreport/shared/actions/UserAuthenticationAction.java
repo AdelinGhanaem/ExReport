@@ -13,12 +13,12 @@ public class UserAuthenticationAction<UserAuthenticationResponse> implements Act
 
   private  User user;
 
-  public UserAuthenticationAction(User user) {
+  public UserAuthenticationAction() {
 
-    this.user = user;
   }
 
-  public UserAuthenticationAction() {
+  public UserAuthenticationAction(User user) {
+    this.user = user;
   }
 
   public User getUser() {
