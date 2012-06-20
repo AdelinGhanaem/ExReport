@@ -6,7 +6,8 @@ import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpe
 import com.clouway.exreport.shared.actions.AddExpenseAction;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.reponses.AddExpenseResponse;
-import com.google.gwt.event.shared.HasHandlers;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 import java.util.Date;
 
@@ -17,12 +18,12 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
 
   private final ActionDispatcherServiceAsync addingExpensesServiceAsync;
 
-  private final HasHandlers hasHandlers;
+  private final EventBus hasHandlers;
 
   private final AddExpensesView view;
 
-  public AddExpensesPresenterImpl(ActionDispatcherServiceAsync addingExpensesServiceAsync, HasHandlers hasHandlers, AddExpensesView view) {
-
+  @Inject
+  public AddExpensesPresenterImpl(ActionDispatcherServiceAsync addingExpensesServiceAsync, EventBus hasHandlers, AddExpensesView view) {
     this.addingExpensesServiceAsync = addingExpensesServiceAsync;
     this.hasHandlers = hasHandlers;
     this.view = view;

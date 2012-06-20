@@ -11,8 +11,6 @@ public interface AddExpensesView extends View<AddExpensesPresenter> {
 
   void notifyNegativeExpensePriceValue();
 
-  void notifyExpenseCanNotBeAddedInFutureDate();
-
   void notifyUserOfConnectionError();
 
   Widget asWidget();

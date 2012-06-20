@@ -1,31 +1,37 @@
 package com.clouway.exreport.client.navigation.activities;
 
-import com.clouway.exreport.client.dashboard.DashboardPanel;
+import com.clouway.exreport.client.expensesreporting.dashboardview.DashboardPanel;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenter;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
-import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenter;
+import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenterImpl;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.navigation.AbstractActivity;
-import com.evo.gad.dispatch.ActionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.inject.Inject;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class DashboardActivity extends AbstractActivity {
 
-  private ExpenseReporterPresenter expenseReporterPresenter;
+  @Inject
+  private ExpenseReporterPresenterImpl expenseReporterPresenter;
 
+  @Inject
   private AddExpensesPresenter addExpensesPresenter;
 
+  @Inject
   private ExpenseReporterView expenseReporterView;
 
+  @Inject
   private AddExpensesView addExpensesView;
 
+  @Inject
   private DashboardPanel dashboardPanel;
 
-  public DashboardActivity(ExpenseReporterPresenter expenseReporterPresenter, AddExpensesPresenter addExpensesPresenter,
+  @Inject
+  public DashboardActivity(ExpenseReporterPresenterImpl expenseReporterPresenter, AddExpensesPresenter addExpensesPresenter,
                            ExpenseReporterView expenseReporterView, AddExpensesView addExpensesView, DashboardPanel panel) {
     this.expenseReporterPresenter = expenseReporterPresenter;
     this.addExpensesPresenter = addExpensesPresenter;
@@ -43,6 +49,5 @@ public class DashboardActivity extends AbstractActivity {
     dashboardPanel.addWidget(addExpensesView.asWidget());
     panel.setWidget(dashboardPanel.asWidget());
   }
-  
-  ActionHandler
+
 }

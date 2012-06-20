@@ -2,7 +2,7 @@ package com.clouway.exreport.client.expensesreporting.expensesreport.view;
 
 import com.clouway.exreport.client.comunication.ActionDispatcherService;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
-import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenter;
+import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenterImpl;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.cells.DayCell;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.cells.MonthCell;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.cells.YearCell;
@@ -54,7 +54,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   private static ExpensesReporterDashboardViewImplUiBinder ourUiBinder = GWT.create(ExpensesReporterDashboardViewImplUiBinder.class);
 
-  private ExpenseReporterPresenter expenseReporterPresenter;
+  private ExpenseReporterPresenterImpl expenseReporterPresenter;
 
   private ActionDispatcherServiceAsync async = GWT.create(ActionDispatcherService.class);
 
@@ -81,7 +81,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   public ExpensesReporterViewImpl() {
 
-    expenseReporterPresenter = new ExpenseReporterPresenter(this, async);
+    expenseReporterPresenter = new ExpenseReporterPresenterImpl(this, async);
 
     singleSelectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 
@@ -211,7 +211,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   }
 
   @Override
-  public void setExpenseReporterPresenter(ExpenseReporterPresenter expenseReporterPresenter) {
+  public void setExpenseReporterPresenter(ExpenseReporterPresenterImpl expenseReporterPresenter) {
 
     this.expenseReporterPresenter = expenseReporterPresenter;
   }

@@ -1,6 +1,7 @@
 package com.clouway.exreport.client.accountcreation.view;
 
-import com.clouway.exreport.client.accountcreation.AccountCreatorPresenter;
+import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
+import com.clouway.exreport.client.navigation.View;
 import com.clouway.exreport.shared.entites.Account;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatorViewImpl extends Composite implements AccountCreatorView {
+public class AccountCreatorViewImpl extends Composite implements AccountCreatorView, View<AccountCreatorPresenterImpl> {
 
 
   interface Driver extends SimpleBeanEditorDriver<Account, AccountEditor> {
@@ -33,7 +34,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   private static AccountCreatorViewImplUiBinder ourUiBinder = GWT.create(AccountCreatorViewImplUiBinder.class);
 
 
-  private AccountCreatorPresenter presenter;
+  private AccountCreatorPresenterImpl presenter;
 
 
   @UiField
@@ -51,7 +52,6 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
     Account account = new Account();
 
     driver.initialize(accountEditor);
-
 
     driver.edit(account);
 
@@ -80,8 +80,13 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   }
 
   @Override
-  public void setPresenter(AccountCreatorPresenter presenter) {
+  public void setPresenter(AccountCreatorPresenterImpl presenter) {
     //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setExpenseReporterPresenter(AccountCreatorPresenterImpl accountCreatorPresenter) {
+    presenter = accountCreatorPresenter;
   }
 
 }

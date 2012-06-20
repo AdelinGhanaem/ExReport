@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.accountcreation.view;
 
-import com.clouway.exreport.client.accountcreation.AccountCreatorPresenter;
+import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public interface AccountCreatorView {
 
   void showMessages(ArrayList<String> errors);
 
-  void setPresenter(AccountCreatorPresenter presenter);
+  void setPresenter(AccountCreatorPresenterImpl presenter);
 
   Widget asWidget();
 }

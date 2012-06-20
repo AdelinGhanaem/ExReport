@@ -46,7 +46,7 @@ public class DashBoardExpensePresenterTest {
   @Mock
   ActionDispatcherServiceAsync reporterAsync;
 
-  private ExpenseReporterPresenter reporterPresenter;
+  private ExpenseReporterPresenterImpl reporterPresenter;
 
   ArrayList<Expense> expenses = new ArrayList<Expense>();
 
@@ -59,7 +59,7 @@ public class DashBoardExpensePresenterTest {
 
     initMocks(this);
 
-    reporterPresenter = new ExpenseReporterPresenter(reporterView, reporterAsync);
+    reporterPresenter = new ExpenseReporterPresenterImpl(reporterView, reporterAsync);
 
   }
 

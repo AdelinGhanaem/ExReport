@@ -1,11 +1,12 @@
 package com.clouway.exreport.client;
 
-import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
-import com.clouway.exreport.client.dashboard.DashboardPanel;
-import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesViewImpl;
-import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
+import com.clouway.exreport.client.navigation.places.NewRegistrationPlace;
+import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -17,18 +18,20 @@ public class ExReport implements EntryPoint {
    */
   public void onModuleLoad() {
 
+    SimpleLayoutPanel panel = new SimpleLayoutPanel();
 
-    ExpensesReporterViewImpl view = new ExpensesReporterViewImpl();
-//
-    AddExpensesViewImpl expensesView = new AddExpensesViewImpl();
+    GinInjector injector = GWT.create(GinInjector.class);
 
-    DashboardPanel dashboardPanel = new DashboardPanel();
+    PlaceController controller = injector.placeController();
 
-    AccountCreatorViewImpl accountCreatorView = new AccountCreatorViewImpl();
+    ActivityManager manager = injector.activityManager();
 
-    RootLayoutPanel widgets = RootLayoutPanel.get();
+    manager.setDisplay(panel);
 
-    widgets.add(view);
+    RootLayoutPanel.get().add(panel);
+
+    controller.goTo(new NewRegistrationPlace());
 
   }
+
 }

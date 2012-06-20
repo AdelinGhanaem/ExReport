@@ -1,49 +1,52 @@
 package com.clouway.exreport.client.authentication;
 
+import com.clouway.exreport.client.authentication.view.UserAuthenticationView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.shared.actions.UserAuthenticationAction;
 import com.clouway.exreport.shared.entites.Token;
 import com.clouway.exreport.shared.entites.User;
 import com.clouway.exreport.shared.reponses.UserAuthenticationResponse;
-import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class UserAuthenticationPresenterTest {
+public class UserAuthenticationPresenterImplTest {
 
 
   @Mock
-  HasHandlers handlers;
+  EventBus handlers;
   @Mock
   ActionDispatcherServiceAsync service;
 
   @Mock
   UserAuthenticationView view;
-  UserAuthenticationPresenter presenter;
+  UserAuthenticationPresenterImpl presenter;
 
   @Before
   public void setUp() throws Exception {
 
     initMocks(this);
-
-    presenter = new UserAuthenticationPresenter(view, service, handlers);
+    handlers = spy(new SimpleEventBus());
+    presenter = new UserAuthenticationPresenterImpl(view, service, handlers);
 
   }
 
   @Test
   public void shouldAuthenticateUserAndFireUserAuthenticatedEvent() throws Exception {
 
-    UserAuthenticationPresenter presenter = new UserAuthenticationPresenter(view, service, handlers);
+    UserAuthenticationPresenterImpl presenter = new UserAuthenticationPresenterImpl(view, service, handlers);
 
     User user = new User("adio", "1234567");
 

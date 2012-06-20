@@ -5,8 +5,9 @@ import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpe
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import com.evo.gad.shared.Action;
-import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -19,6 +20,7 @@ import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallback
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -36,7 +38,7 @@ public class AddExpensesPresenterImplTest {
   ActionDispatcherServiceAsync actionDispatcherServiceAsync;
 
   @Mock
-  HasHandlers hasHandlers;
+  EventBus hasHandlers;
 
   private AddExpensesPresenterImpl addExpensesPresenterImpl;
 
@@ -47,6 +49,7 @@ public class AddExpensesPresenterImplTest {
   @Before
   public void setUp() {
     initMocks(this);
+    hasHandlers = spy(new SimpleEventBus());
     addExpensesPresenterImpl = new AddExpensesPresenterImpl(actionDispatcherServiceAsync, hasHandlers, view);
   }
 

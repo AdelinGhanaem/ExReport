@@ -67,11 +67,6 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView {
   }
 
   @Override
-  public void notifyExpenseCanNotBeAddedInFutureDate() {
-
-  }
-
-  @Override
   public void notifyUserOfConnectionError() {
 
   }

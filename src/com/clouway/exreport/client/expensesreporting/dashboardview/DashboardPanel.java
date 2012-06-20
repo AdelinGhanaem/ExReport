@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.dashboard;
+package com.clouway.exreport.client.expensesreporting.dashboardview;
 
 import com.clouway.exreport.client.navigation.NavigationMenu;
 import com.google.gwt.core.client.GWT;

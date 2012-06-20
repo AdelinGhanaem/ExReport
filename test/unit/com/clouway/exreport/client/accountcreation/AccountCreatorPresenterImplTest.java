@@ -3,12 +3,13 @@ package com.clouway.exreport.client.accountcreation;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
-import com.clouway.exreport.shared.entites.Account;
 import com.clouway.exreport.shared.actions.CreateAccountAction;
+import com.clouway.exreport.shared.entites.Account;
 import com.clouway.exreport.shared.reponses.CreateAccountResponse;
 import com.evo.gad.shared.Action;
-import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -25,14 +27,15 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatorPresenterTest {
+public class AccountCreatorPresenterImplTest {
 
   @Mock
   private ActionDispatcherServiceAsync service;
-  @Mock
-  private HasHandlers handlers;
 
-  private AccountCreatorPresenter accountCreatorPresenter;
+  @Mock
+  private EventBus handlers;
+
+  private AccountCreatorPresenterImpl accountCreatorPresenter;
 
   @Mock
   private AccountCreatorView view;
@@ -44,7 +47,8 @@ public class AccountCreatorPresenterTest {
   public void setUp() {
 
     initMocks(this);
-    accountCreatorPresenter = new AccountCreatorPresenter(service, handlers, view, errorMessages);
+    handlers = spy(new SimpleEventBus());
+    accountCreatorPresenter = new AccountCreatorPresenterImpl(service, handlers, view, errorMessages);
   }
 
   @Test

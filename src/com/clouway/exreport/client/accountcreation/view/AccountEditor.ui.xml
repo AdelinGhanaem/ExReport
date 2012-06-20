@@ -4,9 +4,13 @@
   <g:HTMLPanel>
 
      <g:VerticalPanel>
+
        <g:Label text="email:"/>
+
        <g:TextBox ui:field="email"/>
+
        <g:Label text="password:"/>
+
        <g:PasswordTextBox ui:field="password"/>
 
      </g:VerticalPanel>

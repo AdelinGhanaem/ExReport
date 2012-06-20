@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.authentication;
+package com.clouway.exreport.client.authentication.view;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
