@@ -10,18 +10,21 @@
         </div>
         <div class="{style.leftnavigation}">
             <g:HTMLPanel addStyleNames="{style.navHTML}">
-                <m:NavigationMenu ui:field="navigationMenu">
-                </m:NavigationMenu>
+                <!--<m:NavigationMenu ui:field="navigationMenu">-->
+                <!--</m:NavigationMenu>-->
             </g:HTMLPanel>
         </div>
         <div class="{style.center}">
             <g:ScrollPanel addStyleNames="{style.centerScrollPanel}">
+              <g:HTMLPanel>
                 <g:HTMLPanel ui:field="centerPanel" addStyleNames="{style.centerHTMLPanel}">
-                    <reporting:ExpensesReporterViewImpl>
-                    </reporting:ExpensesReporterViewImpl>
-                    <add:AddExpensesViewImpl>
-                    </add:AddExpensesViewImpl>
+                  <!--<reporting:ExpensesReporterViewImpl ui:field="exReport">-->
+                  <!--</reporting:ExpensesReporterViewImpl>-->
+                  <!--<add:AddExpensesViewImpl ui:field="addExpenses">-->
+                  <!--</add:AddExpensesViewImpl>-->
                 </g:HTMLPanel>
+              </g:HTMLPanel>
+
             </g:ScrollPanel>
         </div>
         <div class="footer">

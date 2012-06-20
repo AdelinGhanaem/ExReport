@@ -78,6 +78,9 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   @UiField
   HorizontalPanel cellTreePanel;
 
+  @UiField
+  HorizontalPanel panel;
+
 
   public ExpensesReporterViewImpl() {
 
@@ -188,7 +191,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   @Override
   public Widget asWidget() {
-    return maiPanel;
+    return panel;
   }
 
   @Override
@@ -214,6 +217,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   public void setExpenseReporterPresenter(ExpenseReporterPresenterImpl expenseReporterPresenter) {
 
     this.expenseReporterPresenter = expenseReporterPresenter;
+
   }
 
 

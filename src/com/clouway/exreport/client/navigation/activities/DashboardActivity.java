@@ -32,6 +32,7 @@ public class DashboardActivity extends AbstractActivity {
 
   @Inject
   public DashboardActivity(ExpenseReporterPresenterImpl expenseReporterPresenter, AddExpensesPresenter addExpensesPresenter,
+
                            ExpenseReporterView expenseReporterView, AddExpensesView addExpensesView, DashboardPanel panel) {
     this.expenseReporterPresenter = expenseReporterPresenter;
     this.addExpensesPresenter = addExpensesPresenter;
@@ -47,7 +48,7 @@ public class DashboardActivity extends AbstractActivity {
     addExpensesView.setExpenseReporterPresenter(addExpensesPresenter);
     dashboardPanel.addWidget(expenseReporterView.asWidget());
     dashboardPanel.addWidget(addExpensesView.asWidget());
-    panel.setWidget(dashboardPanel.asWidget());
+    panel.setWidget(  dashboardPanel.asWidget());
   }
 
 }

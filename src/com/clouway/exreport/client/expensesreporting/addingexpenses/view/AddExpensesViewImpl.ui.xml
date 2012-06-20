@@ -2,14 +2,16 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:mine='urn:import:com.clouway.exreport.client.expensesreporting.addingexpenses.view'>
 
-    <ui:style src="style.css"/>
+  <ui:style src="style.css"/>
 
-    <g:HTMLPanel>
-        <g:DecoratorPanel addStyleNames="{style.addExpensePanel}">
-            <g:VerticalPanel>
-                <mine:ExpenseEditor ui:field="expenseEditor"/>
-                <g:Button ui:field="save" text="save"/>
-            </g:VerticalPanel>
-        </g:DecoratorPanel>
-    </g:HTMLPanel>
+  <g:HTMLPanel>
+    <g:HorizontalPanel ui:field="panel">
+      <g:DecoratorPanel addStyleNames="{style.addExpensePanel}">
+        <g:VerticalPanel>
+          <mine:ExpenseEditor ui:field="expenseEditor"/>
+          <g:Button ui:field="save" text="save"/>
+        </g:VerticalPanel>
+      </g:DecoratorPanel>
+    </g:HorizontalPanel>
+  </g:HTMLPanel>
 </ui:UiBinder>

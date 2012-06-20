@@ -12,6 +12,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -36,6 +37,8 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView {
 
   @UiField
   ExpenseEditor expenseEditor;
+  @UiField
+  HorizontalPanel panel;
 
   private HTMLPanel rootElement;
 
@@ -78,7 +81,7 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView {
   }
 
   public Widget asWidget() {
-    return rootElement;
+    return panel;
   }
 
 }

@@ -1,6 +1,5 @@
 package com.clouway.exreport.client.expensesreporting.dashboardview;
 
-import com.clouway.exreport.client.navigation.NavigationMenu;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -18,18 +17,19 @@ public class DashboardPanel extends Composite {
   private static CompositePanelUiBinder ourUiBinder = GWT.create(CompositePanelUiBinder.class);
 
 
-
   @UiField
   HTMLPanel centerPanel;
 
-  @UiField
-  NavigationMenu navigationMenu;
+//  @UiField
+//  NavigationMenu navigationMenu;
 
 
-    HTMLPanel rootPanel;
+
+  HTMLPanel rootPanel;
 
   public DashboardPanel() {
     rootPanel = ourUiBinder.createAndBindUi(this);
+
     initWidget(rootPanel);
   }
 
@@ -39,7 +39,8 @@ public class DashboardPanel extends Composite {
   }
 
   public Widget asWidget() {
-   return this;
+    return this;
   }
+
 
 }
