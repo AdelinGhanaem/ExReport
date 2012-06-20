@@ -3,10 +3,12 @@ package com.clouway.exreport.shared.actions;
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
 
+import java.io.Serializable;
+
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchDaysAction<FetchDaysResponse> implements Action<Response> {
+public class FetchDaysAction<FetchDaysResponse> implements Action<Response> ,Serializable {
 
   private  int year;
   private  int month;

@@ -1,7 +1,9 @@
 package com.clouway.exreport.client.navigation;
 
+import com.clouway.exreport.client.navigation.activities.AuthenticationActivity;
 import com.clouway.exreport.client.navigation.activities.DashboardActivity;
 import com.clouway.exreport.client.navigation.activities.NewRegistrationActivity;
+import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
 import com.clouway.exreport.client.navigation.places.DashboardPlace;
 import com.clouway.exreport.client.navigation.places.NewRegistrationPlace;
 import com.google.gwt.activity.shared.Activity;
@@ -21,6 +23,9 @@ public class ApplicationActivityMapper<T extends Place> implements ActivityMappe
   @Inject
   NewRegistrationActivity newRegistrationActivity;
 
+  @Inject
+  AuthenticationActivity authenticationActivity;
+
   @Override
   public Activity getActivity(Place place) {
 
@@ -29,6 +34,9 @@ public class ApplicationActivityMapper<T extends Place> implements ActivityMappe
     }
     if (place instanceof NewRegistrationPlace) {
       return newRegistrationActivity;
+    }
+    if (place instanceof AuthenticationPlace) {
+      return authenticationActivity;
     }
     return null;
   }

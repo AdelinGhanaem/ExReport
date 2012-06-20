@@ -3,12 +3,13 @@ package com.clouway.exreport.shared.reponses;
 import com.clouway.exreport.shared.entites.Account;
 import com.evo.gad.shared.Response;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountResponse implements Response {
+public class CreateAccountResponse implements Response ,Serializable {
 
 
   private  Account account;

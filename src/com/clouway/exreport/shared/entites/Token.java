@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Token implements Serializable {
 
   private String user;
+
   private String tokenValue;
 
   public Token(String user) {
@@ -15,9 +16,7 @@ public class Token implements Serializable {
   }
 
   public String getUser() {
-
     return user;
-
   }
 
   public String getTokenValue() {

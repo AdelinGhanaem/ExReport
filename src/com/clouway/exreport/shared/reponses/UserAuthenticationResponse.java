@@ -3,10 +3,12 @@ package com.clouway.exreport.shared.reponses;
 import com.clouway.exreport.shared.entites.Token;
 import com.evo.gad.shared.Response;
 
+import java.io.Serializable;
+
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class UserAuthenticationResponse implements Response {
+public class UserAuthenticationResponse implements Response ,Serializable {
 
   private Token token;
 

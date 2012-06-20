@@ -4,7 +4,6 @@ import com.clouway.exreport.client.comunication.ActionDispatcherService;
 import com.evo.gad.dispatch.ActionDispatcher;
 import com.evo.gad.dispatch.ActionHandlerRepository;
 import com.evo.gad.shared.Action;
-import com.evo.gad.shared.ActionHandlerNotBoundException;
 import com.evo.gad.shared.Response;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
@@ -27,11 +26,6 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
   }
 
   public <T extends Response> T dispatch(Action<T> action) {
-
     return (T) repository.getActionHandler(action.getClass()).handle(action);
-
-
   }
-
-
 }

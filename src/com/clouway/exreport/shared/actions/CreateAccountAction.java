@@ -3,12 +3,13 @@ package com.clouway.exreport.shared.actions;
 import com.clouway.exreport.shared.entites.Account;
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
-import com.google.inject.Inject;
+
+import java.io.Serializable;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountAction<AccountCreatedResponse> implements Action<Response> {
+public class CreateAccountAction<AccountCreatedResponse> implements Action<Response> ,Serializable {
 
   private  Account account;
 
@@ -22,6 +23,4 @@ public class CreateAccountAction<AccountCreatedResponse> implements Action<Respo
   public Account getAccount() {
     return account;
   }
-
-
 }

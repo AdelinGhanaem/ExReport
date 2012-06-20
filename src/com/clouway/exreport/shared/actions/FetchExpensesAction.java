@@ -3,13 +3,14 @@ package com.clouway.exreport.shared.actions;
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchExpensesAction<FetchExpensesResponse> implements Action<Response> {
+public class FetchExpensesAction<FetchExpensesResponse> implements Action<Response>,Serializable {
 
   private  Date firstDate;
   private  Date secondDate;

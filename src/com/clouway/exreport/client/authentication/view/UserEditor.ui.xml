@@ -2,10 +2,12 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
   <g:HTMLPanel>
     <g:VerticalPanel>
-
+      <g:Label text="Username: "/>
       <g:TextBox ui:field="username">
 
       </g:TextBox>
+
+      <g:Label text="Password: "/>
 
       <g:PasswordTextBox ui:field="password">
 

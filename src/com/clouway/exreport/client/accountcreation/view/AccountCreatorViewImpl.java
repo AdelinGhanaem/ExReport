@@ -23,6 +23,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
 
 
   interface Driver extends SimpleBeanEditorDriver<Account, AccountEditor> {
+
   }
 
   interface AccountCreatorViewImplUiBinder extends UiBinder<HTMLPanel, AccountCreatorViewImpl> {
@@ -54,7 +55,6 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
     driver.initialize(accountEditor);
 
     driver.edit(account);
-
 
   }
 

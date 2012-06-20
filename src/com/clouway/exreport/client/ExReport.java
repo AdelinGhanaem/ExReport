@@ -1,6 +1,6 @@
 package com.clouway.exreport.client;
 
-import com.clouway.exreport.client.navigation.places.DashboardPlace;
+import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -30,7 +30,7 @@ public class ExReport implements EntryPoint {
 
     RootLayoutPanel.get().add(panel);
 
-    controller.goTo(new DashboardPlace());
+    controller.goTo(new AuthenticationPlace());
 
   }
 

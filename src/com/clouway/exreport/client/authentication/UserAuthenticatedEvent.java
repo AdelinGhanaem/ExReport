@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.authentication;
 
-import com.clouway.exreport.shared.reponses.UserAuthenticationResponse;
+import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**
@@ -10,12 +10,10 @@ public class UserAuthenticatedEvent extends GwtEvent<UserAuthenticatedEventHandl
 
   public static Type<UserAuthenticatedEventHandler> TYPE = new Type<UserAuthenticatedEventHandler>();
 
-  private final UserAuthenticationResponse result;
-
-  public UserAuthenticatedEvent(UserAuthenticationResponse result) {
-
-    this.result = result;
+  public UserAuthenticatedEvent(Token token) {
+    //To change body of created methods use File | Settings | File Templates.
   }
+
 
   public Type<UserAuthenticatedEventHandler> getAssociatedType() {
     return TYPE;

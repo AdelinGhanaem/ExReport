@@ -2,12 +2,13 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:m='urn:import:com.clouway.exreport.client.authentication.view'>
   <g:HTMLPanel>
-
-    <g:DecoratorPanel>
-      <g:VerticalPanel>
-       <m:UserEditor ui:field="editor"/>
-      </g:VerticalPanel>
-    </g:DecoratorPanel>
-
+    <g:VerticalPanel ui:field="panel">
+      <g:DecoratorPanel>
+        <g:VerticalPanel>
+          <m:UserEditor ui:field="editor"/>
+          <g:Button ui:field="logIn" text="log in"/>
+        </g:VerticalPanel>
+      </g:DecoratorPanel>
+    </g:VerticalPanel>
   </g:HTMLPanel>
 </ui:UiBinder>
