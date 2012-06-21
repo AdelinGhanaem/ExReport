@@ -6,9 +6,8 @@ import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessage
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessagesImpl;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
-import com.clouway.exreport.client.authentication.SecurityTokenProvider;
-import com.clouway.exreport.client.authentication.SecurityTokenProviderImpl;
-import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
+import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.client.security.SecurityTokenProviderImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenter;
@@ -26,11 +25,9 @@ import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseRepor
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
 import com.clouway.exreport.client.navigation.ApplicationActivityMapper;
-import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.gwt.user.client.Cookies;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;

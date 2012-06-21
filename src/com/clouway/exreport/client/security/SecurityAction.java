@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.authentication;
+package com.clouway.exreport.client.security;
 
 import com.clouway.exreport.shared.entites.Token;
 import com.clouway.exreport.shared.reponses.SecurityResponse;
@@ -11,11 +11,12 @@ import com.evo.gad.shared.Response;
 public class SecurityAction<A extends Action<? extends Response>> implements Action<SecurityResponse> {
 
   private A action;
+  private final Token token;
 
-  private Token securityToke;
 
   public SecurityAction(A action, Token token) {
     this.action = action;
+    this.token = token;
   }
 
   public A getAction() {
@@ -23,6 +24,6 @@ public class SecurityAction<A extends Action<? extends Response>> implements Act
   }
 
   public Token getSecurityToke() {
-    return securityToke;
+    return token;
   }
 }

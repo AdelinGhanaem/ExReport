@@ -1,8 +1,6 @@
-package com.clouway.exreport.client.authentication;
+package com.clouway.exreport.client.security;
 
 import com.clouway.exreport.shared.entites.Token;
-
-import javax.servlet.http.Cookie;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com

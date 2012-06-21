@@ -1,7 +1,6 @@
-package com.clouway.exreport.client.authentication;
+package com.clouway.exreport.client.security;
 
 import com.clouway.exreport.shared.entites.Token;
-import com.google.gwt.user.client.Cookies;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com

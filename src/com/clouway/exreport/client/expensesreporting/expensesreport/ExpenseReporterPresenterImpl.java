@@ -1,7 +1,7 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport;
 
-import com.clouway.exreport.client.authentication.SecurityAction;
-import com.clouway.exreport.client.authentication.SecurityActionFactory;
+import com.clouway.exreport.client.security.SecurityAction;
+import com.clouway.exreport.client.security.SecurityActionFactory;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
@@ -10,7 +10,6 @@ import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchMonthsAction;
 import com.clouway.exreport.shared.actions.FetchYearsAction;
-import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
@@ -20,7 +19,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -41,27 +39,19 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
     this.securityActionFactory = securityActionFactory;
   }
 
-
-//  public void showExpensesFor(Date date) {
-//
-//    Date todaysDate = new Date();
-//
-//    if (todaysDate.before(date)) {
-//      view.notifyUserOfFutureDate();
-//    } else {
-//      asynchService.dispatch(new FetchExpensesAction(date));
-//    }
-//  }
-
   public void fetchExpensesBetween(Date firstDate, Date secondDate) {
 
     if (firstDate.before(secondDate) || firstDate.equals(secondDate)) {
-      SecurityAction<FetchExpensesAction<FetchExpensesResponse>> securityAction = securityActionFactory.createSecurity(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate));
-
+      SecurityAction<FetchExpensesAction<FetchExpensesResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate));
       asynchService.dispatch(securityAction, new GotResponse<SecurityResponse<FetchExpensesResponse>>() {
         @Override
         public void gotResponse(SecurityResponse<FetchExpensesResponse> result) {
           view.updateExpenses(result.getResponse().getExpenses());
+        }
+
+        @Override
+        public void onFailure(Throwable caught) {
+          view.showConnectionErrorMessage();
         }
       });
     } else {
@@ -72,63 +62,42 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
 
   public void getAllExpensesYears() {
-    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction = securityActionFactory.createSecurity(new FetchYearsAction<FetchYearsResponse>());
 
+    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchYearsAction<FetchYearsResponse>());
     asynchService.dispatch(securityAction, new GotResponse<SecurityResponse<FetchYearsResponse>>() {
       @Override
       public void gotResponse(SecurityResponse<FetchYearsResponse> result) {
         view.showExpensesYears(result.getResponse().getYears());
+      }
+
+      @Override
+      public void onFailure(Throwable caught) {
+        view.showConnectionErrorMessage();
       }
     });
   }
 
 
   public void getMonthsOf(int year) {
-
-
-    asynchService.dispatch(new FetchMonthsAction<FetchMonthsResponse>(year), new GotResponse<FetchMonthsResponse>() {
-
+    SecurityAction<FetchMonthsAction<FetchMonthsResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchMonthsAction<FetchMonthsResponse>(year));
+    asynchService.dispatch(securityAction, new GotResponse<SecurityResponse<FetchMonthsResponse>>() {
       @Override
-      public void gotResponse(FetchMonthsResponse result) {
-        view.showMonthsOfExpenses(result.getMonths());
+      public void gotResponse(SecurityResponse<FetchMonthsResponse> result) {
+        view.showMonthsOfExpenses(result.getResponse().getMonths());
       }
     });
-
-//    asynchService.getMonthOf(year, new AsyncCallback<ArrayList<Month>>() {
-//      @Override
-//      public void onFailure(Throwable caught) {
-//        //To change body of implemented methods use File | Settings | File Templates.
-//      }
-//
-//      @Override
-//      public void onSuccess(ArrayList<Month> result) {
-//        view.showMonthsOfExpenses(result);
-//      }
-//    });
   }
 
   public void getAllExpensesDays(int year, int month) {
 
-    asynchService.dispatch(new FetchDaysAction<FetchDaysResponse>(year, month), new GotResponse<FetchDaysResponse>() {
+    SecurityAction<FetchDaysAction<FetchDaysResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchDaysAction<FetchDaysResponse>(year, month));
+
+    asynchService.dispatch(securityAction, new GotResponse<SecurityResponse<FetchDaysResponse>>() {
       @Override
-      public void gotResponse(FetchDaysResponse result) {
-        ArrayList<Day> days = result.getDays();
-        view.showDaysExpenses(days);
+      public void gotResponse(SecurityResponse<FetchDaysResponse> result) {
+        view.showDaysExpenses(result.getResponse().getDays());
       }
     });
-
-
-//    asynchService.getDaysOf(year, month, new AsyncCallback<ArrayList<Day>>() {
-//      @Override
-//      public void onFailure(Throwable caught) {
-//        //To change body of implemented methods use File | Settings | File Templates.
-//      }
-//
-//      @Override
-//      public void onSuccess(ArrayList<Day> result) {
-//        view.showDaysExpenses(result);
-//      }
-//    });
   }
 
   @Override

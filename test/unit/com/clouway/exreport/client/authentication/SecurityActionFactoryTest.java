@@ -38,7 +38,7 @@ public class SecurityActionFactoryTest {
 //      }
 //    });
 //
-//    SecurityAction securityAction = securityActionFactory.createSecurity(new TestAction());
+//    SecurityAction securityAction = securityActionFactory.createSecurityAction(new TestAction());
 //
 //
 //    assertThat(securityAction, is(notNullValue()));

@@ -1,7 +1,6 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses.view;
 
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenter;
-import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenterImpl;
 import com.clouway.exreport.shared.entites.Expense;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -31,7 +30,7 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView {
   interface Driver extends SimpleBeanEditorDriver<Expense, ExpenseEditor> {
   }
 
-  private AddExpensesPresenter presenter = new AddExpensesPresenterImpl(null, null, this);
+  private AddExpensesPresenter presenter ;
 
   @UiField
   Button save;
