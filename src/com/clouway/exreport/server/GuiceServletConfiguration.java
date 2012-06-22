@@ -96,7 +96,6 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         metadatas.add(new ActionHandlerMetadata(UserAuthenticationAction.class, UserAuthenticationActionHandler.class));
 
-//        metadatas.add(new ActionHandlerMetadata(SecurityAction.class, SecurityActionHandler.class));
 
         return metadatas;
 

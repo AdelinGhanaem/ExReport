@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AddExpenseAction<AddExpenseResponse> implements Action<Response>,Serializable {
+public class AddExpenseAction<AddExpenseResponse extends Response> implements Action<AddExpenseResponse> {
 
   private Expense expense;
 

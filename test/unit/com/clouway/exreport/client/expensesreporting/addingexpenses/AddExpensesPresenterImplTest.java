@@ -103,11 +103,11 @@ public class AddExpensesPresenterImplTest {
 
     when(factory.createSecurityAction(isA(AddExpenseAction.class))).thenReturn(securityAction);
 
-    doOnSuccess(securityResponse).when(actionDispatcherServiceAsync).dispatch(any(SecurityAction.class), any(GotResponse.class));
+    doOnSuccess(securityResponse).when(actionDispatcherServiceAsync).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
 
     addExpensesPresenterImpl.addExpense(expense);
 
-    verify(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
+    verify(actionDispatcherServiceAsync).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
 
     verify(hasHandlers).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -153,8 +153,6 @@ public class AddExpensesPresenterImplTest {
 
   }
 
-  //TODO:i think that the Expense should encapsulate the date, but we will see ... !
-
   @Test
   public void userIsNotifiedOfConnectionError() {
 
@@ -162,13 +160,11 @@ public class AddExpensesPresenterImplTest {
 
     Expense expense = new Expense("Computer fix", 200, date);
 
-    doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
+    doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatchSecurityAction(any(SecurityAction.class), isA(GotResponse.class));
 
     addExpensesPresenterImpl.addExpense(expense);
 
     verify(view).notifyUserOfConnectionError();
 
   }
-
-
 }

@@ -35,9 +35,8 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   TextBox expenseDate;
 
 
-
-
   LeafValueEditor<Double> price = new LeafValueEditor<Double>() {
+
     @Override
     public void setValue(Double value) {
       expensePrice.setValue(String.valueOf(value));
@@ -51,11 +50,13 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
 
 
   LeafValueEditor<Date> date = new LeafValueEditor<Date>() {
+
+    Date date = new Date();
+
     @Override
     public void setValue(Date value) {
-      if(value!=null){
-        expenseDate.setValue(value.toString());
-      }
+
+      expenseDate.setValue(String.valueOf(new Date()));
     }
 
     @Override

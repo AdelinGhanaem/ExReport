@@ -47,6 +47,10 @@ public class Expense implements Serializable, Comparable<Expense> {
     return date;
   }
 
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
   @Override
   public int compareTo(Expense expense) {
     if (name.equals(expense.getName())) {

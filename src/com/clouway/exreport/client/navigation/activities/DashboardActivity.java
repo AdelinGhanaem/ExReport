@@ -49,10 +49,15 @@ public class DashboardActivity extends AbstractActivity {
   @Override
   public void start(AcceptsOneWidget panel, EventBus eventBus) {
     expenseReporterView.setPresenter(expenseReporterPresenter);
+
     addExpensesView.setPresenter(addExpensesPresenter);
+
     dashboardPanel.addWidget(expenseReporterView.asWidget());
+
     dashboardPanel.addWidget(addExpensesView.asWidget());
+
     dashboardPanel.setToken(provider.getToken());
+
     panel.setWidget(dashboardPanel.asWidget());
   }
 
