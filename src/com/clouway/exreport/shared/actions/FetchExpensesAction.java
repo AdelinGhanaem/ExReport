@@ -12,6 +12,7 @@ import java.util.Date;
 public class FetchExpensesAction<FetchExpensesResponse extends Response> implements Action<FetchExpensesResponse> {
 
   private  Date firstDate;
+
   private  Date secondDate;
 
   public FetchExpensesAction() {

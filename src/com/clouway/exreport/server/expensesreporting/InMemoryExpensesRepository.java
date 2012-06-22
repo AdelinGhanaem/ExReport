@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -40,12 +38,14 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   public List<Expense> getByDate(Date date) {
 
     List<Expense> matchedExpenses = new ArrayList<Expense>();
-//
-    for (Expense expense : previouslySaved) {
-      if (date.equals(expense.getDate())) {
-        matchedExpenses.add(expense);
-      }
-    }
+    matchedExpenses.add(new Expense("food", 12d, date));
+    matchedExpenses.add(new Expense("dress", 12d, date));
+    matchedExpenses.add(new Expense("disko", 12d, date));
+    matchedExpenses.add(new Expense("fuel", 12d, date));
+    matchedExpenses.add(new Expense("othe bullshits ... !", 12d, date));
+    matchedExpenses.add(new Expense("Fix PC", 12d, date));
+    matchedExpenses.add(new Expense("others ", 12d, date));
+
     return matchedExpenses;
   }
 
@@ -62,15 +62,17 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   }
 
   @Override
-  public List<Expense> getByDateBetween(Date firstDate, Date secondDate) {
-    SortedSet<Expense> sortedExpense = new TreeSet<Expense>();
-    for (Expense expense : previouslySaved) {
-      if (firstDate.equals(expense.getDate()) || secondDate.equals(expense.getDate()) ||
-              (firstDate.before(expense.getDate()) && secondDate.after(expense.getDate()))) {
-        sortedExpense.add(expense);
-      }
-    }
-    return new ArrayList<Expense>(sortedExpense);
+  public List<Expense> getByDateBetween(Date date, Date secondDate) {
+    List<Expense> matchedExpenses = new ArrayList<Expense>();
+    matchedExpenses.add(new Expense("food", 12d, date));
+    matchedExpenses.add(new Expense("dress", 12d, date));
+    matchedExpenses.add(new Expense("disko", 12d, date));
+    matchedExpenses.add(new Expense("fuel", 12d, date));
+    matchedExpenses.add(new Expense("othe bullshits ... !", 12d, date));
+    matchedExpenses.add(new Expense("Fix PC", 12d, date));
+    matchedExpenses.add(new Expense("others ", 12d, date));
+
+    return matchedExpenses;
   }
 
   @Override

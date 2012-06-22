@@ -57,7 +57,9 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
       });
 
     } else {
+
       view.notifyUserOfDateDiscrepancy();
+
     }
 
   }

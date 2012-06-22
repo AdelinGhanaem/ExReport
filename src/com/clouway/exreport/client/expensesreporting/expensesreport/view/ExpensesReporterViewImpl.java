@@ -18,7 +18,6 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -51,7 +50,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   private static ExpensesReporterDashboardViewImplUiBinder ourUiBinder = GWT.create(ExpensesReporterDashboardViewImplUiBinder.class);
 
-  private ExpenseReporterPresenter expenseReporterPresenter;
+  private ExpenseReporterPresenter presenter;
 
   private ActionDispatcherServiceAsync async;
 
@@ -86,9 +85,14 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
         Day day = singleSelectionModel.getSelectedObject();
 
-        DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("YYYY/MM/DD");
+        DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("yyyy-MM-DD");
 
-        Date date = new Date(day.getDay(), day.getMonth(), day.getYear());
+//        Date date = dateTimeFormat.parse(day.getYear() + "-0" + day.getMonth() + "-0" + day.getDay());
+//
+//        Window.alert(date.toString());
+        Date date = new Date();
+
+        presenter.fetchExpensesBetween(date, date);
 
       }
     });
@@ -115,6 +119,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   @Override
   public <T> NodeInfo<?> getNodeInfo(T value) {
+
     if (value == null) {
       return new DefaultNodeInfo<Year>(yearAsyncDataProvider, new YearCell());
     }
@@ -132,13 +137,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
       return new DefaultNodeInfo<Day>(dayAsyncDataProvider, new DayCell(), singleSelectionModel, null);
     }
-    if (value instanceof Day) {
-      Day day = (Day) value;
-      Window.alert(String.valueOf(day.getDay()));
 
-//      expenseReporterPresenter.fetchExpensesBetween(day,day);
-
-    }
     return null;
   }
 
@@ -203,32 +202,32 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   }
 
   @Override
-  public void setExpenseReporterPresenter(final ExpenseReporterPresenter expenseReporterPresenter) {
+  public void setPresenter(final ExpenseReporterPresenter presenter) {
 
-    this.expenseReporterPresenter = expenseReporterPresenter;
+    this.presenter = presenter;
 
     yearAsyncDataProvider = new AsyncDataProvider<Year>() {
       @Override
       protected void onRangeChanged(HasData<Year> display) {
-        expenseReporterPresenter.getAllExpensesYears();
+        presenter.getAllExpensesYears();
       }
     };
 
     monthAsyncDataProvider = new AsyncDataProvider<Month>() {
       @Override
       protected void onRangeChanged(HasData<Month> display) {
-        expenseReporterPresenter.getMonthsOf(currentYear.getYear());
+        presenter.getMonthsOf(currentYear.getYear());
       }
     };
 
     dayAsyncDataProvider = new AsyncDataProvider<Day>() {
       @Override
       protected void onRangeChanged(HasData<Day> display) {
-        expenseReporterPresenter.getAllExpensesDays(currentYear.getYear(), currentMonth.getMonth());
+        presenter.getAllExpensesDays(currentYear.getYear(), currentMonth.getMonth());
       }
     };
 
-    expenseReporterPresenter.getAllExpensesYears();
+    presenter.getAllExpensesYears();
 
     CellTree cellTree = new CellTree(this, null);
 

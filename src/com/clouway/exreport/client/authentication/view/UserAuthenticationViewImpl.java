@@ -76,7 +76,7 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   }
 
   @Override
-  public void setExpenseReporterPresenter(UserAuthenticationPresenter userAuthenticationPresenter) {
+  public void setPresenter(UserAuthenticationPresenter userAuthenticationPresenter) {
     presenter = userAuthenticationPresenter;
   }
 

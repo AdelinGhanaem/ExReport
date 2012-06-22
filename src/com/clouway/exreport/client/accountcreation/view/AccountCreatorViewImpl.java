@@ -84,9 +84,5 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
     this.presenter = presenter;
   }
 
-  @Override
-  public void setExpenseReporterPresenter(AccountCreatorPresenterImpl accountCreatorPresenter) {
-    presenter = accountCreatorPresenter;
-  }
 
 }

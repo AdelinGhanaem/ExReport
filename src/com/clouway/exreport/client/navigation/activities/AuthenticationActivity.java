@@ -20,7 +20,7 @@ public class AuthenticationActivity extends AbstractActivity {
 
   @Override
   public void start(AcceptsOneWidget panel, EventBus eventBus) {
-    view.setExpenseReporterPresenter(presenter);
+    view.setPresenter(presenter);
     panel.setWidget(view.asWidget());
   }
 

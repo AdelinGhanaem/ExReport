@@ -104,21 +104,6 @@ public class DashBoardExpensePresenterTest {
 
   }
 
-
-  //  @Test
-//  public void notifiesUserWhenDataIsInFuture() throws ParseException {
-//
-//    Date futureDate = dateFormat.parse("2013-01-01");
-//
-//    reporterPresenter.showExpensesFor(futureDate);
-//
-//    verify(reporterAsync, never()).getExpensesFor(eq(futureDate), any(AsyncCallback.class));
-//
-//    verify(reporterView).notifyUserOfFutureDate();
-//
-//  }
-//
-//
   @Test
   public void notifiesUserWhenStartDateIsAfterEndDate() throws ParseException {
 
@@ -134,8 +119,6 @@ public class DashBoardExpensePresenterTest {
 
   }
 
-  //
-//
   @Test
   public void notifiesUserWhenConnectionErrorOccurs() {
 
@@ -242,5 +225,6 @@ public class DashBoardExpensePresenterTest {
 
     verify(reporterView).showDaysExpenses(days);
   }
+
 }
   

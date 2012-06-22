@@ -60,7 +60,7 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView {
   }
 
   @Override
-  public void setExpenseReporterPresenter(AddExpensesPresenter addExpensesPresenter) {
+  public void setPresenter(AddExpensesPresenter addExpensesPresenter) {
     presenter = addExpensesPresenter;
   }
 

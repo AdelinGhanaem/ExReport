@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface View<T extends Presenter> {
 
-  public void setExpenseReporterPresenter(T t);
+  public void setPresenter(T t);
 
   public Widget asWidget();
 
