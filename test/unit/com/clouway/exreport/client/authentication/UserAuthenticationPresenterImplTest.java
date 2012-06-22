@@ -38,15 +38,17 @@ public class UserAuthenticationPresenterImplTest {
   public void setUp() throws Exception {
 
     initMocks(this);
+
     handlers = spy(new SimpleEventBus());
+
     presenter = new UserAuthenticationPresenterImpl(view, service, handlers);
+
 
   }
 
   @Test
   public void shouldAuthenticateUserAndFireUserAuthenticatedEvent() throws Exception {
 
-    UserAuthenticationPresenterImpl presenter = new UserAuthenticationPresenterImpl(view, service, handlers);
 
     User user = new User("adio", "1234567");
 
@@ -59,6 +61,14 @@ public class UserAuthenticationPresenterImplTest {
     verify(service).dispatch(any(UserAuthenticationAction.class), any(GotResponse.class));
 
     verify(handlers).fireEvent(any(UserAuthenticatedEvent.class));
+  }
+
+  //TODO:test on new registration button ....
+  @Test
+  public void goesToNewRegistrationPlaceOnNewRegistration() {
+
+//    presenter.onNewRegistration();
+
   }
 
 

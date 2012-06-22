@@ -1,7 +1,6 @@
 package com.clouway.exreport.client;
 
 import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
-import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;

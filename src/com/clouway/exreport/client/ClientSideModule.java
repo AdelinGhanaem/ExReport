@@ -6,6 +6,8 @@ import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessage
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessagesImpl;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
+import com.clouway.exreport.client.security.SecurityActionFactory;
+import com.clouway.exreport.client.security.SecurityActionFactoryImpl;
 import com.clouway.exreport.client.security.SecurityTokenProvider;
 import com.clouway.exreport.client.security.SecurityTokenProviderImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
@@ -76,6 +78,8 @@ public class ClientSideModule extends AbstractGinModule {
     bind(UserAuthenticatedEventHandler.class).to(UserAuthenticatedEventHandlerImpl.class);
 
     bind(SecurityTokenProvider.class).to(SecurityTokenProviderImpl.class).in(Singleton.class);
+
+    bind(SecurityActionFactory.class).to(SecurityActionFactoryImpl.class);
 
   }
 

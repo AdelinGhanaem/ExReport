@@ -11,6 +11,7 @@ import com.evo.gad.shared.Response;
 public class SecurityAction<A extends Action<? extends Response>> implements Action<SecurityResponse> {
 
   private A action;
+
   private final Token token;
 
 

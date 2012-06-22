@@ -68,6 +68,7 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   public ExpenseEditor() {
     HTMLPanel rootElement = ourUiBinder.createAndBindUi(this);
     initWidget(rootElement);
+    expenseDate.setText("2012/03/06");
   }
 
 

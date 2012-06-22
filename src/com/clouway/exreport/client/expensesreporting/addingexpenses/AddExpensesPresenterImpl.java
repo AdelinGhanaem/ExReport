@@ -52,7 +52,6 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
         public void gotResponse(SecurityResponse<AddExpenseResponse> result) {
           hasHandlers.fireEvent(new ExpenseAddedEvent(result.getResponse().getExpense()));
         }
-
         @Override
         public void onFailure(Throwable caught) {
           view.notifyUserOfConnectionError();

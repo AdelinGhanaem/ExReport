@@ -6,7 +6,10 @@
       <g:DecoratorPanel>
         <g:VerticalPanel>
           <m:UserEditor ui:field="editor"/>
-          <g:Button ui:field="logIn" text="log in"/>
+          <g:HorizontalPanel>
+            <g:Button ui:field="logIn" text="log in"/>
+            <g:Button ui:field="newAccount" text="Sign up"/>
+          </g:HorizontalPanel>
         </g:VerticalPanel>
       </g:DecoratorPanel>
     </g:VerticalPanel>

@@ -15,6 +15,11 @@ public class SecurityResponse<T extends Response> implements Response {
 
   private T returnedResponse;
 
+  public SecurityResponse(T response) {
+
+    returnedResponse = response;
+  }
+
 
   public T getResponse() {
     return returnedResponse;

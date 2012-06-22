@@ -12,6 +12,9 @@ public class AccountRepositoryImpl implements AccountRepository {
 
   private List<Account> accountList = new ArrayList<Account>();
 
+  public AccountRepositoryImpl() {
+    accountList.add(new Account("mail", "123"));
+  }
 
   @Override
   public void persis(Account account) {
@@ -35,7 +38,13 @@ public class AccountRepositoryImpl implements AccountRepository {
 
   @Override
   public Account getAccount(String username, String password) {
-    return null;  //To change body of implemented methods use File | Settings | File Templates.
+    for (Account account : accountList) {
+      if (username.equals(account.getEmail()) && password.equals(account.getPassword())) {
+        return account;
+      }
+    }
+    return null;
+
   }
 
 }

@@ -19,7 +19,6 @@ public class AccountCreatorImpl implements AccountCreator {
   public AccountCreatorImpl(AccountRepository repository, AccountValidator validator, AccountValidationErrorMessages errorMessages) {
     this.repository = repository;
     this.validator = validator;
-
     this.errorMessages = errorMessages;
   }
 

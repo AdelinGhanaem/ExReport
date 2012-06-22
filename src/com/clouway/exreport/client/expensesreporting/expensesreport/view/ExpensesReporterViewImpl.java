@@ -97,27 +97,30 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
     yearAsyncDataProvider = new AsyncDataProvider<Year>() {
       @Override
       protected void onRangeChanged(HasData<Year> display) {
-//        expenseReporterPresenter.getAllExpensesYears();
+
+
       }
     };
 
     monthAsyncDataProvider = new AsyncDataProvider<Month>() {
       @Override
       protected void onRangeChanged(HasData<Month> display) {
-//        expenseReporterPresenter.getMonthsOf(currentYear.getYear());
+
       }
     };
 
     dayAsyncDataProvider = new AsyncDataProvider<Day>() {
       @Override
       protected void onRangeChanged(HasData<Day> display) {
-//        expenseReporterPresenter.getAllExpensesDays(currentYear.getYear(), currentMonth.getMonth());
+
       }
     };
 
 
     cellTree = new CellTree(this, null);
+
     SimplePager.Resources pagerResources = GWT.create(SimplePager.Resources.class);
+
     maiPanel = ourUiBinder.createAndBindUi(this);
 
     expensesCellTable.addColumn(new Column<Expense, String>(new TextCell()) {
@@ -208,7 +211,6 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   @Override
   public void setExpenseReporterPresenter(ExpenseReporterPresenterImpl expenseReporterPresenter) {
     this.expenseReporterPresenter = expenseReporterPresenter;
-
   }
 
 

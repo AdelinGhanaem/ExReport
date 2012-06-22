@@ -8,7 +8,10 @@ import com.clouway.exreport.server.accountcreation.AccountRepositoryImpl;
 import com.clouway.exreport.server.accountcreation.AccountValidator;
 import com.clouway.exreport.server.accountcreation.AccountValidatorImpl;
 import com.clouway.exreport.server.accountcreation.actionhandlers.CreateAccountActionHandler;
+import com.clouway.exreport.server.authentication.AuthenticatedUsersRepository;
+import com.clouway.exreport.server.authentication.AuthenticatedUsersRepositoryImpl;
 import com.clouway.exreport.server.authentication.UserAuthentication;
+import com.clouway.exreport.server.authentication.UserAuthenticationActionHandler;
 import com.clouway.exreport.server.authentication.UserAuthenticationImpl;
 import com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl;
 import com.clouway.exreport.server.expensesreporting.ExpensesRepository;
@@ -26,6 +29,7 @@ import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchMonthsAction;
 import com.clouway.exreport.shared.actions.FetchYearsAction;
+import com.clouway.exreport.shared.actions.UserAuthenticationAction;
 import com.evo.gad.dispatch.ActionHandlerMetadata;
 import com.evo.gad.dispatch.ActionHandlerRepository;
 import com.google.inject.Guice;
@@ -68,7 +72,8 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         bind(AccountValidationErrorMessages.class).to(AccountValidationErrorMessagesImpl.class);
 
-        bind(ActionHandlerRepository.class).to(LazyActionHandlerRepository.class);
+        bind(AuthenticatedUsersRepository.class).to(AuthenticatedUsersRepositoryImpl.class);
+
       }
 
       @Provides
@@ -88,6 +93,10 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
         metadatas.add(new ActionHandlerMetadata(FetchMonthsAction.class, FetchMonthsActionHandler.class));
 
         metadatas.add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
+
+        metadatas.add(new ActionHandlerMetadata(UserAuthenticationAction.class, UserAuthenticationActionHandler.class));
+
+//        metadatas.add(new ActionHandlerMetadata(SecurityAction.class, SecurityActionHandler.class));
 
         return metadatas;
 

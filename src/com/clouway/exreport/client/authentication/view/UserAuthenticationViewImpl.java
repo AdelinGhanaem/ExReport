@@ -1,6 +1,8 @@
 package com.clouway.exreport.client.authentication.view;
 
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenter;
+import com.clouway.exreport.client.navigation.InjectablePlaceController;
+import com.clouway.exreport.client.navigation.places.NewRegistrationPlace;
 import com.clouway.exreport.shared.entites.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -13,6 +15,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -42,6 +45,12 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   @UiField
   Button logIn;
 
+  @UiField
+  Button newAccount;
+
+  @Inject
+  InjectablePlaceController controller;
+
   public UserAuthenticationViewImpl() {
 
     HTMLPanel rootElement = ourUiBinder.createAndBindUi(this);
@@ -58,12 +67,12 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
 
   @Override
   public void emptyUsername() {
-    //To change body of implemented methods use File | Settings | File Templates.
+
   }
 
   @Override
   public void emptyPassword() {
-    //To change body of implemented methods use File | Settings | File Templates.
+
   }
 
   @Override
@@ -79,9 +88,13 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   @UiHandler("logIn")
   public void onClick(ClickEvent event) {
     User user = driver.flush();
-//    Window.alert(user.getUsername());
     presenter.authenticate(user);
 
+  }
+
+  @UiHandler("newAccount")
+  public void onNewRegistration(ClickEvent event) {
+    controller.goTo(new NewRegistrationPlace());
   }
 
 

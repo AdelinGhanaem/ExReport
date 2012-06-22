@@ -27,7 +27,7 @@ public class UserAuthenticatedEventHandlerImpl implements UserAuthenticatedEvent
   public void onUserAuthenticated(UserAuthenticatedEvent event) {
     Cookies.setCookie("username", event.getToken().getUser());
 
-    Cookies.setCookie("token", event.getToken().getTokenValue());
+//    Cookies.setCookie("token", event.getToken().getTokenValue());
     tokenProvider.setToken(event.getToken());
     controller.goTo(new DashboardPlace());
   }

@@ -2,9 +2,10 @@ package com.clouway.exreport.server.accountcreation.actionhandlers;
 
 import com.clouway.exreport.server.accountcreation.AccountCreator;
 import com.clouway.exreport.shared.actions.CreateAccountAction;
-import com.clouway.exreport.shared.reponses.CreateAccountResponse;
 import com.clouway.exreport.shared.entites.Account;
+import com.clouway.exreport.shared.reponses.CreateAccountResponse;
 import com.evo.gad.dispatch.ActionHandler;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,13 @@ public class CreateAccountActionHandler implements ActionHandler<CreateAccountAc
 
   private final AccountCreator accountCreator;
 
+  @Inject
   public CreateAccountActionHandler(AccountCreator accountCreator) {
 
     this.accountCreator = accountCreator;
   }
+
+
 
   @Override
   public CreateAccountResponse handle(CreateAccountAction action) {
