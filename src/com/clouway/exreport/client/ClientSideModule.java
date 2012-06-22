@@ -52,7 +52,7 @@ public class ClientSideModule extends AbstractGinModule {
     bind(AccountValidationErrorMessages.class).to(AccountValidationErrorMessagesImpl.class);
 
     //User authentication
-    bind(UserAuthenticationView.class).to(UserAuthenticationViewImpl.class);
+    bind(UserAuthenticationView.class).to(UserAuthenticationViewImpl.class).in(Singleton.class);
 
     bind(UserAuthenticationPresenter.class).to(UserAuthenticationPresenterImpl.class).in(Singleton.class);
 
@@ -60,12 +60,12 @@ public class ClientSideModule extends AbstractGinModule {
 
 
     //adding expenses 
-    bind(AddExpensesView.class).to(AddExpensesViewImpl.class);
+    bind(AddExpensesView.class).to(AddExpensesViewImpl.class).in(Singleton.class);
 
     bind(AddExpensesPresenter.class).to(AddExpensesPresenterImpl.class);
 
     //reporting expenses 
-    bind(ExpenseReporterView.class).to(ExpensesReporterViewImpl.class);
+    bind(ExpenseReporterView.class).to(ExpensesReporterViewImpl.class).in(Singleton.class);
 
     bind(ExpenseReporterPresenter.class).to(ExpenseReporterPresenterImpl.class);
 

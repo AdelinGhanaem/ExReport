@@ -12,8 +12,10 @@ public class SecurityAction<A extends Action<? extends Response>> implements Act
 
   private A action;
 
-  private final Token token;
+  private  Token token;
 
+  public SecurityAction() {
+  }
 
   public SecurityAction(A action, Token token) {
     this.action = action;

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchDaysAction<FetchDaysResponse> implements Action<Response> ,Serializable {
+public class FetchDaysAction<FetchDaysResponse extends Response> implements Action<FetchDaysResponse> ,Serializable {
 
   private  int year;
   private  int month;

@@ -15,8 +15,8 @@
       <g:DecoratorPanel addStyleNames="{style.decoratorPanel}">
         <g:ScrollPanel ui:field="cellTreeScrollPanel" addStyleNames="{style.scrollPanel}">
           <g:HorizontalPanel ui:field="cellTreePanel">
-            <c:CellTree ui:field="cellTree">
-            </c:CellTree>
+            <!--<c:CellTree ui:field="cellTree">-->
+            <!--</c:CellTree>-->
           </g:HorizontalPanel>
         </g:ScrollPanel>
       </g:DecoratorPanel>

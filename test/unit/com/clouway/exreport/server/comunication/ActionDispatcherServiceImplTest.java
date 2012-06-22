@@ -33,7 +33,7 @@ public class ActionDispatcherServiceImplTest {
 
     initMocks(this);
 
-    actionDispatcherService = new ActionDispatcherServiceImpl(repository);
+    actionDispatcherService = new ActionDispatcherServiceImpl(repository,null);
 
   }
 

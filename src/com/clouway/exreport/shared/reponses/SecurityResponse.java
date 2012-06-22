@@ -20,6 +20,8 @@ public class SecurityResponse<T extends Response> implements Response {
     returnedResponse = response;
   }
 
+  public SecurityResponse() {
+  }
 
   public T getResponse() {
     return returnedResponse;

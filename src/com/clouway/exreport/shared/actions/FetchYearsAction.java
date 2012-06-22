@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchYearsAction<FetchYearsResponse> implements Action<Response> ,Serializable {
+public class FetchYearsAction<FetchYearsResponse extends Response> implements Action<FetchYearsResponse> ,Serializable {
 
 
 

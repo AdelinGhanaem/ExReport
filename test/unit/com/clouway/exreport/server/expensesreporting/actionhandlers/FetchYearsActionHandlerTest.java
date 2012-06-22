@@ -43,7 +43,5 @@ public class FetchYearsActionHandlerTest extends ExpensesActionHandlerTest {
     assertThat(response.getYears().get(0).getYear(), is(year));
 
     verify(service).getDeclaredYears();
-
-
   }
 }

@@ -23,7 +23,6 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   private Map<Year, Map<Month, List<Day>>> map;
 
   public InMemoryExpensesRepository(List<Expense> previouslySaved) {
-
     this.previouslySaved = previouslySaved;
   }
 
@@ -31,6 +30,9 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   public InMemoryExpensesRepository() {
     previouslySaved = new ArrayList<Expense>();
     map = new HashMap<Year, Map<Month, List<Day>>>();
+    map.put(new Year(2011), null);
+    map.put(new Year(2012), null);
+    map.put(new Year(2013), null);
 
   }
 
@@ -77,40 +79,39 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   }
 
   @Override
-  public List<Month> getExpensesMonths(int yearNumber) {
-    List<Month> months = null;
-
-    for (Year year : map.keySet()) {
-      if (year.getYear() == yearNumber) {
-        months = new ArrayList<Month>(map.get(year).keySet());
-        break;
-      }
-    }
+  public List<Month> getExpensesMonths(final int yearNumber) {
+    List<Month> months = new ArrayList<Month>();
+    months.add(new Month(yearNumber, 2));
+    months.add(new Month(yearNumber, 3));
+    months.add(new Month(yearNumber, 4));
+    months.add(new Month(yearNumber, 5));
+    months.add(new Month(yearNumber, 6));
+    months.add(new Month(yearNumber, 7));
+    months.add(new Month(yearNumber, 8));
     return months;
   }
 
   @Override
-  public List<Day> getDeclaredDays(int yearNumber, int monthNumber) {
-    List<Day> days = new ArrayList<Day>();
+  public List<Day> getDeclaredDays(final int yearNumber, final int monthNumber) {
+    List<Day> days = new ArrayList<Day>() {{
+      add(new Day(1, monthNumber, yearNumber));
+      add(new Day(2, monthNumber, yearNumber));
+      add(new Day(3, monthNumber, yearNumber));
+      add(new Day(4, monthNumber, yearNumber));
+      add(new Day(5, monthNumber, yearNumber));
+    }};
 
-    for (Year year1 : map.keySet()) {
-      if (year1.getYear() == yearNumber) {
-        for (Month month : map.get(year1).keySet()) {
-          if (month.getMonth() == monthNumber) {
-            days = new ArrayList<Day>(map.get(year1).get(month));
-          }
-        }
-      }
-      break;
-    }
     return days;
   }
 
 
   @Override
   public List<Year> getYears() {
-    return new ArrayList<Year>();
-
+    return new ArrayList<Year>() {{
+      add(new Year(2011));
+      add(new Year(2012));
+      add(new Year(2013));
+    }};
   }
 
 
