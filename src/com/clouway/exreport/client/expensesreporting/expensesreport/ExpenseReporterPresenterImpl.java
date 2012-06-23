@@ -74,7 +74,6 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
       public void gotResponse(SecurityResponse<FetchYearsResponse> result) {
         view.showExpensesYears(result.getResponse().getYears());
       }
-
       @Override
       public void onFailure(Throwable caught) {
         view.showConnectionErrorMessage();

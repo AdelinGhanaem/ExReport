@@ -8,10 +8,16 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class AccountCreatedEvent extends GwtEvent<AccountCreatedEventHandler> {
   public static Type<AccountCreatedEventHandler> TYPE = new Type<AccountCreatedEventHandler>();
+  private final Account account;
 
 
   public AccountCreatedEvent(Account account) {
 
+    this.account = account;
+  }
+
+  public Account getAccount() {
+    return account;
   }
 
   public Type<AccountCreatedEventHandler> getAssociatedType() {

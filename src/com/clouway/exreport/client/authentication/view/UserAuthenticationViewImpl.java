@@ -43,10 +43,10 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   VerticalPanel panel;
 
   @UiField
-  Button logIn;
+  com.github.gwtbootstrap.client.ui.Button logIn;
 
   @UiField
-  Button newAccount;
+  com.github.gwtbootstrap.client.ui.Button newAccount;
 
   @Inject
   InjectablePlaceController controller;

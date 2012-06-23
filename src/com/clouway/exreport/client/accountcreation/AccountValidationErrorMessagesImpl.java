@@ -25,4 +25,10 @@ public class AccountValidationErrorMessagesImpl implements AccountValidationErro
     return "Sorry,the email you have entered is previously reserved.\n Try another email. ";
   }
 
+  @Override
+  public String emptyEmailOrPassword() {
+    return "Empty email or password";
+  }
+
+
 }

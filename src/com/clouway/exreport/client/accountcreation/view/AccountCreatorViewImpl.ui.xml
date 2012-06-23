@@ -1,17 +1,32 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:m='urn:import:com.clouway.exreport.client.accountcreation.view'>
+             xmlns:m='urn:import:com.clouway.exreport.client.accountcreation.view'
+             xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
 
-  <g:HTMLPanel>
+        >
 
-    <g:VerticalPanel>
+  <ui:style src="newRegistrationStyle.css"/>
+  <g:HTMLPanel addStyleDependentNames="{style.mainPanel}">
 
-      <m:AccountEditor ui:field="accountEditor"/>
+    <!--<div class="{style.headdistance}"/>-->
 
-      <g:Button ui:field="create" text="create"/>
+    <div class="{style.container}">
 
-    </g:VerticalPanel>
+      <g:DecoratorPanel addStyleDependentNames="{style.decoratorPanel}">
 
+        <g:VerticalPanel addStyleDependentNames="{style.verticalPanel}}">
+
+          <m:AccountEditor ui:field="accountEditor"/>
+
+          <!--<g:Button ui:field="create" text="sign in"/>-->
+          <b:Button type="INVERSE"  ui:field="create" text="sign in"/>
+          <g:Label ui:field="errorsLabel"/>
+
+        </g:VerticalPanel>
+
+      </g:DecoratorPanel>
+
+    </div>
   </g:HTMLPanel>
 
 </ui:UiBinder>

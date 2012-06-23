@@ -1,15 +1,13 @@
 package com.clouway.exreport.client;
 
+import com.clouway.exreport.client.accountcreation.AccountCreatedEventHandler;
+import com.clouway.exreport.client.accountcreation.AccountCreatedEventHandlerImpl;
 import com.clouway.exreport.client.accountcreation.AccountCreatorPresenter;
 import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
 import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessagesImpl;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
-import com.clouway.exreport.client.security.SecurityActionFactory;
-import com.clouway.exreport.client.security.SecurityActionFactoryImpl;
-import com.clouway.exreport.client.security.SecurityTokenProvider;
-import com.clouway.exreport.client.security.SecurityTokenProviderImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenter;
@@ -27,6 +25,10 @@ import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseRepor
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
 import com.clouway.exreport.client.navigation.ApplicationActivityMapper;
+import com.clouway.exreport.client.security.SecurityActionFactory;
+import com.clouway.exreport.client.security.SecurityActionFactoryImpl;
+import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.client.security.SecurityTokenProviderImpl;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -81,6 +83,7 @@ public class ClientSideModule extends AbstractGinModule {
 
     bind(SecurityActionFactory.class).to(SecurityActionFactoryImpl.class);
 
+    bind(AccountCreatedEventHandler.class).to(AccountCreatedEventHandlerImpl.class);
   }
 
 

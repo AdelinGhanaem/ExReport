@@ -9,10 +9,9 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
 
 import java.util.ArrayList;
 
@@ -42,7 +41,10 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   AccountEditor accountEditor;
 
   @UiField
-  Button create;
+  com.github.gwtbootstrap.client.ui.Button create;
+
+  @UiField
+  Label errorsLabel;
 
   public AccountCreatorViewImpl() {
 
@@ -50,7 +52,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
 
     initWidget(rootElement);
 
-    Account account = new Account();
+    Account account = new Account(" ","");
 
     driver.initialize(accountEditor);
 
@@ -63,26 +65,29 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
 
     Account editedAccount = driver.flush();
 
-    Window.alert(editedAccount.getEmail() + "/" + editedAccount.getPassword());
+//    Window.alert(editedAccount.getEmail() + "/" + editedAccount.getPassword());
 
     presenter.create(editedAccount);
 
   }
 
   @Override
-  public void showMessage(String messages) {
-
+  public void showMessage(String message) {
+    errorsLabel.setText(message);
   }
 
   @Override
   public void showMessages(ArrayList<String> errors) {
-    //To change body of implemented methods use File | Settings | File Templates.
+    StringBuilder stringBuilder = new StringBuilder();
+    for (String s : errors) {
+      stringBuilder.append(s);
+      stringBuilder.append("<br>");
+    }
+    errorsLabel.setText(stringBuilder.toString());
   }
 
   @Override
   public void setPresenter(AccountCreatorPresenterImpl presenter) {
     this.presenter = presenter;
   }
-
-
 }

@@ -31,12 +31,21 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
   }
 
   public <T extends Response> T dispatch(Action<T> action) {
+    System.out.println(action.getClass());
     return (T) repository.getActionHandler(action.getClass()).handle(action);
   }
 
 
   public <E extends Response, R extends SecurityResponse<E>, A extends Action<E>> R dispatchSecurityAction(SecurityAction<A> action) {
+
     System.out.println(action.getAction().getClass());
+
+    if (action.getSecurityToke() != null) {
+      System.out.println(action.getSecurityToke().getUser());
+    } else {
+      System.out.println("token is null !!!");
+    }
+
     Token securityToke = action.getSecurityToke();
 
     if (securityToke == null) {

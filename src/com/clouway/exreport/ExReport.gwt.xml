@@ -4,14 +4,16 @@
 
   <!-- Inherit the core Web Toolkit stuff.                  -->
   <inherits name='com.google.gwt.user.User'/>
-  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
+  <inherits name='com.google.gwt.user.theme.clean.Clean' />
   <inherits name="com.google.gwt.activity.Activity"/>
   <inherits name="com.evo.gad.Gad"/>
   <inherits name="com.google.gwt.inject.Inject"/>
-  <!-- Specify the app entry point class.                   -->
-  <!--<set-property name="user.agent" value="safari"/>-->
+  <inherits name="com.github.gwtbootstrap.Bootstrap"/>
 
   <entry-point class='com.clouway.exreport.client.ExReport'/>
+
+  <!-- Specify the app entry point class.                   -->
+  <!--<set-property name="user.agent" value="safari"/>-->
 
   <!--<set-property name="user.agent" value="safari" />-->
 

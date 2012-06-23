@@ -32,7 +32,7 @@ public class AccountCreatorPresenterImpl implements AccountCreatorPresenter {
   }
 
   public void create(Account account) {
-    String validationErrors = validateAccount(account);
+    String validationErrors = "";
     if ("".equals(validationErrors)) {
       service.dispatch(new CreateAccountAction<CreateAccountResponse>(account), new GotResponse<CreateAccountResponse>() {
         @Override
@@ -51,16 +51,21 @@ public class AccountCreatorPresenterImpl implements AccountCreatorPresenter {
 
 
   private boolean isEmailValid(String email) {
-    return RegExp.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$").test(email);
+    RegExp regExp = RegExp.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$");
+    return regExp.test(email);
   }
 
   private String validateAccount(Account account) {
     StringBuilder stringBuilder = new StringBuilder();
-    if (!isEmailValid(account.getEmail())) {
-      stringBuilder.append(errorMessages.invalidEmailForm());
-    }
-    if (passwordIsShort(account.getPassword())) {
-      stringBuilder.append(errorMessages.shortPassword());
+    if (account.getEmail() != null && account.getPassword() != null) {
+      if (!isEmailValid(account.getEmail())) {
+        stringBuilder.append(errorMessages.invalidEmailForm());
+      }
+      if (passwordIsShort(account.getPassword())) {
+        stringBuilder.append(errorMessages.shortPassword());
+      }
+    } else {
+      stringBuilder.append(errorMessages.emptyEmailOrPassword());
     }
     return stringBuilder.toString();
   }

@@ -29,4 +29,9 @@ public class AccountValidationErrorMessagesImpl implements AccountValidationErro
     return "email previouslyReserved";
 
   }
+
+  @Override
+  public String emptyEmailOrPassword() {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 }

@@ -9,14 +9,17 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 public class AuthenticationPlace extends Place {
 
 
-  public static class Tokenizer implements PlaceTokenizer<DashboardPlace> {
+  public static class Tokenizer implements PlaceTokenizer<AuthenticationPlace> {
+
     @Override
-    public DashboardPlace getPlace(String token) {
-      return new DashboardPlace();
+    public AuthenticationPlace getPlace(String token) {
+
+      return new AuthenticationPlace();
     }
+
     @Override
-    public String getToken(DashboardPlace place) {
-      return "login";
+    public String getToken(AuthenticationPlace place) {
+      return "authentication";
     }
   }
 

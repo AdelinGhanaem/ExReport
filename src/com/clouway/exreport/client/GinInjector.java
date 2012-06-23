@@ -1,5 +1,6 @@
 package com.clouway.exreport.client;
 
+import com.clouway.exreport.client.accountcreation.AccountCreatedEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
 import com.clouway.exreport.client.navigation.ApplicationActivityMapper;
 import com.clouway.exreport.client.navigation.InjectableActivityManager;
@@ -23,6 +24,8 @@ public interface GinInjector extends Ginjector {
 
 
   UserAuthenticatedEventHandler userAuthenticatedEventHandler();
+
+  AccountCreatedEventHandler accountCreatedEventHandler();
 
   EventBus eventBus();
 

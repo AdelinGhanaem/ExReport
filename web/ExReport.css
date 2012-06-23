@@ -17,3 +17,9 @@ body, td, a, div, .p {
     background: #191970;
     overflow: visible;
 }
+
+#mainContainer {
+
+    margin: auto;
+
+}

@@ -25,7 +25,6 @@ public class CreateAccountActionHandler implements ActionHandler<CreateAccountAc
   }
 
 
-
   @Override
   public CreateAccountResponse handle(CreateAccountAction action) {
 
@@ -33,6 +32,6 @@ public class CreateAccountActionHandler implements ActionHandler<CreateAccountAc
 
     Account account = accountCreator.create(action.getAccount(), error);
 
-    return new CreateAccountResponse(account, (ArrayList<String>) error);
+    return new CreateAccountResponse(account, new ArrayList<String>(error));
   }
 }

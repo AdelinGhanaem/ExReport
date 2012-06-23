@@ -6,8 +6,6 @@ import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.shared.actions.CreateAccountAction;
 import com.clouway.exreport.shared.entites.Account;
 import com.clouway.exreport.shared.reponses.CreateAccountResponse;
-import com.evo.gad.shared.Action;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import org.junit.Before;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -54,15 +53,15 @@ public class AccountCreatorPresenterImplTest {
   @Test
   public void createsNewAccountAndFiresEventWhenResponseIsReturned() {
 
-    Account account = new Account("email@mail.com", "123567");
+    Account account = new Account("Adelin@mail.com", "123567");
 
     CreateAccountResponse createAccountResponse = new CreateAccountResponse(account, new ArrayList<String>());
 
-    doOnSuccess(createAccountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
+    doOnSuccess(createAccountResponse).when(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
 
     accountCreatorPresenter.create(account);
 
-    verify(service).dispatch(any(CreateAccountAction.class), any(GotResponse.class));
+    verify(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
 
     verify(handlers).fireEvent(any(AccountCreatedEvent.class));
   }
@@ -71,7 +70,7 @@ public class AccountCreatorPresenterImplTest {
   @Test
   public void showErrorsAndDoesNotFireEventWhenReturnedResponseHasErrors() {
 
-    Account account = new Account("email@mail.com", "123567");
+    Account account = new Account("Adelin@mail.com", "123567");
 
     String errorMessage = "errors";
 
@@ -81,11 +80,11 @@ public class AccountCreatorPresenterImplTest {
 
     CreateAccountResponse createAccountResponse = new CreateAccountResponse(null, errors);
 
-    doOnSuccess(createAccountResponse).when(service).dispatch(any(Action.class), any(AsyncCallback.class));
+    doOnSuccess(createAccountResponse).when(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
 
     accountCreatorPresenter.create(account);
 
-    verify(service).dispatch(any(CreateAccountAction.class), any(GotResponse.class));
+    verify(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
 
     verify(view).showMessages(errors);
 
@@ -134,6 +133,9 @@ public class AccountCreatorPresenterImplTest {
     verify(view).showMessage(shotPasswordMessage);
 
   }
+
+
+
 
 
 }

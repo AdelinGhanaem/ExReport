@@ -8,15 +8,15 @@ import com.google.gwt.place.shared.PlaceTokenizer;
  */
 public class NewRegistrationPlace extends Place {
 
-  public static class Tokenizer implements PlaceTokenizer<DashboardPlace> {
+  public static class Tokenizer implements PlaceTokenizer<NewRegistrationPlace> {
 
     @Override
-    public DashboardPlace getPlace(String token) {
-      return new DashboardPlace();
+    public NewRegistrationPlace getPlace(String token) {
+      return new NewRegistrationPlace();
     }
 
     @Override
-    public String getToken(DashboardPlace place) {
+    public String getToken(NewRegistrationPlace place) {
       return "registration";
     }
   }

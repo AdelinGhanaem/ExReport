@@ -25,7 +25,7 @@ public class AccountCreatorImpl implements AccountCreator {
 
   public Account create(Account account, List<String> retirnedErros) {
 
-    retirnedErros.addAll(validator.validateAccount(account));
+//    retirnedErros.addAll(validator.validateAccount(account));
     if (retirnedErros.size() == 0) {
       if (repository.getAccountByEmail(account.getEmail()) != null) {
         retirnedErros.add(errorMessages.emailPreviouslyReserved());

@@ -1,17 +1,24 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:m='urn:import:com.clouway.exreport.client.authentication.view'>
-  <g:HTMLPanel>
-    <g:VerticalPanel ui:field="panel">
-      <g:DecoratorPanel>
-        <g:VerticalPanel>
-          <m:UserEditor ui:field="editor"/>
-          <g:HorizontalPanel>
-            <g:Button ui:field="logIn" text="log in"/>
-            <g:Button ui:field="newAccount" text="Sign up"/>
-          </g:HorizontalPanel>
-        </g:VerticalPanel>
-      </g:DecoratorPanel>
-    </g:VerticalPanel>
+             xmlns:m='urn:import:com.clouway.exreport.client.authentication.view'
+             xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'>
+  <ui:style src="authenticationsStyle.css"/>
+
+  <g:HTMLPanel addStyleNames="{style.containerPanel}">
+
+   <div class="{style.headerPanel}">
+     <g:VerticalPanel ui:field="panel" >
+       <g:DecoratorPanel addStyleNames="{style.stylePanel}">
+         <g:VerticalPanel  >
+           <m:UserEditor ui:field="editor"/>
+           <g:HorizontalPanel>
+             <b:Button ui:field="logIn" type="INVERSE" text="log in"/>
+             <b:Button ui:field="newAccount" type="SUCCESS" text="Sign up"/>
+           </g:HorizontalPanel>
+         </g:VerticalPanel>
+       </g:DecoratorPanel>
+     </g:VerticalPanel>
+   </div>
+
   </g:HTMLPanel>
 </ui:UiBinder>
