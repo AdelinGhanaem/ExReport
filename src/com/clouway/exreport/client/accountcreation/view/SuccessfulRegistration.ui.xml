@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'>
+
+  <ui:style src="sccessregistration.css"/>
+
+  <g:HTMLPanel addStyleNames="{style.mainContainer1}">
+
+    <g:VerticalPanel ui:field="container" addStyleNames="{style.mainContainer}">
+      <g:HTMLPanel>
+        <div class="{style.containerDiv}">
+          <p>Congratulations!</p>
+          <p>You have successfully created an account in ExReport system</p>
+          <b:Button type="SUCCESS"  text="Dash Board" ui:field="dashBoard"/>
+          </div>
+      </g:HTMLPanel>
+    </g:VerticalPanel>
+  </g:HTMLPanel>
+</ui:UiBinder>

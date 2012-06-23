@@ -1,0 +1,35 @@
+.headdistance {
+
+    width: 100%;
+
+    height: 200px;
+
+}
+
+.decoratorPanel {
+    width: 100%;
+    margin: auto;
+    border: 1px;
+
+}
+
+.container {
+    /*margin: 0px 40% 0px 40%;*/
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 400px;
+    border: 10px;
+
+}
+
+.verticalPanel {
+    width: 100%;
+    height: auto;
+}
+
+.mainPanel {
+    margin: auto;
+    width: 100%;
+    height: auto;
+}

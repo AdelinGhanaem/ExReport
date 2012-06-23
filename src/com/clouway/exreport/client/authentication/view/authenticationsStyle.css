@@ -1,0 +1,21 @@
+.stylePanel {
+
+}
+
+.containerPanel {
+    height: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.headerPanel {
+    text-align: center;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    background: black;
+    width: 500px;
+    height: 200px;
+
+}

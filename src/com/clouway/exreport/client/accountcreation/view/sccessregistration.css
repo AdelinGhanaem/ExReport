@@ -1,0 +1,33 @@
+.containerDiv {
+
+    width: 500px;
+
+    height: auto;
+
+    margin: auto;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    color: #228b22;
+    border: 2px;
+}
+
+.mainContainer {
+
+    height: auto;
+
+    margin: auto;
+
+    padding: 2px 2px;
+    border: 2px;
+}
+
+.mainContainer1 {
+    border: 2px;
+}
