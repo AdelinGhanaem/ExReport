@@ -4,7 +4,10 @@ import com.clouway.exreport.client.accountcreation.AccountCreatedEvent;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
 import com.clouway.exreport.client.navigation.ApplicationPlaceHistoryMapper;
 import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
+import com.clouway.exreport.client.navigation.places.DashboardPlace;
 import com.clouway.exreport.client.navigation.places.NewRegistrationPlace;
+import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -48,7 +51,11 @@ public class ExReport implements EntryPoint {
 
     eventBus.addHandler(AccountCreatedEvent.TYPE, injector.accountCreatedEventHandler());
 
-    controller.goTo(new AuthenticationPlace());
+    SecurityTokenProvider securityTokenProvider = injector.securityToken();
+
+    securityTokenProvider.setToken(new Token("mail"));
+
+    controller.goTo(new DashboardPlace());
 
   }
 

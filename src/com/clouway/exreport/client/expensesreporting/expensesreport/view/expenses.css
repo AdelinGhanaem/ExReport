@@ -1,0 +1,30 @@
+.scrollPanel {
+    /*background: #228b22;*/
+    vertical-align: middle;
+    border: 2px;
+    margin: 2px;
+    height: 370px;
+    width: 300px;
+    border: 4px #cbcbcb;
+    border-radius: 10px;
+
+}
+
+.cellTreeScrollPanel {
+    /*background: red;*/
+    vertical-align: middle;
+    margin: 2px;
+    height: 370px;
+    width: 300px;
+    border: 4px #cbcbcb;
+    border-radius: 10px;
+}
+
+.headPanel {
+    vertical-align: middle;
+    border: 1px #5f9ea0;
+    border-radius: 10px;
+    width: auto;
+    margin: 5px;
+    float: right;
+}

@@ -2,37 +2,36 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:m='urn:import:com.clouway.exreport.client.navigation'
              xmlns:reporting='urn:import:com.clouway.exreport.client.expensesreporting.expensesreport.view'
-             xmlns:add='urn:import:com.clouway.exreport.client.expensesreporting.addingexpenses.view'>
+             xmlns:add='urn:import:com.clouway.exreport.client.expensesreporting.addingexpenses.view'
+        >
 
-    <ui:style src="dashboardStyle.css"/>
-    <g:HTMLPanel addStyleNames="{style.mainPanel}">
-      <div class="{style.menu}">
-        <g:Label ui:field="nameLabel"/>
-      </div>
-        <div class="{style.head}">
-        </div>
-        <div class="{style.leftnavigation}">
-            <g:HTMLPanel addStyleNames="{style.navHTML}">
-                <!--<m:NavigationMenu ui:field="navigationMenu">-->
-                <!--</m:NavigationMenu>-->
-            </g:HTMLPanel>
-        </div>
-        <div class="{style.center}">
-            <g:ScrollPanel addStyleNames="{style.centerScrollPanel}">
-              <g:HTMLPanel>
-                <g:HTMLPanel ui:field="centerPanel" addStyleNames="{style.centerHTMLPanel}">
-                  <!--<reporting:ExpensesReporterViewImpl ui:field="exReport">-->
-                  <!--</reporting:ExpensesReporterViewImpl>-->
-                  <!--<add:AddExpensesViewImpl ui:field="addExpenses">-->
-                  <!--</add:AddExpensesViewImpl>-->
-                </g:HTMLPanel>
-              </g:HTMLPanel>
+  <ui:style src="dashboardStyle.css"/>
 
-            </g:ScrollPanel>
-        </div>
-        <div class="footer">
-        </div>
-    </g:HTMLPanel>
+  <g:HTMLPanel addStyleNames="{style.mainPanel}">
+    <!--<div class="{style.menu}">-->
+      <!--<g:Label ui:field="nameLabel"/>-->
+    <!--</div>-->
+    <!--<g:HTMLPanel ui:field="head" addStyleNames="{style.headPanel}">-->
+    <!--</g:HTMLPanel>-->
+    <!--<div class="{style.head}" ui:field="head">-->
+
+    <!--</div>-->
+
+    <!--<div class="{style.center}">-->
+    <!--<g:ScrollPanel addStyleNames="{style.centerScrollPanel}">-->
+
+    <!--<div class="{style.MenuPanel}">-->
+    <!--</div>-->
+
+    <div class="{style.centerPanel}">
+          <reporting:ExpensesReporterViewImpl ui:field="expensesPanel"/>
+    </div>
+    <div class="{style.addingExpense}">
+      <add:AddExpensesViewImpl ui:field="addExpensesPanel"/>
+
+    </div>
+
+  </g:HTMLPanel>
 
 
 </ui:UiBinder>

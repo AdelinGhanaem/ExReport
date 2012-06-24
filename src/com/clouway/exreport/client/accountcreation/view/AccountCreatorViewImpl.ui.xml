@@ -10,23 +10,22 @@
 
     <!--<div class="{style.headdistance}"/>-->
 
-    <div class="{style.container}">
 
-      <g:DecoratorPanel addStyleDependentNames="{style.decoratorPanel}">
+      <div class="{style.header}">
+        <div class="{style.background}">
+          <b:WellForm type="HORIZONTAL" addStyleNames="{style.formContainer}">
+            <m:AccountEditor ui:field="accountEditor"/>
 
-        <g:VerticalPanel addStyleDependentNames="{style.verticalPanel}}">
+            <!--<g:Button ui:field="create" text="sign in"/>-->
+            <b:Button type="INVERSE" ui:field="create" text="sign in" addStyleNames="{style.button}"/>
 
-          <m:AccountEditor ui:field="accountEditor"/>
+            <g:Label ui:field="errorsLabel"/>
+          </b:WellForm>
+        </div>
 
-          <!--<g:Button ui:field="create" text="sign in"/>-->
-          <b:Button type="INVERSE"  ui:field="create" text="sign in"/>
-          <g:Label ui:field="errorsLabel"/>
 
-        </g:VerticalPanel>
+      </div>
 
-      </g:DecoratorPanel>
-
-    </div>
   </g:HTMLPanel>
 
 </ui:UiBinder>

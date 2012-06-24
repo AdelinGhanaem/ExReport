@@ -3,6 +3,7 @@ package com.clouway.exreport.client.accountcreation.view;
 import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
 import com.clouway.exreport.client.navigation.View;
 import com.clouway.exreport.shared.entites.Account;
+import com.github.gwtbootstrap.client.ui.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -41,7 +42,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   AccountEditor accountEditor;
 
   @UiField
-  com.github.gwtbootstrap.client.ui.Button create;
+  Button create;
 
   @UiField
   Label errorsLabel;
@@ -52,7 +53,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
 
     initWidget(rootElement);
 
-    Account account = new Account(" ","");
+    Account account = new Account();
 
     driver.initialize(accountEditor);
 
@@ -64,9 +65,6 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   public void onCreate(ClickEvent event) {
 
     Account editedAccount = driver.flush();
-
-//    Window.alert(editedAccount.getEmail() + "/" + editedAccount.getPassword());
-
     presenter.create(editedAccount);
 
   }
@@ -90,4 +88,6 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   public void setPresenter(AccountCreatorPresenterImpl presenter) {
     this.presenter = presenter;
   }
+
+
 }

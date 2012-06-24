@@ -1,6 +1,8 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses.view;
 
 import com.clouway.exreport.shared.entites.Expense;
+import com.github.gwtbootstrap.client.ui.Button;
+import com.github.gwtbootstrap.client.ui.WellForm;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.LeafValueEditor;
@@ -24,15 +26,15 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   private static ExpenseEditorUiBinder ourUiBinder = GWT.create(ExpenseEditorUiBinder.class);
 
   @UiField
-  TextBox name;
+  com.github.gwtbootstrap.client.ui.TextBox name;
 
   @Ignore
   @UiField
-  TextBox expensePrice;
+  com.github.gwtbootstrap.client.ui.TextBox expensePrice;
 
   @Ignore
   @UiField
-  TextBox expenseDate;
+  com.github.gwtbootstrap.client.ui.TextBox expenseDate;
 
 
   LeafValueEditor<Double> price = new LeafValueEditor<Double>() {
@@ -55,7 +57,6 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
 
     @Override
     public void setValue(Date value) {
-
       expenseDate.setValue(String.valueOf(new Date()));
     }
 
@@ -71,6 +72,4 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
     initWidget(rootElement);
     expenseDate.setText("2012/03/06");
   }
-
-
 }

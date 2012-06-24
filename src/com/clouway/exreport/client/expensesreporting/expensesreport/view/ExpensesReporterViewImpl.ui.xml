@@ -4,33 +4,22 @@
              xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
 
 
-  <ui:style src="dashboard.css">
+  <ui:style src="expenses.css"/>
+  <g:HTMLPanel addStyleNames="{style.headPanel}">
 
-
-  </ui:style>
-
-
-  <g:HTMLPanel>
     <g:HorizontalPanel ui:field="panel">
-      <g:DecoratorPanel addStyleNames="{style.decoratorPanel}">
-        <g:ScrollPanel ui:field="cellTreeScrollPanel" addStyleNames="{style.scrollPanel}">
-          <g:HorizontalPanel ui:field="cellTreePanel">
-            <!--<c:CellTree ui:field="cellTree">-->
-            <!--</c:CellTree>-->
-          </g:HorizontalPanel>
-        </g:ScrollPanel>
-      </g:DecoratorPanel>
-      <g:VerticalPanel>
-        <g:DecoratorPanel addStyleNames="{style.cellTreeDecoratorPanel}">
-          <g:ScrollPanel ui:field="cellTableScrollPanel" addStyleNames="{style.CellTreeScrollPanel}">
-            <g:HorizontalPanel>
-              <c:CellTable ui:field="expensesCellTable">
-              </c:CellTable>
-            </g:HorizontalPanel>
-          </g:ScrollPanel>
-        </g:DecoratorPanel>
-      </g:VerticalPanel>
+
+      <g:ScrollPanel addStyleNames="{style.scrollPanel}">
+        <g:HorizontalPanel ui:field="cellTreeScrollPanel">
+        </g:HorizontalPanel>
+      </g:ScrollPanel>
+
+      <g:ScrollPanel addStyleNames="{style.cellTreeScrollPanel}">
+        <c:CellTable ui:field="expensesCellTable">
+        </c:CellTable>
+      </g:ScrollPanel>
     </g:HorizontalPanel>
+
   </g:HTMLPanel>
 
 

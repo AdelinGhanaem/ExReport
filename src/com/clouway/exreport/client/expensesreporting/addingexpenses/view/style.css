@@ -1,3 +1,10 @@
 .addExpensePanel {
     padding: 10px;
 }
+
+.form {
+    vertical-align: middle;
+    margin: 2px auto;
+    padding: 5px 5px;
+    width:400px;
+}

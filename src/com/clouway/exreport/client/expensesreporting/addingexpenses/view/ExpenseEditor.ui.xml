@@ -1,29 +1,49 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+             xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
         >
   <ui:style>
-    .addExpensePanel {
-      width: 100%;
-      float: left;
 
+
+    /*.addExpenseDivContainer   div {*/
+      /*width: 250px;*/
+      /*height: auto;*/
+      /*margin: 3px auto;*/
+    /*}*/
+
+    .addExpenseDivContainer {
+      /*width: 300px;*/
+      height: auto;
+      /*float: left;*/
+      margin: 5px auto;
+      padding: 2px;
+    }
+
+    .formInput {
+      width: 50px;
     }
 
   </ui:style>
   <g:HTMLPanel>
-    <div style="{style.addExpensePanel}">
-      <g:Label text="Date:"/>
 
-      <g:TextBox ui:field="expenseDate"/>
+      <div style="{style.addExpenseDivContainer}">
 
-      <g:Label text="Title:"/>
-      <g:TextBox ui:field="name"/>
+        <div class="{style.formInput}">
+          <g:Label text="Date:"/>
+          <b:TextBox ui:field="expenseDate" placeholder="spent for ..."/>
+        </div>
 
-      <g:Label text="Price:"/>
-      <g:TextBox ui:field="expensePrice"/>
+        <div class="{style.formInput}">
+          <g:Label text="Title:"/>
+          <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
+        </div>
 
+        <div class="{style.formInput}">
+          <g:Label text="Price"/>
+          <b:TextBox ui:field="name" placeholder="price ... "/>
+        </div>
 
-    </div>
-
+      </div>
   </g:HTMLPanel>
 </ui:UiBinder>

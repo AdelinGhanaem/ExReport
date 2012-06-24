@@ -1,6 +1,5 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport.view;
 
-import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenter;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.cells.DayCell;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.cells.MonthCell;
@@ -21,7 +20,9 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
@@ -52,8 +53,6 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   private ExpenseReporterPresenter presenter;
 
-  private ActionDispatcherServiceAsync async;
-
   HTMLPanel maiPanel;
 
   private Year currentYear;
@@ -67,10 +66,10 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   CellTable<Expense> expensesCellTable;
 
   @UiField
-  ScrollPanel cellTreeScrollPanel;
+  HorizontalPanel cellTreeScrollPanel;
 
-  @UiField
-  HorizontalPanel cellTreePanel;
+//  @UiField
+//  HorizontalPanel cellTreePanel;
 
   @UiField
   HorizontalPanel panel;
@@ -87,9 +86,6 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
         DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("yyyy-MM-DD");
 
-//        Date date = dateTimeFormat.parse(day.getYear() + "-0" + day.getMonth() + "-0" + day.getDay());
-//
-//        Window.alert(date.toString());
         Date date = new Date();
 
         presenter.fetchExpensesBetween(date, date);
@@ -169,10 +165,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   }
 
-  @Override
-  public Widget asWidget() {
-    return panel;
-  }
+
 
   @Override
   public void showExpensesYears(ArrayList<Year> yearList) {
@@ -231,7 +224,6 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
     CellTree cellTree = new CellTree(this, null);
 
-    cellTreePanel.add(cellTree);
-
+    cellTreeScrollPanel.add(cellTree);
   }
 }

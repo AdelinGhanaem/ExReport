@@ -1,26 +1,16 @@
 .headdistance {
 
     width: 100%;
-
     height: 200px;
 
 }
 
-.decoratorPanel {
-    width: 100%;
-    margin: auto;
-    border: 1px;
-
-}
-
 .container {
-    /*margin: 0px 40% 0px 40%;*/
-    margin-left: auto;
-    margin-right: auto;
-    height: auto;
-    width: 400px;
-    border: 10px;
 
+    height: auto;
+    width: 332px;
+    background: #c7e5eb;
+    margin: auto;
 }
 
 .verticalPanel {
@@ -29,7 +19,34 @@
 }
 
 .mainPanel {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
     height: auto;
+}
+
+.header {
+    padding-top: 133px;
+    margin: auto;
+    width: 332px;
+    height: auto;
+    background: url("/resources/images/Signup.png");
+}
+
+.formContainer {
+
+    border: none;
+    background: none;
+}
+
+.background {
+
+    background: #c7e5eb;
+    margin: auto;
+    height: auto;
+    width: 332px;
+}
+
+.button {
+    margin: 4px;
 }

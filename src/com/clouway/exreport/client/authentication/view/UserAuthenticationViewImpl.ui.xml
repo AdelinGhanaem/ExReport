@@ -6,19 +6,21 @@
 
   <g:HTMLPanel addStyleNames="{style.containerPanel}">
 
-   <div class="{style.headerPanel}">
-     <g:VerticalPanel ui:field="panel" >
-       <g:DecoratorPanel addStyleNames="{style.stylePanel}">
-         <g:VerticalPanel  >
-           <m:UserEditor ui:field="editor"/>
-           <g:HorizontalPanel>
-             <b:Button ui:field="logIn" type="INVERSE" text="log in"/>
-             <b:Button ui:field="newAccount" type="SUCCESS" text="Sign up"/>
-           </g:HorizontalPanel>
-         </g:VerticalPanel>
-       </g:DecoratorPanel>
-     </g:VerticalPanel>
-   </div>
+    <div class="{style.headerPanel}">
+
+      <b:WellForm type="HORIZONTAL" addStyleNames="{style.formContainer}">
+        <m:UserEditor ui:field="editor" />
+
+        <b:Button ui:field="logIn" type="INVERSE" text="log in" addStyleNames="{style.button}"/>
+        <b:Button ui:field="newAccount" type="SUCCESS" text="Sign up"/>
+      </b:WellForm>
+      <!--<g:VerticalPanel ui:field="panel" >-->
+
+      <!--<g:HorizontalPanel addStyleNames="{style.forumPanel}" spacing="2px">-->
+      <!---->
+      <!--</g:HorizontalPanel>-->
+      <!--</g:VerticalPanel>-->
+    </div>
 
   </g:HTMLPanel>
 </ui:UiBinder>

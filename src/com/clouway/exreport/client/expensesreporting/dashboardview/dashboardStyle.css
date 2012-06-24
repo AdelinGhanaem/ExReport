@@ -16,46 +16,20 @@
     height: 400px;
 }
 
-.navHTML {
-    width: auto;
-    height: auto;
-    padding: 4px;
-    margin: 4px;
-}
-
 .centerHTMLPanel {
-    /*border-width: 1px;*/
-    /*border-style: solid;*/
-    overflow: visible;
+    background: #ffb593;
     width: auto;
     height: auto;
-    padding: 4px;
+    margin: auto;
+    padding: 5px;
 }
 
 .centerScrollPanel {
     height: 600px;
 }
 
-.leftnavigation {
-    border: 2px black;
-    width: 19%;
-    height: auto;
-    padding: 5px;
-    margin: 5px;
-    float: left;
-}
-
-.center {
-    border: 2px black;
-    width: 75%;
-    height: auto;
-    padding: 5px;
-    margin: 5px;
-    float: right;
-}
-
 .head {
-    height: 100px;
+    height: 50px;
 }
 
 .mainScrollPanel {
@@ -64,11 +38,61 @@
 }
 
 .mainPanel {
+    vertical-align: middle;
     overflow: scroll;
+    /*background: #2aff1c;*/
+    padding: 10px;
+    margin: auto;
 }
 
 .menu {
+    color: white;
+    font-family: Arial;
+    font-size: 15px;
     width: 100%;
     height: 80px;
-    background:url("resources/images/navigation_backgournd.png");
+    background: url("resources/images/navigation_backgournd.png");
+}
+
+.headPanel {
+    margin: 5px 0px;
+    padding: 3px;
+}
+
+
+
+.centerPanel {
+    vertical-align: middle;
+    margin: 2px auto;
+    padding: 5px;
+    width: 70%;
+    border-radius: 10px;
+    background: #d25729;
+    height: 300px;
+}
+
+.cleaner {
+    clear: both;
+}
+
+.leftnavigation {
+
+}
+
+.navHTML {
+
+}
+
+.center {
+
+}
+
+.addingExpense {
+    vertical-align: middle;
+    margin: 2px auto;
+    padding: 5px;
+    width: 70%;
+    border-radius: 10px;
+    background: #aed28f;
+    height: 100px;
 }

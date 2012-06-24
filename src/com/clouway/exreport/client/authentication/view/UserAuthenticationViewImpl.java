@@ -39,8 +39,8 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   @UiField
   UserEditor editor;
 
-  @UiField
-  VerticalPanel panel;
+//  @UiField
+//  VerticalPanel panel;
 
   @UiField
   com.github.gwtbootstrap.client.ui.Button logIn;
@@ -51,9 +51,12 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   @Inject
   InjectablePlaceController controller;
 
+  HTMLPanel rootElement;
+
+
   public UserAuthenticationViewImpl() {
 
-    HTMLPanel rootElement = ourUiBinder.createAndBindUi(this);
+     rootElement = ourUiBinder.createAndBindUi(this);
 
     initWidget(rootElement);
 
@@ -80,10 +83,6 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
     presenter = userAuthenticationPresenter;
   }
 
-  @Override
-  public Widget asWidget() {
-    return panel;
-  }
 
   @UiHandler("logIn")
   public void onClick(ClickEvent event) {
