@@ -24,7 +24,7 @@ import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseRepor
 import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenterImpl;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpensesReporterViewImpl;
-import com.clouway.exreport.client.navigation.ApplicationActivityMapper;
+import com.clouway.exreport.client.navigation.SecureActivityMapperProvider;
 import com.clouway.exreport.client.security.SecurityActionFactory;
 import com.clouway.exreport.client.security.SecurityActionFactoryImpl;
 import com.clouway.exreport.client.security.SecurityTokenProvider;
@@ -56,7 +56,7 @@ public class ClientSideModule extends AbstractGinModule {
     //User authentication
     bind(UserAuthenticationView.class).to(UserAuthenticationViewImpl.class).in(Singleton.class);
 
-    bind(UserAuthenticationPresenter.class).to(UserAuthenticationPresenterImpl.class).in(Singleton.class);
+    bind(UserAuthenticationPresenter.class).to(UserAuthenticationPresenterImpl.class);
 
     //communication
 
@@ -72,7 +72,7 @@ public class ClientSideModule extends AbstractGinModule {
     bind(ExpenseReporterPresenter.class).to(ExpenseReporterPresenterImpl.class);
 
     //navigation 
-    bind(ActivityMapper.class).to(ApplicationActivityMapper.class);
+    bind(ActivityMapper.class).toProvider(SecureActivityMapperProvider.class);
 
 //    bind(SecurityTokenProvider.class)
 
@@ -84,6 +84,7 @@ public class ClientSideModule extends AbstractGinModule {
     bind(SecurityActionFactory.class).to(SecurityActionFactoryImpl.class);
 
     bind(AccountCreatedEventHandler.class).to(AccountCreatedEventHandlerImpl.class);
+
   }
 
 
