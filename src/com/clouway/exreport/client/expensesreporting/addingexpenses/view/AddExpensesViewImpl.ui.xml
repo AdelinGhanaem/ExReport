@@ -5,9 +5,9 @@
 
   <ui:style src="style.css"/>
 
-  <g:HTMLPanel>
+  <g:HTMLPanel addStyleNames="{style.editorContainer}">
 
-    <b:WellForm type="HORIZONTAL" addStyleNames="{style.form}">
+    <!--<b:WellForm type="HORIZONTAL" addStyleNames="{style.form}">-->
 
     <!--<g:Label text="Add expense"/>-->
 
@@ -15,7 +15,7 @@
 
     <b:Button ui:field="save" type="SUCCESS" text="save"/>
 
-    </b:WellForm>
+    <!--</b:WellForm>-->
 
   </g:HTMLPanel>
 </ui:UiBinder>

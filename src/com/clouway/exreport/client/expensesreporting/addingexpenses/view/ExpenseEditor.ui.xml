@@ -6,16 +6,14 @@
   <ui:style>
 
 
-    /*.addExpenseDivContainer   div {*/
+      /*.addExpenseDivContainer   div {*/
       /*width: 250px;*/
       /*height: auto;*/
       /*margin: 3px auto;*/
-    /*}*/
+      /*}*/
 
     .addExpenseDivContainer {
-      /*width: 300px;*/
       height: auto;
-      /*float: left;*/
       margin: 5px auto;
       padding: 2px;
     }
@@ -24,26 +22,27 @@
       width: 50px;
     }
 
+    .editorContainer {
+      height: 100px;
+      vertical-align: middle;
+      padding:5px;
+    }
+
+    .editorContainer div,tr,td {
+    margin:2px;
+    }
+
+
   </ui:style>
-  <g:HTMLPanel>
+  <g:HTMLPanel addStyleNames="{style.editorContainer}">
 
-      <div style="{style.addExpenseDivContainer}">
-
-        <div class="{style.formInput}">
-          <g:Label text="Date:"/>
-          <b:TextBox ui:field="expenseDate" placeholder="spent for ..."/>
-        </div>
-
-        <div class="{style.formInput}">
-          <g:Label text="Title:"/>
-          <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
-        </div>
-
-        <div class="{style.formInput}">
-          <g:Label text="Price"/>
-          <b:TextBox ui:field="name" placeholder="price ... "/>
-        </div>
-
-      </div>
+    <g:HorizontalPanel addStyleNames="{style.addExpenseDivContainer}">
+      <g:Label text="Date:"/>
+      <b:TextBox ui:field="expenseDate" placeholder="spent for ..."/>
+      <g:Label text="Title:"/>
+      <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
+      <g:Label text="Price"/>
+      <b:TextBox ui:field="name" placeholder="price ... "/>
+    </g:HorizontalPanel>
   </g:HTMLPanel>
 </ui:UiBinder>
