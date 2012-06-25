@@ -3,33 +3,36 @@
              xmlns:m='urn:import:com.clouway.exreport.client.navigation'
              xmlns:reporting='urn:import:com.clouway.exreport.client.expensesreporting.expensesreport.view'
              xmlns:add='urn:import:com.clouway.exreport.client.expensesreporting.addingexpenses.view'
+             xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
         >
 
+  <ui:with field="img" type="com.clouway.exreport.client.expensesreporting.dashboardview.DashboardImagesResource"/>
   <ui:style src="dashboardStyle.css"/>
-
   <g:HTMLPanel addStyleNames="{style.mainPanel}">
-    <!--<div class="{style.menu}">-->
-      <!--<g:Label ui:field="nameLabel"/>-->
-    <!--</div>-->
-    <!--<g:HTMLPanel ui:field="head" addStyleNames="{style.headPanel}">-->
-    <!--</g:HTMLPanel>-->
-    <!--<div class="{style.head}" ui:field="head">-->
 
-    <!--</div>-->
-
-    <!--<div class="{style.center}">-->
-    <!--<g:ScrollPanel addStyleNames="{style.centerScrollPanel}">-->
-
-    <!--<div class="{style.MenuPanel}">-->
-    <!--</div>-->
-
-    <div class="{style.centerPanel}">
-          <reporting:ExpensesReporterViewImpl ui:field="expensesPanel"/>
+    <div class="{style.head}">
+      <g:Image resource="{img.logo}"/>
     </div>
-    <div class="{style.addingExpense}">
-      <add:AddExpensesViewImpl ui:field="addExpensesPanel"/>
+    <div>
 
+      <div class="{style.centerPanel}" ui:field="cellTablesDiv">
+        <g:Label text="Reporting" addStyleNames="{style.reportingLabel}"></g:Label>
+        <g:ScrollPanel addStyleNames="{style.mainScrollPanel}">
+          <g:HorizontalPanel ui:field="expensesPanel">
+          </g:HorizontalPanel>
+        </g:ScrollPanel>
+        <g:HorizontalPanel ui:field="addingExpenses" addStyleNames="{style.addingExpense}">
+
+        </g:HorizontalPanel>
+      </div>
+      <div class="{style.addingExpense}">
+
+      </div>
+      <div class="{style.cleaner}">
+
+      </div>
     </div>
+
 
   </g:HTMLPanel>
 

@@ -6,16 +6,10 @@
   <ui:style src="style.css"/>
 
   <g:HTMLPanel addStyleNames="{style.editorContainer}">
-
-    <!--<b:WellForm type="HORIZONTAL" addStyleNames="{style.form}">-->
-
-    <!--<g:Label text="Add expense"/>-->
-
-    <mine:ExpenseEditor ui:field="expenseEditor"/>
-
-    <b:Button ui:field="save" type="SUCCESS" text="save"/>
-
-    <!--</b:WellForm>-->
-
+    <g:VerticalPanel addStyleNames="{style.form}" ui:field="addExpenses">
+      <g:Label text="Add expense" addStyleNames="{style.lable}"/>
+      <mine:ExpenseEditor ui:field="expenseEditor"/>
+      <b:Button ui:field="save" type="SUCCESS" text="save"/>
+    </g:VerticalPanel>
   </g:HTMLPanel>
 </ui:UiBinder>

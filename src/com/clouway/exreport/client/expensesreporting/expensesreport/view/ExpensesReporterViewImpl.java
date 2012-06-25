@@ -20,9 +20,6 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
@@ -67,12 +64,14 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   @UiField
   HorizontalPanel cellTreeScrollPanel;
+  @UiField
+  HorizontalPanel panel;
 
 //  @UiField
 //  HorizontalPanel cellTreePanel;
 
-  @UiField
-  HorizontalPanel panel;
+//  @UiField
+//  HorizontalPanel panel;
 
 
   public ExpensesReporterViewImpl() {
@@ -166,7 +165,6 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
   }
 
 
-
   @Override
   public void showExpensesYears(ArrayList<Year> yearList) {
 
@@ -225,5 +223,10 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
     CellTree cellTree = new CellTree(this, null);
 
     cellTreeScrollPanel.add(cellTree);
+  }
+
+  @Override
+  public Widget asWidget() {
+    return panel;
   }
 }

@@ -7,15 +7,15 @@
   <ui:style src="expenses.css"/>
   <g:HTMLPanel addStyleNames="{style.headPanel}">
 
-    <g:HorizontalPanel ui:field="panel">
+    <g:HorizontalPanel ui:field="panel" addStyleNames="{style.horizontalPanel}">
 
       <g:ScrollPanel addStyleNames="{style.scrollPanel}">
-        <g:HorizontalPanel ui:field="cellTreeScrollPanel">
+        <g:HorizontalPanel ui:field="cellTreeScrollPanel" addStyleNames="{style.cellTree}">
         </g:HorizontalPanel>
       </g:ScrollPanel>
 
       <g:ScrollPanel addStyleNames="{style.cellTreeScrollPanel}">
-        <c:CellTable ui:field="expensesCellTable">
+        <c:CellTable ui:field="expensesCellTable" addStyleNames="{style.cellTable}">
         </c:CellTable>
       </g:ScrollPanel>
     </g:HorizontalPanel>

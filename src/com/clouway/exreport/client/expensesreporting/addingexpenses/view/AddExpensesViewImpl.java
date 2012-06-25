@@ -3,8 +3,6 @@ package com.clouway.exreport.client.expensesreporting.addingexpenses.view;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenter;
 import com.clouway.exreport.shared.entites.Expense;
 import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.WellForm;
-import com.github.gwtbootstrap.client.ui.constants.ButtonType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -14,13 +12,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AddExpensesViewImpl extends Composite implements AddExpensesView ,Editor<Expense> {
+public class AddExpensesViewImpl extends Composite implements AddExpensesView, Editor<Expense> {
 
 
   interface AddExpensesViewImplUiBinder extends UiBinder<HTMLPanel, AddExpensesViewImpl> {
@@ -34,11 +32,13 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView ,E
 
   private AddExpensesPresenter presenter;
 
-    @UiField
+  @UiField
   Button save;
 
   @UiField
   ExpenseEditor expenseEditor;
+  @UiField
+  VerticalPanel addExpenses;
 
 
   private HTMLPanel rootElement;
@@ -80,5 +80,10 @@ public class AddExpensesViewImpl extends Composite implements AddExpensesView ,E
   public void onClick(ClickEvent event) {
     Expense returnedExpense = expenseDriver.flush();
     presenter.addExpense(returnedExpense);
+  }
+
+  @Override
+  public Widget asWidget() {
+    return addExpenses;
   }
 }

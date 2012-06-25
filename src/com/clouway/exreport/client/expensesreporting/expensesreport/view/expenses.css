@@ -1,23 +1,24 @@
 .scrollPanel {
-    /*background: #228b22;*/
     vertical-align: middle;
     border: 2px;
     margin: 2px;
     height: 370px;
     width: 300px;
+    background: #e0e0e0;
     border: 4px #cbcbcb;
     border-radius: 10px;
 
 }
 
 .cellTreeScrollPanel {
-    /*background: red;*/
     vertical-align: middle;
     margin: 2px;
     height: 370px;
-    width: 300px;
+    width: 700px;
     border: 4px #cbcbcb;
     border-radius: 10px;
+    background: #e0e0e0;
+    padding: 5px;
 }
 
 .headPanel {
@@ -27,4 +28,30 @@
     width: auto;
     margin: 5px;
     float: right;
+    /*background: #edadda;*/
+}
+
+.horizontalPanel {
+    vertical-align: middle;
+    border: 1px #5f9ea0;
+    width: 100%;
+    margin: 5px;
+    float: right;
+    /*background: rgba(250, 230, 142, 0.52);*/
+}
+
+.cellTree {
+    vertical-align: middle;
+    /*background: yellow;*/
+    width: 100%;
+    height: 370px;
+    border-radius: 10px;
+    }
+
+.cellTable {
+    width: 100%;
+    font-family: arial;
+    font-size: 12px;
+    /*background: #cbcbcb;*/
+    border-radius: 10px;
 }

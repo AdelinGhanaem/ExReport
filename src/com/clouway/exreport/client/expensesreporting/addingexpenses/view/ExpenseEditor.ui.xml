@@ -5,21 +5,10 @@
         >
   <ui:style>
 
-
-      /*.addExpenseDivContainer   div {*/
-      /*width: 250px;*/
-      /*height: auto;*/
-      /*margin: 3px auto;*/
-      /*}*/
-
     .addExpenseDivContainer {
       height: auto;
       margin: 5px auto;
       padding: 2px;
-    }
-
-    .formInput {
-      width: 50px;
     }
 
     .editorContainer {

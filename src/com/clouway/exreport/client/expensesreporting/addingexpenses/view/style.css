@@ -3,18 +3,26 @@
 }
 
 .form {
+
     vertical-align: middle;
     margin: 2px auto;
     padding: 5px 5px;
-    width:400px;
+    width: 100%;
+    /*background: #8a2be2;*/
+    border-radius: 10px;
 }
 
 .editorContainer {
     height: 100px;
     vertical-align: middle;
-    padding:5px;
+    padding: 5px;
 }
 
-.editorContainer div,tr,td {
-    margin:2px;
+.editorContainer div, tr, td {
+    margin: 2px;
+}
+
+.lable {
+    font-size: 25px;
+    font-family: Arial;
 }
