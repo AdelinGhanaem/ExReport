@@ -74,6 +74,8 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         bind(AuthenticatedUsersRepository.class).to(AuthenticatedUsersRepositoryImpl.class);
 
+        serve("/test").with(TestServlet.class);
+
       }
 
       @Provides
