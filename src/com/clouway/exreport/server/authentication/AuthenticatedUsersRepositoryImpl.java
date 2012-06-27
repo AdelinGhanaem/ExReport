@@ -2,6 +2,7 @@ package com.clouway.exreport.server.authentication;
 
 import com.clouway.exreport.shared.entites.Token;
 import com.google.appengine.api.memcache.MemcacheService;
+import com.google.inject.Inject;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -11,6 +12,7 @@ public class AuthenticatedUsersRepositoryImpl implements AuthenticatedUsersRepos
 
   private final MemcacheService service;
 
+  @Inject
   public AuthenticatedUsersRepositoryImpl(MemcacheService service) {
 
 

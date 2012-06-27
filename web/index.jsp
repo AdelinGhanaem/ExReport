@@ -8,5 +8,6 @@
   </head>
   <body>
 
+  <% response.sendRedirect("ExReport.html");%>
   </body>
 </html>

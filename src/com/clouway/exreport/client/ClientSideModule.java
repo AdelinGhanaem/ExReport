@@ -85,12 +85,15 @@ public class ClientSideModule extends AbstractGinModule {
 
     bind(AccountCreatedEventHandler.class).to(AccountCreatedEventHandlerImpl.class);
 
+
   }
 
 
   @Provides
-  public ActionDispatcherServiceAsync dispatcherServiceAsync() {
+  public ActionDispatcherServiceAsync provideDispatcherServiceAsync() {
     return GWT.create(ActionDispatcherService.class);
   }
+
+
 
 }

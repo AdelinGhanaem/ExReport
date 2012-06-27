@@ -4,6 +4,7 @@ import com.clouway.exreport.shared.entites.Account;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
+import com.google.inject.Inject;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -14,7 +15,7 @@ public class AccountRepositoryImpl implements AccountRepository {
   private final DatastoreService service;
 
   private final String accountEntityKid = "Account";
-
+  @Inject
   public AccountRepositoryImpl(DatastoreService service) {
 
 

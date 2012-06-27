@@ -32,6 +32,10 @@ import com.clouway.exreport.shared.actions.FetchYearsAction;
 import com.clouway.exreport.shared.actions.UserAuthenticationAction;
 import com.evo.gad.dispatch.ActionHandlerMetadata;
 import com.evo.gad.dispatch.ActionHandlerRepository;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
@@ -76,6 +80,17 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         serve("/test").with(TestServlet.class);
 
+      }
+
+      @Provides
+      public DatastoreService provideDatastoreService() {
+        return DatastoreServiceFactory.getDatastoreService();
+      }
+
+
+      @Provides
+      public MemcacheService provideMemcacheService() {
+        return MemcacheServiceFactory.getMemcacheService();
       }
 
       @Provides
