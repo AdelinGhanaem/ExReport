@@ -41,7 +41,7 @@ public class ExpensesRepositoryContractTest {
 //
 //    previouslySaved.add(new Expense());
 //
-//    List<Expense> returnedExpenses = expensesRepository.getByDate(expenseDate);
+//    List<Expense> returnedExpenses = expensesRepository.getExpenseByDate(expenseDate);
 //
 //    Expense returnedExpense = returnedExpenses.get(0);
 //
@@ -69,7 +69,7 @@ public class ExpensesRepositoryContractTest {
 
     previouslySaved.add(new Expense());
 
-    List<Expense> expenseList = expensesRepository.getByName(name);
+    List<Expense> expenseList = expensesRepository.getExpenseByName(name);
 
     Expense returnedExpense = expenseList.get(0);
 
@@ -105,7 +105,7 @@ public class ExpensesRepositoryContractTest {
 
     previouslySaved.add(secondExpense);
 
-    List<Expense> expenseList = expensesRepository.getByDateBetween(dateFormat.parse(firstDate), dateFormat.parse(secondsDate));
+    List<Expense> expenseList = expensesRepository.getExpensesBetween(dateFormat.parse(firstDate), dateFormat.parse(secondsDate));
 
     assertThat(expenseList.size(), is(2));
 

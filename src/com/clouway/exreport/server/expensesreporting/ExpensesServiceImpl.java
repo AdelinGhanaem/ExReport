@@ -32,32 +32,34 @@ public class ExpensesServiceImpl implements ExpensesService {
 
   public List<Expense> getExpensesByDate(Date date) {
 
-    return repository.getByDate(date);
+    return repository.getExpenseByDate(date);
   }
 
 
   public List<Expense> getExpensesByName(String expenseName) {
 
-    return repository.getByName(expenseName);
+    return repository.getExpenseByName(expenseName);
   }
 
   public List<Expense> getExpensesBetween(Date firstDate, Date secondDate) {
 
-    return repository.getByDateBetween(firstDate, secondDate);
+    return repository.getExpensesBetween(firstDate, secondDate);
   }
 
   public List<Month> getMonths(int year) {
-
-    return repository.getExpensesMonths(year);
+    return null;
+//    return repository.getExpensesMonths(year);
   }
 
   public List<Day> getDays(int year, int month) {
-    return repository.getDeclaredDays(year, month);
+//    return repository.getDeclaredDays(year, month);
+    return null;
   }
 
   @Override
   public List<Year> getDeclaredYears() {
-    return repository.getYears();
+//    return repository.getYears();
+    return null;
   }
 
 }

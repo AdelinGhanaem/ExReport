@@ -35,7 +35,7 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   }
 
   @Override
-  public List<Expense> getByDate(Date date) {
+  public List<Expense> getExpenseByDate(Date date) {
 
     List<Expense> matchedExpenses = new ArrayList<Expense>();
     matchedExpenses.add(new Expense("food", 12d, date));
@@ -50,7 +50,7 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   }
 
   @Override
-  public List<Expense> getByName(String expenseName) {
+  public List<Expense> getExpenseByName(String expenseName) {
     List<Expense> matchedExpenses = new ArrayList<Expense>();
 //
     for (Expense expense : previouslySaved) {
@@ -62,7 +62,7 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
   }
 
   @Override
-  public List<Expense> getByDateBetween(Date date, Date secondDate) {
+  public List<Expense> getExpensesBetween(Date date, Date secondDate) {
     List<Expense> matchedExpenses = new ArrayList<Expense>();
     matchedExpenses.add(new Expense("food", 12d, date));
     matchedExpenses.add(new Expense("dress", 12d, date));
@@ -80,41 +80,8 @@ public class InMemoryExpensesRepository implements ExpensesRepository {
     previouslySaved.add(expense);
   }
 
-  @Override
-  public List<Month> getExpensesMonths(final int yearNumber) {
-    List<Month> months = new ArrayList<Month>();
-    months.add(new Month(yearNumber, 2));
-    months.add(new Month(yearNumber, 3));
-    months.add(new Month(yearNumber, 4));
-    months.add(new Month(yearNumber, 5));
-    months.add(new Month(yearNumber, 6));
-    months.add(new Month(yearNumber, 7));
-    months.add(new Month(yearNumber, 8));
-    return months;
-  }
-
-  @Override
-  public List<Day> getDeclaredDays(final int yearNumber, final int monthNumber) {
-    List<Day> days = new ArrayList<Day>() {{
-      add(new Day(1, monthNumber, yearNumber));
-      add(new Day(2, monthNumber, yearNumber));
-      add(new Day(3, monthNumber, yearNumber));
-      add(new Day(4, monthNumber, yearNumber));
-      add(new Day(5, monthNumber, yearNumber));
-    }};
-
-    return days;
-  }
 
 
-  @Override
-  public List<Year> getYears() {
-    return new ArrayList<Year>() {{
-      add(new Year(2011));
-      add(new Year(2012));
-      add(new Year(2013));
-    }};
-  }
 
 
 }
