@@ -1,29 +1,31 @@
 package com.clouway.exreport.server.authentication;
 
 import com.clouway.exreport.shared.entites.Token;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.appengine.api.memcache.MemcacheService;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class AuthenticatedUsersRepositoryImpl implements AuthenticatedUsersRepository {
 
-  private List<Token> tokenList = new ArrayList<Token>();
 
-  public AuthenticatedUsersRepositoryImpl() {
-    tokenList.add(new Token("mail"));
+  private final MemcacheService service;
+
+  public AuthenticatedUsersRepositoryImpl(MemcacheService service) {
+
+
+    this.service = service;
   }
 
   @Override
   public boolean isAuthorized(Token token) {
-    return true;
+    Token returnedToke = (Token) service.get(token.getUser());
+    return returnedToke != null;
   }
+
 
   @Override
   public void persist(Token token) {
-    tokenList.add(token);
+    service.put(token.getUser(), token);
   }
-
 }
