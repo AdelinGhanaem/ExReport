@@ -2,14 +2,14 @@ package com.clouway.exreport.shared.reponses;
 
 import com.clouway.exreport.shared.entites.Month;
 import com.evo.gad.shared.Response;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchMonthsResponse implements Response  {
+public class FetchMonthsResponse implements Response,IsSerializable {
 
   public FetchMonthsResponse() {
   }

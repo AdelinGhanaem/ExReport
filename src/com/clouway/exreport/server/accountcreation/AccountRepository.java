@@ -7,9 +7,9 @@ import com.clouway.exreport.shared.entites.Account;
  */
 public interface AccountRepository {
 
-  void persis(Account account);
+  Account persis(Account account);
 
-  Account getAccountByEmail(String email);
+  boolean isPreviouslyRegistered(String email);
 
   Account getAccount(String username, String password);
 }

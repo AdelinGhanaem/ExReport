@@ -1,6 +1,5 @@
 package com.clouway.exreport.server.expensesreporting;
 
-import com.clouway.exreport.shared.entites.Year;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -243,17 +242,17 @@ public class Showcase {
   @Test
   public void returnsAllYearsOfExpenses() {
 
-    String parentKey = "123";
-
-    String keyKind = "yearsList";
-
-    ArrayList<Year> yearList = new ArrayList<Year>();
-
-    yearList.add(new Year(2012));
-
-    Entity entity = new Entity(keyKind, parentKey);
-
-    entity.setProperty("years", yearList);
+//    String parentKey = "123";
+//
+//    String keyKind = "yearsList";
+//
+//    ArrayList<Year> yearList = new ArrayList<Year>();
+//
+//    yearList.add(new Year(2012));
+//
+//    Entity entity = new Entity(keyKind, parentKey);
+//
+//    entity.setProperty("years", yearList);
 
 //    List<Year> years = repository.getYears();
 

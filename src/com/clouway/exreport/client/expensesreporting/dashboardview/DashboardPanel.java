@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.expensesreporting.dashboardview;
 
-import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

@@ -17,18 +17,18 @@ public class UserAuthenticationActionHandler implements ActionHandler<UserAuthen
 
   @Inject
   public UserAuthenticationActionHandler(UserAuthentication authentication, AuthenticatedUsersRepository repository) {
-
     this.authentication = authentication;
     this.repository = repository;
   }
 
   @Override
   public UserAuthenticationResponse handle(UserAuthenticationAction action) {
-
     Token token = authentication.authenticate(action.getUser());
+
     if (token != null) {
-      repository.persist(token);
+//      repository.addToken(token);
     }
+
     return new UserAuthenticationResponse(token);
   }
 }

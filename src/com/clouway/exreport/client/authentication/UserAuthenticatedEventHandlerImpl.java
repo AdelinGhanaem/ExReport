@@ -2,7 +2,7 @@ package com.clouway.exreport.client.authentication;
 
 import com.clouway.exreport.client.navigation.InjectablePlaceController;
 import com.clouway.exreport.client.navigation.places.DashboardPlace;
-import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.google.gwt.user.client.Cookies;
 import com.google.inject.Inject;
 

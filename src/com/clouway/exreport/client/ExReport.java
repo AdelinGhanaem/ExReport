@@ -48,7 +48,7 @@ public class ExReport implements EntryPoint {
 
     eventBus.addHandler(AccountCreatedEvent.TYPE, injector.accountCreatedEventHandler());
 
-//    SecurityTokenProvider securityTokenProvider = injector.securityToken();
+//    SecurityTokenProviderImpl securityTokenProvider = injector.securityToken();
 
 //    securityTokenProvider.setToken(new Token("mail"));
 

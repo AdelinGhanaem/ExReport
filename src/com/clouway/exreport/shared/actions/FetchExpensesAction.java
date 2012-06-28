@@ -2,6 +2,7 @@ package com.clouway.exreport.shared.actions;
 
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class FetchExpensesAction<FetchExpensesResponse extends Response> implements Action<FetchExpensesResponse> {
+public class FetchExpensesAction<FetchExpensesResponse extends Response> implements Action<FetchExpensesResponse> ,IsSerializable {
 
   private  Date firstDate;
 

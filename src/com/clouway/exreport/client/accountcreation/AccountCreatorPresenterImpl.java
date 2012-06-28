@@ -3,6 +3,7 @@ package com.clouway.exreport.client.accountcreation;
 import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
+import com.clouway.exreport.shared.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.actions.CreateAccountAction;
 import com.clouway.exreport.shared.entites.Account;
 import com.clouway.exreport.shared.reponses.CreateAccountResponse;
@@ -33,6 +34,7 @@ public class AccountCreatorPresenterImpl implements AccountCreatorPresenter {
 
   public void create(Account account) {
     String validationErrors = "";
+    validationErrors = validateAccount(account);
     if ("".equals(validationErrors)) {
       service.dispatch(new CreateAccountAction<CreateAccountResponse>(account), new GotResponse<CreateAccountResponse>() {
         @Override

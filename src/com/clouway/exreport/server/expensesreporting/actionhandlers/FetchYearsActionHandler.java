@@ -17,9 +17,7 @@ public class FetchYearsActionHandler implements ActionHandler<FetchYearsAction, 
   private ExpensesService service;
 
   @Inject
-
   public FetchYearsActionHandler(ExpensesService service) {
-
     this.service = service;
   }
 

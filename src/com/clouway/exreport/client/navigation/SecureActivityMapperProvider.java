@@ -8,7 +8,7 @@ import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
 import com.clouway.exreport.client.navigation.places.DashboardPlace;
 import com.clouway.exreport.client.navigation.places.NewRegistrationPlace;
 import com.clouway.exreport.client.navigation.places.SuccessfulRegistrationsPlace;
-import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;

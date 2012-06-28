@@ -15,6 +15,8 @@ import org.mockito.Mock;
 
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnSuccess;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -74,31 +76,30 @@ public class UserAuthenticationPresenterImplTest {
 
   //TODO:continue with user validation ....
 
-//  @Test
-//  public void userWithEmptyUsernameIsNotAuthenticated() throws Exception {
-//
-//
-//    presenter.authenticate(new User("", "1234567"));
-//
-//    verify(service, never()).dispatch(any(UserAuthenticationAction.class), any(GotResponse.class));
-//
-//    verify(handlers, never()).fireEvent(any(UserAuthenticatedEvent.class));
-//
-//    verify(view).emptyUsername();
-//
-//  }
-//
-//
-//  @Test
-//  public void userWithEmptyPasswordIsNotAuthenticated() {
-//
-//    presenter.authenticate(new User("Adelin", ""));
-//
-//    verify(service, never()).dispatch(any(UserAuthenticationAction.class), any(GotResponse.class));
-//
-//    verify(handlers, never()).fireEvent(any(UserAuthenticatedEvent.class));
-//
-//    verify(view).emptyPassword();
-//  }
+  @Test
+  public void userWithEmptyUsernameIsNotAuthenticated() throws Exception {
+
+    presenter.authenticate(new User("", "1234567"));
+
+    verify(service, never()).dispatch(isA(UserAuthenticationAction.class), isA(GotResponse.class));
+
+    verify(handlers, never()).fireEvent(any(UserAuthenticatedEvent.class));
+
+    verify(view).emptyUsername();
+
+  }
+
+
+  @Test
+  public void userWithEmptyPasswordIsNotAuthenticated() {
+
+    presenter.authenticate(new User("Adelin", ""));
+
+    verify(service, never()).dispatch(any(UserAuthenticationAction.class), any(GotResponse.class));
+
+    verify(handlers, never()).fireEvent(any(UserAuthenticatedEvent.class));
+
+    verify(view).emptyPassword();
+  }
 
 }

@@ -87,7 +87,7 @@ public class AccountRepositoryImplTest {
 
     Query query = new Query(accountEntityKind);
 
-    query.addFilter("name", Query.FilterOperator.EQUAL,username);
+    query.addFilter("name", Query.FilterOperator.EQUAL, username);
 
     query.addFilter("password", Query.FilterOperator.EQUAL, password);
 
@@ -98,6 +98,27 @@ public class AccountRepositoryImplTest {
     assertThat((String) entity.getProperty("name"), is(equalTo("user")));
 
     assertThat((String) entity.getProperty("password"), is(equalTo("password")));
+  }
+
+  @Test
+  public void accountIsReturnedByEmail() {
+    String email = "email";
+
+    String password = "password";
+
+    Entity entity = new Entity(accountEntityKind);
+
+    entity.setProperty("name", email);
+
+    entity.setProperty("password", password);
+
+    service.put(entity);
+
+    boolean isPreviouslyRegistered = repository.isPreviouslyRegistered(email);
+
+    assertThat(isPreviouslyRegistered, is(true));
+
+
   }
 
 }

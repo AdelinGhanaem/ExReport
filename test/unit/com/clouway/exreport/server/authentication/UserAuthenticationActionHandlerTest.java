@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -79,7 +78,7 @@ public class UserAuthenticationActionHandlerTest {
 
     handler.handle(new UserAuthenticationAction(user));
 
-    verify(authenticatedUsersRepository).persist(token);
+//    verify(authenticatedUsersRepository).addToken(token);
   }
 
 
@@ -92,9 +91,10 @@ public class UserAuthenticationActionHandlerTest {
 
     handler.handle(new UserAuthenticationAction(user));
 
-    verify(authenticatedUsersRepository, never()).persist(null);
+//    verify(authenticatedUsersRepository, never()).addToken(null);
 
   }
+
 
 
 }

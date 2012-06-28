@@ -1,5 +1,6 @@
 package com.clouway.exreport.client.security;
 
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.shared.entites.Token;
 
 /**

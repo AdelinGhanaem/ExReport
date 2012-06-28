@@ -1,7 +1,7 @@
 package com.clouway.exreport.client.navigation;
 
 import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
-import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;

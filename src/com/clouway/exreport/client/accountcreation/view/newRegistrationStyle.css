@@ -31,6 +31,7 @@
     width: 332px;
     height: auto;
     background: url("/resources/images/Signup.png");
+    border-radius: 10px;
 }
 
 .formContainer {
@@ -45,6 +46,7 @@
     margin: auto;
     height: auto;
     width: 332px;
+    /*border-radius: 10px;*/
 }
 
 .button {

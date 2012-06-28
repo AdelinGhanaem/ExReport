@@ -3,4 +3,15 @@
   <application>ExReport-1.0</application>
   <threadsafe>true</threadsafe>
   <version>1</version>
+
+  <static-files>
+    <include path="**" />
+    <include path="**.nocache.*" expiration="0s" />
+    <include path="**.rpc" expiration="0s" />
+    <include path="**.cache.*" expiration="365d" />
+  </static-files>
+
+  <resource-files>
+    <include path="**.gwt.rpc" />
+  </resource-files>
 </appengine-web-app>

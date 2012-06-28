@@ -1,6 +1,6 @@
 package com.clouway.exreport.client.navigation.activities;
 
-import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.client.expensesreporting.dashboardview.DashboardPanel;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenter;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;

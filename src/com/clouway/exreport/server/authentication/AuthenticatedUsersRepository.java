@@ -7,7 +7,7 @@ import com.clouway.exreport.shared.entites.Token;
  */
 public interface AuthenticatedUsersRepository {
 
-  boolean isAuthorized(Token token);
+  String getTokenKey(Token token);
 
-  void persist(Token token);
+  void addToken(Token token, String accountId);
 }

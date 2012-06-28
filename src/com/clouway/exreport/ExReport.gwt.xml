@@ -17,7 +17,7 @@
 
   <!--<set-property name="user.agent" value="safari" />-->
 
-  <servlet path="/service" class="com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl"/>
+  <!--<servlet path="/service" class="com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl"/>-->
 
   <source path="client"/>
 

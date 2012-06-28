@@ -1,6 +1,6 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
+import com.clouway.exreport.shared.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.entites.Account;
 import org.junit.Before;
 import org.junit.Test;

@@ -14,20 +14,19 @@ public class AuthenticatedUsersRepositoryImpl implements AuthenticatedUsersRepos
 
   @Inject
   public AuthenticatedUsersRepositoryImpl(MemcacheService service) {
-
-
     this.service = service;
   }
 
   @Override
-  public boolean isAuthorized(Token token) {
-    Token returnedToke = (Token) service.get(token.getUser());
-    return returnedToke != null;
+  public String getTokenKey(Token token) {
+    return (String) service.get(token);
   }
 
 
   @Override
-  public void persist(Token token) {
-    service.put(token.getUser(), token);
+  public void addToken(Token token, String accountId) {
+    service.put(token, accountId);
   }
+
+
 }

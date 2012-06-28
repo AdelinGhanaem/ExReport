@@ -1,12 +1,12 @@
 package com.clouway.exreport.shared.entites;
 
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class User implements Serializable {
+public class User implements IsSerializable {
 
   private String username;
   private String password;

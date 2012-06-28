@@ -27,9 +27,7 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
   @Inject
   public AddExpensesPresenterImpl(ActionDispatcherServiceAsync asynchService, EventBus hasHandlers, AddExpensesView view, SecurityActionFactory factory) {
     this.asynchService = asynchService;
-
     this.hasHandlers = hasHandlers;
-
     this.view = view;
     this.factory = factory;
   }
@@ -40,23 +38,11 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
 
       SecurityAction<AddExpenseAction<AddExpenseResponse>> action = factory.createSecurityAction(addExpenseAction);
 
-//      asynchService.dispatch(action, new GotResponse<SecurityResponse<AddExpenseResponse>>() {
-//        @Override
-//        public void gotResponse(SecurityResponse<AddExpenseResponse> result) {
-//        }
-//
-//        @Override
-//        public void onFailure(Throwable caught) {
-//          view.notifyUserOfConnectionError();
-//        }
-//      });
-
       asynchService.dispatchSecurityAction(action, new GotResponse<SecurityResponse<AddExpenseResponse>>() {
         @Override
         public void gotResponse(SecurityResponse<AddExpenseResponse> result) {
           hasHandlers.fireEvent(new ExpenseAddedEvent(result.getResponse().getExpense()));
         }
-
         @Override
         public void onFailure(Throwable caught) {
           view.notifyUserOfConnectionError();

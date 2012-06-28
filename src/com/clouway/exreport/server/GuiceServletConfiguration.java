@@ -1,6 +1,5 @@
 package com.clouway.exreport.server;
 
-import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
 import com.clouway.exreport.server.accountcreation.AccountCreator;
 import com.clouway.exreport.server.accountcreation.AccountCreatorImpl;
 import com.clouway.exreport.server.accountcreation.AccountRepository;
@@ -17,12 +16,14 @@ import com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl;
 import com.clouway.exreport.server.expensesreporting.ExpensesRepository;
 import com.clouway.exreport.server.expensesreporting.ExpensesService;
 import com.clouway.exreport.server.expensesreporting.ExpensesServiceImpl;
-import com.clouway.exreport.server.expensesreporting.InMemoryExpensesRepository;
 import com.clouway.exreport.server.expensesreporting.actionhandlers.AddExpenseActionHandler;
 import com.clouway.exreport.server.expensesreporting.actionhandlers.FetchDaysActionHandler;
 import com.clouway.exreport.server.expensesreporting.actionhandlers.FetchExpensesActionHandler;
 import com.clouway.exreport.server.expensesreporting.actionhandlers.FetchMonthsActionHandler;
 import com.clouway.exreport.server.expensesreporting.actionhandlers.FetchYearsActionHandler;
+import com.clouway.exreport.shared.AccountValidationErrorMessages;
+import com.clouway.exreport.shared.AccountValidationErrorMessagesImpl;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.shared.actions.AddExpenseAction;
 import com.clouway.exreport.shared.actions.CreateAccountAction;
 import com.clouway.exreport.shared.actions.FetchDaysAction;
@@ -51,22 +52,25 @@ import java.util.Set;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class GuiceServletConfiguration extends GuiceServletContextListener {
+
+
   @Override
   protected Injector getInjector() {
 
     return Guice.createInjector(new ServletModule() {
+
       @Override
       protected void configureServlets() {
 
         serve("/ExReport/service").with(ActionDispatcherServiceImpl.class);
+
+        serve("/test").with(TestServlet.class);
 
         bind(ActionHandlerRepository.class).to(LazyActionHandlerRepository.class);
 
         bind(UserAuthentication.class).to(UserAuthenticationImpl.class);
 
         bind(ExpensesService.class).to(ExpensesServiceImpl.class);
-
-        bind(ExpensesRepository.class).to(InMemoryExpensesRepository.class);
 
         bind(AccountRepository.class).to(AccountRepositoryImpl.class);
 
@@ -78,7 +82,9 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         bind(AuthenticatedUsersRepository.class).to(AuthenticatedUsersRepositoryImpl.class);
 
-        serve("/test").with(TestServlet.class);
+        bind(ExpensesRepository.class).toProvider(ExpensesRepositoryProvider.class);
+
+        bind(SecurityTokenProvider.class).to(SecurityTokenProviderImpl.class).in(Singleton.class);
 
       }
 

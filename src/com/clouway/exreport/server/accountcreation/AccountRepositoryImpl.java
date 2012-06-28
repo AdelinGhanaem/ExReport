@@ -3,6 +3,7 @@ package com.clouway.exreport.server.accountcreation;
 import com.clouway.exreport.shared.entites.Account;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.inject.Inject;
 
@@ -15,24 +16,27 @@ public class AccountRepositoryImpl implements AccountRepository {
   private final DatastoreService service;
 
   private final String accountEntityKid = "Account";
+
   @Inject
   public AccountRepositoryImpl(DatastoreService service) {
-
-
     this.service = service;
   }
 
   @Override
-  public void persis(Account account) {
+  public Account persis(Account account) {
     Entity entity = new Entity(accountEntityKid);
     entity.setProperty("name", account.getEmail());
     entity.setProperty("password", account.getPassword());
     service.put(entity);
+    return new Account(KeyFactory.keyToString(entity.getKey()), account.getEmail(), account.getPassword());
   }
 
   @Override
-  public Account getAccountByEmail(String email) {
-    return null;
+  public boolean isPreviouslyRegistered(String email) {
+    Query query = new Query(accountEntityKid);
+    query.setFilter(new Query.FilterPredicate("name", Query.FilterOperator.EQUAL, email));
+    Entity entity = service.prepare(query).asSingleEntity();
+    return entity != null;
   }
 
 
@@ -44,7 +48,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     Entity entity = service.prepare(query).asSingleEntity();
     Account account = null;
     if (entity != null && (entity.getProperty("username").equals(username) && entity.getProperty("password").equals(password))) {
-      account = new Account((String) entity.getProperty("username"), (String) entity.getProperty("password"));
+      account = new Account(entity.getKey().toString(), (String) entity.getProperty("username"), (String) entity.getProperty("password"));
     }
     return account;
   }

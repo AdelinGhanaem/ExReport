@@ -1,7 +1,8 @@
 package com.clouway.exreport.client.navigation;
 
 import com.clouway.exreport.client.navigation.activities.AuthenticationActivity;
-import com.clouway.exreport.client.security.SecurityTokenProvider;
+import com.clouway.exreport.client.navigation.places.AuthenticationPlace;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
@@ -50,6 +51,8 @@ public class SecureActivityMapperTest {
     classActivityMap.put(SecurePlace.class, new SecureActivity());
 
     classActivityMap.put(TestPlace.class, new TestActivity());
+
+    classActivityMap.put(AuthenticationPlace.class,new AuthenticationActivity());
 
     secureActivityMapper = new SecureActivityMapper(classActivityMap, classes, provider);
   }

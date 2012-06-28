@@ -3,17 +3,17 @@ package com.clouway.exreport.shared.actions;
 import com.clouway.exreport.shared.entites.Account;
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
-
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountAction<AccountCreatedResponse> implements Action<Response> ,Serializable {
+public class CreateAccountAction<AccountCreatedResponse extends Response> implements Action<AccountCreatedResponse> ,IsSerializable {
 
   private  Account account;
 
   public CreateAccountAction() {
+
   }
   public CreateAccountAction(Account account) {
 

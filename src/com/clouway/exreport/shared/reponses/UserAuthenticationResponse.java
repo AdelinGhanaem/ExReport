@@ -4,14 +4,13 @@ import com.clouway.exreport.shared.entites.Token;
 import com.evo.gad.shared.Response;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.io.Serializable;
-
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class UserAuthenticationResponse implements Response  {
+public class UserAuthenticationResponse implements Response,IsSerializable {
 
   private Token token;
+
 
   public UserAuthenticationResponse(Token token) {
     this.token = token;
@@ -21,7 +20,6 @@ public class UserAuthenticationResponse implements Response  {
   }
 
   public Token getToken() {
-
     return token;
   }
 }

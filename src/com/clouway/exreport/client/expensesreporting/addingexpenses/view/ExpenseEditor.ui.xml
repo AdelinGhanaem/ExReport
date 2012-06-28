@@ -27,10 +27,10 @@
 
     <g:HorizontalPanel addStyleNames="{style.addExpenseDivContainer}">
       <g:Label text="Date:"/>
-      <b:TextBox ui:field="expenseDate" placeholder="spent for ..."/>
-      <g:Label text="Title:"/>
-      <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
+      <b:TextBox ui:field="expenseDate" placeholder="Date"/>
       <g:Label text="Price"/>
+      <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
+      <g:Label text="Title:"/>
       <b:TextBox ui:field="name" placeholder="price ... "/>
     </g:HorizontalPanel>
   </g:HTMLPanel>

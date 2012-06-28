@@ -3,13 +3,12 @@ package com.clouway.exreport.shared.actions;
 import com.clouway.exreport.shared.entites.User;
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
-
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class UserAuthenticationAction<UserAuthenticationResponse> implements Action<Response> ,Serializable {
+public class UserAuthenticationAction<UserAuthenticationResponse extends Response> implements Action<UserAuthenticationResponse> ,IsSerializable {
 
   private  User user;
 

@@ -1,7 +1,9 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.client.accountcreation.AccountValidationErrorMessages;
+import com.clouway.exreport.server.authentication.AuthenticatedUsersRepository;
+import com.clouway.exreport.shared.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.entites.Account;
+import com.clouway.exreport.shared.entites.Token;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -14,6 +16,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,6 +39,9 @@ public class AccountCreatorImplTest {
   @Mock
   AccountValidationErrorMessages errorMessages;
 
+  @Mock
+  AuthenticatedUsersRepository authenticatedUsersRepository;
+
   AccountCreatorImpl accountCreatorImpl;
 
 
@@ -43,7 +50,7 @@ public class AccountCreatorImplTest {
 
     initMocks(this);
 
-    accountCreatorImpl = new AccountCreatorImpl(repository, accountValidator, errorMessages);
+    accountCreatorImpl = new AccountCreatorImpl(repository, accountValidator, errorMessages, authenticatedUsersRepository);
 
   }
 
@@ -54,11 +61,13 @@ public class AccountCreatorImplTest {
 
     List<String> errorMessages = new ArrayList<String>();
 
-    when(repository.getAccountByEmail(account.getEmail())).thenReturn(null);
+    when(repository.isPreviouslyRegistered(account.getEmail())).thenReturn(false);
+
+    when(repository.persis(account)).thenReturn(new Account("key", "mail@mail.com", "password"));
 
     Account createdAccount = accountCreatorImpl.create(account, errorMessages);
 
-    verify(repository).getAccountByEmail(account.getEmail());
+    verify(repository).isPreviouslyRegistered(account.getEmail());
 
     verify(repository).persis(account);
 
@@ -77,7 +86,7 @@ public class AccountCreatorImplTest {
 
     String errorMessage = "errorMessage";
 
-    when(repository.getAccountByEmail(account.getEmail())).thenReturn(account);
+    when(repository.isPreviouslyRegistered(account.getEmail())).thenReturn(true);
 
     when(errorMessages.emailPreviouslyReserved()).thenReturn(errorMessage);
 
@@ -85,7 +94,7 @@ public class AccountCreatorImplTest {
 
     Account createdAccount = accountCreatorImpl.create(account, errorMessages);
 
-    verify(repository).getAccountByEmail(account.getEmail());
+    verify(repository).isPreviouslyRegistered(account.getEmail());
 
     verify(repository, never()).persis(account);
 
@@ -114,7 +123,7 @@ public class AccountCreatorImplTest {
 
     when(accountValidator.validateAccount(account)).thenReturn(errorMessages);
 
-    verify(repository, never()).getAccountByEmail(invalidEmailForm);
+    verify(repository, never()).isPreviouslyRegistered(invalidEmailForm);
 
     verify(repository, never()).persis(account);
 
@@ -143,7 +152,7 @@ public class AccountCreatorImplTest {
 
     Account createdAccount = accountCreatorImpl.create(account, new ArrayList<String>());
 
-    verify(repository, never()).getAccountByEmail(invalidEmailForm);
+    verify(repository, never()).isPreviouslyRegistered(invalidEmailForm);
 
     verify(repository, never()).persis(account);
 
@@ -172,7 +181,7 @@ public class AccountCreatorImplTest {
 
     Account createdAccount = accountCreatorImpl.create(account, new ArrayList<String>());
 
-    verify(repository, never()).getAccountByEmail(shortPassword);
+    verify(repository, never()).isPreviouslyRegistered(shortPassword);
 
     verify(repository, never()).persis(account);
 
@@ -181,7 +190,32 @@ public class AccountCreatorImplTest {
     assertThat(errorMessages.size(), is(1));
 
     assertThat(errorMessages.contains(errorMessage), is(true));
+  }
+
+  @Test
+  public void addsUserToAuthenticatedUsersWhenUserIsCreated() {
+
+    String password = "password";
+
+    String username = "username";
+
+    String accountId = "key";
+
+    Token token = new Token(username);
+
+    Account account = new Account(accountId, username, password);
+
+    when(accountValidator.validateAccount(account)).thenReturn(new ArrayList<String>());
+
+    when(repository.persis(account)).thenReturn(new Account(accountId, username, password));
+
+    Account createdAccount = accountCreatorImpl.create(account, new ArrayList<String>());
+
+    assertThat(createdAccount, is(notNullValue()));
+
+    verify(authenticatedUsersRepository).addToken(isA(Token.class), eq(createdAccount.getId()));
 
   }
+
 
 }

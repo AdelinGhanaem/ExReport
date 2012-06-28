@@ -79,7 +79,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
     StringBuilder stringBuilder = new StringBuilder();
     for (String s : errors) {
       stringBuilder.append(s);
-      stringBuilder.append("<br>");
+      stringBuilder.append("\n");
     }
     errorsLabel.setText(stringBuilder.toString());
   }

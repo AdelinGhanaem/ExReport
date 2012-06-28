@@ -26,7 +26,7 @@ public class SecurityActionFactoryTest {
 //
 //    TestAction action = new TestAction();
 //
-//    SecurityActionFactoryImpl securityActionFactory = new SecurityActionFactoryImpl(new SecurityTokenProvider() {
+//    SecurityActionFactoryImpl securityActionFactory = new SecurityActionFactoryImpl(new SecurityTokenProviderImpl() {
 //      @Override
 //      public Token getToken() {
 //        return null;  //To change body of implemented methods use File | Settings | File Templates.

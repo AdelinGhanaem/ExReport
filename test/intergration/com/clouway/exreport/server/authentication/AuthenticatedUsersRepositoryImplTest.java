@@ -34,7 +34,6 @@ public class AuthenticatedUsersRepositoryImplTest {
 
     authenticatedUsersRepository = new AuthenticatedUsersRepositoryImpl(service);
 
-
   }
 
   @After
@@ -43,42 +42,37 @@ public class AuthenticatedUsersRepositoryImplTest {
   }
 
   @Test
-  public void returnsTrueIfTokenIsPreviouslyPersisted() {
-
+  public void returnsTokenKeyIfTokenIsPreviouslyPersisted() {
     Token token = new Token("User");
-
-    service.put(token.getUser(), token);
-
-    boolean isAuthenticated = authenticatedUsersRepository.isAuthorized(token);
-
-    assertThat(isAuthenticated, is(equalTo(true)));
-
+    String key = "account key";
+    service.put(token, key);
+    String returnedKey = authenticatedUsersRepository.getTokenKey(token);
+    assertThat(returnedKey, is(equalTo(key)));
   }
 
 
   @Test
-  public void returnsFalseWhenTokeIsNotPreviouslyPersisted() {
-
+  public void returnsNullWhenTokeIsNotPreviouslyPersisted() {
     Token token = new Token("User");
-
-    boolean isAuthenticated = authenticatedUsersRepository.isAuthorized(token);
-
-    assertThat(isAuthenticated, is(equalTo(false)));
+    String returnedKey = authenticatedUsersRepository.getTokenKey(token);
+    assertThat(returnedKey, is(equalTo(null)));
   }
 
 
   @Test
-  public void tokenIsPersistedCorrectly() {
+  public void userIsAddedCorrectly() {
 
-    Token token = new Token("user");
+    Token token = new Token("mail@mail.com");
 
-    authenticatedUsersRepository.persist(token);
+    String userKey = "key";
 
-    Token returnedToken = (Token) service.get(token.getUser());
+    authenticatedUsersRepository.addToken(token, userKey);
 
-    assertThat(returnedToken, is(notNullValue()));
+    String key = (String) service.get(token);
 
-    assertThat(returnedToken.getUser(), is(equalTo(token.getUser())));
+    assertThat(key, is(notNullValue()));
+
+    assertThat(key, is(userKey));
 
   }
 
