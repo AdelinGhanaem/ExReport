@@ -30,7 +30,7 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
   }
 
   public void authenticate(User user) {
-
+    //    handlers.fireEvent(new UserAuthenticatedEvent(new Token("user")));
     service.dispatch(new UserAuthenticationAction<UserAuthenticationResponse>(user), new GotResponse<UserAuthenticationResponse>() {
       @Override
       public void gotResponse(UserAuthenticationResponse result) {
@@ -41,6 +41,4 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
       }
     });
   }
-
-
 }

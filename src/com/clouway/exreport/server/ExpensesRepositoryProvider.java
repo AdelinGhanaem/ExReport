@@ -1,9 +1,12 @@
 package com.clouway.exreport.server;
 
 import com.clouway.exreport.server.authentication.AuthenticatedUsersRepository;
+import com.clouway.exreport.server.comunication.ActionDispatcherServiceImpl;
 import com.clouway.exreport.server.expensesreporting.ExpensesRepository;
 import com.clouway.exreport.server.expensesreporting.ExpensesRepositoryImpl;
+import com.clouway.exreport.shared.entites.Token;
 import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.inject.Provider;
 
@@ -18,14 +21,18 @@ public class ExpensesRepositoryProvider implements Provider<ExpensesRepository> 
   private AuthenticatedUsersRepository repository;
 
   @Inject
-  private SecurityTokenProviderImpl tokenProvider;
-
-  @Inject
   private DatastoreService datastoreService;
 
   @Override
   public ExpensesRepository get() {
-    String accountKey = repository.getTokenKey(tokenProvider.getToken());
-    return new ExpensesRepositoryImpl(datastoreService, KeyFactory.stringToKey(accountKey));
+
+    Token tokenThreadLocal = ActionDispatcherServiceImpl.tokenThreadLocal.get();
+
+    String accountKey = repository.getTokenKey(tokenThreadLocal);
+
+    Key key = KeyFactory.stringToKey(accountKey);
+
+    return new ExpensesRepositoryImpl(datastoreService, key);
+
   }
 }

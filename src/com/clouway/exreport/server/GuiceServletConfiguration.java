@@ -118,13 +118,12 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
         metadatas.add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
 
         metadatas.add(new ActionHandlerMetadata(UserAuthenticationAction.class, UserAuthenticationActionHandler.class));
-
-
         return metadatas;
-
       }
     });
   }
+
+
 
 
 }

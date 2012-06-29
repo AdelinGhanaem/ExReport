@@ -9,6 +9,7 @@ import com.clouway.exreport.shared.actions.AddExpenseAction;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import com.clouway.exreport.shared.reponses.SecurityResponse;
+import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -33,7 +34,9 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
   }
 
   public void addExpense(Expense expense) {
+    view.disableAddButton();
     if (expense.isPriceValid()) {
+
       AddExpenseAction<AddExpenseResponse> addExpenseAction = new AddExpenseAction<AddExpenseResponse>(expense);
 
       SecurityAction<AddExpenseAction<AddExpenseResponse>> action = factory.createSecurityAction(addExpenseAction);
@@ -42,7 +45,10 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
         @Override
         public void gotResponse(SecurityResponse<AddExpenseResponse> result) {
           hasHandlers.fireEvent(new ExpenseAddedEvent(result.getResponse().getExpense()));
+          Window.alert("expense is added !");
+          view.enableAddButton();
         }
+
         @Override
         public void onFailure(Throwable caught) {
           view.notifyUserOfConnectionError();
@@ -50,6 +56,7 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
       });
     } else {
       view.notifyNegativeExpensePriceValue();
+      view.enableAddButton();
     }
   }
 }

@@ -36,6 +36,7 @@ import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallback
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.ignoreStubs;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -44,7 +45,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class DashBoardExpensePresenterTest {
+public class ExpenseReporterPresenterImplTest {
 
 
   @Mock
@@ -64,6 +65,7 @@ public class DashBoardExpensePresenterTest {
 
 
   //TODO:Don't forget to change to MessagesContainer;
+
   //TODO:Try to figure out how to capture the ArrayList result... may be something with capture(... ) !
 
   @Before
@@ -173,34 +175,8 @@ public class DashBoardExpensePresenterTest {
   }
 
   @Test
-  public void returnsAllExpensesMonthsOfTheYear() {
-
-    int year = 2012;
-
-    ArrayList<Month> months = new ArrayList<Month>();
-
-    FetchMonthsResponse fetchMonthsResponse = new FetchMonthsResponse(months);
-
-    SecurityResponse<FetchMonthsResponse> securityResponse = new SecurityResponse<FetchMonthsResponse>(fetchMonthsResponse, token);
-
-    FetchMonthsAction<FetchMonthsResponse> monthsAction = new FetchMonthsAction<FetchMonthsResponse>(year);
-
-    SecurityAction<FetchMonthsAction<FetchMonthsResponse>> securityAction = new SecurityAction<FetchMonthsAction<FetchMonthsResponse>>(monthsAction, token);
-
-    when(factory.createSecurityAction(isA(FetchMonthsAction.class))).thenReturn(securityAction);
-
-    doOnSuccess(securityResponse).when(reporterAsync).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
-
-    reporterPresenter.getMonthsOf(year);
-
-    verify(reporterAsync).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
-
-    verify(reporterView).showMonthsOfExpenses(months);
-
-  }
-
-  @Test
   public void returnsAllExpensesDays() {
+
     int year = 2012;
 
     int month = 6;
@@ -224,6 +200,12 @@ public class DashBoardExpensePresenterTest {
     verify(reporterAsync).dispatchSecurityAction(eq(securityAction), isA(GotResponse.class));
 
     verify(reporterView).showDaysExpenses(days);
+  }
+
+  @Test
+  public void shouldShowAllMonthsOfAYear() {
+    reporterPresenter.getMonthsOf(2012);
+    verify(reporterView).showMonthsOfExpenses(isA(ArrayList.class));
   }
 
 }

@@ -21,9 +21,6 @@ public abstract class GotResponse<T extends Response> implements AsyncCallback<T
       builder.append("\n");
     }
     GWT.log("error",caught);
-
-//    Window.alert(builder.toString());
-
   }
 
   @Override

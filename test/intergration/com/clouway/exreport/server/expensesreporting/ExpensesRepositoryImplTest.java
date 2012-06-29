@@ -1,6 +1,7 @@
 package com.clouway.exreport.server.expensesreporting;
 
 import com.clouway.exreport.shared.entites.Expense;
+import com.clouway.exreport.shared.entites.Year;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -39,7 +40,7 @@ public class ExpensesRepositoryImplTest {
 
   private Key key;
 
-  private ExpensesRepository repository;
+  private ExpensesRepositoryImpl repository;
 
   private static final String EXPENSE_ENTITY_KIND = "Expense";
 
@@ -68,6 +69,7 @@ public class ExpensesRepositoryImplTest {
 
   @Test
   public void expensesAreReturnedByDate() {
+
     Date date = newDate(2012, 2, 3);
 
     Entity entity = createExpenseEntity("food", 12d, date);
@@ -77,6 +79,8 @@ public class ExpensesRepositoryImplTest {
     List<Expense> returnedList = repository.getExpenseByDate(date);
 
     assertThat(returnedList, is(notNullValue()));
+
+    assertThat(returnedList.size(), is(equalTo(1)));
 
     assertThat(returnedList.get(0), is(notNullValue()));
 
@@ -91,6 +95,7 @@ public class ExpensesRepositoryImplTest {
 
   @Test
   public void tryReturnAnotherExpense() {
+
     Date date = new Date();
 
     Entity entity = new Entity("Expense", key);
@@ -120,6 +125,7 @@ public class ExpensesRepositoryImplTest {
 
   @Test
   public void returnsEmptyListWhenNoExpenseWithTheProvidedDate() {
+
     Date date = new Date();
 
     List<Expense> expenseList = new ArrayList<Expense>();
@@ -173,7 +179,9 @@ public class ExpensesRepositoryImplTest {
   public void returnsExpensesBetweenTwoDate() throws Exception {
 
     addExpenseOn(january(2012, 2));
+
     addExpenseOn(january(2012, 4));
+
     addExpenseOn(january(2012, 6));
 
     List<Expense> expenses = repository.getExpensesBetween(january(2012, 2), january(2012, 5));
@@ -203,16 +211,43 @@ public class ExpensesRepositoryImplTest {
 
     assertThat((String) returnedEntities.get(0).getProperty("name"), is(equalTo("computer")));
 
+  }
+
+
+  @Test
+  public void savesTheYearOfExpenseWhenExpensesIsSaved() {
+
+    int year = 2012;
+
+    Expense expense = new Expense("keyboard", 3000d, newDate(year, 3, 12));
+
+    repository.saveExpense(expense);
+
+    Query query = new Query("Year");
+
+    query.setAncestor(key);
+
+    query.addFilter("year", Query.FilterOperator.EQUAL, "2012");
+
+    Entity returnedYear = service.prepare(query).asSingleEntity();
+
+    assertThat(returnedYear, is(notNullValue()));
+
+    Integer integer = Integer.valueOf((String) returnedYear.getProperty("year"));
+
+    assertThat(integer, is(equalTo(year)));
 
   }
 
 
   private void addExpenseOn(Date firstDate) {
+
     Entity entity = new Entity(EXPENSE_ENTITY_KIND, key);
     entity.setProperty("name", "fuel");
     entity.setProperty("price", 30d);
     entity.setProperty("date", firstDate);
     service.put(entity);
+
   }
 
   private Entity createExpenseEntity(String name, Double price, Date date) {
@@ -247,9 +282,9 @@ public class ExpensesRepositoryImplTest {
       calendar.set(Calendar.HOUR, 1);
       calendar.set(Calendar.MINUTE, 1);
       calendar.set(Calendar.SECOND, 1);
-
       clearNonDateFields(calendar);
       return calendar.getTime();
+
     }
 
     private static Calendar clearNonDateFields(Calendar c) {
@@ -261,8 +296,27 @@ public class ExpensesRepositoryImplTest {
     }
   }
 
+  @Test
+  public void yearsTest() throws Exception {
+    Calendar calendar = Calendar.getInstance();
+    Date date = new Date();
+    calendar.setTime(date);
+    int year = calendar.get(Calendar.YEAR);
+    assertThat(year, is(equalTo(2012)));
+  }
 
+
+  @Test
+  public void returnsAllYearsOfDeclaredExpenses() {
+    for (int i = 0; i < 10; i++) {
+      Entity entity = new Entity(EntityKind.YEAR, key);
+      entity.setProperty("year", 2000 + i);
+      System.out.println(2000 + i);
+      service.put(entity);
+    }
+    List<Year> returnedYears = repository.getYears();
+    assertThat(returnedYears, is(notNullValue()));
+    assertThat(returnedYears.size(), is(equalTo(10)));
+  }
   //TODO:what happens when any of the properties of the expense entity does does not exists (NullPointerException).
-
-
 }

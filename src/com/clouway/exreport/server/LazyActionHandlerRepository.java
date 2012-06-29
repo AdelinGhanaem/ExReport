@@ -55,7 +55,6 @@ public class LazyActionHandlerRepository implements ActionHandlerRepository {
     Class<? extends ActionHandler<? extends Action, ? extends Response>> handler = handlers.get(actionClass);
     //gets a key for an inject type ...
     ActionHandler<? extends Action, ? extends Response> instance = injector.getInstance(Key.get(handler));
-
     return instance;
   }
 }

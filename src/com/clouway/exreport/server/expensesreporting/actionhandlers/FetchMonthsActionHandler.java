@@ -28,7 +28,6 @@ public class FetchMonthsActionHandler implements ActionHandler<FetchMonthsAction
 
   @Override
   public FetchMonthsResponse handle(FetchMonthsAction action) {
-
     List<Month> months = service.getMonths(action.getYear());
     return new FetchMonthsResponse(new ArrayList<Month>(months));
   }

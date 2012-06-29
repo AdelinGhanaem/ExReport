@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 public class UserAuthenticationImpl implements UserAuthentication {
 
   private AccountRepository repository;
+
   private final AuthenticatedUsersRepository authenticatedUsersRepository;
 
   @Inject
@@ -21,13 +22,13 @@ public class UserAuthenticationImpl implements UserAuthentication {
   }
 
   public Token authenticate(User user) {
+
     Account account = repository.getAccount(user.getUsername(), user.getPassword());
     if (account != null) {
       Token token = new Token(user.getUsername());
       authenticatedUsersRepository.addToken(token, account.getId());
-      return new Token(account.getEmail());
+      return token;
     }
     return null;
   }
-
 }

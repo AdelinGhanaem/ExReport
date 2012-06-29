@@ -27,11 +27,17 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
 
   private SecurityTokenProvider tokenProvider;
 
+  public static ThreadLocal<Token> tokenThreadLocal = new ThreadLocal<Token>();
+
   @Inject
   public ActionDispatcherServiceImpl(ActionHandlerRepository repository, AuthenticatedUsersRepository authorizedUsersRepository, SecurityTokenProvider tokenProvider) {
+
     this.repository = repository;
+
     this.authorizedUsersRepository = authorizedUsersRepository;
+
     this.tokenProvider = tokenProvider;
+
   }
 
   public <T extends Response> T dispatch(Action<T> action) {
@@ -47,11 +53,11 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
       return (R) new SecurityResponse<R>(null);
     }
 
-    if (authorizedUsersRepository.getTokenKey(securityToken)==null) {
+    if (authorizedUsersRepository.getTokenKey(securityToken) == null) {
       return (R) new SecurityResponse<R>(null);
     }
 
-    tokenProvider.setToken(securityToken);
+    tokenThreadLocal.set(securityToken);
 
     E response = this.dispatch(action.getAction());
 

@@ -32,11 +32,8 @@ public class UserAuthenticationActionHandlerTest {
 
   @Before
   public void setUp() throws Exception {
-
     initMocks(this);
-
-    handler = new UserAuthenticationActionHandler(authentication, authenticatedUsersRepository);
-
+    handler = new UserAuthenticationActionHandler(authentication);
   }
 
   @Test

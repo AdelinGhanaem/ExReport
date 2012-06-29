@@ -22,7 +22,6 @@
           </g:HorizontalPanel>
         </g:ScrollPanel>
         <g:HorizontalPanel ui:field="addingExpenses" addStyleNames="{style.addingExpense}">
-
         </g:HorizontalPanel>
       </div>
       <div class="{style.addingExpense}">

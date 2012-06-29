@@ -14,6 +14,7 @@ import java.util.List;
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
 public class FetchYearsActionHandler implements ActionHandler<FetchYearsAction, FetchYearsResponse> {
+
   private ExpensesService service;
 
   @Inject
@@ -28,7 +29,9 @@ public class FetchYearsActionHandler implements ActionHandler<FetchYearsAction, 
   public FetchYearsResponse handle(FetchYearsAction action) {
 
     List<Year> yearList = service.getDeclaredYears();
-
+    if (yearList == null) {
+      yearList = new ArrayList<Year>();
+    }
     return new FetchYearsResponse(new ArrayList<Year>(yearList));
   }
 }

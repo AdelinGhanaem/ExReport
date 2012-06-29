@@ -23,9 +23,6 @@ public class DashboardPanel extends Composite {
   private static CompositePanelUiBinder ourUiBinder = GWT.create(CompositePanelUiBinder.class);
 
 
-//  @UiField
-//  HTMLPanel centerPanel;
-
   @UiField
   HorizontalPanel expensesPanel;
   @UiField
@@ -40,15 +37,6 @@ public class DashboardPanel extends Composite {
     rootPanel = ourUiBinder.createAndBindUi(this);
     initWidget(rootPanel);
   }
-
-//  public void setExpensesPanelPresenter(ExpenseReporterPresenter expensesPanelPresenter) {
-//    expensesPanel.setPresenter(expensesPanelPresenter);
-//  }
-//
-//  public void setAddingExpensesPanelPresenter(AddExpensesPresenter addExpensesPresenter) {
-//    setExpensesReportingPanel.setPresenter(addExpensesPresenter);
-//  }
-
 
   public void setExpensesReportingPanel(Widget widget) {
     expensesPanel.add(widget);

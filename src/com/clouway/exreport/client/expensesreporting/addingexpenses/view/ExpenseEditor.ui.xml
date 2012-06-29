@@ -2,6 +2,7 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:e='urn:import:com.google.gwt.editor.ui.client'
              xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
+             xmlns:dp="urn:import:com.google.gwt.user.datepicker.client"
         >
   <ui:style>
 
@@ -28,6 +29,7 @@
     <g:HorizontalPanel addStyleNames="{style.addExpenseDivContainer}">
       <g:Label text="Date:"/>
       <b:TextBox ui:field="expenseDate" placeholder="Date"/>
+      <dp:DatePicker ui:field="datePicker"/>
       <g:Label text="Price"/>
       <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
       <g:Label text="Title:"/>

@@ -17,6 +17,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
   private final String accountEntityKid = "Account";
 
+
   @Inject
   public AccountRepositoryImpl(DatastoreService service) {
     this.service = service;
@@ -25,7 +26,7 @@ public class AccountRepositoryImpl implements AccountRepository {
   @Override
   public Account persis(Account account) {
     Entity entity = new Entity(accountEntityKid);
-    entity.setProperty("name", account.getEmail());
+    entity.setProperty("username", account.getEmail());
     entity.setProperty("password", account.getPassword());
     service.put(entity);
     return new Account(KeyFactory.keyToString(entity.getKey()), account.getEmail(), account.getPassword());
@@ -34,7 +35,7 @@ public class AccountRepositoryImpl implements AccountRepository {
   @Override
   public boolean isPreviouslyRegistered(String email) {
     Query query = new Query(accountEntityKid);
-    query.setFilter(new Query.FilterPredicate("name", Query.FilterOperator.EQUAL, email));
+    query.setFilter(new Query.FilterPredicate("username", Query.FilterOperator.EQUAL, email));
     Entity entity = service.prepare(query).asSingleEntity();
     return entity != null;
   }
@@ -43,12 +44,12 @@ public class AccountRepositoryImpl implements AccountRepository {
   @Override
   public Account getAccount(String username, String password) {
     Query query = new Query(accountEntityKid);
-    query.addFilter("username", Query.FilterOperator.EQUAL, username);
-    query.addFilter("password", Query.FilterOperator.EQUAL, password);
+    query.setFilter(Query.CompositeFilterOperator.and(new Query.FilterPredicate("username", Query.FilterOperator.EQUAL, username),
+            new Query.FilterPredicate("password", Query.FilterOperator.EQUAL, password)));
     Entity entity = service.prepare(query).asSingleEntity();
     Account account = null;
     if (entity != null && (entity.getProperty("username").equals(username) && entity.getProperty("password").equals(password))) {
-      account = new Account(entity.getKey().toString(), (String) entity.getProperty("username"), (String) entity.getProperty("password"));
+      account = new Account(KeyFactory.keyToString(entity.getKey()), (String) entity.getProperty("username"), (String) entity.getProperty("password"));
     }
     return account;
   }

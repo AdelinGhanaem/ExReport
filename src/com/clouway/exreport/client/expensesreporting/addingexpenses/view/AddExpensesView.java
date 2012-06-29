@@ -14,4 +14,9 @@ public interface AddExpensesView extends View<AddExpensesPresenter> {
   void notifyUserOfConnectionError();
 
   Widget asWidget();
+
+  void disableAddButton();
+
+  void enableAddButton();
+
 }

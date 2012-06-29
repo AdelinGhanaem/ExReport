@@ -1,16 +1,19 @@
 package com.clouway.exreport.client.expensesreporting.addingexpenses.view;
 
 import com.clouway.exreport.shared.entites.Expense;
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.WellForm;
+import com.github.gwtbootstrap.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DatePicker;
 
 import java.util.Date;
 
@@ -26,16 +29,20 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   private static ExpenseEditorUiBinder ourUiBinder = GWT.create(ExpenseEditorUiBinder.class);
 
   @UiField
-  com.github.gwtbootstrap.client.ui.TextBox name;
+  TextBox name;
 
   @Ignore
   @UiField
-  com.github.gwtbootstrap.client.ui.TextBox expensePrice;
+  TextBox expensePrice;
 
   @Ignore
   @UiField
-  com.github.gwtbootstrap.client.ui.TextBox expenseDate;
+  TextBox expenseDate;
 
+  @UiField
+  DatePicker datePicker;
+
+  private Date pickedDate;
 
   LeafValueEditor<Double> price = new LeafValueEditor<Double>() {
 
@@ -50,19 +57,16 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
     }
   };
 
-
   LeafValueEditor<Date> date = new LeafValueEditor<Date>() {
-
-    Date date = new Date();
 
     @Override
     public void setValue(Date value) {
-      expenseDate.setValue(String.valueOf(new Date()));
+      expenseDate.setValue(value.toString());
     }
 
     @Override
     public Date getValue() {
-      return new Date();
+      return pickedDate;
     }
   };
 
@@ -70,6 +74,22 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   public ExpenseEditor() {
     HTMLPanel rootElement = ourUiBinder.createAndBindUi(this);
     initWidget(rootElement);
-    expenseDate.setText("2012/03/06");
+    datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+      @Override
+      public void onValueChange(ValueChangeEvent<Date> dateValueChangeEvent) {
+        expenseDate.setText(dateValueChangeEvent.getValue().toString());
+        pickedDate = dateValueChangeEvent.getValue();
+        datePicker.setVisible(false);
+      }
+    });
+
   }
+
+
+  @UiHandler("expenseDate")
+  public void onClick(ClickEvent event) {
+    datePicker.setVisible(true);
+  }
+
+
 }

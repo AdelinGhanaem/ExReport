@@ -7,9 +7,12 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Date;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -26,7 +29,7 @@ public class AccountRepositoryImplTest {
 
   private DatastoreService service;
 
-  AccountRepository repository;
+  AccountRepositoryImpl repository;
 
   private String accountEntityKind = "Account";
 
@@ -46,7 +49,7 @@ public class AccountRepositoryImplTest {
   public void accountIsReturnedByUsernameAndPassword() {
     String username = "username";
     String password = "password";
-    Entity entity = new Entity("Account");
+    Entity entity = new Entity(accountEntityKind);
     entity.setProperty("username", username);
     entity.setProperty("password", password);
     service.put(entity);
@@ -55,6 +58,7 @@ public class AccountRepositoryImplTest {
     assertThat(username, is(equalTo(returnedAccount.getEmail())));
     assertThat(password, is(equalTo(returnedAccount.getPassword())));
   }
+
 
   @Test
   public void returnsNullWhenAccountDoesNotExist() {

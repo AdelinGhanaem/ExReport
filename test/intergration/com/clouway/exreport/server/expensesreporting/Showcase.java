@@ -3,6 +3,8 @@ package com.clouway.exreport.server.expensesreporting;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
@@ -15,10 +17,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -27,7 +34,7 @@ import java.util.Set;
 public class Showcase {
 
 
-  private ExpensesRepository repository = new ExpensesRepositoryImpl(null,null);
+  private ExpensesRepository repository = new ExpensesRepositoryImpl(null, null);
 
   private LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
@@ -47,7 +54,7 @@ public class Showcase {
   public void tearDown() throws Exception {
     helper.tearDown();
   }
-  
+
   static class Person {
     @Id
     private Long id;
@@ -58,26 +65,48 @@ public class Showcase {
     private Integer age;
 
 
+  }
+
+  @Test
+  public void keyToString() {
+
+    Entity entity = new Entity("Account");
+
+    service.put(entity);
+
+    String stringKey = KeyFactory.keyToString(entity.getKey());
+
+    Key key = KeyFactory.stringToKey(stringKey);
+
+    assertThat(key, is(equalTo(key)));
+
 
   }
 
   @Test
   public void twigSample() throws Exception {
+
     Person person = new Person();
+
     person.id = 10l;
+
     person.name = "Stefan";
+
     person.age = 20;
 
     ObjectDatastore datastore = new AnnotationObjectDatastore(false);
+
     datastore.store().instance(person).now();
 
     datastore.disassociateAll();
 
     Person existingPerson = datastore.load().type(Person.class).id(10l).now();
+
     System.out.println(existingPerson.name);
-    
-    List<Person> personList = datastore.find().type(Person.class).addFilter("name", Query.FilterOperator.EQUAL,"Stefan")
+
+    List<Person> personList = datastore.find().type(Person.class).addFilter("name", Query.FilterOperator.EQUAL, "Stefan")
             .returnAll().now();
+
     for (Person p : personList) {
       System.out.println(p.name);
 
@@ -86,19 +115,22 @@ public class Showcase {
   }
 
   class Expense {
+
     public final String name;
+
     public final Double amount;
 
     Expense(String name, Double amount) {
       this.name = name;
       this.amount = amount;
     }
+
   }
 
   @Test
   public void sampleTest() throws Exception {
 
-    Entity account = new Entity("Account","mgenov@gmail.com");
+    Entity account = new Entity("Account", "mgenov@gmail.com");
 
     account.setProperty("name", "Miroslav Genov");
 
@@ -112,9 +144,9 @@ public class Showcase {
 
     Query query = new Query("Expense");
 
-    query.addFilter("account", Query.FilterOperator.EQUAL,account.getKey());
+    query.addFilter("account", Query.FilterOperator.EQUAL, account.getKey());
 
-    query.addFilter("date", Query.FilterOperator.EQUAL,new Date());
+    query.addFilter("date", Query.FilterOperator.EQUAL, new Date());
 
     List<Expense> expenses = new ArrayList<Expense>();
 
@@ -128,7 +160,7 @@ public class Showcase {
 
       System.out.println();
 
-      expenses.add(new Expense((String)entity.getProperty("name"), (Double)entity.getProperty("amount")));
+      expenses.add(new Expense((String) entity.getProperty("name"), (Double) entity.getProperty("amount")));
 
       System.out.println();
 
@@ -137,11 +169,9 @@ public class Showcase {
     // 1 request = 30 seconds -> 1000000000000 rows !!!!
 
 
-
     // task queue -> 1000 - 2000 rows -> blobstore
 
     // 50 mb file ?? 6mb -> < 1s
-
 
 
     // return to GWT !!!
@@ -154,7 +184,6 @@ public class Showcase {
   // 4 Pesho, 10, Peter, dimitrov
 
 
-
   // Pesho, 20 godini !
 
 
@@ -164,7 +193,7 @@ public class Showcase {
 
   @Test
   public void sampleSearch() throws Exception {
-    Entity account = new Entity("Account","mgenov@gmail.com");
+    Entity account = new Entity("Account", "mgenov@gmail.com");
 
     account.setProperty("name", "Miroslav Genov");
     Set<String> index = new HashSet<String>();
@@ -181,8 +210,8 @@ public class Showcase {
 
     account.setProperty("index", index);
     service.put(account);
-    
-    
+
+
     Query query = new Query("Account");
     query.addFilter("index", Query.FilterOperator.EQUAL, "ivan".toLowerCase());
     query.addFilter("index", Query.FilterOperator.EQUAL, "pirot".toLowerCase());
@@ -202,12 +231,12 @@ public class Showcase {
     Entity account = new Entity("Account", "mgenov@gmail.com");
 
     account.setProperty("name", "Miroslav Genov");
-    
+
     service.put(account);
-    
-    for (int i = 0; i< 10;i++) {
-      
-      Entity expense = new Entity("Expense",account.getKey());
+
+    for (int i = 0; i < 10; i++) {
+
+      Entity expense = new Entity("Expense", account.getKey());
 
       expense.setProperty("name", "Name" + i);
 
@@ -234,7 +263,6 @@ public class Showcase {
     expense.setProperty("amount", amount);
     expense.setProperty("account", account.getKey());
     expense.setProperty("date", new Date());
-
     service.put(expense);
 
   }
@@ -242,25 +270,11 @@ public class Showcase {
   @Test
   public void returnsAllYearsOfExpenses() {
 
-//    String parentKey = "123";
-//
-//    String keyKind = "yearsList";
-//
-//    ArrayList<Year> yearList = new ArrayList<Year>();
-//
-//    yearList.add(new Year(2012));
-//
-//    Entity entity = new Entity(keyKind, parentKey);
-//
-//    entity.setProperty("years", yearList);
+    Calendar calendar = Calendar.getInstance();
 
-//    List<Year> years = repository.getYears();
+    calendar.set(2012, Calendar.FEBRUARY, 1);
 
-//    assertThat(years, is(notNullValue()));
-//
-//    assertThat(years.get(0), is(notNullValue()));
-//
-//    assertThat(years.get(0).getYear(),is(equalTo(2012)));
+    int dayOfFeb = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
   }
 

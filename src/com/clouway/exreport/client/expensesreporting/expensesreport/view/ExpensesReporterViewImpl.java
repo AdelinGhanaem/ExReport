@@ -10,13 +10,12 @@ import com.clouway.exreport.shared.entites.Month;
 import com.clouway.exreport.shared.entites.Year;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -52,9 +51,6 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   HTMLPanel maiPanel;
 
-  private Year currentYear;
-
-  private Month currentMonth;
 
   final SingleSelectionModel<Day> singleSelectionModel = new SingleSelectionModel<Day>();
 
@@ -64,15 +60,13 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   @UiField
   HorizontalPanel cellTreeScrollPanel;
+
+  private int lastClickedYear;
+
+  private int lastClickedMonth;
+
   @UiField
   HorizontalPanel panel;
-
-//  @UiField
-//  HorizontalPanel cellTreePanel;
-
-//  @UiField
-//  HorizontalPanel panel;
-
 
   public ExpensesReporterViewImpl() {
 
@@ -80,19 +74,13 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
       @Override
       public void onSelectionChange(SelectionChangeEvent event) {
-
         Day day = singleSelectionModel.getSelectedObject();
-
-        DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("yyyy-MM-DD");
-
-        Date date = new Date();
-
+        DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("yyyy/MM/dd");
+        String stringDate = day.getYear() + "/" + day.getMonth() + "/" + day.getDay();
+        Date date = dateTimeFormat.parse(stringDate);
         presenter.fetchExpensesBetween(date, date);
-
       }
     });
-
-    SimplePager.Resources pagerResources = GWT.create(SimplePager.Resources.class);
 
     maiPanel = ourUiBinder.createAndBindUi(this);
 
@@ -114,25 +102,17 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
 
   @Override
   public <T> NodeInfo<?> getNodeInfo(T value) {
-
     if (value == null) {
       return new DefaultNodeInfo<Year>(yearAsyncDataProvider, new YearCell());
     }
-
     if (value instanceof Year) {
-
-      currentYear = (Year) value;
-
+      lastClickedYear = ((Year) value).getYear();
       return new DefaultNodeInfo<Month>(monthAsyncDataProvider, new MonthCell());
-
     }
     if (value instanceof Month) {
-
-      currentMonth = (Month) value;
-
+      lastClickedMonth = ((Month) value).getMonth();
       return new DefaultNodeInfo<Day>(dayAsyncDataProvider, new DayCell(), singleSelectionModel, null);
     }
-
     return null;
   }
 
@@ -207,14 +187,14 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
     monthAsyncDataProvider = new AsyncDataProvider<Month>() {
       @Override
       protected void onRangeChanged(HasData<Month> display) {
-        presenter.getMonthsOf(currentYear.getYear());
+        presenter.getMonthsOf(lastClickedYear);
       }
     };
 
     dayAsyncDataProvider = new AsyncDataProvider<Day>() {
       @Override
       protected void onRangeChanged(HasData<Day> display) {
-        presenter.getAllExpensesDays(currentYear.getYear(), currentMonth.getMonth());
+        presenter.getAllExpensesDays(lastClickedYear, lastClickedMonth);
       }
     };
 

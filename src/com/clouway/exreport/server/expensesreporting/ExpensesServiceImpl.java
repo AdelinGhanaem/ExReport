@@ -31,7 +31,6 @@ public class ExpensesServiceImpl implements ExpensesService {
   }
 
   public List<Expense> getExpensesByDate(Date date) {
-
     return repository.getExpenseByDate(date);
   }
 
@@ -48,18 +47,15 @@ public class ExpensesServiceImpl implements ExpensesService {
 
   public List<Month> getMonths(int year) {
     return null;
-//    return repository.getExpensesMonths(year);
   }
 
   public List<Day> getDays(int year, int month) {
-//    return repository.getDeclaredDays(year, month);
     return null;
   }
 
   @Override
   public List<Year> getDeclaredYears() {
-//    return repository.getYears();
-    return null;
+    return repository.getYears();
   }
 
 }

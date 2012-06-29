@@ -18,8 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnFailure;
@@ -65,29 +65,36 @@ public class AddExpensesPresenterImplTest {
     hasHandlers = spy(new SimpleEventBus());
 
     addExpensesPresenterImpl = new AddExpensesPresenterImpl(actionDispatcherServiceAsync, hasHandlers, view, factory);
+
   }
 
 //  @Test
-//  public void shouldAddExpenseAndFireExpenseAddedEventOnSuccess() throws ParseException {
+//  public void addsExpenseAndFireExpenseAddedEventOnSuccess() throws ParseException {
 //
 //    Date date = dateTimeFormat.parse("2012-06-02");
 //
 //    Expense expense = new Expense("Food", 12d, date);
 //
-//    AddExpenseResponse expenseResponse = new AddExpenseResponse(expense);
+//    AddExpenseResponse addExpenseResponse = new AddExpenseResponse(expense);
 //
-//    doOnSuccess(expenseResponse).when(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
+//    SecurityAction<AddExpenseAction<AddExpenseResponse>> securityAction = new SecurityAction<AddExpenseAction<AddExpenseResponse>>();
+//
+//    SecurityResponse<AddExpenseResponse> securityResponse = new SecurityResponse<AddExpenseResponse>(addExpenseResponse);
+//
+//    when(factory.createSecurityAction(isA(AddExpenseAction.class))).thenReturn(securityAction);
+//
+//    doOnSuccess(securityResponse).when(actionDispatcherServiceAsync).dispatch(isA(AddExpenseAction.class), isA(GotResponse.class));
 //
 //    addExpensesPresenterImpl.addExpense(expense);
 //
-//    verify(actionDispatcherServiceAsync).dispatch(any(Action.class), any(AsyncCallback.class));
+//    verify(actionDispatcherServiceAsync).dispatch(isA(SecurityAction.class), any(GotResponse.class));
 //
-//    verify(hasHandlers).fireEvent(any(ExpenseAddedEvent.class));
+//    verify(hasHandlers).fireEvent(isA(ExpenseAddedEvent.class));
 //
 //  }
 
   @Test
-  public void anExpenseIsAddedWhenDateIsCurrentDate() {
+  public void addsExpenseAndFireExpenseAddedEventOnSuccess() {
 
     Date date = new Date();
 
@@ -113,28 +120,13 @@ public class AddExpensesPresenterImplTest {
 
   }
 
-//  //
-////  //TODO:When testing date in the future make sure the date is always in the future !!;
-//  @Test
-//  public void anExpenseCanNotBeAddedInFutureDate() throws ParseException {
-//
-//    Date futureDate = dateTimeFormat.parse("2013-03-12");
-//
-//    Expense expense = new Expense("House Rent", 12d, futureDate);
-//
-//    addExpensesPresenterImpl.addExpense(expense);
-//
-//    verify(actionDispatcherServiceAsync, never()).dispatch(any(Action.class), any(AsyncCallback.class));
-//
-//    verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
-//
-//    verify(view).notifyExpenseCanNotBeAddedInFutureDate();
-//
-//  }
+  @Test
+  public void disablesAddButtonOnAddExpense() {
+    addExpensesPresenterImpl.addExpense(new Expense());
+    verify(view).disableAddButton();
+  }
 
-
-  //
-
+  //TODO:When testing date in the future make sure the date is always in the future !!;
 
   @Test
   public void expensePriceCanNotBeNegative() {
@@ -165,6 +157,15 @@ public class AddExpensesPresenterImplTest {
     addExpensesPresenterImpl.addExpense(expense);
 
     verify(view).notifyUserOfConnectionError();
+  }
+
+
+  @Test
+  public void shouldUpdatedTableOnExpensesAdded() {
+
+    Date date = new Date();
+
+    Expense expense = new Expense("computer mouse", 12d, date);
 
   }
 }
