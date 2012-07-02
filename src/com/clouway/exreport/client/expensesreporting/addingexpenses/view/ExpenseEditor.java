@@ -2,18 +2,14 @@ package com.clouway.exreport.client.expensesreporting.addingexpenses.view;
 
 import com.clouway.exreport.shared.entites.Expense;
 import com.github.gwtbootstrap.client.ui.TextBox;
+import com.github.gwtbootstrap.datepicker.client.ui.DateBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.LeafValueEditor;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.datepicker.client.DatePicker;
 
 import java.util.Date;
 
@@ -35,12 +31,13 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
   @UiField
   TextBox expensePrice;
 
+//  @Ignore
+//  @UiField
+//  TextBox datePicker;
+
   @Ignore
   @UiField
-  TextBox expenseDate;
-
-  @UiField
-  DatePicker datePicker;
+  DateBox datePicker;
 
   private Date pickedDate;
 
@@ -61,35 +58,28 @@ public class ExpenseEditor extends Composite implements Editor<Expense> {
 
     @Override
     public void setValue(Date value) {
-      expenseDate.setValue(value.toString());
+      if (value != null) {
+        datePicker.setValue(value);
+      }
     }
 
     @Override
     public Date getValue() {
-      return pickedDate;
+      return datePicker.getValue();
     }
   };
 
 
   public ExpenseEditor() {
+
     HTMLPanel rootElement = ourUiBinder.createAndBindUi(this);
+
+    pickedDate = new Date();
+
     initWidget(rootElement);
-    datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
-      @Override
-      public void onValueChange(ValueChangeEvent<Date> dateValueChangeEvent) {
-        expenseDate.setText(dateValueChangeEvent.getValue().toString());
-        pickedDate = dateValueChangeEvent.getValue();
-        datePicker.setVisible(false);
-      }
-    });
-
   }
 
 
-  @UiHandler("expenseDate")
-  public void onClick(ClickEvent event) {
-    datePicker.setVisible(true);
-  }
 
 
 }

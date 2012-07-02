@@ -16,7 +16,7 @@
     <div>
 
       <div class="{style.centerPanel}" ui:field="cellTablesDiv">
-        <g:Label text="Reporting" addStyleNames="{style.reportingLabel}"></g:Label>
+        <g:Label text="Reporting" addStyleNames="{style.reportingLabel}"/>
         <g:ScrollPanel addStyleNames="{style.mainScrollPanel}">
           <g:HorizontalPanel ui:field="expensesPanel">
           </g:HorizontalPanel>

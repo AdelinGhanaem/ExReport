@@ -5,11 +5,11 @@
 
   <ui:style src="style.css"/>
 
-  <g:HTMLPanel addStyleNames="{style.editorContainer}">
-    <g:VerticalPanel addStyleNames="{style.form}" ui:field="addExpenses">
+  <g:HTMLPanel addStyleNames="{style.addingExpenseContainer}">
+    <g:FlowPanel addStyleNames="{style.form}" ui:field="addExpenses">
       <g:Label text="Add expense" addStyleNames="{style.lable}"/>
       <mine:ExpenseEditor ui:field="expenseEditor"/>
       <b:Button ui:field="save" type="SUCCESS" text="save"/>
-    </g:VerticalPanel>
+    </g:FlowPanel>
   </g:HTMLPanel>
 </ui:UiBinder>

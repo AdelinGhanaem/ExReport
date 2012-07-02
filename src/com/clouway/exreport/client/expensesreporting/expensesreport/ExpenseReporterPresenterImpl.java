@@ -9,6 +9,7 @@ import com.clouway.exreport.client.security.SecurityActionFactory;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchYearsAction;
 import com.clouway.exreport.shared.entites.Day;
+import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.entites.Month;
 import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.reponses.FetchYearsResponse;
@@ -28,29 +29,29 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
   private final ExpenseReporterView view;
 
-  private final ActionDispatcherServiceAsync asynchService;
+  private final ActionDispatcherServiceAsync service;
 
   private SecurityActionFactory securityActionFactory;
 
   HashMap<Integer, Integer> monthDaysMap = new HashMap<Integer, Integer>() {{
     put(1, 31);
-    put(2, 31);
+    put(2, 29);
     put(3, 31);
-    put(4, 31);
+    put(4, 30);
     put(5, 31);
-    put(6, 31);
+    put(6, 30);
     put(7, 31);
     put(8, 31);
-    put(9, 31);
+    put(9, 30);
     put(10, 31);
-    put(11, 31);
+    put(11, 30);
     put(12, 31);
   }};
 
   @Inject
   public ExpenseReporterPresenterImpl(ExpenseReporterView view, ActionDispatcherServiceAsync reporterAsync, SecurityActionFactory securityActionFactory) {
     this.view = view;
-    this.asynchService = reporterAsync;
+    this.service = reporterAsync;
     this.securityActionFactory = securityActionFactory;
   }
 
@@ -58,18 +59,22 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
     if (firstDate.before(secondDate) || firstDate.equals(secondDate)) {
       SecurityAction<FetchExpensesAction<FetchExpensesResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate));
-      asynchService.dispatchSecurityAction(securityAction, new GotResponse<SecurityResponse<FetchExpensesResponse>>() {
+      service.dispatchSecurityAction(securityAction, new GotResponse<SecurityResponse<FetchExpensesResponse>>() {
         @Override
         public void gotResponse(SecurityResponse<FetchExpensesResponse> result) {
+          ArrayList<Expense> expenses = result.getResponse().getExpenses();
+          double sum = 0;
+          for (Expense expense : result.getResponse().getExpenses()) {
+            sum += expense.getPrice();
+          }
           view.updateExpenses(result.getResponse().getExpenses());
+          view.showExpensesSum(sum);
         }
-
         @Override
         public void onFailure(Throwable caught) {
           view.showConnectionErrorMessage();
         }
       });
-
     } else {
       view.notifyUserOfDateDiscrepancy();
     }
@@ -78,9 +83,9 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
 
   public void getAllExpensesYears() {
-    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchYearsAction<FetchYearsResponse>());
 
-    asynchService.dispatchSecurityAction(securityAction, new GotResponse<SecurityResponse<FetchYearsResponse>>() {
+    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchYearsAction<FetchYearsResponse>());
+    service.dispatchSecurityAction(securityAction, new GotResponse<SecurityResponse<FetchYearsResponse>>() {
       @Override
       public void gotResponse(SecurityResponse<FetchYearsResponse> result) {
         view.showExpensesYears(result.getResponse().getYears());
@@ -91,7 +96,6 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
         view.showConnectionErrorMessage();
       }
     });
-
 
 
   }

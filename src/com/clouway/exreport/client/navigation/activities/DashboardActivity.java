@@ -53,12 +53,10 @@ public class DashboardActivity extends AbstractActivity {
 
     addExpensesView.setPresenter(addExpensesPresenter);
 
-//    dashboardPanel.setAddingExpensesPanelPresenter(addExpensesPresenter);
-//
-//    dashboardPanel.setExpensesPanelPresenter(expenseReporterPresenter);
-
     dashboardPanel.setExpensesReportingPanel(expenseReporterView.asWidget());
+
     dashboardPanel.setAddingExpensesPanel(addExpensesView.asWidget());
+
     panel.setWidget(dashboardPanel);
 
   }

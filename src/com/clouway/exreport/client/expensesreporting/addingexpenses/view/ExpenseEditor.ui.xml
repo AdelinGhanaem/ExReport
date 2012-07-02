@@ -3,6 +3,7 @@
              xmlns:e='urn:import:com.google.gwt.editor.ui.client'
              xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
              xmlns:dp="urn:import:com.google.gwt.user.datepicker.client"
+             xmlns:b2="urn:import:com.github.gwtbootstrap.datepicker.client.ui"
         >
   <ui:style>
 
@@ -13,27 +14,29 @@
     }
 
     .editorContainer {
-      height: 100px;
+      height: auto;
       vertical-align: middle;
-      padding:5px;
+      padding: 5px;
     }
 
-    .editorContainer div,tr,td {
-    margin:2px;
+    .datePicker {
+      position: absolute;
+      z-index: 1;
     }
 
 
   </ui:style>
   <g:HTMLPanel addStyleNames="{style.editorContainer}">
 
-    <g:HorizontalPanel addStyleNames="{style.addExpenseDivContainer}">
-      <g:Label text="Date:"/>
-      <b:TextBox ui:field="expenseDate" placeholder="Date"/>
-      <dp:DatePicker ui:field="datePicker"/>
-      <g:Label text="Price"/>
-      <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
-      <g:Label text="Title:"/>
-      <b:TextBox ui:field="name" placeholder="price ... "/>
-    </g:HorizontalPanel>
+    <!--<g:VerticalPanel addStyleNames="{style.addExpenseDivContainer}">-->
+    <g:Label text="Title:"/>
+    <b:TextBox ui:field="name" placeholder="price ... "/>
+    <g:Label text="Price"/>
+    <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
+    <g:Label text="Date:"/>
+    <!--<b:TextBox ui:field="expenseDate" placeholder="" enabled="true"/>-->
+    <b2:DateBox ui:field="datePicker"  format="dd/mm/yyyy"  autoClose="true"/>
+
+    <!--</g:VerticalPanel>-->
   </g:HTMLPanel>
 </ui:UiBinder>

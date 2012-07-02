@@ -30,4 +30,6 @@ public interface ExpenseReporterView extends View<ExpenseReporterPresenter> {
     void showMonthsOfExpenses(ArrayList<Month> months);
 
     void showDaysExpenses(ArrayList<Day> days);
+
+  void showExpensesSum(double expensesSum);
 }

@@ -1,25 +1,23 @@
 package com.clouway.exreport.client.expensesreporting.expensesreport;
 
-import com.clouway.exreport.client.security.SecurityAction;
-import com.clouway.exreport.client.security.SecurityActionFactory;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
+import com.clouway.exreport.client.security.SecurityAction;
+import com.clouway.exreport.client.security.SecurityActionFactory;
 import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
-import com.clouway.exreport.shared.actions.FetchMonthsAction;
 import com.clouway.exreport.shared.actions.FetchYearsAction;
 import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.entites.Expense;
-import com.clouway.exreport.shared.entites.Month;
 import com.clouway.exreport.shared.entites.Token;
+import com.clouway.exreport.shared.entites.Year;
 import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
-import com.clouway.exreport.shared.reponses.FetchMonthsResponse;
 import com.clouway.exreport.shared.reponses.FetchYearsResponse;
-import com.clouway.exreport.shared.entites.Year;
 import com.clouway.exreport.shared.reponses.SecurityResponse;
 import com.evo.gad.shared.Action;
+import com.evo.gad.shared.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +34,6 @@ import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallback
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
-import static org.mockito.Mockito.ignoreStubs;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -49,15 +45,15 @@ public class ExpenseReporterPresenterImplTest {
 
 
   @Mock
-  ExpenseReporterView reporterView;
+  ExpenseReporterView view;
 
   @Mock
-  ActionDispatcherServiceAsync reporterAsync;
+  ActionDispatcherServiceAsync service;
 
   @Mock
   SecurityActionFactory factory;
 
-  private ExpenseReporterPresenterImpl reporterPresenter;
+  private ExpenseReporterPresenterImpl presenter;
 
   private Token token;
 
@@ -74,7 +70,7 @@ public class ExpenseReporterPresenterImplTest {
     initMocks(this);
 
 
-    reporterPresenter = new ExpenseReporterPresenterImpl(reporterView, reporterAsync, factory);
+    presenter = new ExpenseReporterPresenterImpl(view, service, factory);
 
   }
 
@@ -96,28 +92,13 @@ public class ExpenseReporterPresenterImplTest {
 
     when(factory.createSecurityAction(isA(FetchExpensesAction.class))).thenReturn(securityAction);
 
-    doOnSuccess(response).when(reporterAsync).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
+    doOnSuccess(response).when(service).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
 
-    reporterPresenter.fetchExpensesBetween(firstDate, secondDate);
+    presenter.fetchExpensesBetween(firstDate, secondDate);
 
-    verify(reporterAsync).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
+    verify(service).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
 
-    verify(reporterView).updateExpenses(expenses);
-
-  }
-
-  @Test
-  public void notifiesUserWhenStartDateIsAfterEndDate() throws ParseException {
-
-    Date startDate = dateFormat.parse("2012-06-01");
-
-    Date endDate = dateFormat.parse("2010-06-01");
-
-    reporterPresenter.fetchExpensesBetween(startDate, endDate);
-
-    verify(reporterAsync, never()).dispatch(any(Action.class), any(GotResponse.class));
-
-    verify(reporterView).notifyUserOfDateDiscrepancy();
+    verify(view).updateExpenses(expenses);
 
   }
 
@@ -128,11 +109,11 @@ public class ExpenseReporterPresenterImplTest {
 
     Date endDate = new Date();
 
-    doOnFailure(new Throwable()).when(reporterAsync).dispatchSecurityAction(any(SecurityAction.class), any(GotResponse.class));
+    doOnFailure(new Throwable()).when(service).dispatchSecurityAction(any(SecurityAction.class), any(GotResponse.class));
 
-    reporterPresenter.fetchExpensesBetween(firstDate, endDate);
+    presenter.fetchExpensesBetween(firstDate, endDate);
 
-    verify(reporterView).showConnectionErrorMessage();
+    verify(view).showConnectionErrorMessage();
 
   }
 
@@ -143,6 +124,7 @@ public class ExpenseReporterPresenterImplTest {
     ArrayList<Year> yearList = new ArrayList<Year>();
 
     FetchYearsAction<FetchYearsResponse> fetchYearsAction = new FetchYearsAction<FetchYearsResponse>();
+
     FetchYearsResponse yearsResponse = new FetchYearsResponse(yearList);
 
     SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction =
@@ -152,61 +134,59 @@ public class ExpenseReporterPresenterImplTest {
 
     when(factory.createSecurityAction(isA(FetchYearsAction.class))).thenReturn(securityAction);
 
-    doOnSuccess(securityResponse).when(reporterAsync).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
+    doOnSuccess(securityResponse).when(service).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
 
-    reporterPresenter.getAllExpensesYears();
+    presenter.getAllExpensesYears();
 
-    verify(reporterAsync).dispatchSecurityAction(eq(securityAction), any(AsyncCallback.class));
+    verify(service).dispatchSecurityAction(eq(securityAction), any(AsyncCallback.class));
 
-    verify(reporterView).showExpensesYears(yearList);
+    verify(view).showExpensesYears(yearList);
 
   }
 
   @Test
   public void notifiesUserWhenErrorOccursWhileRequiringYearsOfExpenses() {
 
-    doOnFailure(new Throwable()).when(reporterAsync).dispatchSecurityAction(any(SecurityAction.class), any(AsyncCallback.class));
+    doOnFailure(new Throwable()).when(service).dispatchSecurityAction(any(SecurityAction.class), any(AsyncCallback.class));
 
-    reporterPresenter.getAllExpensesYears();
+    presenter.getAllExpensesYears();
 
-    verify(reporterAsync).dispatchSecurityAction(any(SecurityAction.class), any(AsyncCallback.class));
+    verify(service).dispatchSecurityAction(any(SecurityAction.class), any(AsyncCallback.class));
 
-    verify(reporterView).showConnectionErrorMessage();
+    verify(view).showConnectionErrorMessage();
   }
 
   @Test
-  public void returnsAllExpensesDays() {
+  public void showTheReturnedExpensesSum() {
+    ArrayList<Expense> returnedExpenses = new ArrayList<Expense>();
+    for (int i = 0; i < 5; i++) {
+      returnedExpenses.add(new Expense("name" + i, 2, new Date()));
+    }
+    FetchExpensesResponse response = new FetchExpensesResponse(returnedExpenses);
 
-    int year = 2012;
+    SecurityResponse<FetchExpensesResponse> securityResponse = stubSecurityActionCreation(response,
+            new FetchExpensesAction<FetchExpensesResponse>(new Date(), new Date()));
 
-    int month = 6;
+    doOnSuccess(securityResponse).when(service).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
 
-    ArrayList<Day> days = new ArrayList<Day>();
+    presenter.fetchExpensesBetween(new Date(), new Date());
 
-    FetchDaysResponse fetchDaysResponse = new FetchDaysResponse(days);
+    verify(service).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
 
-    FetchDaysAction<FetchDaysResponse> action = new FetchDaysAction<FetchDaysResponse>(year, month);
+    verify(view).showExpensesSum(10d);
+  }
 
-    SecurityResponse<FetchDaysResponse> response = new SecurityResponse<FetchDaysResponse>(fetchDaysResponse, token);
-
-    SecurityAction<FetchDaysAction<FetchDaysResponse>> securityAction = new SecurityAction<FetchDaysAction<FetchDaysResponse>>(action, token);
-
-    when(factory.createSecurityAction(isA(FetchDaysAction.class))).thenReturn(securityAction);
-
-    doOnSuccess(response).when(reporterAsync).dispatchSecurityAction(eq(securityAction), isA(GotResponse.class));
-
-    reporterPresenter.getAllExpensesDays(year, month);
-
-    verify(reporterAsync).dispatchSecurityAction(eq(securityAction), isA(GotResponse.class));
-
-    verify(reporterView).showDaysExpenses(days);
+  private <R extends Response, A extends Action<R>, S extends SecurityAction<A>, P extends SecurityResponse<R>> P stubSecurityActionCreation(R response, A action) {
+    SecurityResponse<R> securityResponse = new SecurityResponse<R>(response);
+    SecurityAction<A> securityAction = new SecurityAction<A>(action, new Token());
+    when(factory.createSecurityAction(any(Action.class))).thenReturn(securityAction);
+    return (P) securityResponse;
   }
 
   @Test
   public void shouldShowAllMonthsOfAYear() {
-    reporterPresenter.getMonthsOf(2012);
-    verify(reporterView).showMonthsOfExpenses(isA(ArrayList.class));
+    presenter.getMonthsOf(2012);
+    verify(view).showMonthsOfExpenses(isA(ArrayList.class));
   }
-
 }
   

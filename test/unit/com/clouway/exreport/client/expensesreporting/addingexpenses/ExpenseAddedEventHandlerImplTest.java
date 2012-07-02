@@ -39,7 +39,7 @@ public class ExpenseAddedEventHandlerImplTest {
   }
 
   @Test
-  public void shouldUpdateYearsWhenOnExpenseAdded() {
+  public void shouldUpdateYearsWhenOnExpenseIsAdded() {
     expenseAddedEventHandler.onExpenseAdded(new ExpenseAddedEvent(new Expense()));
     verify(presenter).getAllExpensesYears();
   }

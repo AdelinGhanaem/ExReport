@@ -23,4 +23,5 @@ public class ExpenseAddedEventHandlerImpl implements ExpenseAddedEventHandler {
     addExpense.enableAddButton();
     presenter.getAllExpensesYears();
   }
+
 }

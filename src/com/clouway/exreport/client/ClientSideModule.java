@@ -16,6 +16,8 @@ import com.clouway.exreport.client.comunication.ActionDispatcherService;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenter;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.AddExpensesPresenterImpl;
+import com.clouway.exreport.client.expensesreporting.addingexpenses.ExpenseAddedEventHandler;
+import com.clouway.exreport.client.expensesreporting.addingexpenses.ExpenseAddedEventHandlerImpl;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesView;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.view.AddExpensesViewImpl;
 import com.clouway.exreport.client.expensesreporting.expensesreport.ExpenseReporterPresenter;
@@ -25,10 +27,10 @@ import com.clouway.exreport.client.expensesreporting.expensesreport.view.Expense
 import com.clouway.exreport.client.navigation.SecureActivityMapperProvider;
 import com.clouway.exreport.client.security.SecurityActionFactory;
 import com.clouway.exreport.client.security.SecurityActionFactoryImpl;
-import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.client.security.SecurityTokenProviderImpl;
 import com.clouway.exreport.shared.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.AccountValidationErrorMessagesImpl;
+import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -85,6 +87,8 @@ public class ClientSideModule extends AbstractGinModule {
 
     bind(AccountCreatedEventHandler.class).to(AccountCreatedEventHandlerImpl.class);
 
+    bind(ExpenseAddedEventHandler.class).to(ExpenseAddedEventHandlerImpl.class);
+
 
   }
 
@@ -93,7 +97,6 @@ public class ClientSideModule extends AbstractGinModule {
   public ActionDispatcherServiceAsync provideDispatcherServiceAsync() {
     return GWT.create(ActionDispatcherService.class);
   }
-
 
 
 }

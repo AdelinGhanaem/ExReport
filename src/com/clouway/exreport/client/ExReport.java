@@ -2,11 +2,11 @@ package com.clouway.exreport.client;
 
 import com.clouway.exreport.client.accountcreation.AccountCreatedEvent;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
+import com.clouway.exreport.client.expensesreporting.addingexpenses.ExpenseAddedEvent;
 import com.clouway.exreport.client.navigation.ApplicationPlaceHistoryMapper;
 import com.clouway.exreport.client.navigation.places.DashboardPlace;
 import com.clouway.exreport.client.navigation.places.NewRegistrationPlace;
 import com.clouway.exreport.shared.SecurityTokenProvider;
-import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -49,8 +49,11 @@ public class ExReport implements EntryPoint {
     eventBus.addHandler(UserAuthenticatedEvent.TYPE, injector.userAuthenticatedEventHandler());
 
     eventBus.addHandler(AccountCreatedEvent.TYPE, injector.accountCreatedEventHandler());
+
+    eventBus.addHandler(ExpenseAddedEvent.TYPE, injector.expenseAddedEventHandler());
+
     SecurityTokenProvider provider = injector.securityToken();
-    provider.setToken(new Token("mail@mail.com"));
+
     controller.goTo(new DashboardPlace());
 
   }

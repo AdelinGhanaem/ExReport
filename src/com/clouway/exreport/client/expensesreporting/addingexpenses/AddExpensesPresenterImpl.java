@@ -9,7 +9,6 @@ import com.clouway.exreport.shared.actions.AddExpenseAction;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.reponses.AddExpenseResponse;
 import com.clouway.exreport.shared.reponses.SecurityResponse;
-import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -18,7 +17,7 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 public class AddExpensesPresenterImpl implements AddExpensesPresenter {
 
-  private final ActionDispatcherServiceAsync asynchService;
+  private final ActionDispatcherServiceAsync service;
 
   private final EventBus hasHandlers;
 
@@ -26,8 +25,8 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
   private final SecurityActionFactory factory;
 
   @Inject
-  public AddExpensesPresenterImpl(ActionDispatcherServiceAsync asynchService, EventBus hasHandlers, AddExpensesView view, SecurityActionFactory factory) {
-    this.asynchService = asynchService;
+  public AddExpensesPresenterImpl(ActionDispatcherServiceAsync service, EventBus hasHandlers, AddExpensesView view, SecurityActionFactory factory) {
+    this.service = service;
     this.hasHandlers = hasHandlers;
     this.view = view;
     this.factory = factory;
@@ -41,11 +40,10 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
 
       SecurityAction<AddExpenseAction<AddExpenseResponse>> action = factory.createSecurityAction(addExpenseAction);
 
-      asynchService.dispatchSecurityAction(action, new GotResponse<SecurityResponse<AddExpenseResponse>>() {
+      service.dispatchSecurityAction(action, new GotResponse<SecurityResponse<AddExpenseResponse>>() {
         @Override
         public void gotResponse(SecurityResponse<AddExpenseResponse> result) {
           hasHandlers.fireEvent(new ExpenseAddedEvent(result.getResponse().getExpense()));
-          Window.alert("expense is added !");
           view.enableAddButton();
         }
 
