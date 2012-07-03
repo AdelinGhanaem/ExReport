@@ -6,7 +6,7 @@ import com.clouway.exreport.server.accountcreation.AccountRepository;
 import com.clouway.exreport.server.accountcreation.AccountRepositoryImpl;
 import com.clouway.exreport.server.accountcreation.AccountValidator;
 import com.clouway.exreport.server.accountcreation.AccountValidatorImpl;
-import com.clouway.exreport.server.accountcreation.actionhandlers.CreateAccountActionHandler;
+import com.clouway.exreport.server.accountcreation.actionhandlers.RegisterAccountActionHandler;
 import com.clouway.exreport.server.authentication.AuthenticatedUsersRepository;
 import com.clouway.exreport.server.authentication.AuthenticatedUsersRepositoryImpl;
 import com.clouway.exreport.server.authentication.UserAuthentication;
@@ -25,7 +25,7 @@ import com.clouway.exreport.shared.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.AccountValidationErrorMessagesImpl;
 import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.shared.actions.AddExpenseAction;
-import com.clouway.exreport.shared.actions.CreateAccountAction;
+import com.clouway.exreport.shared.actions.RegisterAccountAction;
 import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchMonthsAction;
@@ -107,7 +107,7 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
 
         metadatas.add(new ActionHandlerMetadata(AddExpenseAction.class, AddExpenseActionHandler.class));
 
-        metadatas.add(new ActionHandlerMetadata(CreateAccountAction.class, CreateAccountActionHandler.class));
+        metadatas.add(new ActionHandlerMetadata(RegisterAccountAction.class, RegisterAccountActionHandler.class));
 
         metadatas.add(new ActionHandlerMetadata(FetchDaysAction.class, FetchDaysActionHandler.class));
 

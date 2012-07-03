@@ -9,16 +9,15 @@
     <div class="{style.headerPanel}">
 
       <b:WellForm type="HORIZONTAL" addStyleNames="{style.formContainer}">
+
         <b:ControlGroup>
-
           <m:UserEditor ui:field="editor" />
-
           <b:Button ui:field="logIn" type="INVERSE" text="log in" addStyleNames="{style.button}"/>
           <b:Button ui:field="newAccount" type="SUCCESS" text="Sign up"/>
         </b:ControlGroup>
 
       </b:WellForm>
-      <div></div>
+      <div><g:Label ui:field="errorsLabel"/></div>
 
     </div>
 

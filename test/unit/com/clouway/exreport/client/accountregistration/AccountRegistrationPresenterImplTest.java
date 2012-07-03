@@ -1,12 +1,12 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.client.accountregistration;
 
-import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
+import com.clouway.exreport.client.accountregistration.view.AccountRegistrationView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.shared.AccountValidationErrorMessages;
-import com.clouway.exreport.shared.actions.CreateAccountAction;
+import com.clouway.exreport.shared.actions.RegisterAccountAction;
 import com.clouway.exreport.shared.entites.Account;
-import com.clouway.exreport.shared.reponses.CreateAccountResponse;
+import com.clouway.exreport.shared.reponses.RegisterAccountResponse;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import org.junit.Before;
@@ -27,7 +27,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatorPresenterImplTest {
+public class AccountRegistrationPresenterImplTest {
 
   @Mock
   private ActionDispatcherServiceAsync service;
@@ -35,10 +35,10 @@ public class AccountCreatorPresenterImplTest {
   @Mock
   private EventBus handlers;
 
-  private AccountCreatorPresenterImpl accountCreatorPresenter;
+  private AccountRegistrationPresenterImpl accountRegistrationPresenter;
 
   @Mock
-  private AccountCreatorView view;
+  private AccountRegistrationView view;
 
   @Mock
   AccountValidationErrorMessages errorMessages;
@@ -48,7 +48,7 @@ public class AccountCreatorPresenterImplTest {
 
     initMocks(this);
     handlers = spy(new SimpleEventBus());
-    accountCreatorPresenter = new AccountCreatorPresenterImpl(service, handlers, view, errorMessages);
+    accountRegistrationPresenter = new AccountRegistrationPresenterImpl(service, handlers, view, errorMessages);
   }
 
   @Test
@@ -56,15 +56,15 @@ public class AccountCreatorPresenterImplTest {
 
     Account account = new Account("Adelin@mail.com", "123567");
 
-    CreateAccountResponse createAccountResponse = new CreateAccountResponse(account, new ArrayList<String>());
+    RegisterAccountResponse registerAccountResponse = new RegisterAccountResponse(account, new ArrayList<String>());
 
-    doOnSuccess(createAccountResponse).when(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
+    doOnSuccess(registerAccountResponse).when(service).dispatch(isA(RegisterAccountAction.class), isA(GotResponse.class));
 
-    accountCreatorPresenter.create(account);
+    accountRegistrationPresenter.register(account);
 
-    verify(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
+    verify(service).dispatch(isA(RegisterAccountAction.class), isA(GotResponse.class));
 
-    verify(handlers).fireEvent(any(AccountCreatedEvent.class));
+    verify(handlers).fireEvent(any(AccountRegisteredEvent.class));
   }
 
 
@@ -79,17 +79,17 @@ public class AccountCreatorPresenterImplTest {
 
     errors.add(errorMessage);
 
-    CreateAccountResponse createAccountResponse = new CreateAccountResponse(null, errors);
+    RegisterAccountResponse registerAccountResponse = new RegisterAccountResponse(null, errors);
 
-    doOnSuccess(createAccountResponse).when(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
+    doOnSuccess(registerAccountResponse).when(service).dispatch(isA(RegisterAccountAction.class), isA(GotResponse.class));
 
-    accountCreatorPresenter.create(account);
+    accountRegistrationPresenter.register(account);
 
-    verify(service).dispatch(isA(CreateAccountAction.class), isA(GotResponse.class));
+    verify(service).dispatch(isA(RegisterAccountAction.class), isA(GotResponse.class));
 
     verify(view).showMessages(errors);
 
-    verify(handlers, never()).fireEvent(any(AccountCreatedEvent.class));
+    verify(handlers, never()).fireEvent(any(AccountRegisteredEvent.class));
   }
 
 
@@ -102,11 +102,11 @@ public class AccountCreatorPresenterImplTest {
 
     Account account = new Account(invalidEmailForm, "12345678");
 
-    accountCreatorPresenter.create(account);
+    accountRegistrationPresenter.register(account);
 
-    verify(service, never()).dispatch(any(CreateAccountAction.class), any(GotResponse.class));
+    verify(service, never()).dispatch(any(RegisterAccountAction.class), any(GotResponse.class));
 
-    verify(handlers, never()).fireEvent(any(AccountCreatedEvent.class));
+    verify(handlers, never()).fireEvent(any(AccountRegisteredEvent.class));
 
     verify(errorMessages).invalidEmailForm();
 
@@ -123,11 +123,11 @@ public class AccountCreatorPresenterImplTest {
 
     when(errorMessages.shortPassword()).thenReturn(shotPasswordMessage);
 
-    accountCreatorPresenter.create(new Account("mail@mail.com", "123"));
+    accountRegistrationPresenter.register(new Account("mail@mail.com", "123"));
 
-    verify(service, never()).dispatch(any(CreateAccountAction.class), any(GotResponse.class));
+    verify(service, never()).dispatch(any(RegisterAccountAction.class), any(GotResponse.class));
 
-    verify(handlers, never()).fireEvent(any(AccountCreatedEvent.class));
+    verify(handlers, never()).fireEvent(any(AccountRegisteredEvent.class));
 
     verify(errorMessages).shortPassword();
 

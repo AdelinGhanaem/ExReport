@@ -41,27 +41,36 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
   }
 
   public <T extends Response> T dispatch(Action<T> action) {
-    return (T) repository.getActionHandler(action.getClass()).handle(action);
+
+    Action<T> original = action;
+
+    if (action instanceof SecurityAction) {
+      SecurityAction<T> securedAction = (SecurityAction<T>) action;
+
+      Token token = securedAction.getSecurityToke();
+
+      if (token == null) {
+        return (T) new SecurityResponse<T>(null);
+      }
+
+      String key = authorizedUsersRepository.getTokenKey(token);
+
+      if (key == null) {
+        return (T) new SecurityResponse<T>(null);
+      }
+
+      tokenProvider.setToken(token);
+      tokenThreadLocal.set(token);
+      original = securedAction.getAction();
+
+      Response response = (T) repository.getActionHandler(original.getClass()).handle(original);
+
+      return (T) new SecurityResponse(response);
+    }
+    Response response = repository.getActionHandler(original.getClass()).handle(original);
+    return (T) response;
+
+
   }
 
-
-  public <E extends Response, R extends SecurityResponse<E>, A extends Action<E>> R dispatchSecurityAction(SecurityAction<A> action) {
-
-    Token securityToken = action.getSecurityToke();
-
-    if (securityToken == null) {
-      return (R) new SecurityResponse<R>(null);
-    }
-
-    if (authorizedUsersRepository.getTokenKey(securityToken) == null) {
-      return (R) new SecurityResponse<R>(null);
-    }
-
-    tokenThreadLocal.set(securityToken);
-
-    E response = this.dispatch(action.getAction());
-
-    return (R) new SecurityResponse<E>(response);
-
-  }
 }

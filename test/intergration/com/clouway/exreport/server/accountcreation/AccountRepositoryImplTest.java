@@ -7,12 +7,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -91,7 +88,7 @@ public class AccountRepositoryImplTest {
 
     Query query = new Query(accountEntityKind);
 
-    query.addFilter("name", Query.FilterOperator.EQUAL, username);
+    query.addFilter("username", Query.FilterOperator.EQUAL, username);
 
     query.addFilter("password", Query.FilterOperator.EQUAL, password);
 
@@ -99,20 +96,21 @@ public class AccountRepositoryImplTest {
 
     assertThat(entity, is(notNullValue()));
 
-    assertThat((String) entity.getProperty("name"), is(equalTo("user")));
+    assertThat((String) entity.getProperty("username"), is(equalTo("user")));
 
     assertThat((String) entity.getProperty("password"), is(equalTo("password")));
   }
 
   @Test
   public void accountIsReturnedByEmail() {
+
     String email = "email";
 
     String password = "password";
 
     Entity entity = new Entity(accountEntityKind);
 
-    entity.setProperty("name", email);
+    entity.setProperty("username", email);
 
     entity.setProperty("password", password);
 

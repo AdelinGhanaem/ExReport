@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class SecurityResponse<T extends Response> implements Response ,IsSerializable{
+public class SecurityResponse<T extends Response> implements Response ,IsSerializable {
 
 
   public SecurityResponse(T returnedResponse,Token token) {

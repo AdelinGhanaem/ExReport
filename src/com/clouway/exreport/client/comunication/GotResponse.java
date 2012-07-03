@@ -13,7 +13,6 @@ public abstract class GotResponse<T extends Response> implements AsyncCallback<T
   public void onFailure(Throwable caught) {
 //    Window.alert(caught.getMessage());
 
-
     StringBuilder builder = new StringBuilder();
     caught.getStackTrace();
     for (StackTraceElement elements : caught.getStackTrace()) {

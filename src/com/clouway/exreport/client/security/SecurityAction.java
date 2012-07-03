@@ -8,21 +8,22 @@ import com.evo.gad.shared.Response;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class SecurityAction<A extends Action<? extends Response>> implements Action<SecurityResponse> {
+public class SecurityAction<T extends Response> implements Action<SecurityResponse> {
 
-  private A action;
+  private Action<T> action;
 
   private  Token token;
 
   public SecurityAction() {
+
   }
 
-  public SecurityAction(A action, Token token) {
+  public SecurityAction(Action<T> action, Token token) {
     this.action = action;
     this.token = token;
   }
 
-  public A getAction() {
+  public Action<T> getAction() {
     return action;
   }
 

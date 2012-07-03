@@ -33,17 +33,20 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
   }
 
   public void addExpense(Expense expense) {
+
     view.disableAddButton();
+
     if (expense.isPriceValid()) {
 
       AddExpenseAction<AddExpenseResponse> addExpenseAction = new AddExpenseAction<AddExpenseResponse>(expense);
 
-      SecurityAction<AddExpenseAction<AddExpenseResponse>> action = factory.createSecurityAction(addExpenseAction);
+      SecurityAction<AddExpenseResponse> action = factory.createSecurityAction(addExpenseAction);
 
-      service.dispatchSecurityAction(action, new GotResponse<SecurityResponse<AddExpenseResponse>>() {
+      service.dispatch(action, new GotResponse<SecurityResponse>() {
         @Override
-        public void gotResponse(SecurityResponse<AddExpenseResponse> result) {
-          hasHandlers.fireEvent(new ExpenseAddedEvent(result.getResponse().getExpense()));
+        public void gotResponse(SecurityResponse result) {
+          AddExpenseResponse response = (AddExpenseResponse) result.getResponse();
+          hasHandlers.fireEvent(new ExpenseAddedEvent((response.getExpense())));
           view.enableAddButton();
         }
 
@@ -53,8 +56,11 @@ public class AddExpensesPresenterImpl implements AddExpensesPresenter {
         }
       });
     } else {
+
       view.notifyNegativeExpensePriceValue();
+
       view.enableAddButton();
+
     }
   }
 }

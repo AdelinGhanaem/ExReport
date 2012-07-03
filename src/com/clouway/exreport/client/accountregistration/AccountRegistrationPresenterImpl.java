@@ -1,12 +1,12 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.client.accountregistration;
 
-import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
+import com.clouway.exreport.client.accountregistration.view.AccountRegistrationView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.shared.AccountValidationErrorMessages;
-import com.clouway.exreport.shared.actions.CreateAccountAction;
+import com.clouway.exreport.shared.actions.RegisterAccountAction;
 import com.clouway.exreport.shared.entites.Account;
-import com.clouway.exreport.shared.reponses.CreateAccountResponse;
+import com.clouway.exreport.shared.reponses.RegisterAccountResponse;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -14,35 +14,35 @@ import com.google.web.bindery.event.shared.EventBus;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatorPresenterImpl implements AccountCreatorPresenter {
+public class AccountRegistrationPresenterImpl implements AccountRegistrationPresenter {
 
   private final ActionDispatcherServiceAsync service;
 
   private final EventBus handlers;
 
-  private final AccountCreatorView view;
+  private final AccountRegistrationView view;
 
   private final AccountValidationErrorMessages errorMessages;
 
   @Inject
-  public AccountCreatorPresenterImpl(ActionDispatcherServiceAsync service, EventBus handlers, AccountCreatorView view, AccountValidationErrorMessages errorMessages) {
+  public AccountRegistrationPresenterImpl(ActionDispatcherServiceAsync service, EventBus handlers, AccountRegistrationView view, AccountValidationErrorMessages errorMessages) {
     this.service = service;
     this.handlers = handlers;
     this.view = view;
     this.errorMessages = errorMessages;
   }
 
-  public void create(Account account) {
+  public void register(Account account) {
     String validationErrors = "";
     validationErrors = validateAccount(account);
     if ("".equals(validationErrors)) {
-      service.dispatch(new CreateAccountAction<CreateAccountResponse>(account), new GotResponse<CreateAccountResponse>() {
+      service.dispatch(new RegisterAccountAction<RegisterAccountResponse>(account), new GotResponse<RegisterAccountResponse>() {
         @Override
-        public void gotResponse(CreateAccountResponse result) {
+        public void gotResponse(RegisterAccountResponse result) {
           if (result.getErrors().size() > 0) {
             view.showMessages(result.getErrors());
           } else {
-            handlers.fireEvent(new AccountCreatedEvent(result.getAccount()));
+            handlers.fireEvent(new AccountRegisteredEvent(result.getAccount()));
           }
         }
       });

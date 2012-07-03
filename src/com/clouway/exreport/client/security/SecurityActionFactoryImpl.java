@@ -1,7 +1,6 @@
 package com.clouway.exreport.client.security;
 
 import com.clouway.exreport.shared.SecurityTokenProvider;
-import com.clouway.exreport.shared.entites.Token;
 import com.evo.gad.shared.Action;
 import com.evo.gad.shared.Response;
 import com.google.inject.Inject;
@@ -18,9 +17,10 @@ public class SecurityActionFactoryImpl implements SecurityActionFactory {
     this.provider = provider;
   }
 
-  public <T extends Action<? extends Response>> SecurityAction<T> createSecurityAction(T t) {
-    Token token = provider.getToken();
-    return new SecurityAction<T>(t, token);
+  @Override
+  public <T extends Response, A extends Action<T>> SecurityAction<T> createSecurityAction(A a) {
+     return  new SecurityAction<T>(a,provider.getToken());
+
   }
 
 }

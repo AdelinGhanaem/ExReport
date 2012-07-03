@@ -9,17 +9,17 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountResponse implements Response ,IsSerializable {
+public class RegisterAccountResponse implements Response ,IsSerializable {
 
 
   private  Account account;
 
   private  ArrayList<String> error;
 
-  public CreateAccountResponse() {
+  public RegisterAccountResponse() {
   }
 
-  public CreateAccountResponse(Account account, ArrayList<String> error) {
+  public RegisterAccountResponse(Account account, ArrayList<String> error) {
 
     this.account = account;
 

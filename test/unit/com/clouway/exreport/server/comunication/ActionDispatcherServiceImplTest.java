@@ -66,8 +66,6 @@ public class ActionDispatcherServiceImplTest {
   }
 
 
-  
-
   private class MyActionHandler implements ActionHandler {
     @Override
     public Response handle(Action action) {
@@ -82,15 +80,15 @@ public class ActionDispatcherServiceImplTest {
 
     Token token = new Token(username);
 
-    TestAction testAction = new TestAction();
+    TestAction<TestResponse> testAction = new TestAction<TestResponse>();
+
+    SecurityAction<TestResponse> action = new SecurityAction<TestResponse>(testAction, token);
 
     when(authenticatedUsersRepository.getTokenKey(token)).thenReturn("key");
 
     when(actionHandlerRepository.getActionHandler(TestAction.class)).thenReturn(new TestActionHandler());
 
-    SecurityAction<TestAction> action = new SecurityAction<TestAction>(testAction, token);
-
-    SecurityResponse<TestResponse> returnedResponse = dispatcher.dispatchSecurityAction(action);
+    SecurityResponse<TestResponse> returnedResponse = dispatcher.dispatch(action);
 
     assertThat(returnedResponse, is(notNullValue()));
 
@@ -108,9 +106,9 @@ public class ActionDispatcherServiceImplTest {
 
     Token nullToke = null;
 
-    SecurityAction<TestAction> action = new SecurityAction<TestAction>(testAction, nullToke);
+    SecurityAction<TestResponse> action = new SecurityAction<TestResponse>(testAction, nullToke);
 
-    SecurityResponse<TestResponse> testResponse = dispatcher.dispatchSecurityAction(action);
+    SecurityResponse<TestResponse> testResponse = dispatcher.dispatch(action);
 
     assertThat(testResponse.getResponse(), is(nullValue()));
 
@@ -128,21 +126,22 @@ public class ActionDispatcherServiceImplTest {
 
     TestAction testAction = new TestAction();
 
-    SecurityAction<TestAction> action = new SecurityAction<TestAction>(testAction, token);
+    SecurityAction<TestResponse> action = new SecurityAction<TestResponse>(testAction, token);
 
     when(authenticatedUsersRepository.getTokenKey(token)).thenReturn(null);
 
-    SecurityResponse<TestResponse> returnedResponse = dispatcher.dispatchSecurityAction(action);
+    SecurityResponse<TestResponse> returnedResponse = dispatcher.dispatch(action);
 
     verify(authenticatedUsersRepository).getTokenKey(token);
 
     assertThat(returnedResponse, is(notNullValue()));
 
     assertThat(returnedResponse.getResponse(), is(nullValue()));
+
   }
 
 
-  private class TestAction implements Action<TestResponse> {
+  private class TestAction<TestResponse extends Response> implements Action<TestResponse> {
   }
 
   private class TestResponse implements Response {

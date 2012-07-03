@@ -19,7 +19,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static com.clouway.exreport.client.expensesreporting.TestingAsyncCallbacksHelper.doOnFailure;
@@ -68,31 +67,6 @@ public class AddExpensesPresenterImplTest {
 
   }
 
-//  @Test
-//  public void addsExpenseAndFireExpenseAddedEventOnSuccess() throws ParseException {
-//
-//    Date date = dateTimeFormat.parse("2012-06-02");
-//
-//    Expense expense = new Expense("Food", 12d, date);
-//
-//    AddExpenseResponse addExpenseResponse = new AddExpenseResponse(expense);
-//
-//    SecurityAction<AddExpenseAction<AddExpenseResponse>> securityAction = new SecurityAction<AddExpenseAction<AddExpenseResponse>>();
-//
-//    SecurityResponse<AddExpenseResponse> securityResponse = new SecurityResponse<AddExpenseResponse>(addExpenseResponse);
-//
-//    when(factory.createSecurityAction(isA(AddExpenseAction.class))).thenReturn(securityAction);
-//
-//    doOnSuccess(securityResponse).when(actionDispatcherServiceAsync).dispatch(isA(AddExpenseAction.class), isA(GotResponse.class));
-//
-//    addExpensesPresenterImpl.addExpense(expense);
-//
-//    verify(actionDispatcherServiceAsync).dispatch(isA(SecurityAction.class), any(GotResponse.class));
-//
-//    verify(hasHandlers).fireEvent(isA(ExpenseAddedEvent.class));
-//
-//  }
-
   @Test
   public void addsExpenseAndFireExpenseAddedEventOnSuccess() {
 
@@ -106,15 +80,15 @@ public class AddExpensesPresenterImplTest {
 
     AddExpenseAction<AddExpenseResponse> action = new AddExpenseAction<AddExpenseResponse>();
 
-    SecurityAction<AddExpenseAction<AddExpenseResponse>> securityAction = new SecurityAction<AddExpenseAction<AddExpenseResponse>>(action, token);
+    SecurityAction<AddExpenseResponse> securityAction = new SecurityAction<AddExpenseResponse>(action, token);
 
     when(factory.createSecurityAction(isA(AddExpenseAction.class))).thenReturn(securityAction);
 
-    doOnSuccess(securityResponse).when(actionDispatcherServiceAsync).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
+    doOnSuccess(securityResponse).when(actionDispatcherServiceAsync).dispatch(isA(SecurityAction.class), isA(GotResponse.class));
 
     addExpensesPresenterImpl.addExpense(expense);
 
-    verify(actionDispatcherServiceAsync).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
+    verify(actionDispatcherServiceAsync).dispatch(isA(SecurityAction.class), isA(GotResponse.class));
 
     verify(hasHandlers).fireEvent(any(ExpenseAddedEvent.class));
 
@@ -142,7 +116,6 @@ public class AddExpensesPresenterImplTest {
     verify(hasHandlers, never()).fireEvent(any(ExpenseAddedEvent.class));
 
     verify(view).notifyNegativeExpensePriceValue();
-
   }
 
   @Test
@@ -152,7 +125,7 @@ public class AddExpensesPresenterImplTest {
 
     Expense expense = new Expense("Computer fix", 200, date);
 
-    doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatchSecurityAction(any(SecurityAction.class), isA(GotResponse.class));
+    doOnFailure(new Throwable()).when(actionDispatcherServiceAsync).dispatch(any(SecurityAction.class), isA(GotResponse.class));
 
     addExpensesPresenterImpl.addExpense(expense);
 

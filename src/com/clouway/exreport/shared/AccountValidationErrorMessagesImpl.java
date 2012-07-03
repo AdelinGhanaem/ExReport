@@ -12,7 +12,7 @@ public class AccountValidationErrorMessagesImpl implements AccountValidationErro
 
   @Override
   public String emptyEmail() {
-    return "You can not create account without email";
+    return "You can not register account without email";
   }
 
   @Override

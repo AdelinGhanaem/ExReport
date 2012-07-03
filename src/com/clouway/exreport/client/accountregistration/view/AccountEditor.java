@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.accountcreation.view;
+package com.clouway.exreport.client.accountregistration.view;
 
 import com.clouway.exreport.shared.entites.Account;
 import com.google.gwt.core.client.GWT;

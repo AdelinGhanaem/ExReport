@@ -12,6 +12,5 @@ public interface UserAuthenticationView extends View<UserAuthenticationPresenter
 
   void emptyPassword();
 
-
-
+  void incorrectUsernameOrPassword();
 }

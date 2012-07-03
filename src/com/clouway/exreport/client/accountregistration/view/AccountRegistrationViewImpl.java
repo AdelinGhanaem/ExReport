@@ -1,6 +1,6 @@
-package com.clouway.exreport.client.accountcreation.view;
+package com.clouway.exreport.client.accountregistration.view;
 
-import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
+import com.clouway.exreport.client.accountregistration.AccountRegistrationPresenterImpl;
 import com.clouway.exreport.client.navigation.View;
 import com.clouway.exreport.shared.entites.Account;
 import com.github.gwtbootstrap.client.ui.Button;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatorViewImpl extends Composite implements AccountCreatorView, View<AccountCreatorPresenterImpl> {
+public class AccountRegistrationViewImpl extends Composite implements AccountRegistrationView, View<AccountRegistrationPresenterImpl> {
 
 
   interface Driver extends SimpleBeanEditorDriver<Account, AccountEditor> {
 
   }
 
-  interface AccountCreatorViewImplUiBinder extends UiBinder<HTMLPanel, AccountCreatorViewImpl> {
+  interface AccountCreatorViewImplUiBinder extends UiBinder<HTMLPanel, AccountRegistrationViewImpl> {
   }
 
 
@@ -35,19 +35,19 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   private static AccountCreatorViewImplUiBinder ourUiBinder = GWT.create(AccountCreatorViewImplUiBinder.class);
 
 
-  private AccountCreatorPresenterImpl presenter;
+  private AccountRegistrationPresenterImpl presenter;
 
 
   @UiField
   AccountEditor accountEditor;
 
   @UiField
-  Button create;
+  Button register;
 
   @UiField
   Label errorsLabel;
 
-  public AccountCreatorViewImpl() {
+  public AccountRegistrationViewImpl() {
 
     HTMLPanel rootElement = ourUiBinder.createAndBindUi(this);
 
@@ -61,11 +61,11 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
 
   }
 
-  @UiHandler("create")
+  @UiHandler("register")
   public void onCreate(ClickEvent event) {
 
     Account editedAccount = driver.flush();
-    presenter.create(editedAccount);
+    presenter.register(editedAccount);
 
   }
 
@@ -85,7 +85,7 @@ public class AccountCreatorViewImpl extends Composite implements AccountCreatorV
   }
 
   @Override
-  public void setPresenter(AccountCreatorPresenterImpl presenter) {
+  public void setPresenter(AccountRegistrationPresenterImpl presenter) {
     this.presenter = presenter;
   }
 

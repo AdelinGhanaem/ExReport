@@ -1,9 +1,9 @@
 package com.clouway.exreport.server.accountcreation;
 
-import com.clouway.exreport.server.accountcreation.actionhandlers.CreateAccountActionHandler;
-import com.clouway.exreport.shared.actions.CreateAccountAction;
+import com.clouway.exreport.server.accountcreation.actionhandlers.RegisterAccountActionHandler;
+import com.clouway.exreport.shared.actions.RegisterAccountAction;
 import com.clouway.exreport.shared.entites.Account;
-import com.clouway.exreport.shared.reponses.CreateAccountResponse;
+import com.clouway.exreport.shared.reponses.RegisterAccountResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,13 +24,13 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountActionHandlerTest {
+public class RegisterAccountActionHandlerTest {
 
 
   @Mock
   AccountCreator accountCreator;
 
-  private CreateAccountActionHandler createAccountActionHandler;
+  private RegisterAccountActionHandler registerAccountActionHandler;
 
   @Before
 
@@ -38,7 +38,7 @@ public class CreateAccountActionHandlerTest {
 
     initMocks(this);
 
-    createAccountActionHandler = new CreateAccountActionHandler(accountCreator);
+    registerAccountActionHandler = new RegisterAccountActionHandler(accountCreator);
 
   }
 
@@ -53,11 +53,11 @@ public class CreateAccountActionHandlerTest {
 
     when(accountCreator.create(account, erros)).thenReturn(account);
 
-    CreateAccountResponse responseCreate = createAccountActionHandler.handle(new CreateAccountAction(account));
+    RegisterAccountResponse responseRegister = registerAccountActionHandler.handle(new RegisterAccountAction(account));
 
-    assertThat(responseCreate, is(notNullValue()));
+    assertThat(responseRegister, is(notNullValue()));
 
-    Account responseAccount = responseCreate.getAccount();
+    Account responseAccount = responseRegister.getAccount();
 
     assertThat(responseAccount, is(notNullValue()));
 
@@ -65,7 +65,7 @@ public class CreateAccountActionHandlerTest {
 
     verify(accountCreator).create(eq(account), any(List.class));
 
-    assertThat(responseCreate.getErrors().size(), is(0));
+    assertThat(responseRegister.getErrors().size(), is(0));
   }
      //TODO:do i need to test what is going to happen in each test scenario again ?? like invalid email form, short password .... ect ... ?
 

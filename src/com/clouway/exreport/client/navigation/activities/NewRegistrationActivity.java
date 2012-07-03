@@ -1,8 +1,8 @@
 package com.clouway.exreport.client.navigation.activities;
 
 
-import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
-import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
+import com.clouway.exreport.client.accountregistration.AccountRegistrationPresenterImpl;
+import com.clouway.exreport.client.accountregistration.view.AccountRegistrationView;
 import com.clouway.exreport.client.navigation.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -13,12 +13,12 @@ import com.google.inject.Inject;
  */
 public class NewRegistrationActivity extends AbstractActivity {
 
-  private final AccountCreatorPresenterImpl presenter;
+  private final AccountRegistrationPresenterImpl presenter;
 
-  private final AccountCreatorView view;
+  private final AccountRegistrationView view;
 
   @Inject
-  public NewRegistrationActivity(AccountCreatorPresenterImpl presenter, AccountCreatorView view) {
+  public NewRegistrationActivity(AccountRegistrationPresenterImpl presenter, AccountRegistrationView view) {
     this.presenter = presenter;
     this.view = view;
   }

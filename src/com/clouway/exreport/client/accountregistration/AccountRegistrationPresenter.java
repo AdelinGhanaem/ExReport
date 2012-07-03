@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.client.accountregistration;
 
 import com.clouway.exreport.client.navigation.Presenter;
 import com.clouway.exreport.shared.entites.Account;
@@ -6,8 +6,8 @@ import com.clouway.exreport.shared.entites.Account;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public interface AccountCreatorPresenter extends Presenter {
+public interface AccountRegistrationPresenter extends Presenter {
 
-  public void create(Account account);
+  public void register(Account account);
 
 }

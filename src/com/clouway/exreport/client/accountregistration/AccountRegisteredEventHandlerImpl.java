@@ -1,4 +1,4 @@
-package com.clouway.exreport.client.accountcreation;
+package com.clouway.exreport.client.accountregistration;
 
 import com.clouway.exreport.client.navigation.InjectablePlaceController;
 import com.clouway.exreport.client.navigation.places.SuccessfulRegistrationsPlace;
@@ -9,7 +9,7 @@ import com.google.inject.Inject;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AccountCreatedEventHandlerImpl implements AccountCreatedEventHandler {
+public class AccountRegisteredEventHandlerImpl implements AccountRegisteredEventHandler {
 
 
   @Inject
@@ -19,7 +19,7 @@ public class AccountCreatedEventHandlerImpl implements AccountCreatedEventHandle
   SecurityTokenProvider provider;
 
   @Override
-  public void onAccountCreated(AccountCreatedEvent event) {
+  public void onAccountRegistered(AccountRegisteredEvent event) {
     provider.setToken(new Token(event.getAccount().getEmail()));
     placeController.goTo(new SuccessfulRegistrationsPlace());
   }

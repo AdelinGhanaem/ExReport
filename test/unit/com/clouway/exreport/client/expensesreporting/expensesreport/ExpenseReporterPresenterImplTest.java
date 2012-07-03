@@ -5,14 +5,11 @@ import com.clouway.exreport.client.comunication.GotResponse;
 import com.clouway.exreport.client.expensesreporting.expensesreport.view.ExpenseReporterView;
 import com.clouway.exreport.client.security.SecurityAction;
 import com.clouway.exreport.client.security.SecurityActionFactory;
-import com.clouway.exreport.shared.actions.FetchDaysAction;
 import com.clouway.exreport.shared.actions.FetchExpensesAction;
 import com.clouway.exreport.shared.actions.FetchYearsAction;
-import com.clouway.exreport.shared.entites.Day;
 import com.clouway.exreport.shared.entites.Expense;
 import com.clouway.exreport.shared.entites.Token;
 import com.clouway.exreport.shared.entites.Year;
-import com.clouway.exreport.shared.reponses.FetchDaysResponse;
 import com.clouway.exreport.shared.reponses.FetchExpensesResponse;
 import com.clouway.exreport.shared.reponses.FetchYearsResponse;
 import com.clouway.exreport.shared.reponses.SecurityResponse;
@@ -88,15 +85,15 @@ public class ExpenseReporterPresenterImplTest {
 
     FetchExpensesAction<FetchExpensesResponse> fetchExpensesAction = new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate);
 
-    SecurityAction<FetchExpensesAction<FetchExpensesResponse>> securityAction = new SecurityAction<FetchExpensesAction<FetchExpensesResponse>>(fetchExpensesAction, new Token());
+    SecurityAction<FetchExpensesResponse> securityAction = new SecurityAction<FetchExpensesResponse>(fetchExpensesAction, new Token());
 
     when(factory.createSecurityAction(isA(FetchExpensesAction.class))).thenReturn(securityAction);
 
-    doOnSuccess(response).when(service).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
+    doOnSuccess(response).when(service).dispatch(eq(securityAction), any(GotResponse.class));
 
     presenter.fetchExpensesBetween(firstDate, secondDate);
 
-    verify(service).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
+    verify(service).dispatch(eq(securityAction), any(GotResponse.class));
 
     verify(view).updateExpenses(expenses);
 
@@ -109,7 +106,7 @@ public class ExpenseReporterPresenterImplTest {
 
     Date endDate = new Date();
 
-    doOnFailure(new Throwable()).when(service).dispatchSecurityAction(any(SecurityAction.class), any(GotResponse.class));
+    doOnFailure(new Throwable()).when(service).dispatch(any(SecurityAction.class), any(GotResponse.class));
 
     presenter.fetchExpensesBetween(firstDate, endDate);
 
@@ -127,18 +124,17 @@ public class ExpenseReporterPresenterImplTest {
 
     FetchYearsResponse yearsResponse = new FetchYearsResponse(yearList);
 
-    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction =
-            new SecurityAction<FetchYearsAction<FetchYearsResponse>>(fetchYearsAction, token);
+    SecurityAction<FetchYearsResponse> securityAction = new SecurityAction<FetchYearsResponse>(fetchYearsAction, token);
 
     SecurityResponse<FetchYearsResponse> securityResponse = new SecurityResponse<FetchYearsResponse>(yearsResponse, token);
 
     when(factory.createSecurityAction(isA(FetchYearsAction.class))).thenReturn(securityAction);
 
-    doOnSuccess(securityResponse).when(service).dispatchSecurityAction(eq(securityAction), any(GotResponse.class));
+    doOnSuccess(securityResponse).when(service).dispatch(eq(securityAction), any(GotResponse.class));
 
     presenter.getAllExpensesYears();
 
-    verify(service).dispatchSecurityAction(eq(securityAction), any(AsyncCallback.class));
+    verify(service).dispatch(eq(securityAction), any(AsyncCallback.class));
 
     verify(view).showExpensesYears(yearList);
 
@@ -147,11 +143,11 @@ public class ExpenseReporterPresenterImplTest {
   @Test
   public void notifiesUserWhenErrorOccursWhileRequiringYearsOfExpenses() {
 
-    doOnFailure(new Throwable()).when(service).dispatchSecurityAction(any(SecurityAction.class), any(AsyncCallback.class));
+    doOnFailure(new Throwable()).when(service).dispatch(any(SecurityAction.class), any(AsyncCallback.class));
 
     presenter.getAllExpensesYears();
 
-    verify(service).dispatchSecurityAction(any(SecurityAction.class), any(AsyncCallback.class));
+    verify(service).dispatch(any(SecurityAction.class), any(AsyncCallback.class));
 
     verify(view).showConnectionErrorMessage();
   }
@@ -167,18 +163,18 @@ public class ExpenseReporterPresenterImplTest {
     SecurityResponse<FetchExpensesResponse> securityResponse = stubSecurityActionCreation(response,
             new FetchExpensesAction<FetchExpensesResponse>(new Date(), new Date()));
 
-    doOnSuccess(securityResponse).when(service).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
+    doOnSuccess(securityResponse).when(service).dispatch(isA(SecurityAction.class), isA(GotResponse.class));
 
     presenter.fetchExpensesBetween(new Date(), new Date());
 
-    verify(service).dispatchSecurityAction(isA(SecurityAction.class), isA(GotResponse.class));
+    verify(service).dispatch(isA(SecurityAction.class), isA(GotResponse.class));
 
     verify(view).showExpensesSum(10d);
   }
 
-  private <R extends Response, A extends Action<R>, S extends SecurityAction<A>, P extends SecurityResponse<R>> P stubSecurityActionCreation(R response, A action) {
+  private <R extends Response, A extends Action<R>, S extends SecurityAction<R>, P extends SecurityResponse<R>> P stubSecurityActionCreation(R response, A action) {
     SecurityResponse<R> securityResponse = new SecurityResponse<R>(response);
-    SecurityAction<A> securityAction = new SecurityAction<A>(action, new Token());
+    SecurityAction<R> securityAction = new SecurityAction<R>(action, new Token());
     when(factory.createSecurityAction(any(Action.class))).thenReturn(securityAction);
     return (P) securityResponse;
   }

@@ -1,6 +1,6 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:m='urn:import:com.clouway.exreport.client.accountcreation.view'
+             xmlns:m='urn:import:com.clouway.exreport.client.accountregistration.view'
              xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
 
         >
@@ -15,10 +15,8 @@
         <div class="{style.background}">
           <b:WellForm type="HORIZONTAL" addStyleNames="{style.formContainer}">
             <m:AccountEditor ui:field="accountEditor"/>
-
-            <!--<g:Button ui:field="create" text="sign in"/>-->
-            <b:Button type="INVERSE" ui:field="create" text="sign in" addStyleNames="{style.button}"/>
-
+            <!--<g:Button ui:field="register" text="sign in"/>-->
+            <b:Button type="INVERSE" ui:field="register" text="sign in" addStyleNames="{style.button}"/>
             <g:Label ui:field="errorsLabel"/>
           </b:WellForm>
         </div>

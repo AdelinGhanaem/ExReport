@@ -30,15 +30,35 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
   }
 
   public void authenticate(User user) {
-    //    handlers.fireEvent(new UserAuthenticatedEvent(new Token("user")));
-    service.dispatch(new UserAuthenticationAction<UserAuthenticationResponse>(user), new GotResponse<UserAuthenticationResponse>() {
-      @Override
-      public void gotResponse(UserAuthenticationResponse result) {
-        if (result.getToken() == null) {
-          Window.alert("Invalid username or password");
+    if (isValid(user)) {
+      service.dispatch(new UserAuthenticationAction<UserAuthenticationResponse>(user), new GotResponse<UserAuthenticationResponse>() {
+        @Override
+        public void gotResponse(UserAuthenticationResponse result) {
+          if (result.getToken() == null) {
+            view.incorrectUsernameOrPassword();
+          } else {
+            handlers.fireEvent(new UserAuthenticatedEvent(result.getToken()));
+          }
         }
-        handlers.fireEvent(new UserAuthenticatedEvent(result.getToken()));
-      }
-    });
+
+        @Override
+        public void onFailure(Throwable caught) {
+          Window.alert("Connection error !!");
+        }
+      });
+    }
+
+  }
+
+  private boolean isValid(User user) {
+    if ("".equals(user.getUsername())) {
+      view.emptyUsername();
+      return false;
+    }
+    if ("".equals(user.getPassword())) {
+      view.emptyPassword();
+      return false;
+    }
+    return true;
   }
 }

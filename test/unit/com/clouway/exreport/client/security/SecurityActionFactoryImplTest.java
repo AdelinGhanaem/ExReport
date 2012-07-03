@@ -35,15 +35,18 @@ public class SecurityActionFactoryImplTest {
 
     SecurityActionFactoryImpl securityActionFactory = new SecurityActionFactoryImpl(provider);
 
-    TestAction<TestResponse> testAction = new TestAction<TestResponse>();
 
     when(provider.getToken()).thenReturn(token);
 
-    SecurityAction<TestAction<TestResponse>> returnedActionSecurity = securityActionFactory.createSecurityAction(testAction);
+    TestResponse response = new TestResponse();
+
+    TestAction<TestResponse> testAction = new TestAction<TestResponse>();
+
+    SecurityAction<TestResponse> returnedActionSecurity = securityActionFactory.createSecurityAction(testAction);
 
     assertThat(returnedActionSecurity, is(notNullValue()));
     assertThat(returnedActionSecurity.getAction(), is(notNullValue()));
-    assertThat(returnedActionSecurity.getAction(), is(equalTo(testAction)));
+    assertThat((TestAction<TestResponse>) returnedActionSecurity.getAction(), is(equalTo(testAction)));
     assertThat(returnedActionSecurity.getSecurityToke(), is(notNullValue()));
     assertThat(returnedActionSecurity.getSecurityToke(), is(equalTo(token)));
 
@@ -51,7 +54,7 @@ public class SecurityActionFactoryImplTest {
   }
 
 
-  private class TestAction<TestResponse> implements Action<Response> {
+  private class TestAction<TestResponse extends Response> implements Action<TestResponse> {
 
   }
 

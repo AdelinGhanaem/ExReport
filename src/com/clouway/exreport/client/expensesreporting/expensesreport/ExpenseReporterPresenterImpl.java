@@ -58,21 +58,23 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
   public void fetchExpensesBetween(Date firstDate, Date secondDate) {
 
     if (firstDate.before(secondDate) || firstDate.equals(secondDate)) {
-      SecurityAction<FetchExpensesAction<FetchExpensesResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate));
-      service.dispatchSecurityAction(securityAction, new GotResponse<SecurityResponse<FetchExpensesResponse>>() {
-        @Override
-        public void gotResponse(SecurityResponse<FetchExpensesResponse> result) {
-          ArrayList<Expense> expenses = result.getResponse().getExpenses();
-          double sum = 0;
-          for (Expense expense : result.getResponse().getExpenses()) {
-            sum += expense.getPrice();
-          }
-          view.updateExpenses(result.getResponse().getExpenses());
-          view.showExpensesSum(sum);
-        }
+      SecurityAction<FetchExpensesResponse> securityAction = securityActionFactory.createSecurityAction(new FetchExpensesAction<FetchExpensesResponse>(firstDate, secondDate));
+      service.dispatch(securityAction, new GotResponse<SecurityResponse>() {
         @Override
         public void onFailure(Throwable caught) {
           view.showConnectionErrorMessage();
+        }
+
+        @Override
+        public void gotResponse(SecurityResponse result) {
+          FetchExpensesResponse response = (FetchExpensesResponse) result.getResponse();
+          ArrayList<Expense> expenses = response.getExpenses();
+          double sum = 0;
+          for (Expense expense : expenses) {
+            sum += expense.getPrice();
+          }
+          view.updateExpenses(expenses);
+          view.showExpensesSum(sum);
         }
       });
     } else {
@@ -84,16 +86,16 @@ public class ExpenseReporterPresenterImpl extends AbstractActivity implements Ex
 
   public void getAllExpensesYears() {
 
-    SecurityAction<FetchYearsAction<FetchYearsResponse>> securityAction = securityActionFactory.createSecurityAction(new FetchYearsAction<FetchYearsResponse>());
-    service.dispatchSecurityAction(securityAction, new GotResponse<SecurityResponse<FetchYearsResponse>>() {
-      @Override
-      public void gotResponse(SecurityResponse<FetchYearsResponse> result) {
-        view.showExpensesYears(result.getResponse().getYears());
-      }
-
+    SecurityAction<FetchYearsResponse> securityAction = securityActionFactory.createSecurityAction(new FetchYearsAction<FetchYearsResponse>());
+    service.dispatch(securityAction, new GotResponse<SecurityResponse>() {
       @Override
       public void onFailure(Throwable caught) {
         view.showConnectionErrorMessage();
+      }
+      @Override
+      public void gotResponse(SecurityResponse result) {
+        FetchYearsResponse response = (FetchYearsResponse) result.getResponse();
+        view.showExpensesYears(response.getYears());
       }
     });
 

@@ -8,14 +8,14 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class CreateAccountAction<AccountCreatedResponse extends Response> implements Action<AccountCreatedResponse> ,IsSerializable {
+public class RegisterAccountAction<AccountCreatedResponse extends Response> implements Action<AccountCreatedResponse> ,IsSerializable {
 
   private  Account account;
 
-  public CreateAccountAction() {
+  public RegisterAccountAction() {
 
   }
-  public CreateAccountAction(Account account) {
+  public RegisterAccountAction(Account account) {
 
     this.account = account;
   }

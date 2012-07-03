@@ -10,7 +10,7 @@
       <g:HTMLPanel>
         <div class="{style.containerDiv}">
           <p>Congratulations!</p>
-          <p>You have successfully created an account in ExReport system</p>
+          <p>You have successfully registered an account in ExReport system</p>
           <b:Button type="SUCCESS"  text="Dash Board" ui:field="dashBoard"/>
           </div>
       </g:HTMLPanel>

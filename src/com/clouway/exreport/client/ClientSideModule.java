@@ -1,11 +1,11 @@
 package com.clouway.exreport.client;
 
-import com.clouway.exreport.client.accountcreation.AccountCreatedEventHandler;
-import com.clouway.exreport.client.accountcreation.AccountCreatedEventHandlerImpl;
-import com.clouway.exreport.client.accountcreation.AccountCreatorPresenter;
-import com.clouway.exreport.client.accountcreation.AccountCreatorPresenterImpl;
-import com.clouway.exreport.client.accountcreation.view.AccountCreatorView;
-import com.clouway.exreport.client.accountcreation.view.AccountCreatorViewImpl;
+import com.clouway.exreport.client.accountregistration.AccountRegisteredEventHandler;
+import com.clouway.exreport.client.accountregistration.AccountRegisteredEventHandlerImpl;
+import com.clouway.exreport.client.accountregistration.AccountRegistrationPresenter;
+import com.clouway.exreport.client.accountregistration.AccountRegistrationPresenterImpl;
+import com.clouway.exreport.client.accountregistration.view.AccountRegistrationView;
+import com.clouway.exreport.client.accountregistration.view.AccountRegistrationViewImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenter;
@@ -49,9 +49,9 @@ public class ClientSideModule extends AbstractGinModule {
     bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 
     //account creation
-    bind(AccountCreatorView.class).to(AccountCreatorViewImpl.class).in(Singleton.class);
+    bind(AccountRegistrationView.class).to(AccountRegistrationViewImpl.class).in(Singleton.class);
 
-    bind(AccountCreatorPresenter.class).to(AccountCreatorPresenterImpl.class);
+    bind(AccountRegistrationPresenter.class).to(AccountRegistrationPresenterImpl.class);
 
     bind(AccountValidationErrorMessages.class).to(AccountValidationErrorMessagesImpl.class);
 
@@ -85,7 +85,7 @@ public class ClientSideModule extends AbstractGinModule {
 
     bind(SecurityActionFactory.class).to(SecurityActionFactoryImpl.class);
 
-    bind(AccountCreatedEventHandler.class).to(AccountCreatedEventHandlerImpl.class);
+    bind(AccountRegisteredEventHandler.class).to(AccountRegisteredEventHandlerImpl.class);
 
     bind(ExpenseAddedEventHandler.class).to(ExpenseAddedEventHandlerImpl.class);
 

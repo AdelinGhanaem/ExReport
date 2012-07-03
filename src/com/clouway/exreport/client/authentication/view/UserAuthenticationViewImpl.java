@@ -12,6 +12,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 
 /**
@@ -42,6 +43,9 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
   @UiField
   com.github.gwtbootstrap.client.ui.Button newAccount;
 
+  @UiField
+  Label errorsLabel;
+
   @Inject
   InjectablePlaceController controller;
 
@@ -50,7 +54,7 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
 
   public UserAuthenticationViewImpl() {
 
-     rootElement = ourUiBinder.createAndBindUi(this);
+    rootElement = ourUiBinder.createAndBindUi(this);
 
     initWidget(rootElement);
 
@@ -64,12 +68,17 @@ public class UserAuthenticationViewImpl extends Composite implements UserAuthent
 
   @Override
   public void emptyUsername() {
-
+    errorsLabel.setText("Empty username");
   }
 
   @Override
   public void emptyPassword() {
+    errorsLabel.setText("Empty password");
+  }
 
+  @Override
+  public void incorrectUsernameOrPassword() {
+    errorsLabel.setText("Incorrect username or password !");
   }
 
   @Override
