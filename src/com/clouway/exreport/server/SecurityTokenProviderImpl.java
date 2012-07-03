@@ -21,5 +21,10 @@ public  class SecurityTokenProviderImpl implements SecurityTokenProvider{
     this.token = token;
   }
 
+  @Override
+  public void clearToken() {
+
+  }
+
 
 }

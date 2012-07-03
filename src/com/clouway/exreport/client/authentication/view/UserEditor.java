@@ -20,8 +20,10 @@ public class UserEditor extends Composite implements Editor<User> {
   }
 
   private static UserEditorUiBinder ourUiBinder = GWT.create(UserEditorUiBinder.class);
+
   @UiField
   TextBox username;
+
   @UiField
   PasswordTextBox password;
 

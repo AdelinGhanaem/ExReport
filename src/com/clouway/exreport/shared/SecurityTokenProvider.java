@@ -11,4 +11,5 @@ public interface SecurityTokenProvider {
 
   public void setToken(Token token);
 
+  void clearToken();
 }

@@ -7,12 +7,24 @@
         >
 
   <ui:with field="img" type="com.clouway.exreport.client.expensesreporting.dashboardview.DashboardImagesResource"/>
+
   <ui:style src="dashboardStyle.css"/>
+
   <g:HTMLPanel addStyleNames="{style.mainPanel}">
 
     <div class="{style.head}">
+
       <g:Image resource="{img.logo}"/>
+
     </div>
+
+    <!--<g:Label ui:field="usernameLabel" text="Username:"/>-->
+    <b:Navbar >
+      <b:Brand ui:field="usernameLabel" text="Username:" addStyleNames="{style.label}"/>
+      <b:Nav alignment="RIGHT">
+        <b:Button ui:field="logout" type="DANGER" text="logout"/>
+      </b:Nav>
+    </b:Navbar>
     <div>
 
       <div class="{style.centerPanel}" ui:field="cellTablesDiv">

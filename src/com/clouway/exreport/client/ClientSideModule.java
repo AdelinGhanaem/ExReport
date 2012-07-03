@@ -6,6 +6,7 @@ import com.clouway.exreport.client.accountregistration.AccountRegistrationPresen
 import com.clouway.exreport.client.accountregistration.AccountRegistrationPresenterImpl;
 import com.clouway.exreport.client.accountregistration.view.AccountRegistrationView;
 import com.clouway.exreport.client.accountregistration.view.AccountRegistrationViewImpl;
+import com.clouway.exreport.client.authentication.LogoutEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandlerImpl;
 import com.clouway.exreport.client.authentication.UserAuthenticationPresenter;
@@ -89,6 +90,7 @@ public class ClientSideModule extends AbstractGinModule {
 
     bind(ExpenseAddedEventHandler.class).to(ExpenseAddedEventHandlerImpl.class);
 
+    bind(LogoutEventHandler.class).to(UserAuthenticationPresenterImpl.class);
 
   }
 

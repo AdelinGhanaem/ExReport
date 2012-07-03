@@ -3,8 +3,11 @@ package com.clouway.exreport.client.authentication;
 import com.clouway.exreport.client.authentication.view.UserAuthenticationView;
 import com.clouway.exreport.client.comunication.ActionDispatcherServiceAsync;
 import com.clouway.exreport.client.comunication.GotResponse;
+import com.clouway.exreport.shared.SecurityTokenProvider;
+import com.clouway.exreport.shared.actions.LogoutAction;
 import com.clouway.exreport.shared.actions.UserAuthenticationAction;
 import com.clouway.exreport.shared.entites.User;
+import com.clouway.exreport.shared.reponses.LogoutResponse;
 import com.clouway.exreport.shared.reponses.UserAuthenticationResponse;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
@@ -13,7 +16,7 @@ import com.google.web.bindery.event.shared.EventBus;
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class UserAuthenticationPresenterImpl implements UserAuthenticationPresenter {
+public class UserAuthenticationPresenterImpl implements UserAuthenticationPresenter, LogoutEventHandler {
 
 
   private final UserAuthenticationView view;
@@ -21,12 +24,15 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
   private ActionDispatcherServiceAsync service;
 
   private final EventBus handlers;
+  private final SecurityTokenProvider provider;
 
   @Inject
-  public UserAuthenticationPresenterImpl(UserAuthenticationView view, ActionDispatcherServiceAsync service, EventBus handlers) {
+  public UserAuthenticationPresenterImpl(UserAuthenticationView view, ActionDispatcherServiceAsync service,
+                                         EventBus handlers, SecurityTokenProvider provider) {
     this.view = view;
     this.service = service;
     this.handlers = handlers;
+    this.provider = provider;
   }
 
   public void authenticate(User user) {
@@ -60,5 +66,16 @@ public class UserAuthenticationPresenterImpl implements UserAuthenticationPresen
       return false;
     }
     return true;
+  }
+
+  @Override
+  public void onLogout(LogoutEvent event) {
+
+    service.dispatch(new LogoutAction<LogoutResponse>(provider.getToken()), new GotResponse<LogoutResponse>() {
+      @Override
+      public void gotResponse(LogoutResponse result) {
+        provider.clearToken();
+      }
+    });
   }
 }

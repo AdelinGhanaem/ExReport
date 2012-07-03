@@ -6,6 +6,7 @@ import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
+import com.google.inject.Inject;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class SecureActivityMapper implements ActivityMapper {
 
   private List<Class> securityPlaces;
 
+  @Inject
   public SecureActivityMapper(Map<Class<? extends Place>, Activity> activityMap, List<Class> securePlaces, SecurityTokenProvider provider) {
 
     this.activityMap = activityMap;
@@ -33,6 +35,7 @@ public class SecureActivityMapper implements ActivityMapper {
 
   @Override
   public Activity getActivity(Place place) {
+
     for (Class aClass : securityPlaces) {
       if (aClass.equals(place.getClass())) {
         Token token = provider.getToken();
@@ -40,6 +43,7 @@ public class SecureActivityMapper implements ActivityMapper {
           return activityMap.get(AuthenticationPlace.class);
         }
       }
+
     }
     return activityMap.get(place.getClass());
   }

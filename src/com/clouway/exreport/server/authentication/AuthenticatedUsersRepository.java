@@ -10,4 +10,6 @@ public interface AuthenticatedUsersRepository {
   String getTokenKey(Token token);
 
   void addToken(Token token, String accountId);
+
+  void deleteToken(Token token);
 }

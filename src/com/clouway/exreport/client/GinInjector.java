@@ -1,9 +1,9 @@
 package com.clouway.exreport.client;
 
 import com.clouway.exreport.client.accountregistration.AccountRegisteredEventHandler;
+import com.clouway.exreport.client.authentication.LogoutEventHandler;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEventHandler;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.ExpenseAddedEventHandler;
-import com.clouway.exreport.client.navigation.ApplicationActivityMapper;
 import com.clouway.exreport.client.navigation.InjectableActivityManager;
 import com.clouway.exreport.client.navigation.InjectablePlaceController;
 import com.clouway.exreport.shared.SecurityTokenProvider;
@@ -18,7 +18,6 @@ import com.google.web.bindery.event.shared.EventBus;
 public interface GinInjector extends Ginjector {
 
 
-  ApplicationActivityMapper activityMapper();
 
   InjectablePlaceController placeController();
 
@@ -34,4 +33,6 @@ public interface GinInjector extends Ginjector {
   EventBus eventBus();
 
   SecurityTokenProvider securityToken();
+
+  LogoutEventHandler logoutEventHandler();
 }

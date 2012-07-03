@@ -28,5 +28,10 @@ public class AuthenticatedUsersRepositoryImpl implements AuthenticatedUsersRepos
     service.put(token, accountId);
   }
 
+  @Override
+  public void deleteToken(Token token) {
+    service.delete(token);
+  }
+
 
 }

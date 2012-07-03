@@ -178,17 +178,35 @@ public class ExpensesRepositoryImplTest {
   @Test
   public void returnsExpensesBetweenTwoDate() throws Exception {
 
-    addExpenseOn(january(2012, 2));
+    addExpenseOn(january(2012, 2),key);
 
-    addExpenseOn(january(2012, 4));
+    addExpenseOn(january(2012, 4),key);
 
-    addExpenseOn(january(2012, 6));
+    addExpenseOn(january(2012, 6),key);
 
     List<Expense> expenses = repository.getExpensesBetween(january(2012, 2), january(2012, 5));
 
     assertThat(expenses, is(notNullValue()));
 
     assertThat(expenses.size(), is(equalTo(2)));
+  }
+
+
+  @Test
+  public void returnsEmptyListWhenNoExpensesDeclaredForCurrentUserKey() {
+
+    Entity entity = new Entity(EntityKind.ACCOUNT);
+
+    service.put(entity);
+
+    Key key1 = entity.getKey();
+
+    addExpenseOn(january(2012,1),key1);
+
+    List<Expense> expenses = repository.getExpensesBetween(january(2001, 1), january(2012, 3));
+
+    assertThat(expenses.size(), is(0));
+
   }
 
 
@@ -240,7 +258,7 @@ public class ExpensesRepositoryImplTest {
   }
 
 
-  private void addExpenseOn(Date firstDate) {
+  private void addExpenseOn(Date firstDate,Key key) {
 
     Entity entity = new Entity(EXPENSE_ENTITY_KIND, key);
     entity.setProperty("name", "fuel");

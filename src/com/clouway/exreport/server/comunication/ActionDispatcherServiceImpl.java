@@ -64,9 +64,9 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
       original = securedAction.getAction();
 
       Response response = (T) repository.getActionHandler(original.getClass()).handle(original);
-
       return (T) new SecurityResponse(response);
     }
+
     Response response = repository.getActionHandler(original.getClass()).handle(original);
     return (T) response;
 

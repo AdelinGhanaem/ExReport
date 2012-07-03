@@ -36,7 +36,6 @@ public class DashboardActivity extends AbstractActivity {
 
   @Inject
   public DashboardActivity(ExpenseReporterPresenterImpl expenseReporterPresenter, AddExpensesPresenter addExpensesPresenter,
-
                            ExpenseReporterView expenseReporterView, AddExpensesView addExpensesView, DashboardPanel panel) {
     this.expenseReporterPresenter = expenseReporterPresenter;
     this.addExpensesPresenter = addExpensesPresenter;

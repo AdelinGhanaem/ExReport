@@ -135,21 +135,21 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
       public String getValue(Expense object) {
         return object.getName();
       }
-    });
+    }, "Title:");
 
     expensesCellTable.addColumn(new Column<Expense, Number>(new NumberCell()) {
       @Override
       public Double getValue(Expense object) {
         return object.getPrice();
       }
-    });
+    }, "Price:");
 
     expensesCellTable.addColumn(new Column<Expense, Date>(new DateCell()) {
       @Override
       public Date getValue(Expense object) {
         return object.getDate();
       }
-    });
+    }, "Date:");
     initWidget(maiPanel);
   }
 
@@ -253,6 +253,7 @@ public class ExpensesReporterViewImpl extends Composite implements ExpenseReport
     presenter.getAllExpensesYears();
 
     CellTree cellTree = new CellTree(this, null);
+
 
     cellTreeScrollPanel.add(cellTree);
   }

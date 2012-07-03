@@ -36,7 +36,7 @@ public class ExpensesRepositoryImpl implements ExpensesRepository {
     calendar.setTime(expense.getDate());
     int yearInteger = calendar.get(Calendar.YEAR);
 
-    Query query = new Query(EntityKind.YEAR);
+    Query query = new Query(EntityKind.YEAR, key);
 
     Entity entity = service.prepare(query.setFilter(new Query.FilterPredicate("year", Query.FilterOperator.EQUAL, yearInteger))).asSingleEntity();
 
@@ -73,7 +73,7 @@ public class ExpensesRepositoryImpl implements ExpensesRepository {
   @Override
   public List<Expense> getExpenseByName(final String expenseName) {
 
-    Query query = new Query("Expense", key);
+    Query query = new Query(EntityKind.EXPENSE, key);
 
     query.addFilter("name", Query.FilterOperator.EQUAL, expenseName);
 
@@ -86,21 +86,18 @@ public class ExpensesRepositoryImpl implements ExpensesRepository {
   @Override
   public List<Expense> getExpensesBetween(Date firstDate, Date secondDate) {
 
-    Query query = new Query(expenseEntityKind);
+    Query query = new Query(expenseEntityKind, key);
 
     query.setFilter(Query.CompositeFilterOperator.and(new Query.FilterPredicate("date",
             Query.FilterOperator.GREATER_THAN_OR_EQUAL, firstDate), new Query.FilterPredicate("date",
             Query.FilterOperator.LESS_THAN_OR_EQUAL, secondDate)));
-
     Iterable<Entity> entities = service.prepare(query).asIterable();
-
     return getReturnedExpenses(entities);
-
   }
 
   @Override
   public List<Year> getYears() {
-    Query query = new Query("Year");
+    Query query = new Query("Year", key);
     query.addSort("year");
     Iterable<Entity> entities = service.prepare(query).asIterable();
     List<Year> years = new ArrayList<Year>();

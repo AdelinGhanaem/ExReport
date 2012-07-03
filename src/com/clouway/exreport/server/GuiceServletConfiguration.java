@@ -9,6 +9,7 @@ import com.clouway.exreport.server.accountcreation.AccountValidatorImpl;
 import com.clouway.exreport.server.accountcreation.actionhandlers.RegisterAccountActionHandler;
 import com.clouway.exreport.server.authentication.AuthenticatedUsersRepository;
 import com.clouway.exreport.server.authentication.AuthenticatedUsersRepositoryImpl;
+import com.clouway.exreport.server.authentication.LogoutActionHandler;
 import com.clouway.exreport.server.authentication.UserAuthentication;
 import com.clouway.exreport.server.authentication.UserAuthenticationActionHandler;
 import com.clouway.exreport.server.authentication.UserAuthenticationImpl;
@@ -24,13 +25,7 @@ import com.clouway.exreport.server.expensesreporting.actionhandlers.FetchYearsAc
 import com.clouway.exreport.shared.AccountValidationErrorMessages;
 import com.clouway.exreport.shared.AccountValidationErrorMessagesImpl;
 import com.clouway.exreport.shared.SecurityTokenProvider;
-import com.clouway.exreport.shared.actions.AddExpenseAction;
-import com.clouway.exreport.shared.actions.RegisterAccountAction;
-import com.clouway.exreport.shared.actions.FetchDaysAction;
-import com.clouway.exreport.shared.actions.FetchExpensesAction;
-import com.clouway.exreport.shared.actions.FetchMonthsAction;
-import com.clouway.exreport.shared.actions.FetchYearsAction;
-import com.clouway.exreport.shared.actions.UserAuthenticationAction;
+import com.clouway.exreport.shared.actions.*;
 import com.evo.gad.dispatch.ActionHandlerMetadata;
 import com.evo.gad.dispatch.ActionHandlerRepository;
 import com.google.appengine.api.datastore.DatastoreService;
@@ -118,6 +113,9 @@ public class GuiceServletConfiguration extends GuiceServletContextListener {
         metadatas.add(new ActionHandlerMetadata(FetchYearsAction.class, FetchYearsActionHandler.class));
 
         metadatas.add(new ActionHandlerMetadata(UserAuthenticationAction.class, UserAuthenticationActionHandler.class));
+
+        metadatas.add(new ActionHandlerMetadata(LogoutAction.class, LogoutActionHandler.class));
+
         return metadatas;
       }
     });

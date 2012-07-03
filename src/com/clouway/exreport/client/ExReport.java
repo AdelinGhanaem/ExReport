@@ -1,6 +1,7 @@
 package com.clouway.exreport.client;
 
 import com.clouway.exreport.client.accountregistration.AccountRegisteredEvent;
+import com.clouway.exreport.client.authentication.LogoutEvent;
 import com.clouway.exreport.client.authentication.UserAuthenticatedEvent;
 import com.clouway.exreport.client.expensesreporting.addingexpenses.ExpenseAddedEvent;
 import com.clouway.exreport.client.navigation.ApplicationPlaceHistoryMapper;
@@ -51,6 +52,8 @@ public class ExReport implements EntryPoint {
     eventBus.addHandler(AccountRegisteredEvent.TYPE, injector.accountCreatedEventHandler());
 
     eventBus.addHandler(ExpenseAddedEvent.TYPE, injector.expenseAddedEventHandler());
+
+    eventBus.addHandler(LogoutEvent.TYPE,injector.logoutEventHandler()) ;
 
     SecurityTokenProvider provider = injector.securityToken();
 

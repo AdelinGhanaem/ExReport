@@ -29,12 +29,17 @@
   <g:HTMLPanel addStyleNames="{style.editorContainer}">
 
     <!--<g:VerticalPanel addStyleNames="{style.addExpenseDivContainer}">-->
+
     <g:Label text="Title:"/>
-    <b:TextBox ui:field="name" placeholder="price ... "/>
+
+    <b:TextBox ui:field="name" placeholder="for ..."/>
+
     <g:Label text="Price"/>
-    <b:TextBox ui:field="expensePrice" placeholder="on ..."/>
+
+    <b:TextBox ui:field="expensePrice" placeholder="price ..."/>
+
     <g:Label text="Date:"/>
-    <!--<b:TextBox ui:field="expenseDate" placeholder="" enabled="true"/>-->
+
     <b2:DateBox ui:field="datePicker"  format="dd/mm/yyyy"  autoClose="true"/>
 
     <!--</g:VerticalPanel>-->

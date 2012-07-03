@@ -12,18 +12,19 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
  */
-public class AuthenticatedUsersRepositoryImplTest {
+public class AuthenticatedTokensRepositoryImplTest {
 
   private LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalMemcacheServiceTestConfig());
 
   private MemcacheService service;
 
-  AuthenticatedUsersRepository authenticatedUsersRepository;
+  AuthenticatedUsersRepositoryImpl authenticatedUsersRepository;
 
   @Before
   public void setUp() throws Exception {
@@ -43,11 +44,17 @@ public class AuthenticatedUsersRepositoryImplTest {
 
   @Test
   public void returnsTokenKeyIfTokenIsPreviouslyPersisted() {
+
     Token token = new Token("User");
+
     String key = "account key";
+
     service.put(token, key);
+
     String returnedKey = authenticatedUsersRepository.getTokenKey(token);
+
     assertThat(returnedKey, is(equalTo(key)));
+
   }
 
 
@@ -60,7 +67,7 @@ public class AuthenticatedUsersRepositoryImplTest {
 
 
   @Test
-  public void userIsAddedCorrectly() {
+  public void tokenIsAddedCorrectly() {
 
     Token token = new Token("mail@mail.com");
 
@@ -73,6 +80,23 @@ public class AuthenticatedUsersRepositoryImplTest {
     assertThat(key, is(notNullValue()));
 
     assertThat(key, is(userKey));
+
+  }
+
+  @Test
+  public void deletesToken() {
+
+    String key = "bula bula";
+
+    Token token = new Token("mail@mail.com");
+
+    service.put(token, key);
+
+    authenticatedUsersRepository.deleteToken(token);
+
+    String returnedKey = (String) service.get(token);
+
+    assertThat(returnedKey, is(nullValue()));
 
   }
 

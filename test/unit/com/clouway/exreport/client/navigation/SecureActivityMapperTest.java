@@ -87,6 +87,7 @@ public class SecureActivityMapperTest {
 
   @Test
   public void shouldNotCheckForSecurityTokenWhenPlaceIsNotSecured() {
+
     when(provider.getToken()).thenReturn(new Token("username"));
 
     Activity activity = secureActivityMapper.getActivity(new TestPlace());
