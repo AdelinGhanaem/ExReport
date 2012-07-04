@@ -64,13 +64,14 @@
 
 .centerPanel {
     vertical-align: middle;
-    margin:  auto;
+    margin: auto;
     padding: 5px;
-    width: 77%;
+    width: 100%;
     border-radius: 10px;
     /*background: #e65e47;*/
     height: 600px;
-    float: right;
+    text-align: center;
+    /*float: right;*/
 }
 
 .cleaner {
@@ -90,16 +91,28 @@
 }
 
 .addingExpense {
-padding: 20px;
+    padding: 20px;
+    width: 20%;
+    float: left;
 }
 
 .reportingLabel {
     font-family: Arial;
     font-size: x-large;
+    width: 20%;
 
 }
 
 .label {
     /*width: 100px;*/
     /*background: red;*/
+}
+
+.mainFlowPanel {
+
+}
+
+.expenseReportingPanel {
+    width: 60%;
+    float: right;
 }

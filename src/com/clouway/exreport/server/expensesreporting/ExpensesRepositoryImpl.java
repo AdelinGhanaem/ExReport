@@ -33,7 +33,9 @@ public class ExpensesRepositoryImpl implements ExpensesRepository {
   @Override
   public void saveExpense(Expense expense) {
     Calendar calendar = Calendar.getInstance();
+
     calendar.setTime(expense.getDate());
+
     int yearInteger = calendar.get(Calendar.YEAR);
 
     Query query = new Query(EntityKind.YEAR, key);
@@ -56,6 +58,7 @@ public class ExpensesRepositoryImpl implements ExpensesRepository {
     entityEntity.setProperty("date", expense.getDate());
 
     service.put(entityEntity);
+
   }
 
   @Override
@@ -63,7 +66,7 @@ public class ExpensesRepositoryImpl implements ExpensesRepository {
 
     Query query = new Query(expenseEntityKind, key);
 
-    query.addFilter("date", Query.FilterOperator.EQUAL, date);
+    query.setFilter(new Query.FilterPredicate("date", Query.FilterOperator.EQUAL, date));
 
     return getReturnedExpenses(service.prepare(query).asIterable());
 

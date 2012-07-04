@@ -8,7 +8,8 @@
     margin: 2px auto;
     padding: 5px 5px;
     width: 100%;
-    background: #e0e0e0;
+    /*background: red;*/
+    background: silver;
     border-radius: 10px;
 
 }
@@ -30,4 +31,6 @@
 
 .addingExpenseContainer {
     margin: auto;
+    /*background: red;*/
+    width: 20%;
 }

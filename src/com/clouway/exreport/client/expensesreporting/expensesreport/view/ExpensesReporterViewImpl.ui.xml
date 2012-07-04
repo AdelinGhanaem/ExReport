@@ -6,20 +6,28 @@
 
   <ui:style src="expenses.css"/>
   <g:HTMLPanel addStyleNames="{style.headPanel}">
+
     <g:HorizontalPanel ui:field="panel" addStyleNames="{style.horizontalPanel}">
+
+      <g:Label addStyleNames="{style.reportingLabel}" text="Reporting ... "/>
+
       <g:ScrollPanel addStyleNames="{style.scrollPanel}">
         <g:HorizontalPanel ui:field="cellTreeScrollPanel" addStyleNames="{style.cellTree}">
         </g:HorizontalPanel>
       </g:ScrollPanel>
+
       <g:ScrollPanel addStyleNames="{style.cellTreeScrollPanel}">
         <c:CellTable ui:field="expensesCellTable" addStyleNames="{style.cellTable}">
         </c:CellTable>
       </g:ScrollPanel>
+
       <g:VerticalPanel addStyleNames="{style.expenseSum}">
         <g:Label text="Expenses sum:"/>
         <g:Label ui:field="expensesSum" text="0.0"/>
       </g:VerticalPanel>
+
     </g:HorizontalPanel>
+
   </g:HTMLPanel>
 
 </ui:UiBinder>

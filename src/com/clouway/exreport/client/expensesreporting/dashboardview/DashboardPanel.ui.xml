@@ -18,30 +18,42 @@
 
     </div>
 
-    <!--<g:Label ui:field="usernameLabel" text="Username:"/>-->
-    <b:Navbar >
+    <b:Navbar>
+
       <b:Brand ui:field="usernameLabel" text="Username:" addStyleNames="{style.label}"/>
+
       <b:Nav alignment="RIGHT">
+
         <b:Button ui:field="logout" type="DANGER" text="logout"/>
+
       </b:Nav>
+
     </b:Navbar>
+
     <div>
 
-      <div class="{style.centerPanel}" ui:field="cellTablesDiv">
-        <g:Label text="Reporting" addStyleNames="{style.reportingLabel}"/>
-        <g:ScrollPanel addStyleNames="{style.mainScrollPanel}">
-          <g:HorizontalPanel ui:field="expensesPanel">
-          </g:HorizontalPanel>
-        </g:ScrollPanel>
-        <g:HorizontalPanel ui:field="addingExpenses" addStyleNames="{style.addingExpense}">
+      <g:FlowPanel addStyleNames="{style.mainFlowPanel}">
+
+
+        <g:HorizontalPanel ui:field="expensesPanel" addStyleNames="{style.expenseReportingPanel}">
+
         </g:HorizontalPanel>
+
+        <g:HorizontalPanel ui:field="addingExpenses" addStyleNames="{style.addingExpense}">
+
+        </g:HorizontalPanel>
+
+
+      </g:FlowPanel>
+
+      <div class="{style.centerPanel}" ui:field="cellTablesDiv">
+
       </div>
+
       <div class="{style.addingExpense}">
 
       </div>
-      <div class="{style.cleaner}">
 
-      </div>
     </div>
 
 

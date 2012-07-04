@@ -30,7 +30,9 @@ public class UserAuthenticatedEventHandlerImpl implements UserAuthenticatedEvent
   public void onUserAuthenticated(UserAuthenticatedEvent event) {
 
     tokenProvider.setToken(event.getToken());
+
     panel.setUsernameLabel(event.getToken().getUser());
+
     controller.goTo(new DashboardPlace());
 
   }

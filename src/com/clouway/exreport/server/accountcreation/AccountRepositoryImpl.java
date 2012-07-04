@@ -33,9 +33,9 @@ public class AccountRepositoryImpl implements AccountRepository {
   }
 
   @Override
-  public boolean isPreviouslyRegistered(String email) {
+  public boolean isPreviouslyRegistered(String username) {
     Query query = new Query(accountEntityKid);
-    query.setFilter(new Query.FilterPredicate("username", Query.FilterOperator.EQUAL, email));
+    query.setFilter(new Query.FilterPredicate("username", Query.FilterOperator.EQUAL, username));
     Entity entity = service.prepare(query).asSingleEntity();
     return entity != null;
   }

@@ -1,25 +1,23 @@
 .scrollPanel {
     vertical-align: middle;
     border: 2px;
-    margin: 2px;
+    margin: 5px;
     height: 370px;
     width: 300px;
-    background: #e0e0e0;
-    border: 4px #cbcbcb;
+    background: #ededed;
     border-radius: 10px;
 
 }
 
 .cellTreeScrollPanel {
     vertical-align: middle;
-    margin: 2px;
+    margin: 5px;
     height: 370px;
     width: 700px;
-    border: 4px #cbcbcb;
     border-radius: 10px;
-    background: #e0e0e0;
+    background: #ededed;
     /*background: red;*/
-    padding: 5px;
+    /*padding: 5px;*/
 }
 
 .headPanel {
@@ -28,17 +26,16 @@
     border-radius: 10px;
     width: auto;
     margin: 5px;
-    float: right;
-    background: red;
 }
 
 .horizontalPanel {
     vertical-align: middle;
     border: 1px #5f9ea0;
-    width: 100%;
+    width: 80%;
     margin: 5px;
     float: right;
-    /*background: #000088;*/
+    background: silver;
+    border-radius: 10px;
 
 }
 
@@ -50,17 +47,22 @@
 }
 
 .cellTable {
+
     width: 100%;
     font-family: arial;
     font-size: 12px;
-    /*background: #cbcbcb;*/
     border-radius: 10px;
 }
 
 .expenseSum {
+    margin: 5px;
     padding: 10px;
     width: 200px;
     background: #e0e0e0;
     border-radius: 10px;
     font-size: 15px;
+}
+
+.reportingLabel {
+    font-size: 14px;
 }

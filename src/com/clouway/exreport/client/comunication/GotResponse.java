@@ -11,7 +11,6 @@ public abstract class GotResponse<T extends Response> implements AsyncCallback<T
 
   @Override
   public void onFailure(Throwable caught) {
-//    Window.alert(caught.getMessage());
 
     StringBuilder builder = new StringBuilder();
     caught.getStackTrace();

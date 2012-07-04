@@ -70,7 +70,6 @@ public class ActionDispatcherServiceImpl extends RemoteServiceServlet implements
     Response response = repository.getActionHandler(original.getClass()).handle(original);
     return (T) response;
 
-
   }
 
 }

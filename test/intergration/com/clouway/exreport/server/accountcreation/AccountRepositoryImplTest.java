@@ -46,11 +46,13 @@ public class AccountRepositoryImplTest {
   public void accountIsReturnedByUsernameAndPassword() {
     String username = "username";
     String password = "password";
+
     Entity entity = new Entity(accountEntityKind);
     entity.setProperty("username", username);
     entity.setProperty("password", password);
     service.put(entity);
     Account returnedAccount = repository.getAccount(username, password);
+
     assertThat(returnedAccount, is(notNullValue()));
     assertThat(username, is(equalTo(returnedAccount.getEmail())));
     assertThat(password, is(equalTo(returnedAccount.getPassword())));

@@ -3,6 +3,7 @@ package com.clouway.exreport.client.security;
 import com.clouway.exreport.shared.SecurityTokenProvider;
 import com.clouway.exreport.shared.entites.Token;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Adelin Ghanayem adelin.ghanaem@clouway.com
@@ -27,6 +28,7 @@ public class SecurityTokenProviderImpl implements SecurityTokenProvider {
 
   @Override
   public void clearToken() {
-      Cookies.removeCookie("username");
+    Cookies.removeCookie("username");
+    Window.Location.replace("http://www.exreport1803.appspot.com/");
   }
 }
