@@ -56,11 +56,13 @@ public class Showcase {
   }
 
   static class Person {
+
     @Id
     private Long id;
 
     @Index(true)
     private String name;
+
 
     private Integer age;
 
